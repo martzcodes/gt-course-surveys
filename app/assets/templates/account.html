@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label>Name</label>
-    <input ng-model="user.name" type="text" name="name" class="form-control"></input>
+    <input ng-model="user.name" type="text" name="name" class="form-control" ng-readonly="user.email === 'anonymous-user@gatech.edu'"></input>
   </div>
 
 </form>
