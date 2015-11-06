@@ -1,0 +1,11 @@
+<page-title title="{{ course | course:'Loading...' }}" url="{{ course.url }}"></page-title>
+
+<div ng-hide="course.reviews.length === 0">
+  <review author="{{ review.author }}" ng-repeat="review in course.reviews | orderBy:['-votes', '-semester', '-difficulty']"></review>
+</div>
+
+<div ng-show="course.reviews.length === 0" class="panel panel-default">
+  <div class="panel-body">
+    No reviews yet.
+  </div>
+</div>

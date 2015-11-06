@@ -1,0 +1,18 @@
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="/#/">Home</a></li>
+  <li><a href="/#/faq">FAQ</a></li>
+  <li ng-show="authData"><a href="/#/write-review">Write Review</a></li>
+
+  <li ng-hide="authData"><a href="/#/sign-in">Sign In</a></li>
+  <li ng-show="authData" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <img alt="Gravatar" gravatar-src="user.email" height="22" width="22" gravatar-size="50"></img>
+      <span class="glyphicon glyphicon-menu-down"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/#/account">My Account</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="/#/" ng-click="signOut()">Sign Out</a></li>
+    </ul>
+  </li>
+</ul>

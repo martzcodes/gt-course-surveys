@@ -1,0 +1,21 @@
+<page-title title="Frequently Asked Questions"></page-title>
+
+<div class="panel panel-default" ng-repeat="question in questions">
+  <div class="panel-heading">
+    {{ question.title }}
+  </div>
+  <div class="panel-body">
+    <p ng-repeat="line in question.answer">{{ line }}</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Have a question not answered here?
+  </div>
+  <div class="panel-body">
+    <p>
+      Contact <a href="mailto:bajin.mehmet@gmail.com?subject=Georgia Tech Surveys Question">Mehmet Bajin</a>.
+    </p>
+  </div>
+</div>

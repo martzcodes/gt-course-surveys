@@ -1,0 +1,12 @@
+.DS_STORE
+bower_components
+bower_components/*
+json
+json/*
+node_modules
+node_modules/*
+tmp
+tmp/*
+README.md
+app/assets/css/*
+app/assets/js/*

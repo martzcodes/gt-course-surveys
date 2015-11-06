@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="surveyor">
+  <head>
+    <title>Georgia Tech Course Surveys</title>
+    <meta charset="utf-8"></meta>
+    <meta name="description" content="An app that lets students assess course difficulty and workload."></meta>
+    <meta name="author" content="Mehmet Bajin"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta property="og:image" content="http://askbuzz.gatech.edu/GeorgiaTech.png" />
+    <meta property="og:title" content="Georgia Tech Course Surveys" />
+    <meta property="og:description" content="An app that lets students assess course difficulty and workload." />
+    <meta property="og:type" content="website" />
+    <link rel="shortcut icon" href="/favicon.ico?v=2.00"></link>
+    <link rel="stylesheet" href="/dist/css/main.css"></link>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-top">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">
+            <a href="/#/"><img alt="Home" width="22" height="22" src="/assets/images/logo.png"></img></a>
+          </div>
+        </div>
+        <nav-bar-body></nav-bar-body>
+      </div>
+    </nav>
+    <div ng-view class="container"></div>
+  </body>
+  <script src="/dist/js/main.js"></script>
+</html>

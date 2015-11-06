@@ -1,0 +1,34 @@
+<form class="form" novalidate>
+  
+  <div class="form-header">
+    <h1>Sign In</h1>
+  </div>
+
+  <div class="form-body">
+
+    <div class="form-group">
+      <label>Email</label>
+      <input ng-model="user.email" type="email" name="email" class="form-control" required></input>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input ng-model="user.password" type="password" name="password" class="form-control" required></input>
+    </div>
+
+    <div class="form-group">
+      <span class="glyphicon glyphicon-question-sign"></span>
+      <a href="/#/password">Forgot your password?</a>
+    </div>
+
+    <div class="form-group">
+      <button ng-click="signIn(user)" type="submit" class="btn btn-default" ng-class="{ 'disabled':working }">
+        {{ !working ? 'Sign In' : 'Signing in...' }}
+      </button>
+    </div>
+
+    <p>Don't have an account? <a href="/#/sign-up">Create a free account</a>.</p>
+
+  </div>
+
+</form>

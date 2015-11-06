@@ -1,0 +1,44 @@
+<div class="row review">
+  
+  <div class="col-md-1 text-center review-votes">
+    <div class="glyphicon glyphicon-triangle-top" ng-click="vote(review, true)"></div>
+    <div class="review-votes-count">{{ review.votes }}</div>
+    <div class="glyphicon glyphicon-triangle-bottom" ng-click="vote(review, false)"></div>
+  </div>
+  
+  <div class="col-md-11">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <div class="pull-left">
+          <span>{{ author.name }}</span>
+          <span class="text-muted">{{ review.updated || review.created | datetime }}</span>
+        </div>
+        <div class="pull-right" ng-if="review.author === authData.uid" ng-hide="editing">
+          <span class="glyphicon glyphicon-pencil" ng-click="edit(review)"></span>
+          <span class="glyphicon glyphicon-trash" ng-click="remove(review)"></span>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      
+      <div class="panel-body">
+        <div ng-hide="editing">
+          <p style="white-space:pre-wrap;">{{ review.comments }}</p>
+        </div>
+        <review-form ng-show="editing"></review-form>
+      </div>
+
+      <div class="panel-footer" ng-hide="editing">
+        <div class="pull-left">
+          <span class="text-muted">{{ review.difficulty | difficulty }} ({{ review.workload }} hours/week)</span>
+        </div>
+        <div class="pull-right">
+          <span class="text-muted">{{ review.semester | semester }}</span>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
