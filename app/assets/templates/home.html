@@ -41,10 +41,10 @@
           {{ course.reviewCount | number:0 }}
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar ng-if="course.averageDifficulty" value="course.averageDifficulty" max="5">{{ course.averageDifficulty | number:1 }}</uib-progressbar>
+          <uib-progressbar ng-show="course.averageDifficulty" value="course.averageDifficulty" max="5">{{ course.averageDifficulty | number:1 }}</uib-progressbar>
         </td>
         <td class="col-1 text-right">
-          {{ course.averageWorkload | number:1 }}
+          <span ng-show="course.averageWorkload">{{ course.averageWorkload | number:1 }}</span>
         </td>
       </tr>
     </tbody>
