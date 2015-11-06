@@ -5,8 +5,7 @@ json
 json/*
 node_modules
 node_modules/*
+tmp.js
 tmp
 tmp/*
 README.md
-app/assets/css/*
-app/assets/js/*
