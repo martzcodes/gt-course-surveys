@@ -30,7 +30,9 @@
 
       <div class="panel-footer" ng-hide="editing">
         <div class="pull-left">
-          <span class="text-muted">{{ review.difficulty | difficulty }} ({{ review.workload }} hours/week)</span>
+          <span class="text-muted">{{ review.difficulty | difficulty }}
+            <span ng-if="review.workload > 0"> ({{ review.workload + ' ' + (review.workload > 1 ? 'hours/week' : 'hour/week') }})</span>
+          </span>
         </div>
         <div class="pull-right">
           <span class="text-muted">{{ review.semester | semester }}</span>

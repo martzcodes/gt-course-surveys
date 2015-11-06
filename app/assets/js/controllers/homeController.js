@@ -8,21 +8,38 @@ angular.module('surveyor').controller('HomeController',
           course.reviews.$loaded()
             .then(function (reviewList) {
               var totals = {
-                count: 0,
+                difficulty: 0,
+                workload: 0
+              };
+
+              var counts = {
+                total: 0,
                 difficulty: 0,
                 workload: 0
               };
               
               angular.forEach(reviewList, function (review) {
-                totals.count++;
-                totals.difficulty += review.difficulty;
-                totals.workload += review.workload;
+                counts.total++;
+
+                if (review.difficulty > 0) {
+                  totals.difficulty += review.difficulty;
+                  counts.difficulty++;
+                }
+
+                if (review.workload > 0) {
+                  totals.workload += review.workload;
+                  counts.workload++;
+                }
               });
 
-              if (totals.count > 0) {
-                course.reviewCount = totals.count;
-                course.averageDifficulty = totals.difficulty / totals.count;
-                course.averageWorkload = totals.workload / totals.count;
+              if (counts.total > 0) {
+                course.reviewCount = counts.total;
+              }
+              if (counts.difficulty > 0) {
+                course.averageDifficulty = totals.difficulty / counts.difficulty;
+              }
+              if (counts.workload > 0) {
+                course.averageWorkload = totals.workload / counts.workload;
               }
             });
         });
