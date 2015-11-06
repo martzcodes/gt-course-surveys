@@ -11,7 +11,7 @@
 
       <div class="panel-heading">
         <div class="pull-left">
-          <span>{{ author.name }}</span>
+          <span>{{ !author.remain_anonymous ? author.name : 'Anonymous' }}</span>
           <span class="text-muted">{{ review.updated || review.created | datetime }}</span>
         </div>
         <div class="pull-right" ng-if="review.author === authData.uid" ng-hide="editing">

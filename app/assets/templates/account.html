@@ -19,7 +19,13 @@
 
   <div class="form-group">
     <label>Name</label>
-    <input ng-model="user.name" type="text" name="name" class="form-control" ng-readonly="user.email === 'anonymous-user@gatech.edu'"></input>
+    <input ng-model="user.name" type="text" name="name" class="form-control" ng-readonly="isAnonymous"></input>
+  </div>
+
+  <div class="checkbox" ng-if="!isAnonymous">
+    <label>
+      <input type="checkbox" ng-model="user.remain_anonymous"></input> Remain Anonymous
+    </label>
   </div>
 
 </form>
