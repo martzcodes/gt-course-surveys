@@ -11,7 +11,7 @@
         <th class="col-4">Name</th>
         <th class="col-1 text-center"># Reviews</th>
         <th class="col-1 text-center"><span uib-tooltip="1 (easiest) to 5 (hardest)" tooltip-placement="bottom">Avg. Diff.</span></th>
-        <th class="col-1 text-center"><span uib-tooltip="hours / week" tooltip-placement="bottom">Avg. Work.</span></th>
+        <th class="col-1 text-right"><span uib-tooltip="hours / week" tooltip-placement="bottom">Avg. Work.</span></th>
       </tr>
     </thead>
     <tbody>
@@ -19,12 +19,12 @@
         <td class="col-1">{{ course.department }}</td>
         <td class="col-1">{{ course.number + (course.section ? '-' + course.section : '') }}</td>
         <td class="col-4">{{ course.name }}</td>
-        <td class="col-1 text-center">{{ course.metrics.reviewCount }}</td>
+        <td class="col-1 text-center">{{ course.metrics.reviewCount | number:0 }}</td>
         <td class="col-1 text-center">
           <uib-progressbar ng-if="course.metrics.averageDifficulty"
-            value="course.metrics.averageDifficulty" max="5">{{ course.metrics.averageDifficulty }}</uib-progressbar>
+            value="course.metrics.averageDifficulty" max="5">{{ course.metrics.averageDifficulty | number:1 }}</uib-progressbar>
         </td>
-        <td class="col-1 text-center">{{ course.metrics.averageWorkload }}</td>
+        <td class="col-1 text-right">{{ course.metrics.averageWorkload | number:1 }}</td>
       </tr>
     </tbody>
   </table>
