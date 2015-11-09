@@ -4,5 +4,6 @@ angular.module('surveyor', [ 'ngRoute', 'ngResource', 'firebase', 'ngAnimate', '
     anonymousUser: {
       email: 'anonymous-user@gatech.edu',
       password: 'anonymous'
-    }
+    },
+    unknownSemesterId: '0000-0'
   });

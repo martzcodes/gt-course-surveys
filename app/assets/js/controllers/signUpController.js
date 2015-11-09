@@ -18,7 +18,8 @@ angular.module('surveyor').controller('SignUpController',
         Notification.success('Signed in.');
         globals.firebase.child('users').child(authData.uid).set({
           email: $scope.user.email,
-          name: $scope.user.email.split('@')[0].replace(/\./g, ' ')
+          name: $scope.user.email.split('@')[0].replace(/\./g, ' '),
+          created: moment().format()
         });
         $location.path('/account');
       }

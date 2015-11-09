@@ -1,9 +1,9 @@
 angular.module('surveyor').filter('semester',
-  function () {
+  function (globals) {
     return function (semester,  dflt) {
       var id = '';
 
-      if (semester === 'unknown') {
+      if (semester === globals.unknownSemesterId) {
         return 'Unknown';
       }
 

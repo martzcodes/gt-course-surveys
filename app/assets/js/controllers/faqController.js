@@ -25,7 +25,8 @@ angular.module('surveyor').controller('FaqController',
       {
         title: 'How does voting work?',
         answer: [
-          'You may upvote or downvote reviews made by others. You may cast at most one vote (ever) per review.'
+          'You may upvote or downvote reviews made by others, and you may cast at most one vote (ever) per review.',
+          'Note that voting is always anonymous.'
         ]
       }
     ];
