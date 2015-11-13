@@ -1,3 +1,4 @@
+
 .table tbody tr:hover,
 .table thead th[ng-click]:hover {
   cursor: pointer;
@@ -20,4 +21,8 @@ th.col-9, td.col-9 { width: 90%; }
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.table thead .glyphicon {
+  font-size: 12px;
 }

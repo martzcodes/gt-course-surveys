@@ -17,10 +17,7 @@
     "angular-gravatar": "*",
     "angular-ui-bootstrap": "*",
     "firebase": "*",
-    "angularfire": "*",
-    "moment": "*",
-    "bootstrap": "^3.3.5",
-    "normalize-css": "*"
+    "moment": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

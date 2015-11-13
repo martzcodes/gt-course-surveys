@@ -6,7 +6,6 @@ angular.module('surveyor').controller('PasswordController',
 
     $('input[type=email]').select();
 
-    $scope.user = {};
     $scope.working = false;
 
     $scope.onPasswordReset = function (error) {

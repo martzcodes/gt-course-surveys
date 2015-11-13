@@ -8,3 +8,5 @@ node_modules/*
 tmp.js
 tmp
 tmp/*
+app/assets/css*
+app/assets/js*

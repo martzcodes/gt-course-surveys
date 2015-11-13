@@ -4,7 +4,7 @@ angular.module('surveyor').directive('review',
       replace: true,
       restrict: 'E',
       templateUrl: '/assets/templates/directives/review.html',
-      controller: function ($scope, $filter, User) {
+      controller: function ($scope, User) {
         User($scope.review.author).$bindTo($scope, 'author');
 
         $scope.showCancel = true;
@@ -33,41 +33,6 @@ angular.module('surveyor').directive('review',
               $scope.editing = false;
             })
             .catch(Notification.error);
-        };
-
-        $scope.voteInternal = function (review, voterId, up) {
-          if (up) {
-            review.votes++;
-          }
-          else {
-            review.votes--;
-          }
-
-          review.voters = review.voters || {};
-          review.voters[voterId] = true;
-          
-          $scope.course.reviews.$save(review);
-        };
-
-        $scope.votedOnBy = function (review, voterId) {
-          return review.voters && review.voters[voterId];
-        };
-
-        $scope.vote = function (review, up) {
-          if ($scope.authData) {
-            if ($scope.authData.uid === review.author) {
-              Notification.info('Cannot vote on your reviews.');
-            }
-            else if ($scope.votedOnBy(review, $scope.authData.uid)) {
-              Notification.info('You already voted.');
-            }
-            else {
-              $scope.voteInternal(review, $scope.authData.uid, up);
-            }
-          }
-          else {
-            Notification.info('Please sign in first.');
-          }
         };
       }
     };

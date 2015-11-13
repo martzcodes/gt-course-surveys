@@ -7,10 +7,9 @@ angular.module('surveyor').directive('navBarBody',
       link: function ($scope, element, attrs, User) {
 
       },
-      controller: function ($scope, globals, $location, $firebaseObject, Notification, User) {
+      controller: function ($scope, globals, $location, Notification, User) {
         $scope.user = $scope.user || {};
-
-        $scope.unbindUser = null;
+        $scope.userUnbind = null;
 
         globals.firebase.onAuth(function (authData) {
           $scope.authData = authData;
@@ -18,17 +17,27 @@ angular.module('surveyor').directive('navBarBody',
             var user = User(authData.uid);
 
             user.$bindTo($scope, 'user').then(function (unbind) {
-              $scope.unbindUser = unbind;
+              $scope.userUnbind = unbind;
             });
 
             user.$loaded().then(function (user) {
               $scope.isAnonymous = ($scope.user.email === globals.anonymousUser.email);
               
-              if (authData.provider === 'google' && !$scope.user.email) {
-                globals.firebase.child('users').child(authData.uid).set({
-                  email: authData.google.email,
-                  name: authData.google.displayName
-                });
+              // one time user creation
+              if (!$scope.user.created) {
+                $scope.user.created = moment().format();
+                switch (authData.provider) {
+                  case 'password':
+                    $scope.user.email = authData.password.email;
+                    $scope.user.name = authData.password.email.split('@')[0].replace(/\./g, ' ');
+                    break;
+                  case 'google':
+                    $scope.user.email = authData.google.email;
+                    $scope.user.name = authData.google.displayName;
+                    break;
+                  default:
+                    break;
+                }
               }
             });
           }
@@ -36,7 +45,7 @@ angular.module('surveyor').directive('navBarBody',
 
         $scope.signOut = function () {
           globals.firebase.unauth();
-          $scope.unbindUser();
+          $scope.userUnbind();
           $scope.user = {};
           $location.path('/');
           Notification.success('Signed out.');

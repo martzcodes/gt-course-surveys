@@ -25,8 +25,6 @@ module.exports = function (grunt) {
           { src: [ './bower_components/firebase/firebase.js' ],                       dest: './tmp/js/vendor/firebase.min.js' },
           { src: [ './bower_components/angularfire/dist/angularfire.min.js' ],        dest: './tmp/js/vendor/angular-fire.min.js' },
 
-          { src: [ './bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js' ],  dest: './tmp/js/vendor/angular-geolocation.min.js' },
-
           { src: [ './node_modules/normalize-css/normalize.css' ],                    dest: './tmp/css/vendor/normalize.css' },
           { src: [ './node_modules/angular-toastr/dist/angular-toastr.min.css' ],     dest: './tmp/css/vendor/angular-toastr.min.css' },
           { src: [ './node_modules/bootstrap/dist/css/bootstrap.min.css' ],           dest: './tmp/css/vendor/bootstrap.min.css' },

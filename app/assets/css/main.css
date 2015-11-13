@@ -1,5 +1,6 @@
+
 body {
-  font-family: "bt_mono","Source Code Pro",monospace;
+  font-family: Arvo, serif;
   visibility: visible;
   height: 100%;
   margin: 0;
@@ -37,7 +38,7 @@ img[alt=Gravatar] {
 
 .navbar-brand img {
   position: relative;
-  top: -1px;
+  top: -2px;
 }
 
 p:last-child {

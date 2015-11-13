@@ -6,7 +6,6 @@ angular.module('surveyor').controller('SignInController',
 
     $('input[type=email]').select();
 
-    $scope.user = {};
     $scope.working = false;
 
     if ($routeParams.email) {
@@ -47,9 +46,7 @@ angular.module('surveyor').controller('SignInController',
 
     $scope.signInGoogle = function () {
       $scope.working = true;
-      globals.firebase.authWithOAuthPopup('google', $scope.onUserSignedIn, {
-        scope: 'email'
-      });
+      globals.firebase.authWithOAuthPopup('google', $scope.onUserSignedIn, { scope: 'email' });
     };
   }
 );

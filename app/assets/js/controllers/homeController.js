@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('HomeController',
-  function ($scope, CourseList, $window, $location, Notification, geolocation, ReviewList, $filter, globals) {
+  function ($scope, CourseList, $window, $location, Notification, ReviewList, $filter, globals) {
     $scope.courses = CourseList();
     $scope.courses.$loaded()
       .then(function (courses) {
@@ -36,15 +36,5 @@ angular.module('surveyor').controller('HomeController',
     $scope.select = function (course) {
       $location.path('/course/' + course.$id);
     };
-
-    // if ($scope.authData && $scope.user && $scope.user.email !== globals.anonymousUser.email) {
-    //   geolocation.getLocation()
-    //     .then(function (geoPosition) {
-    //       $scope.user.location = {
-    //         latitude: geoPosition.coords.latitude,
-    //         longitude: geoPosition.coords.longitude
-    //       };
-    //     });
-    // }
   }
 );

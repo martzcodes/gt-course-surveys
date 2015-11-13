@@ -6,7 +6,6 @@ angular.module('surveyor').controller('SignUpController',
 
     $('input[type=email]').select();
 
-    $scope.user = {};
     $scope.working = false;
 
     $scope.onUserSignedIn = function (error, authData) {
@@ -16,11 +15,6 @@ angular.module('surveyor').controller('SignUpController',
       }
       else {
         Notification.success('Signed in.');
-        globals.firebase.child('users').child(authData.uid).set({
-          email: $scope.user.email,
-          name: $scope.user.email.split('@')[0].replace(/\./g, ' '),
-          created: moment().format()
-        });
         $location.path('/account');
       }
     };

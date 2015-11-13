@@ -4,7 +4,6 @@ angular.module('surveyor').controller('WriteReviewController',
       $location.path('/sign-in');
     }
 
-    $scope.review = {};
     $scope.showCourse = true;
     $scope.showSemester = true;
     $scope.submitCaption = 'Publish';
@@ -45,8 +44,7 @@ angular.module('surveyor').controller('WriteReviewController',
           semester: review.semester.$id,
           difficulty: review.difficulty,
           workload: review.workload,
-          comments: review.comments,
-          votes: 0
+          comments: review.comments
         }, function (error) {
           if (error) {
             Notification.error(error);
