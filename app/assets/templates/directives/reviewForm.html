@@ -8,7 +8,7 @@
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="course">
         <li role="menuitem" ng-repeat="course in courses" ng-click="selectCourse(course)">
-          <a href="">{{ course | course }}</a>
+          <a href="">{{ ::course | course }}</a>
         </li>
       </ul>
     </div>
@@ -22,7 +22,7 @@
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="semester">
         <li role="menuitem" ng-repeat="semester in semesters" ng-click="selectSemester(semester)">
-          <a href="">{{ semester | semester }}</a>
+          <a href="">{{ ::semester | semester }}</a>
         </li>
       </ul>
     </div>
@@ -31,11 +31,11 @@
   <div class="form-group">
     <label class="col-sm-2">Difficulty*</label>
     <div class="col-sm-10 btn-group btn-group-sm difficulty" role="group" aria-label="Difficulty">
-      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="1">{{ 1 | difficulty }}</button>
-      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="2">{{ 2 | difficulty }}</button>
-      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="3">{{ 3 | difficulty }}</button>
-      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="4">{{ 4 | difficulty }}</button>
-      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="5">{{ 5 | difficulty }}</button>
+      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="1">{{ ::1 | difficulty }}</button>
+      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="2">{{ ::2 | difficulty }}</button>
+      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="3">{{ ::3 | difficulty }}</button>
+      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="4">{{ ::4 | difficulty }}</button>
+      <button type="button" class="btn btn-default" ng-model="review.difficulty" uib-btn-radio="5">{{ ::5 | difficulty }}</button>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default btn-sm" ng-click="save(review)">{{ submitCaption || 'Save' }}</button>
+      <button type="submit" class="btn btn-default btn-sm" ng-click="save(review)">{{ ::submitCaption || 'Save' }}</button>
       <button type="submit" class="btn btn-default btn-sm" ng-click="cancel()" ng-if="showCancel">Cancel</button>
       <span class="pull-right text-muted">{{ review.comments.length || 0 }} char.</span>
       <span class="clearfix"></span>

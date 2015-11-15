@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('CourseController',
-  function ($scope, $routeParams, $window, Course, ReviewList, Notification) {
+  function ($scope, $routeParams, $window, Course, ReviewList, Notification, $filter) {
     $scope.course = Course($routeParams.id);
     $scope.course.$loaded()
       .then(function (course) {

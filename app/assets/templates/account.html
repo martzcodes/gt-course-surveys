@@ -14,12 +14,12 @@
 
   <div class="form-group">
     <label>Email</label>
-    <input ng-model="user.email" type="email" name="email" class="form-control" readonly></input>
+    <input type="email" name="email" class="form-control" value="{{ ::user.email }}" readonly></input>
   </div>
 
   <div class="form-group">
     <label>Name</label>
-    <input ng-model="user.name" type="text" name="name" class="form-control" ng-readonly="isAnonymous"></input>
+    <input ng-model="user.name" ng-model-options="{ debounce: 250 }" type="text" name="name" class="form-control" ng-readonly="isAnonymous"></input>
   </div>
 
   <div class="checkbox" ng-if="!isAnonymous">

@@ -2,10 +2,10 @@
 
 <div class="panel panel-default" ng-repeat="question in questions">
   <div class="panel-heading">
-    {{ question.title }}
+    {{ ::question.title }}
   </div>
   <div class="panel-body">
-    <p ng-repeat="line in question.answer">{{ line }}</p>
+    <p ng-repeat="line in question.answer">{{ ::line }}</p>
   </div>
 </div>
 
