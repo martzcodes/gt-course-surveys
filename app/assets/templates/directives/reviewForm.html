@@ -8,7 +8,7 @@
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="course">
         <li role="menuitem" ng-repeat="course in courses" ng-click="selectCourse(course)">
-          <a href="">{{ ::course | course }}</a>
+          <a href="">{{ course | course }}</a>
         </li>
       </ul>
     </div>
@@ -22,7 +22,7 @@
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="semester">
         <li role="menuitem" ng-repeat="semester in semesters" ng-click="selectSemester(semester)">
-          <a href="">{{ ::semester | semester }}</a>
+          <a href="">{{ semester | semester }}</a>
         </li>
       </ul>
     </div>
