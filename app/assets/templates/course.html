@@ -4,7 +4,7 @@
   <review author="{{ ::review.author }}" ng-repeat="review in course.reviews | orderBy:['-semester', '-difficulty']"></review>
 </div>
 
-<div ng-show="course.reviews.length === 0" class="panel panel-default">
+<div ng-if="course.reviews.length === 0" class="panel panel-default">
   <div class="panel-body">
     No reviews yet.
   </div>

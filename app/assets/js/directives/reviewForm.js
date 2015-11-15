@@ -5,6 +5,8 @@ angular.module('surveyor').directive('reviewForm',
       restrict: 'E',
       templateUrl: 'assets/templates/directives/reviewForm.html',
       controller: function ($scope, CourseList, SemesterList, Notification) {
+        $scope.review = $scope.review || {};
+        
         if ($scope.showCourse) {
           $scope.courses = CourseList();
           $scope.courses.$loaded().catch(Notification.error);
