@@ -16,7 +16,12 @@ angular.module('surveyor').controller('SignInController',
     $scope.onUserSignedIn = function (error, authData) {
       $scope.working = false;
       if (error) {
-        Notification.error(error);
+        if (error.code === 'TRANSPORT_UNAVAILABLE') {
+          globals.firebase.authWithOAuthRedirect('google', $scope.onUserSignedIn);
+        }
+        else {
+          Notification.error(error);
+        }
       }
       else {
         Notification.success('Signed in.');
