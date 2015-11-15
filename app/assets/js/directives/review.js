@@ -5,7 +5,7 @@ angular.module('surveyor').directive('review',
       restrict: 'E',
       templateUrl: '/assets/templates/directives/review.html',
       controller: function ($scope, User) {
-        User($scope.review.author).$bindTo($scope, 'author');
+        $scope.author = User($scope.review.author);
 
         $scope.showCancel = true;
 
