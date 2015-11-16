@@ -2,6 +2,7 @@ angular.module('surveyor').controller('SignInController',
   function ($scope, $location, $routeParams, globals, Notification) {
     if (globals.firebase.getAuth()) {
       $location.path('/account');
+      return;
     }
 
     $('input[type=email]').select();
@@ -42,11 +43,6 @@ angular.module('surveyor').controller('SignInController',
         $scope.working = true;
         globals.firebase.authWithPassword(user, $scope.onUserSignedIn);
       }
-    };
-
-    $scope.signInAnonymously = function () {
-      $scope.working = true;
-      globals.firebase.authWithPassword(globals.anonymousUser, $scope.onUserSignedIn);
     };
 
     $scope.signInGoogle = function () {

@@ -21,8 +21,6 @@ angular.module('surveyor').directive('navBarBody',
             });
 
             user.$loaded().then(function (user) {
-              $scope.isAnonymous = ($scope.user.email === globals.anonymousUser.email);
-              
               // one time user creation
               if (!$scope.user.created) {
                 $scope.user.created = moment().format();

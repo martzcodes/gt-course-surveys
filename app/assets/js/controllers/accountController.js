@@ -2,14 +2,10 @@ angular.module('surveyor').controller('AccountController',
   function ($scope, $location, globals, Notification) {
     if (!$scope.authData) {
       $location.path('/sign-in');
+      return;
     }
 
-    if ($scope.isAnonymous) {
-      $location.path('/');
-    }
-    else {
-      $('input[name=name]').select();
-    }
+    $('input[name=name]').select();
 
     $scope.specializations = [
       'Computational Perception & Robotics',
@@ -30,9 +26,6 @@ angular.module('surveyor').controller('AccountController',
     };
 
     $scope.changePassword = function (email, newPassword, newPasswordConfirmation, oldPassword) {
-      console.log('newPassword', newPassword);
-      console.log('newPasswordConfirmation', newPasswordConfirmation);
-      console.log('oldPassword', oldPassword);
       if (newPassword !== newPasswordConfirmation) {
         Notification.error('Passwords do not match.');
       }

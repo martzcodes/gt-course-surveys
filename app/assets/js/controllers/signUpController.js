@@ -2,6 +2,7 @@ angular.module('surveyor').controller('SignUpController',
   function ($scope, $location, globals, Notification) {
     if (globals.firebase.getAuth()) {
       $location.path('/account');
+      return;
     }
 
     $('input[type=email]').select();

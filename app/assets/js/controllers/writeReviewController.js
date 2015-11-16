@@ -2,6 +2,7 @@ angular.module('surveyor').controller('WriteReviewController',
   function ($scope, globals, Notification, $location) {
     if (!$scope.authData) {
       $location.path('/sign-in');
+      return;
     }
 
     $scope.showCourse = true;
