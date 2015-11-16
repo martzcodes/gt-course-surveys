@@ -10,6 +10,8 @@ angular.module('surveyor').controller('HomeController',
               var totals = { difficulty: 0, workload: 0 };
               var counts = { difficulty: 0, workload: 0, total: 0 };
 
+              course.reviewCount = course.averageDifficulty = course.averageWorkload = 0;
+
               angular.forEach(reviewList, function (review) {
                 counts.total++;
                 if (review.difficulty > 0) {

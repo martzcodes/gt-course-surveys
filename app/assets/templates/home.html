@@ -7,22 +7,22 @@
     <thead>
       <tr>
         <th class="col-1 hidden-xs" ng-click="sortType = 'department'; sortReverse = !sortReverse">
-          Department <span ng-show="sortType === 'department'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          Department <span ng-show="sortType === 'department'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1" ng-click="sortType = 'number'; sortReverse = !sortReverse">
-          Number     <span ng-show="sortType === 'number'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          Number     <span ng-show="sortType === 'number'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-4" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-          Name       <span ng-show="sortType === 'name'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          Name       <span ng-show="sortType === 'name'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-center hidden-xs" ng-click="sortType = 'reviewCount'; sortReverse = !sortReverse">
-          # Reviews  <span ng-show="sortType === 'reviewCount'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          # Reviews  <span ng-show="sortType === 'reviewCount'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-center" ng-click="sortType = 'averageDifficulty'; sortReverse = !sortReverse">
-          Avg. Diff. <span ng-show="sortType === 'averageDifficulty'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          Avg. Diff. <span ng-show="sortType === 'averageDifficulty'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-right"  ng-click="sortType = 'averageWorkload'; sortReverse = !sortReverse">
-          Avg. Work. <span ng-show="sortType === 'averageWorkload'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
+          Avg. Work. <span ng-show="sortType === 'averageWorkload'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
       </tr>
     </thead>
