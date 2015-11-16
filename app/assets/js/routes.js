@@ -5,6 +5,11 @@ angular.module('surveyor').config(function ($routeProvider) {
       controller: 'HomeController'
     })
 
+    .when('/grades', {
+      templateUrl: 'assets/templates/grades.html',
+      controller: 'GradesController'
+    })
+
     .when('/write-review', {
       templateUrl: 'assets/templates/writeReview.html',
       controller: 'WriteReviewController'

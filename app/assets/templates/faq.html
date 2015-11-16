@@ -1,11 +1,32 @@
 <page-title title="Frequently Asked Questions"></page-title>
 
-<div class="panel panel-default" ng-repeat="question in questions">
+<div class="panel panel-default">
   <div class="panel-heading">
-    {{ ::question.title }}
+    What is this app?
   </div>
   <div class="panel-body">
-    <p ng-repeat="line in question.answer">{{ ::line }}</p>
+    <p>This app was created for OMSCS students to get a feel for course difficulty and workload.</p>
+    <p>It is not endorsed or sponsored in any way by the official OMSCS program or staff.</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Does this sync with the old Google Doc?
+  </div>
+  <div class="panel-body">
+    <p>No. There was a one-time import of all data in the Google Doc on November 5, 2015.</p>
+    <p>While the Google Doc is still accessible, its use is discouraged, because it lacks validation and other useful features.</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Do I have to sign in to publish reviews?
+  </div>
+  <div class="panel-body">
+    <p>Yes, and you can authenticate anonymously, with a gatech.edu email/password, or with Google.</p>
+    <p>Unfortunately, there is not an easy way to determine the validity of a gatech.edu email, so please enter your email correctly if you choose to authenticate with an email/password until email verification is supported.</p>
   </div>
 </div>
 
