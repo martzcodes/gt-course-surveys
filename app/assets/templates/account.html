@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div class="clearfix"></div>
+  <hr class="clearfix"></hr>
 
   <div class="form-group">
     <label>Email</label>
@@ -21,12 +21,32 @@
     <label>Name</label>
     <input ng-model="user.name" ng-model-options="{ debounce: 250 }" type="text" name="name" class="form-control" ng-readonly="isAnonymous"></input>
   </div>
+  
+  <div class="form-group">
+    <label>Specialization</label>
+    <div class="dropdown" uib-dropdown>
+      <button id="specialization" type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+        {{ user.specialization || 'Select' }} <span class="caret"></span>
+      </button>
+      <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="specialization">
+        <li role="menuitem" ng-repeat="specialization in specializations" ng-click="user.specialization = specialization">
+          <a href="">{{ specialization }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <div class="checkbox" ng-if="!isAnonymous">
     <label>
-      <input type="checkbox" ng-model="user.remain_anonymous"></input> Remain Anonymous
+      <input type="checkbox" ng-model="user.remain_anonymous"></input>
+      Remain Anonymous
+      <span class="glyphicon glyphicon-info-sign"
+        uib-popover="If this is checked, your name appears as Anonymous."
+        popover-trigger="mouseenter"></span>
     </label>
   </div>
+
+  <hr></hr>
 
   <div ng-if="authData.provider === 'password'">
     <div class="form-group">
@@ -45,7 +65,7 @@
     </div>
 
     <div class="form-group">
-      <button ng-click="changePassword(user.email, newPassword, newPasswordConfirmation, oldPassword)" type="submit" class="btn btn-default" ng-class="{ 'disabled':working }">
+      <button ng-click="changePassword(user.email, newPassword, newPasswordConfirmation, oldPassword)" type="submit" class="btn btn-primary" ng-class="{ 'disabled':working }" style="margin-bottom:20px;">
         {{ !working ? 'Change Password' : 'Changing...' }}
       </button>
     </div>

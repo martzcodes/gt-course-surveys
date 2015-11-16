@@ -6,7 +6,7 @@
   <table class="table table-hover table-striped table-condensed">
     <thead>
       <tr>
-        <th class="col-1" ng-click="sortType = 'department'; sortReverse = !sortReverse">
+        <th class="col-1 hidden-xs" ng-click="sortType = 'department'; sortReverse = !sortReverse">
           Department <span ng-show="sortType === 'department'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1" ng-click="sortType = 'number'; sortReverse = !sortReverse">
@@ -15,7 +15,7 @@
         <th class="col-4" ng-click="sortType = 'name'; sortReverse = !sortReverse">
           Name       <span ng-show="sortType === 'name'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1 text-center" ng-click="sortType = 'reviewCount'; sortReverse = !sortReverse">
+        <th class="col-1 text-center hidden-xs" ng-click="sortType = 'reviewCount'; sortReverse = !sortReverse">
           # Reviews  <span ng-show="sortType === 'reviewCount'" class="glyphicon glyphicon-triangle-{{ !sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-center" ng-click="sortType = 'averageDifficulty'; sortReverse = !sortReverse">
@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="course in courses | orderBy:sortType:sortReverse" ng-click="select(course)">
-        <td class="col-1">
+        <td class="col-1 hidden-xs">
           {{ ::course.department }}
         </td>
         <td class="col-1">
@@ -36,8 +36,10 @@
         </td>
         <td class="col-4">
           {{ ::course.name }}
+          <span ng-if="::course.foundational" class="glyphicon glyphicon-flag"
+            uib-tooltip="Foundational" tooltip-placement="bottom"></span>
         </td>
-        <td class="col-1 text-center">
+        <td class="col-1 text-center hidden-xs">
           {{ ::course.reviewCount | number:0 }}
         </td>
         <td class="col-1 text-center">

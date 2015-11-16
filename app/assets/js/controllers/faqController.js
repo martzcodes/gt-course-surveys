@@ -19,14 +19,7 @@ angular.module('surveyor').controller('FaqController',
         title: 'Do I have to sign in to post reviews?',
         answer: [
           'Yes, and you can authenticate anonymously, with a gatech.edu email/password, or with Google.',
-          'Unfortunately, there is not an easy way to determine the validity of a gatech.edu email, so please enter your email correctly if you choose to authenticate with an email/password!'
-        ]
-      },
-      {
-        title: 'How does voting work?',
-        answer: [
-          'You may upvote or downvote reviews made by others, and you may cast at most one vote (ever) per review.',
-          'Note that voting is always anonymous.'
+          'Unfortunately, there is not an easy way to determine the validity of a gatech.edu email, so please enter your email correctly if you choose to authenticate with an email/password until email verification is supported.'
         ]
       }
     ];
