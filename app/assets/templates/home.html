@@ -42,13 +42,13 @@
           <span ng-if="::course.foundational" class="glyphicon glyphicon-flag" uib-tooltip="Foundational" tooltip-placement="right"></span>
         </td>
         <td class="col-1 text-center hidden-xs">
-          {{ ::course.reviewCount | number:0 }}
+          {{ ::course.reviewCount }}
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar ng-if="::course.averageDifficulty" value="::course.averageDifficulty" max="5">{{ ::course.averageDifficulty | number:1 }}</uib-progressbar>
+          <uib-progressbar value="::course.averageDifficulty" max="5">{{ course.averageDifficulty > 0 ? course.averageDifficulty : null }}</uib-progressbar>
         </td>
         <td class="col-1 text-right">
-          <span ng-if="::course.averageWorkload">{{ ::course.averageWorkload | number:1 }}</span>
+          <span ng-if="::course.averageWorkload">{{ ::course.averageWorkload }}</span>
         </td>
       </tr>
     </tbody>

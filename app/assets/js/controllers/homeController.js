@@ -29,10 +29,10 @@ angular.module('surveyor').controller('HomeController',
 
               course.reviewCount = counts.total;
               if (counts.difficulty > 0) {
-                course.averageDifficulty = totals.difficulty / counts.difficulty;
+                course.averageDifficulty = Number($filter('number')(totals.difficulty / counts.difficulty, 1));
               }
               if (counts.workload > 0) {
-                course.averageWorkload = totals.workload / counts.workload;
+                course.averageWorkload = Number($filter('number')(totals.workload / counts.workload, 1));
               }
             });
         });

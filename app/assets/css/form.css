@@ -40,6 +40,6 @@
   margin-bottom: 0;
 }
 
-.difficulty > button {
-  width: 90px;
+.btn-group-difficulty > .btn {
+  min-width: 90px;
 }
