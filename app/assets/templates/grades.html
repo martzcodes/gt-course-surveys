@@ -41,16 +41,16 @@
           <span ng-if="course.foundational" class="glyphicon glyphicon-flag" uib-tooltip="Foundational" tooltip-placement="right"></span>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.a" max="100"><small>{{ course.a > 0 ? course.a : '' }}</small></uib-progressbar>
+          <uib-progressbar value="::course.a" max="100">{{ course.a > 0 ? course.a : '' }}</uib-progressbar>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.b" max="100"><small>{{ course.b > 0 ? course.b : '' }}</small></uib-progressbar>
+          <uib-progressbar value="::course.b" max="100">{{ course.b > 0 ? course.b : '' }}</uib-progressbar>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.c" max="100"><small>{{ course.c > 0 ? course.c : '' }}</small></uib-progressbar>
+          <uib-progressbar value="::course.c" max="100">{{ course.c > 0 ? course.c : '' }}</uib-progressbar>
         </td>
         <td class="col-1 text-center hidden-xs">
-          <uib-progressbar value="::course.w" max="100"><small>{{ course.w > 0 ? course.w : '' }}</small></uib-progressbar>
+          <uib-progressbar value="::course.w" max="100">{{ course.w > 0 ? course.w : '' }}</uib-progressbar>
         </td>
       </tr>
     </tbody>
