@@ -34,7 +34,7 @@
           {{ ::course.department }}
         </td>
         <td class="col-1">
-          {{ ::course.number + (course.section ? '-' + course.section : '') }}
+          {{ ::course.formattedNumber }}
         </td>
         <td class="col-4">
           {{ ::course.name }}

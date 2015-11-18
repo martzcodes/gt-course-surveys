@@ -5,6 +5,7 @@ angular.module('surveyor').controller('GradesController',
     $scope.courses.$loaded()
       .then(function (courses) {
         angular.forEach(courses, function (course) {
+          course.formattedNumber = course.number + (course.section ? '-' + course.section : '');
           course.grades = Grades(course.$id);
           course.grades.$loaded()
             .then(function (grades) {
