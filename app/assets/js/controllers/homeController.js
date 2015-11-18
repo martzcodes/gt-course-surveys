@@ -41,5 +41,7 @@ angular.module('surveyor').controller('HomeController',
     $scope.select = function (course) {
       $location.path('/course/' + course.$id);
     };
+
+    gapi.plus.go('google-plus-home');
   }
 );

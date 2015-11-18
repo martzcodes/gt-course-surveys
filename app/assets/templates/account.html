@@ -46,7 +46,7 @@
     </label>
   </div>
 
-  <hr></hr>
+  <hr ng-if="authData.provider === 'password'"></hr>
 
   <div ng-if="authData.provider === 'password'">
     <div class="form-group">

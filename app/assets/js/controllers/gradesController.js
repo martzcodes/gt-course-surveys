@@ -25,5 +25,7 @@ angular.module('surveyor').controller('GradesController',
     $scope.select = function (course) {
       $location.path('/course/' + course.$id);
     };
+
+    gapi.plus.go('google-plus-grades');
   }
 );
