@@ -1,8 +1,10 @@
+# random
 .DS_STORE
+tmp
+
+# log files
 *.log
+
+# package management
 bower_components
 node_modules
-tmp.js
-tmp
-# app/assets/css
-# app/assets/js

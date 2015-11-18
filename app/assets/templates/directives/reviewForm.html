@@ -3,7 +3,7 @@
   <div class="form-group" ng-if="showCourse">
     <label class="col-sm-2">Course*</label>
     <div class="col-sm-10 btn-group dropdown" uib-dropdown>
-      <button id="course" type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+      <button id="course" type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" style="min-width:90px;">
         {{ review.course | course:'Select' }} <span class="caret"></span>
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="course">
@@ -17,7 +17,7 @@
   <div class="form-group" ng-if="showSemester">
     <label class="col-sm-2">Semester*</label>
     <div class="col-sm-10 btn-group dropdown" uib-dropdown="">
-      <button id="semester" type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+      <button id="semester" type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" style="min-width:90px;">
         {{ review.semester | semester:'Select' }} <span class="caret"></span>
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="semester">
@@ -42,7 +42,7 @@
   <div class="form-group">
     <label class="col-sm-2">Workload*</label>
     <div class="col-sm-10">
-      <input class="form-control" type="number" min="1" name="workload" ng-model="review.workload" style="width:100px;display:inline;"></input>
+      <input class="form-control" type="number" min="1" name="workload" ng-model="review.workload" style="width:90px;display:inline;"></input>
       &nbsp;&nbsp;hours/week
     </div>
   </div>

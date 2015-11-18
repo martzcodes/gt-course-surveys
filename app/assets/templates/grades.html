@@ -1,3 +1,62 @@
-<div class="alert alert-warning" role="alert">
-  Coming soon!
+<div class="panel panel-default">
+  <div class="panel-body" ng-if="loading">
+    Loading...
+  </div>
+  <table class="table table-hover table-striped table-condensed" ng-if="!loading">
+    <thead>
+      <tr>
+        <th class="col-1 hidden-xs" ng-click="sortType = 'department'; sortReverse = !sortReverse">
+          Department <span ng-if="sortType === 'department'"  class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-1" ng-click="sortType = 'number'; sortReverse = !sortReverse">
+          Number     <span ng-if="sortType === 'number'"      class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-4" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+          Name       <span ng-if="sortType === 'name'"        class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-1 text-center" ng-click="sortType = 'a'; sortReverse = !sortReverse">
+          % A <span ng-if="sortType === 'a'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-1 text-center" ng-click="sortType = 'b'; sortReverse = !sortReverse">
+          % B <span ng-if="sortType === 'b'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-1 text-center" ng-click="sortType = 'c'; sortReverse = !sortReverse">
+          % C <span ng-if="sortType === 'c'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+        <th class="col-1 text-center hidden-xs" ng-click="sortType = 'w'; sortReverse = !sortReverse">
+          % W <span ng-if="sortType === 'w'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="course in courses | orderBy:sortType:sortReverse" ng-click="select(course)">
+        <td class="col-1 hidden-xs">
+          {{ ::course.department }}
+        </td>
+        <td class="col-1">
+          {{ ::course.number + (course.section ? '-' + course.section : '') }}
+        </td>
+        <td class="col-4">
+          {{ ::course.name }}
+          <span ng-if="course.foundational" class="glyphicon glyphicon-flag" uib-tooltip="Foundational" tooltip-placement="right"></span>
+        </td>
+        <td class="col-1 text-center">
+          <uib-progressbar value="::course.a" max="100"><small>{{ course.a > 0 ? course.a : '' }}</small></uib-progressbar>
+        </td>
+        <td class="col-1 text-center">
+          <uib-progressbar value="::course.b" max="100"><small>{{ course.b > 0 ? course.b : '' }}</small></uib-progressbar>
+        </td>
+        <td class="col-1 text-center">
+          <uib-progressbar value="::course.c" max="100"><small>{{ course.c > 0 ? course.c : '' }}</small></uib-progressbar>
+        </td>
+        <td class="col-1 text-center hidden-xs">
+          <uib-progressbar value="::course.w" max="100"><small>{{ course.w > 0 ? course.w : '' }}</small></uib-progressbar>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-if="!loading" class="alert alert-info text-center">
+  This information was aggregated from Fall 2014, Spring 2015, and Summer 2015 data.
 </div>

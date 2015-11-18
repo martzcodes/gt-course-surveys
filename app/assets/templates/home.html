@@ -3,26 +3,29 @@
 </div>
 
 <div class="panel panel-default">
-  <table class="table table-hover table-striped table-condensed">
+  <div class="panel-body" ng-if="loading">
+    Loading...
+  </div>
+  <table class="table table-hover table-striped table-condensed" ng-if="!loading">
     <thead>
       <tr>
         <th class="col-1 hidden-xs" ng-click="sortType = 'department'; sortReverse = !sortReverse">
-          Department <span ng-show="sortType === 'department'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+          Department <span ng-if="sortType === 'department'"        class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1" ng-click="sortType = 'number'; sortReverse = !sortReverse">
-          Number     <span ng-show="sortType === 'number'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+          Number     <span ng-if="sortType === 'number'"            class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-4" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-          Name       <span ng-show="sortType === 'name'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-5" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+          Name       <span ng-if="sortType === 'name'"              class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-center hidden-xs" ng-click="sortType = 'reviewCount'; sortReverse = !sortReverse">
-          # Reviews  <span ng-show="sortType === 'reviewCount'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+          # Reviews  <span ng-if="sortType === 'reviewCount'"       class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-center" ng-click="sortType = 'averageDifficulty'; sortReverse = !sortReverse">
-          Avg. Diff. <span ng-show="sortType === 'averageDifficulty'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+          Avg. Diff. <span ng-if="sortType === 'averageDifficulty'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
         <th class="col-1 text-right"  ng-click="sortType = 'averageWorkload'; sortReverse = !sortReverse">
-          Avg. Work. <span ng-show="sortType === 'averageWorkload'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+          Avg. Work. <span ng-if="sortType === 'averageWorkload'"   class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
       </tr>
     </thead>
@@ -34,19 +37,18 @@
         <td class="col-1">
           {{ ::course.number + (course.section ? '-' + course.section : '') }}
         </td>
-        <td class="col-4">
+        <td class="col-5">
           {{ ::course.name }}
-          <span ng-if="::course.foundational" class="glyphicon glyphicon-flag"
-            uib-tooltip="Foundational" tooltip-placement="bottom"></span>
+          <span ng-if="::course.foundational" class="glyphicon glyphicon-flag" uib-tooltip="Foundational" tooltip-placement="right"></span>
         </td>
         <td class="col-1 text-center hidden-xs">
           {{ ::course.reviewCount | number:0 }}
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar ng-show="course.averageDifficulty" value="course.averageDifficulty" max="5">{{ ::course.averageDifficulty | number:1 }}</uib-progressbar>
+          <uib-progressbar ng-if="::course.averageDifficulty" value="::course.averageDifficulty" max="5">{{ ::course.averageDifficulty | number:1 }}</uib-progressbar>
         </td>
         <td class="col-1 text-right">
-          <span ng-show="course.averageWorkload">{{ ::course.averageWorkload | number:1 }}</span>
+          <span ng-if="::course.averageWorkload">{{ ::course.averageWorkload | number:1 }}</span>
         </td>
       </tr>
     </tbody>

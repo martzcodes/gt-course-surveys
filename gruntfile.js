@@ -12,6 +12,7 @@ module.exports = function (grunt) {
       app: {
         files: [
           { src: [ './node_modules/jquery/dist/jquery.min.js' ],                      dest: './tmp/js/vendor/jquery.min.js' },
+          { src: [ './bower_components/lodash/lodash.min.js' ],                       dest: './tmp/js/vendor/lodash.min.js' },
           { src: [ './node_modules/angular/angular.min.js' ],                         dest: './tmp/js/vendor/angular.min.js' },
           { src: [ './node_modules/angular-animate/angular-animate.min.js' ],         dest: './tmp/js/vendor/angular-animate.min.js' },
           { src: [ './node_modules/angular-messages/angular-messages.min.js' ],       dest: './tmp/js/vendor/angular-messages.min.js' },
@@ -121,6 +122,7 @@ module.exports = function (grunt) {
           {
             src: [
               './tmp/js/vendor/jquery.min.js',
+              './tmp/js/vendor/lodash.min.js',
               './tmp/js/vendor/angular.min.js',
               './tmp/js/vendor/angular-animate.min.js',
               './tmp/js/vendor/angular-messages.min.js',

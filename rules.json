@@ -21,6 +21,10 @@
     "semesters": {
       ".read": true,
       ".write": false
+    },
+    "grades": {
+      ".read": true,
+      ".write": false
     }
   }
 }

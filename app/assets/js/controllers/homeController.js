@@ -1,5 +1,6 @@
 angular.module('surveyor').controller('HomeController',
   function ($scope, CourseList, $window, $location, Notification, ReviewList, $filter, globals) {
+    $scope.loading = true;
     $scope.courses = CourseList();
     $scope.courses.$loaded()
       .then(function (courses) {
@@ -7,6 +8,8 @@ angular.module('surveyor').controller('HomeController',
           course.reviews = ReviewList(course.$id);
           course.reviews.$loaded()
             .then(function (reviewList) {
+              $scope.loading = false;
+              
               var totals = { difficulty: 0, workload: 0 };
               var counts = { difficulty: 0, workload: 0, total: 0 };
 
