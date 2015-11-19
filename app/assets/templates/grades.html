@@ -1,35 +1,49 @@
+<div class="btn-group pull-right" ng-if="!loading" style="margin-bottom:20px;">
+  <button class="btn btn-xs btn-default" ng-class="{ 'active':displayMode === '%' }" ng-click="toggleDisplay('%')">Percentages</button>
+  <button class="btn btn-xs btn-default" ng-class="{ 'active':displayMode === '#' }" ng-click="toggleDisplay('#')">Counts</button>
+</div>
+<div class="clearfix"></div>
+
 <div class="panel panel-default">
   <div class="panel-body" ng-if="loading">
     Loading...
   </div>
+
   <table class="table table-hover table-striped table-condensed" ng-if="!loading">
     <thead>
       <tr>
-        <th class="col-1 hidden-xs" ng-click="sortType = 'department'; sortReverse = !sortReverse">
-          Department <span ng-if="sortType === 'department'"  class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1 hidden-xs" ng-click="toggleSort('d')">
+          Department
+          <span ng-if="sortType === 'd'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1" ng-click="sortType = 'number'; sortReverse = !sortReverse">
-          Number     <span ng-if="sortType === 'number'"      class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1" ng-click="toggleSort('#')">
+          Number
+          <span ng-if="sortType === '#'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-4" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-          Name       <span ng-if="sortType === 'name'"        class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-4" ng-click="toggleSort('n')">
+          Name
+          <span ng-if="sortType === 'n'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1 text-center" ng-click="sortType = 'a'; sortReverse = !sortReverse">
-          % A <span ng-if="sortType === 'a'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1 text-center" ng-click="toggleSort('a')">
+          {{ displayMode }} A
+          <span ng-if="sortType === 'a'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1 text-center" ng-click="sortType = 'b'; sortReverse = !sortReverse">
-          % B <span ng-if="sortType === 'b'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1 text-center" ng-click="toggleSort('b')">
+          {{ displayMode }} B
+          <span ng-if="sortType === 'b'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1 text-center" ng-click="sortType = 'c'; sortReverse = !sortReverse">
-          % C <span ng-if="sortType === 'c'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1 text-center" ng-click="toggleSort('c')">
+          {{ displayMode }} C
+          <span ng-if="sortType === 'c'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
-        <th class="col-1 text-center hidden-xs" ng-click="sortType = 'w'; sortReverse = !sortReverse">
-          % W <span ng-if="sortType === 'w'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
+        <th class="col-1 text-center hidden-xs" ng-click="toggleSort('w')">
+          {{ displayMode }} W
+          <span ng-if="sortType === 'w'" class="glyphicon glyphicon-triangle-{{ sortReverse ? 'bottom' : 'top' }}"></span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="course in courses | orderBy:sortType:sortReverse" ng-click="select(course)">
+      <tr ng-repeat="course in courses | orderBy:sortKey:sortReverse" ng-click="select(course)">
         <td class="col-1 hidden-xs">
           {{ ::course.department }}
         </td>
@@ -41,16 +55,20 @@
           <span ng-if="course.foundational" class="glyphicon glyphicon-flag" uib-tooltip="Foundational" tooltip-placement="right"></span>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.a" max="100">{{ course.a > 0 ? course.a : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '%'" value="::course.grades['%'].a" max="100">{{ course.grades['%'].a > 0 ? course.grades['%'].a : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '#'" value="::course.grades['#'].a" max="::course.grades.total">{{ course.grades['#'].a > 0 ? course.grades['#'].a : null }}</uib-progressbar>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.b" max="100">{{ course.b > 0 ? course.b : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '%'" value="::course.grades['%'].b" max="100">{{ course.grades['%'].b > 0 ? course.grades['%'].b : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '#'" value="::course.grades['#'].b" max="::course.grades.total">{{ course.grades['#'].b > 0 ? course.grades['#'].b : null }}</uib-progressbar>
         </td>
         <td class="col-1 text-center">
-          <uib-progressbar value="::course.c" max="100">{{ course.c > 0 ? course.c : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '%'" value="::course.grades['%'].c" max="100">{{ course.grades['%'].c > 0 ? course.grades['%'].c : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '#'" value="::course.grades['#'].c" max="::course.grades.total">{{ course.grades['#'].c > 0 ? course.grades['#'].c : null }}</uib-progressbar>
         </td>
         <td class="col-1 text-center hidden-xs">
-          <uib-progressbar value="::course.w" max="100">{{ course.w > 0 ? course.w : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '%'" value="::course.grades['%'].w" max="100">{{ course.grades['%'].w > 0 ? course.grades['%'].w : null }}</uib-progressbar>
+          <uib-progressbar ng-if="displayMode === '#'" value="::course.grades['#'].w" max="::course.grades.total">{{ course.grades['#'].w > 0 ? course.grades['#'].w : null }}</uib-progressbar>
         </td>
       </tr>
     </tbody>
@@ -58,9 +76,11 @@
 </div>
 
 <div ng-if="!loading" class="text-muted pull-right">
-  <small>Fall 2014, Spring 2015, Summer 2015</small>
+  <small>Fall 2014 + Spring 2015 + Summer 2015</small>
 </div>
 
-<div id="google-plus-grades">
+<div id="google-plus-grades" class="pull-left">
   <g:plus action="share" annotation="bubble" href="https://gt-course-surveys.herokuapp.com"></g:plus>
 </div>
+
+<div class="clearfix"></div>

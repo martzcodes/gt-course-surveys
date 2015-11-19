@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('HomeController',
-  function ($scope, CourseList, $window, $location, Notification, ReviewList, $filter, globals) {
+  function ($scope, CourseList, $window, $location, Notification, ReviewList, $filter, globals, $timeout) {
     $scope.loading = true;
     $scope.courses = CourseList();
     $scope.courses.$loaded()
@@ -39,10 +39,21 @@ angular.module('surveyor').controller('HomeController',
         });
       });
 
+    $scope.sortType = null;
+    $scope.sortReverse = false;
+    $scope.toggleSort = function (sortType) {
+      if ($scope.sortType === sortType) {
+        $scope.sortReverse = !$scope.sortReverse;
+      }
+      $scope.sortType = sortType;
+    };
+    
     $scope.select = function (course) {
       $location.path('/course/' + course.$id);
     };
 
-    gapi.plus.go('google-plus-home');
+    $timeout(function () {
+      gapi.plus.go('google-plus-grades');
+    }, 1500);
   }
 );

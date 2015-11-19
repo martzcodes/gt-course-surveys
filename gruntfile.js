@@ -17,7 +17,6 @@ module.exports = function (grunt) {
           { src: [ './node_modules/angular-animate/angular-animate.min.js' ],         dest: './tmp/js/vendor/angular-animate.min.js' },
           { src: [ './node_modules/angular-messages/angular-messages.min.js' ],       dest: './tmp/js/vendor/angular-messages.min.js' },
           { src: [ './node_modules/angular-route/angular-route.min.js' ],             dest: './tmp/js/vendor/angular-route.min.js' },
-          { src: [ './node_modules/angular-resource/angular-resource.min.js' ],       dest: './tmp/js/vendor/angular-resource.min.js' },
           { src: [ './node_modules/angular-gravatar/build/angular-gravatar.min.js' ], dest: './tmp/js/vendor/angular-gravatar.min.js' },
           { src: [ './node_modules/angular-toastr/dist/angular-toastr.tpls.min.js' ], dest: './tmp/js/vendor/angular-toastr.tpls.min.js' },
           { src: [ './node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.min.js' ],  dest: './tmp/js/vendor/angular-ui-bootstrap.tpls.min.js' },
