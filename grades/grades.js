@@ -41,6 +41,9 @@ function readGradesFile(fileName, grades) {
           if (courseId === '8803' && fileName.indexOf('cse.txt') > 0) {
             courseId = '8803-BDHI';
           }
+          if (courseId === '4495' && fileName.indexOf('cs.txt') > 0) {
+            courseId = '6476';
+          }
           if (grades[courseId] === undefined) {
             return;
           }
