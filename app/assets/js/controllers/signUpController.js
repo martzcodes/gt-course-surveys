@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('SignUpController',
-  function ($scope, $location, globals, Notification) {
+  function ($scope, $location, globals, Notification, $timeout) {
     if (globals.firebase.getAuth()) {
       $location.path('/account');
       return;
@@ -27,7 +27,9 @@ angular.module('surveyor').controller('SignUpController',
       }
       else {
         Notification.success('Account created.');
-        globals.firebase.authWithPassword($scope.user, $scope.onUserSignedIn);
+        $timeout(function () {
+          globals.firebase.authWithPassword($scope.user, $scope.onUserSignedIn);
+        }, 1000);
       }
     };
 

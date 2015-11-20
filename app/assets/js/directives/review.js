@@ -4,9 +4,9 @@ angular.module('surveyor').directive('review',
       replace: true,
       restrict: 'E',
       templateUrl: '/assets/templates/directives/review.html',
-      controller: function ($scope, User) {
+      controller: function ($scope, User, globals) {
         $scope.author = User($scope.review.author);
-
+        $scope.showTime = ($scope.review.author !== globals.anonymousUserId);
         $scope.showCancel = true;
 
         $scope.edit = function (review) {

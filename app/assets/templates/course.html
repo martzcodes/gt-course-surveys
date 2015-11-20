@@ -1,7 +1,7 @@
 <page-title title="{{ course | course:'Loading...' }}" url="{{ ::course.url }}"></page-title>
 
 <div ng-hide="course.reviews.length === 0">
-  <review author="{{ ::review.author }}" ng-repeat="review in course.reviews | orderBy:['-semester', '-difficulty']"></review>
+  <review author="{{ ::review.author }}" ng-repeat="review in course.reviews | orderBy:[ '-semester', '-created', '-difficulty' ]"></review>
 </div>
 
 <div ng-if="course.reviews.length === 0" class="panel panel-default">

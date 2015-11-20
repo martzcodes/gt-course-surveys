@@ -6,7 +6,7 @@
       <div class="panel-heading">
         <div class="pull-left">
           <span>{{ ::!author.remain_anonymous ? author.name : 'Anonymous' }}</span>
-          <span class="text-muted">{{ review.updated || review.created | datetime }}</span>
+          <span class="text-muted" ng-if="showTime">{{ review.updated || review.created | datetime }}</span>
         </div>
         <div class="pull-right" ng-if="review.author === authData.uid" ng-if="!editing">
           <span class="glyphicon glyphicon-pencil" ng-click="edit(review)"></span>
