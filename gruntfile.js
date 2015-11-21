@@ -15,7 +15,6 @@ module.exports = function (grunt) {
           { src: [ './bower_components/lodash/lodash.min.js' ],                       dest: './tmp/js/vendor/lodash.min.js' },
           { src: [ './node_modules/angular/angular.min.js' ],                         dest: './tmp/js/vendor/angular.min.js' },
           { src: [ './node_modules/angular-animate/angular-animate.min.js' ],         dest: './tmp/js/vendor/angular-animate.min.js' },
-          { src: [ './node_modules/angular-messages/angular-messages.min.js' ],       dest: './tmp/js/vendor/angular-messages.min.js' },
           { src: [ './node_modules/angular-route/angular-route.min.js' ],             dest: './tmp/js/vendor/angular-route.min.js' },
           { src: [ './node_modules/angular-gravatar/build/angular-gravatar.min.js' ], dest: './tmp/js/vendor/angular-gravatar.min.js' },
           { src: [ './node_modules/angular-toastr/dist/angular-toastr.tpls.min.js' ], dest: './tmp/js/vendor/angular-toastr.tpls.min.js' },
@@ -29,6 +28,7 @@ module.exports = function (grunt) {
           { src: [ './node_modules/angular-toastr/dist/angular-toastr.min.css' ],     dest: './tmp/css/vendor/angular-toastr.min.css' },
           { src: [ './node_modules/bootstrap/dist/css/bootstrap.min.css' ],           dest: './tmp/css/vendor/bootstrap.min.css' },
           { src: [ './node_modules/bootstrap/dist/css/bootstrap-theme.min.css' ],     dest: './tmp/css/vendor/bootstrap-theme.min.css' },
+          { src: [ './bower_components/angular-animate-css/build/nga.min.css' ],      dest: './tmp/css/vendor/nga.min.css' },
 
           {
             expand: true,
@@ -114,6 +114,7 @@ module.exports = function (grunt) {
               './tmp/css/vendor/bootstrap.min.css',
               './tmp/css/vendor/bootstrap-theme.min.css',
               './tmp/css/vendor/angular-toastr.min.css',
+              './tmp/css/vendor/nga.min.css',
               './tmp/css/surveyor.min.css',
             ],
             dest: './app/dist/css/main.css'
@@ -124,7 +125,6 @@ module.exports = function (grunt) {
               './tmp/js/vendor/lodash.min.js',
               './tmp/js/vendor/angular.min.js',
               './tmp/js/vendor/angular-animate.min.js',
-              './tmp/js/vendor/angular-messages.min.js',
               './tmp/js/vendor/angular-route.min.js',
               './tmp/js/vendor/angular-resource.min.js',
               './tmp/js/vendor/angular-gravatar.min.js',

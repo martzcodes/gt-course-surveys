@@ -7,17 +7,16 @@
   "dependencies": {
     "angular": "^1.4",
     "angular-animate": "^1.4",
-    "angular-gravatar": "*",
-    "angular-messages": "^1.4",
+    "angular-gravatar": "^0.4.1",
     "angular-resource": "^1.4",
     "angular-route": "^1.4",
-    "angular-toastr": "*",
-    "angular-ui-bootstrap": "*",
+    "angular-toastr": "^1.6.0",
+    "angular-ui-bootstrap": "^0.14.3",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "firebase": "*",
+    "firebase": "^2.3.2",
     "jquery": "^2.1.4",
-    "moment": "*",
+    "moment": "^2.10.6",
     "rsvp": "^3.1.0"
   },
   "devDependencies": {

@@ -33,9 +33,12 @@ angular.module('surveyor').controller('GradesController',
       });
 
     $scope.sortType = null;
-    $scope.sortReverse = false;
+    $scope.sortReverse = null;
     $scope.toggleSort = function (sortType) {
-      if ($scope.sortType === sortType) {
+      if ($scope.sortReverse === null) {
+        $scope.sortReverse = true;
+      }
+      else if ($scope.sortType === sortType) {
         $scope.sortReverse = !$scope.sortReverse;
       }
       $scope.sortType = sortType;
