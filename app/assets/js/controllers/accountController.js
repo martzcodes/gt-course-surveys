@@ -7,12 +7,7 @@ angular.module('surveyor').controller('AccountController',
 
     $('input[name=name]').select();
 
-    $scope.specializations = [
-      'Computational Perception & Robotics',
-      'Computing Systems',
-      'Interactive Intelligence',
-      'Machine Learning'
-    ];
+    $scope.specializations = [ 0, 1, 2, 3 ];
     $scope.working = false;
 
     $scope.onPasswordChanged = function (error) {

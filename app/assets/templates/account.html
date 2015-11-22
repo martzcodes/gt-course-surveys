@@ -26,11 +26,11 @@
     <label>Specialization</label>
     <div class="dropdown" uib-dropdown>
       <button id="specialization" type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
-        {{ user.specialization || 'Select' }} <span class="caret"></span>
+        {{ user.specialization | specialization:'Select' }} <span class="caret"></span>
       </button>
       <ul class="uib-dropdown-menu dropdown-menu" role="menu" aria-labelledby="specialization">
         <li role="menuitem" ng-repeat="specialization in specializations" ng-click="user.specialization = specialization">
-          <a href="">{{ specialization }}</a>
+          <a href="">{{ specialization | specialization }}</a>
         </li>
       </ul>
     </div>
