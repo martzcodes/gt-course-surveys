@@ -4,9 +4,6 @@ angular.module('surveyor').directive('navBarBody',
       replace: true,
       restrict: 'E',
       templateUrl: 'assets/templates/directives/navBarBody.html',
-      link: function ($scope, element, attrs, User) {
-
-      },
       controller: function ($scope, globals, $location, Notification, User) {
         $scope.user = $scope.user || {};
         $scope.userUnbind = null;

@@ -9,42 +9,44 @@ angular.module('surveyor').controller('SignUpController',
 
     $scope.working = false;
 
-    $scope.onUserSignedIn = function (error, authData) {
+    $scope.onUserCreated = function (error, authData) {
       $scope.working = false;
       if (error) {
         Notification.error(error);
       }
       else {
-        Notification.success('Signed in.');
-        $location.path('/account');
+        globals.firebase.resetPassword({
+          email: $scope.user.email
+        }, function (error) {
+          if (error) {
+            Notification.error(error);
+          }
+          else {
+            Notification.success('Account created. Check your email for login instructions.');
+          }
+        });
       }
     };
 
-    $scope.onUserCreated = function (error, authData) {
-      if (error) {
-        Notification.error(error);
-        $scope.working = false;
+    $scope.generatePassword = function () {
+      var possibleChars = ['abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?_-'];
+      var password = '';
+      for (var i = 0; i < 16; i += 1) {
+        password += possibleChars[Math.floor(Math.random() * possibleChars.length)];
       }
-      else {
-        Notification.success('Account created.');
-        $timeout(function () {
-          globals.firebase.authWithPassword($scope.user, $scope.onUserSignedIn);
-        }, 1000);
-      }
+      return password;
     };
 
     $scope.signUp = function (user) {
-      if (!user.email || !user.password) {
-        if (!user.password) {
-          Notification.error('Please enter a password.');
-        }
-        if (!user.email) {
-          Notification.error('Please enter a gatech.edu email.');
-        }
+      if (!user.email) {
+        Notification.error('Please enter a gatech.edu email.');
       }
       else {
         $scope.working = true;
-        globals.firebase.createUser(user, $scope.onUserCreated);
+        globals.firebase.createUser({
+          email: user.email,
+          password: $scope.generatePassword()
+        }, $scope.onUserCreated);
       }
     };
   }
