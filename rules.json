@@ -5,7 +5,7 @@
       ".write": false
     },
     "reviews": {
-      ".indexOn": [ "course" ],
+      ".indexOn": [ "course", "author" ],
       ".read": true,
       "$review_id": {
         ".write": "root.child('users/'+auth.uid).exists() && (data.child('author').val() === auth.uid || newData.child('author').val() === auth.uid)",
