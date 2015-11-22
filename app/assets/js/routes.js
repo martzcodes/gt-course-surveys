@@ -1,8 +1,18 @@
 angular.module('surveyor').config(function ($routeProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'assets/templates/home.html',
-      controller: 'HomeController'
+      templateUrl: 'assets/templates/reviews.html',
+      controller: 'ReviewsController'
+    })
+    
+    .when('/reviews', {
+      templateUrl: 'assets/templates/reviews.html',
+      controller: 'ReviewsController'
+    })
+
+    .when('/my-reviews', {
+      templateUrl: 'assets/templates/myReviews.html',
+      controller: 'MyReviewsController'
     })
 
     .when('/grades', {

@@ -3,7 +3,7 @@
     <li ng-if="authData"><a href="/#/write-review">Write Review</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li><a href="/#/">Reviews</a></li>
+    <li><a href="/#/reviews">Reviews</a></li>
     <li><a href="/#/grades">Grades</a></li>
     <li><a href="/#/faq">FAQ</a></li>
     <li ng-if="!authData"><a href="/#/sign-in">Sign In</a></li>
@@ -14,6 +14,7 @@
       </a>
       <ul class="dropdown-menu">
         <li><a href="/#/account">My Account</a></li>
+        <li><a href="/#/my-reviews">My Reviews</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="/#/" ng-click="signOut()">Sign Out</a></li>
       </ul>

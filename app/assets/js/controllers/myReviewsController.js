@@ -1,11 +1,12 @@
-angular.module('surveyor').controller('CourseController',
+angular.module('surveyor').controller('MyReviewsController',
   function ($scope, $routeParams, $window, Course, ReviewList, Notification) {
-    $scope.course = Course($routeParams.id);
-    $scope.course.$loaded()
-      .then(function (course) {
-        $scope.reviews = ReviewList(course.$id);
-      })
-      .catch(Notification.error);
+    if (!$scope.authData) {
+      $location.path('/reviews');
+      return;
+    }
+
+    $scope.reviews = ReviewList($scope.authData.uid, true);
+    $scope.reviews.$loaded().catch(Notification.error);
 
     $scope.remove = function (review) {
       if ($window.confirm('Permanently delete this review?')) {

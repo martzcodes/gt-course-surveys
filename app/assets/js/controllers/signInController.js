@@ -26,7 +26,7 @@ angular.module('surveyor').controller('SignInController',
       }
       else {
         Notification.success('Signed in.');
-        $location.path('/');
+        $location.path('/reviews');
       }
     };
 

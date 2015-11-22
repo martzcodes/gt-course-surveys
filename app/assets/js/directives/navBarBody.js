@@ -45,7 +45,7 @@ angular.module('surveyor').directive('navBarBody',
           globals.firebase.unauth();
           $scope.userUnbind();
           $scope.user = {};
-          $location.path('/');
+          $location.path('/reviews');
           Notification.success('Signed out.');
         };
       }

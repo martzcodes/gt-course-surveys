@@ -4,10 +4,17 @@ angular.module('surveyor').directive('review',
       replace: true,
       restrict: 'E',
       templateUrl: '/assets/templates/directives/review.html',
-      controller: function ($scope, User, globals) {
+      controller: function ($scope, User, globals, $location, Course) {
         $scope.author = User($scope.review.author);
         $scope.showTime = ($scope.review.author !== globals.anonymousUserId);
         $scope.showCancel = true;
+        if ($location.path() === '/my-reviews') {
+          $scope.course = Course($scope.review.course);
+          $scope.showTime = false;
+        }
+        else {
+          $scope.course = null;
+        }
 
         $scope.edit = function (review) {
           $scope.reviewBeforeEdits = {
@@ -27,7 +34,7 @@ angular.module('surveyor').directive('review',
 
         $scope.save = function (review) {
           review.updated = moment().format();
-          $scope.course.reviews.$save(review)
+          $scope.reviews.$save(review)
             .then(function () {
               Notification.success('Saved.');
               $scope.editing = false;

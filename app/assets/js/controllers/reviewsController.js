@@ -1,4 +1,4 @@
-angular.module('surveyor').controller('HomeController',
+angular.module('surveyor').controller('ReviewsController',
   function ($scope, CourseList, $window, $location, Notification, ReviewList, $filter, globals, $timeout) {
     $scope.loading = true;
     $scope.courses = CourseList();
