@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('SignUpController',
-  function ($scope, $location, globals, Notification, $timeout) {
+  function ($scope, $location, globals, Notification) {
     if (globals.firebase.getAuth()) {
       $location.path('/account');
       return;
@@ -29,10 +29,10 @@ angular.module('surveyor').controller('SignUpController',
     };
 
     $scope.generatePassword = function () {
-      var possibleChars = ['abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?_-'];
+      var characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?_-';
       var password = '';
-      for (var i = 0; i < 16; i += 1) {
-        password += possibleChars[Math.floor(Math.random() * possibleChars.length)];
+      for (var i = 0; i < 16; i++) {
+        password += characters[Math.floor(Math.random() * characters.length)];
       }
       return password;
     };
