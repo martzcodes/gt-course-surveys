@@ -8,12 +8,12 @@ angular.module('surveyor').directive('navBarBody',
         $scope.user = $scope.user || {};
         $scope.userUnbind = null;
 
-        $scope.notifySlack = function (authData, user, created) {
+        $scope.notifySlack = function (created) {
           if ($location.host() === 'localhost') {
             return;
           }
 
-          var text = '```' + (created ? 'sign-up: ' : 'sign-in: ') + user.name + ', ' + user.email + ' (' + authData.provider + ')```';
+          var text = '```' + (created ? 'sign-up: ' : 'sign-in: ') + $scope.user.name + ', ' + $scope.user.email + ' (' + $scope.authData.provider + ')```';
           var payload = {
             channel: '#authentication',
             username: 'gt-course-surveys',
@@ -54,10 +54,10 @@ angular.module('surveyor').directive('navBarBody',
                   default:
                     break;
                 }
-                $scope.notifySlack(authData, user, true);
+                $scope.notifySlack(true);
               }
               else {
-                $scope.notifySlack(authData, user, false);
+                $scope.notifySlack(false);
               }
             });
           }
