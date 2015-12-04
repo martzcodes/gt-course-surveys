@@ -8,7 +8,6 @@
     "angular": "^1.4",
     "angular-animate": "^1.4",
     "angular-gravatar": "^0.4.1",
-    "angular-resource": "^1.4",
     "angular-route": "^1.4",
     "angular-toastr": "^1.6.0",
     "angular-ui-bootstrap": "^0.14.3",
@@ -31,6 +30,7 @@
     "grunt-ng-annotate": "^1.0.1"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "NODE_ENV=production node app.js",
+    "test": "NODE_ENV=development node app.js"
   }
 }
