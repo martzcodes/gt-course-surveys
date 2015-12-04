@@ -4,9 +4,30 @@ angular.module('surveyor').directive('navBarBody',
       replace: true,
       restrict: 'E',
       templateUrl: 'assets/templates/directives/navBarBody.html',
-      controller: function ($scope, globals, $location, Notification, User) {
+      controller: function ($scope, globals, $location, Notification, User, $http) {
         $scope.user = $scope.user || {};
         $scope.userUnbind = null;
+
+        $scope.notifySlack = function (authData, user, created) {
+          if ($location.host() === 'localhost') {
+            return;
+          }
+
+          var text = '```' + (created ? 'sign-up: ' : 'sign-in: ') + user.name + ', ' + user.email + ' (' + authData.provider + ')```';
+          var payload = {
+            channel: '#authentication',
+            username: 'gt-course-surveys',
+            icon_emoji: ':clipboard:',
+            text: text
+          };
+          
+          $http({
+            method: 'POST',
+            url: globals.slackUrl,
+            data: payload,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          });
+        };
 
         globals.firebase.onAuth(function (authData) {
           $scope.authData = authData;
@@ -33,6 +54,10 @@ angular.module('surveyor').directive('navBarBody',
                   default:
                     break;
                 }
+                $scope.notifySlack(authData, user, true);
+              }
+              else {
+                $scope.notifySlack(authData, user, false);
               }
             });
           }
