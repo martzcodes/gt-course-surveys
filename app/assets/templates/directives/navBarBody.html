@@ -6,7 +6,7 @@
     <li><a href="/#/reviews">Reviews</a></li>
     <li><a href="/#/grades">Grades</a></li>
     <li><a href="/#/faq">FAQ</a></li>
-    <li ng-if="!authData"><a href="/#/sign-in">Sign In</a></li>
+    <li ng-if="!authData" class="hidden-xs"><a href="/#/sign-in">Sign In</a></li>
     <li ng-if="authData" class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <img alt="Gravatar" gravatar-src="user.email" height="22" width="22" gravatar-size="50"></img>
