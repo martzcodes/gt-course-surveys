@@ -4,30 +4,9 @@ angular.module('surveyor').directive('navBarBody',
       replace: true,
       restrict: 'E',
       templateUrl: 'assets/templates/directives/navBarBody.html',
-      controller: function ($scope, globals, $location, Notification, User, $http) {
+      controller: function ($scope, globals, $location, Notification, User, slack) {
         $scope.user = $scope.user || {};
         $scope.userUnbind = null;
-
-        $scope.notifySlack = function (created) {
-          if ($location.host() === 'localhost') {
-            return;
-          }
-
-          var text = '```' + (created ? 'sign-up: ' : 'sign-in: ') + $scope.user.name + ', ' + $scope.user.email + ' (' + $scope.authData.provider + ')```';
-          var payload = {
-            channel: '#authentication',
-            username: 'gt-course-surveys',
-            icon_emoji: ':clipboard:',
-            text: text
-          };
-          
-          $http({
-            method: 'POST',
-            url: globals.slackUrl,
-            data: payload,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-          });
-        };
 
         globals.firebase.onAuth(function (authData) {
           $scope.authData = authData;
@@ -54,10 +33,20 @@ angular.module('surveyor').directive('navBarBody',
                   default:
                     break;
                 }
-                $scope.notifySlack(true);
+                slack.postMessage({
+                  type: slack.messageTypes.signUp,
+                  name: $scope.user.name,
+                  email: $scope.user.email,
+                  provider: authData.provider
+                });
               }
               else {
-                $scope.notifySlack(false);
+                slack.postMessage({
+                  type: slack.messageTypes.signIn,
+                  name: $scope.user.name,
+                  email: $scope.user.email,
+                  provider: authData.provider
+                });
               }
             });
           }

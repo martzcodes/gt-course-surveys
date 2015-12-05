@@ -1,5 +1,5 @@
 angular.module('surveyor').controller('WriteReviewController',
-  function ($scope, globals, Notification, $location) {
+  function ($scope, globals, Notification, $location, slack) {
     if (!$scope.authData) {
       $location.path('/sign-in');
       return;
@@ -53,6 +53,12 @@ angular.module('surveyor').controller('WriteReviewController',
           else {
             Notification.success('Review published.');
             $location.path('/course/' + review.course.$id);
+            slack.postMessage({
+              type: slack.messageTypes.publishReview,
+              name: $scope.user.name,
+              email: $scope.user.email,
+              course: review.course.$id
+            });
           }
         });
       }
