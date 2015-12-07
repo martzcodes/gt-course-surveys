@@ -7,6 +7,7 @@ angular.module('surveyor').controller('WriteReviewController',
 
     $scope.showCourse = true;
     $scope.showSemester = true;
+    $scope.showHints = true;
     $scope.submitCaption = 'Publish';
 
     $scope.save = function (review) {
