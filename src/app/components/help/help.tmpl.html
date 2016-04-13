@@ -1,0 +1,12 @@
+<div class="padding-10" layout="column" layout-align="space-between stretch" layout-fill layout-margin>
+    <md-card ng-repeat="item in vm.items">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">{{ item.title }}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p ng-bind-html="item.body.join('</p><p>')"></p>
+        </md-card-content>
+    </md-card>
+</div>

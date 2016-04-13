@@ -1,0 +1,65 @@
+{
+    "404": {
+        "TITLE": "404",
+        "HOME": "Wieder nach Hause gehen",
+        "MESSAGE": "Seite nicht gefunden",
+        "DESCRIPTION": "Sorry, die Seite die Sie suchen nicht gefunden werden kann hier. Kopf zurück auf die Startseite und von dort aus starten."
+    },
+    "500": {
+        "TITLE": "500",
+        "MESSAGE": "Ging etwas schief.",
+        "DESCRIPTION": "Sorry, etwas ist schief gegangen.",
+        "HOME": "Wieder nach Hause gehen"
+    },
+    "GENERAL": {
+        "CANCEL": "Abbrechen",
+        "OK": "Ok"
+    },
+    "ADMIN": {
+        "TOOLBAR": {
+            "SETTINGS": "Einstellungen",
+            "PROFILE": "Profil",
+            "LOGOUT": "Logout",
+            "TOGGLE_NAVIGATION": "Toggle Navigation Sidebar",
+            "TOGGLE_NOTIFICATIONS": "Knebel Benachrichtigungen Sidebar",
+            "TOGGLE_FULLSCREEN": "Vollbildmodus",
+            "CHANGE_LANGUAGE": "Sprache Ändern",
+            "TOGGLE_MENU": "Toggle-Menü",
+            "LOGIN": "Login",
+            "RECENT_REVIEWS": "Aktuelle Bewertungen (Letzte 2 Wochen)"
+        }
+    },
+    "LANGUAGES": {
+        "ENGLISH": "Englisch",
+        "FRENCH": "Französisch",
+        "GERMAN": "Deutsch",
+        "ITALIAN": "Italienisch",
+        "SPANISH": "Spanisch",
+        "TURKISH": "Türkisch"
+    },
+    "MESSAGES": {
+        "LANGUAGE_CHANGED": "Sprache verändert."
+    },
+    "TABLES": {
+        "NEXT": "Nächste Seite",
+        "PREV": "Vorherige Seite",
+        "OF": "der",
+        "ROWS": "Zeilen pro Seite:"
+    },
+    "USER": {
+        "ANONYMOUS": "Anonym"
+    },
+    "TABLE": {
+        "HEADER": {
+            "DEPARTMENT": "Abteilung",
+            "NUMBER": "Anzahl",
+            "NAME": "Name",
+            "NUM_REVIEWS": "# Bewertungen",
+            "AVG_DIFFICULTY": "Avg. Diff.",
+            "AVG_WORKLOAD": "Avg. Arbeit."
+        }
+    },
+    "COURSE": {
+        "FOUNDATIONAL": "Grundlegende"
+    }
+}

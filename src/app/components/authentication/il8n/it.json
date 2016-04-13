@@ -1,0 +1,90 @@
+{
+    "MENU": {
+        "PROFILE": "Profilo"
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Inserisci il tuo indirizzo e-mail",
+            "PLEASE_VALID": "Si prega di inserire un indirizzo email valido",
+            "PLEASE_GATECH": "Si prega di inserire un gatech.edu indirizzo e-mail"
+        },
+        "PASSWORD": {
+            "LABEL": "password",
+            "PLEASE_ENTER": "Si prega di inserire la tua password."
+        },
+        "REMEMBER": "Ricordati Di Me",
+        "FORGOT": "Hai dimenticato la password?",
+        "BUTTON": "Log In",
+        "BUTTONING": "La Registrazione In",
+        "SIGNUP_LINK": "Non hai un account? Creare uno ora",
+        "SOCIAL": {
+            "OR": "o effettuare il login con"
+        },
+        "MESSAGES": {
+            "LOGGED_IN": "Effettuato il login."
+        }
+    },
+    "SIGNUP": {
+        "TITLE": "Iscriviti",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Inserisci il tuo indirizzo e-mail",
+            "PLEASE_VALID": "Si prega di inserire un indirizzo email valido",
+            "PLEASE_GATECH": "Si prega di inserire un gatech.edu indirizzo e-mail"
+        },
+        "BUTTON": "Iscriviti",
+        "BUTTONING": "La Firma",
+        "HAVE_LOGIN": "Già un account? Login qui",
+        "MESSAGES": {
+            "CONFIRM_SENT": "Account stato creato. Controlla la tua email per le istruzioni per il login.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "FORGOT": {
+        "TITLE": "Hai dimenticato la tua password?",
+        "ENTER_EMAIL": "Inserisci la tua email qui sotto:",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Inserisci il tuo indirizzo e-mail",
+            "PLEASE_VALID": "Si prega di inserire un indirizzo email valido",
+            "PLEASE_GATECH": "Si prega di inserire un gatech.edu indirizzo e-mail"
+        },
+        "RESET": "Reset",
+        "RESETTING": "Ripristino",
+        "LOGIN": "In mente? Login qui",
+        "MESSAGES": {
+            "RESET_SENT": "La nuova password è stata inviata.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profilo",
+        "EMAIL": {
+            "LABEL": "email"
+        },
+        "NAME": {
+            "LABEL": "nome",
+            "PLEASE_ENTER": "Inserisci il tuo nome"
+        },
+        "SPECIALIZATION": {
+            "LABEL": "specializzazione"
+        },
+        "PASSWORD": {
+            "TITLE": "Password",
+            "CURRENT": "password attuale",
+            "NEW": "nuova password",
+            "CONFIRM": "conferma password",
+            "PLEASE_ENTER": "Si prega di inserire una password",
+            "MIN_LENGTH": "La password deve essere maggiore di 8 caratteri",
+            "SAME_PASSWORD": "È necessario immettere la stessa password"
+        },
+        "REMAIN_ANONYMOUS": {
+            "LABEL": "Rimanere anonimo per gli altri?"
+        },
+        "UPDATE": "Aggiornamento",
+        "UPDATING": "Aggiornamento",
+        "UPDATED": "Aggiornato."
+    }
+}

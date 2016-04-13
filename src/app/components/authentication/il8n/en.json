@@ -1,0 +1,90 @@
+{
+    "MENU": {
+        "PROFILE": "Profile"
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Please enter your email address",
+            "PLEASE_VALID": "Please enter a valid email address",
+            "PLEASE_GATECH": "Please enter a gatech.edu email address"
+        },
+        "PASSWORD": {
+            "LABEL": "password",
+            "PLEASE_ENTER": "Please enter your password."
+        },
+        "REMEMBER": "Remember Me",
+        "FORGOT": "Forgot password?",
+        "BUTTON": "Log In",
+        "BUTTONING": "Logging In",
+        "SIGNUP_LINK": "Don't have an account? Create one now",
+        "SOCIAL": {
+            "OR": "or login with"
+        },
+        "MESSAGES": {
+            "LOGGED_IN": "Logged in."
+        }
+    },
+    "SIGNUP": {
+        "TITLE": "Sign up",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Please enter your email address",
+            "PLEASE_VALID": "Please enter a valid email address",
+            "PLEASE_GATECH": "Please enter a gatech.edu email address"
+        },
+        "BUTTON": "Sign Up",
+        "BUTTONING": "Signing Up",
+        "HAVE_LOGIN": "Already have an account? Login here",
+        "MESSAGES": {
+            "CONFIRM_SENT": "Account created. Please check your email for login instructions.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "FORGOT": {
+        "TITLE": "Forgot your password?",
+        "ENTER_EMAIL": "Please enter your email below:",
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Please enter your email address",
+            "PLEASE_VALID": "Please enter a valid email address",
+            "PLEASE_GATECH": "Please enter a gatech.edu email address"
+        },
+        "RESET": "Reset",
+        "RESETTING": "Resetting",
+        "LOGIN": "Remembered it? Login in here",
+        "MESSAGES": {
+            "RESET_SENT": "Your new password has been mailed.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profile",
+        "EMAIL": {
+            "LABEL": "email"
+        },
+        "NAME": {
+            "LABEL": "name",
+            "PLEASE_ENTER": "Please enter your name"
+        },
+        "SPECIALIZATION": {
+            "LABEL": "specialization"
+        },
+        "PASSWORD": {
+            "TITLE": "Password",
+            "CURRENT": "current password",
+            "NEW": "new password",
+            "CONFIRM": "confirm password",
+            "PLEASE_ENTER": "Please enter a password",
+            "MIN_LENGTH": "Your password must be greater than 8 characters long",
+            "SAME_PASSWORD": "You need to enter the same password"
+        },
+        "REMAIN_ANONYMOUS": {
+            "LABEL": "Remain anonymous to others?"
+        },
+        "UPDATE": "Update",
+        "UPDATING": "Updating",
+        "UPDATED": "Updated."
+    }
+}

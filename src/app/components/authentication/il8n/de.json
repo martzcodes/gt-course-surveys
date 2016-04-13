@@ -1,0 +1,90 @@
+{
+    "MENU": {
+        "PROFILE": "Profil"
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": {
+            "LABEL": "E-Mail",
+            "PLEASE_ENTER": "Bitte geben Sie Ihre E-Mail-Adresse",
+            "PLEASE_VALID": "Bitte geben Sie eine gültige E-Mail-Adresse",
+            "PLEASE_GATECH": "Bitte geben Sie eine gatech.edu E-Mail-Adresse"
+        },
+        "PASSWORD": {
+            "LABEL": "Passwort",
+            "PLEASE_ENTER": "Bitte geben Sie Ihr Passwort ein."
+        },
+        "REMEMBER": "Erinnern Sie Sich An Mich",
+        "FORGOT": "Passwort vergessen?",
+        "BUTTON": "Log-In",
+        "BUTTONING": "Logging In",
+        "SIGNUP_LINK": "Sie haben noch kein Konto? Jetzt eins erstellen",
+        "SOCIAL": {
+            "OR": "oder einloggen mit"
+        },
+        "MESSAGES": {
+            "LOGGED_IN": "Angemeldet."
+        }
+    },
+    "SIGNUP": {
+        "TITLE": "Anmelden",
+        "EMAIL": {
+            "LABEL": "E-Mail",
+            "PLEASE_ENTER": "Bitte geben Sie Ihre E-Mail-Adresse",
+            "PLEASE_VALID": "Bitte geben Sie eine gültige E-Mail-Adresse",
+            "PLEASE_GATECH": "Bitte geben Sie eine gatech.edu E-Mail-Adresse"
+        },
+        "BUTTON": "Anmelden",
+        "BUTTONING": "Anmeldung",
+        "HAVE_LOGIN": "Sie haben bereits ein Konto? Anmeldung hier",
+        "MESSAGES": {
+            "CONFIRM_SENT": "Konto erstellt. Bitte überprüfen Sie Ihre E-Mail für den login-Instruktionen.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "FORGOT": {
+        "TITLE": "Haben Sie Ihr Passwort vergessen?",
+        "ENTER_EMAIL": "Bitte geben Sie Ihre E-Mail unten:",
+        "EMAIL": {
+            "LABEL": "E-Mail",
+            "PLEASE_ENTER": "Bitte geben Sie Ihre E-Mail-Adresse",
+            "PLEASE_VALID": "Bitte geben Sie eine gültige E-Mail-Adresse",
+            "PLEASE_GATECH": "Bitte geben Sie eine gatech.edu E-Mail-Adresse"
+        },
+        "RESET": "Zurücksetzen",
+        "RESETTING": "Zurücksetzen",
+        "LOGIN": "Es erinnert? Anmeldung hier",
+        "MESSAGES": {
+            "RESET_SENT": "Ihr neues Passwort wurde per post verschickt werden.",
+            "LOGIN_NOW": "Login"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profil",
+        "EMAIL": {
+            "LABEL": "E-Mail"
+        },
+        "NAME": {
+            "LABEL": "name",
+            "PLEASE_ENTER": "Bitte geben Sie Ihren Namen"
+        },
+        "SPECIALIZATION": {
+            "LABEL": "Spezialisierung"
+        },
+        "PASSWORD": {
+            "TITLE": "Passwort",
+            "CURRENT": "Aktuelles Passwort",
+            "NEW": "neues Passwort",
+            "CONFIRM": "Kennwort bestätigen",
+            "PLEASE_ENTER": "Bitte geben Sie ein Passwort ein",
+            "MIN_LENGTH": "Ihr Kennwort muss mehr als 8 Zeichen lang sein",
+            "SAME_PASSWORD": "Sie müssen dasselbe Kennwort eingeben"
+        },
+        "REMAIN_ANONYMOUS": {
+            "LABEL": "Anonym bleiben, um die anderen?"
+        },
+        "UPDATE": "Update",
+        "UPDATING": "Aktualisierung",
+        "UPDATED": "Aktualisiert."
+    }
+}

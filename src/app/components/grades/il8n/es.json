@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "GRADES": {
+            "ALL": "Los grados"
+        }
+    },
+    "DISPLAY": {
+        "PERCENTAGES": "Porcentajes",
+        "COUNTS": "Cuenta"
+    }
+}

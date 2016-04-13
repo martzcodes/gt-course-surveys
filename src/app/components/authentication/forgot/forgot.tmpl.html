@@ -1,0 +1,43 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+    <div flex="40" flex-lg="50" flex-md="70" flex-xs="100">
+        <md-card>
+            <md-toolbar class="padding-20">
+                <div layout="row" layout-align="center center">
+                    <h1 class="md-headline" translate>FORGOT.TITLE</h1>
+                </div>
+            </md-toolbar>
+            <md-content class="md-padding">
+                <p translate>FORGOT.ENTER_EMAIL</p>
+                <form name="forgotForm">
+
+                    <!-- EMAIL -->
+                    <md-input-container class="md-block">
+                        <label translate>FORGOT.EMAIL.LABEL</label>
+                        <input name="email" type="email" ng-model="vm.user.email" ng-pattern="/^.+@gatech\.edu$/" required />
+                        <div ng-messages="forgotForm.email.$error">
+                            <div ng-message when="required"><span translate>FORGOT.EMAIL.PLEASE_ENTER</span></div>
+                            <div ng-message when="email"><span translate>FORGOT.EMAIL.PLEASE_VALID</span></div>
+                            <div ng-message when="pattern"><span translate>FORGOT.EMAIL.PLEASE_GATECH</span></div>
+                        </div>
+                    </md-input-container>
+
+                    <!-- RESET -->
+                    <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10 md-raised"
+                        type="submit"
+                        ng-click="vm.resetClick()"
+                        ng-disabled="forgotForm.$invalid || vm.working"
+                        translate="{{ vm.working ? 'FORGOT.RESETTING' : 'FORGOT.RESET' }}"
+                        aria-label="{{ 'FORGOT.RESET' | translate }}">
+                    </md-button>
+
+                    <!-- LOGIN -->
+                    <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"
+                        href="#/login"
+                        translate="FORGOT.LOGIN"
+                        aria-label="{{ 'FORGOT.LOGIN' | translate }}"></md-button>
+
+                </form>
+            </md-content>
+        </md-card>
+    </div>
+</div>

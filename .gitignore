@@ -1,0 +1,20 @@
+
+# package management
+bower_components
+node_modules
+
+# gulp output
+.tmp
+dist
+build
+
+# firebase blaze output
+rules.json
+
+# misc
+*.log
+.DS_Store
+
+# triangular
+src/assets
+src/app/triangular

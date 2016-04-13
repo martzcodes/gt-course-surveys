@@ -1,0 +1,47 @@
+// material icons
+$zmdi-font-path: "../bower_components/material-design-iconic-font/dist/fonts";
+@import "bower_components/material-design-iconic-font/scss/material-design-iconic-font.scss";
+
+// angular material scss
+@import "angular-material/angular-material.scss";
+
+// triangular module scss
+@import "triangular/triangular";
+
+// material backgrounds
+@import "scss/material-backgrounds";
+
+// template font family
+button, select, html, textarea, input {
+  font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// app scss
+.animated {
+  &.ng-enter {
+    @include fadeIn($delay: 0s, $duration: 0.3s);
+  }
+  &.ng-leave {
+    @include fadeOut($delay: 0s, $duration: 0.3s);
+  }
+}
+
+md-card.md-blue-grey-theme {
+  background-color: #FBFBFB;
+}
+
+.widget {
+  min-height: 111px;
+}
+
+.side-menu-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ *  Comments bellow are markers used by gulp-inject to automatically inject all sass files.
+ */
+// injector
+// endinjector

@@ -1,0 +1,87 @@
+<md-card>
+    <md-card-content>
+        <md-data-table-container>
+            <table md-data-table class="md-primary md-data-table" md-progress>
+                <thead md-head>
+                    <tr>
+                        <th md-column-header class="col-1 hide-xs" ng-click="vm.toggleSort('d')">
+                            {{ 'TABLE.HEADER.DEPARTMENT' | translate }}
+                            <md-icon ng-if="vm.sortType === 'd' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'd' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-1" ng-click="vm.toggleSort('#')">
+                            {{ 'TABLE.HEADER.NUMBER' | translate }}
+                            <md-icon ng-if="vm.sortType === '#' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === '#' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-4" ng-click="vm.toggleSort('n')">
+                            {{ 'TABLE.HEADER.NAME' | translate }}
+                            <md-icon ng-if="vm.sortType === 'n' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'n' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-1 text-center" ng-click="vm.toggleSort('a')">
+                            {{ vm.displayMode }} A
+                            <md-icon ng-if="vm.sortType === 'a' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'a' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-1 text-center" ng-click="vm.toggleSort('b')">
+                            {{ vm.displayMode }} B
+                            <md-icon ng-if="vm.sortType === 'b' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'b' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-1 text-center" ng-click="vm.toggleSort('c')">
+                            {{ vm.displayMode }} C
+                            <md-icon ng-if="vm.sortType === 'c' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'c' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                        <th md-column-header class="col-1 text-center hide-xs" ng-click="vm.toggleSort('w')">
+                            {{ vm.displayMode }} W
+                            <md-icon ng-if="vm.sortType === 'w' &&  vm.sortReverse" md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                            <md-icon ng-if="vm.sortType === 'w' && !vm.sortReverse" md-font-icon="zmdi zmdi-caret-up"></md-icon>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr ng-repeat="courseGrades in vm.grades | orderBy:vm.getSortKey:vm.sortReverse" ng-click="vm.goTo(courseGrades.course)">
+                        <td class="col-1 hide-xs">
+                            {{ ::courseGrades.course.department }}
+                        </td>
+                        <td class="col-1">
+                            {{ ::courseGrades.course.number }}
+                        </td>
+                        <td class="col-4">
+                            {{ ::courseGrades.course.name }}&nbsp;
+                            <md-icon ng-if="::courseGrades.course.foundational" md-font-icon="zmdi zmdi-flag">
+                                <md-tooltip md-direction="right">
+                                    <span translate>COURSE.FOUNDATIONAL</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </td>
+                        <td class="col-1 text-center">
+                            <progress-bar ng-show="vm.displayMode === '%'" value="courseGrades['%'].a" max="100"></progress-bar>
+                            <progress-bar ng-show="vm.displayMode === '#'" value="courseGrades['#'].a" max="{{ courseGrades.total }}"></progress-bar>
+                        </td>
+                        <td class="col-1 text-center">
+                            <progress-bar ng-show="vm.displayMode === '%'" value="courseGrades['%'].b" max="100"></progress-bar>
+                            <progress-bar ng-show="vm.displayMode === '#'" value="courseGrades['#'].b" max="{{ courseGrades.total }}"></progress-bar>
+                        </td>
+                        <td class="col-1 text-center">
+                            <progress-bar ng-show="vm.displayMode === '%'" value="courseGrades['%'].c" max="100"></progress-bar>
+                            <progress-bar ng-show="vm.displayMode === '#'" value="courseGrades['#'].c" max="{{ courseGrades.total }}"></progress-bar>
+                        </td>
+                        <td class="col-1 text-center hide-xs">
+                            <progress-bar ng-show="vm.displayMode === '%'" value="courseGrades['%'].w" max="100"></progress-bar>
+                            <progress-bar ng-show="vm.displayMode === '#'" value="courseGrades['#'].w" max="{{ courseGrades.total }}"></progress-bar>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+    </md-card-content>
+    <md-card-actions>
+        <md-card-icon-actions layout="row" layout-align="end center">
+            <md-button ng-click="vm.displayMode = '%'" translate="DISPLAY.PERCENTAGES" aria-label="{{ 'DISPLAY.PERCENTAGES' | translate }}"></md-button>
+            <md-button ng-click="vm.displayMode = '#'" translate="DISPLAY.COUNTS" aria-label="{{ 'DISPLAY.COUNTS' | translate }}"></md-button>
+        </md-card-icon-actions>
+    </md-card-actions>
+</md-card>

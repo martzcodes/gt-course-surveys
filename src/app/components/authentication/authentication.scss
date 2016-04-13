@@ -1,0 +1,9 @@
+
+#ui-login {
+  &.ng-enter {
+    @include fadeIn($delay: 0.4s);
+  }
+  &.ng-leave {
+    @include fadeOut();
+  }
+}

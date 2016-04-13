@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "GRADES": {
+            "ALL": "Gradi"
+        }
+    },
+    "DISPLAY": {
+        "PERCENTAGES": "Percentuali",
+        "COUNTS": "Conta"
+    }
+}

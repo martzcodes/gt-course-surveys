@@ -1,0 +1,82 @@
+{
+  "name": "gt-course-surveys",
+  "version": "2.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-chart.js": "~0.8.4",
+    "angular-cookies": "1.4.8",
+    "angular-digest-hud": "~0.1.13",
+    "angular-dragula": "~1.0.12",
+    "angular-google-chart": "~0.0.11",
+    "angular-google-maps": "~2.1.0",
+    "angular-highlightjs": "0.4.1",
+    "angular-linkify": "~1.2.0",
+    "angular-local-storage": "~0.2.2",
+    "angular-material": "1.0.1",
+    "angular-material-data-table": "0.8.14",
+    "angular-messages": "1.4.8",
+    "angular-moment": "~0.10.1",
+    "angular-resource": "1.4.8",
+    "angular-sanitize": "1.4.8",
+    "angular-translate": "~2.7.2",
+    "angular-translate-loader-partial": "~2.7.2",
+    "angular-translate-storage-cookie": "~2.7.2",
+    "angular-translate-storage-local": "~2.7.2",
+    "angular-ui-calendar": "~1.0.0",
+    "angular-ui-router": "~0.2.13",
+    "animate.css-scss": "https://github.com/geoffgraham/animate.scss.git#master",
+    "countUp.js": "1.5.0",
+    "font-awesome": "~4.3.0",
+    "jquery": "~2.1.3",
+    "material-design-iconic-font": "~2.1.2",
+    "textAngular": "~1.3.7",
+    "weather-icons": "https://github.com/chk1/weather-icons.git#master",
+    "ng-file-upload": "~9.0.13",
+    "firebase": "~2.3.2",
+    "angularfire": "~1.1.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.8"
+  },
+  "overrides": {
+    "angular-material": {
+      "main": [
+        "angular-material.js",
+        "angular-material.scss"
+      ]
+    },
+    "weather-icons": {
+      "main": [
+        "./css/weather-icons.css",
+        "./font/*"
+      ]
+    },
+    "angular-dragula": {
+      "main": [
+        "dist/angular-dragula.js",
+        "dist/dragula.min.css"
+      ]
+    },
+    "ng-file-upload": {
+      "main": [
+        "ng-file-upload-shim.js",
+        "ng-file-upload.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular": "1.4.8",
+    "angular-material": "1.0.1"
+  },
+  "main": [
+    "triangular.js",
+    "triangular.min.js",
+    "triangular.css",
+    "triangular.min.css"
+  ],
+  "ignore": [
+    "README.md"
+  ]
+}

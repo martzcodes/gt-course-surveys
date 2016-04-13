@@ -1,0 +1,70 @@
+{
+    "MENU": {
+        "REVIEWS": {
+            "ALL": "Todos Los Comentarios",
+            "MY": "Mis Comentarios",
+            "COURSE": "Curso De Comentarios"
+        }
+    },
+    "NONE": {
+        "REVIEWS": "No hay comentarios todavía."
+    },
+    "REVIEW": {
+        "DIALOG": {
+            "EDIT": {
+                "TITLE": "Revisión"
+            },
+            "REMOVE": {
+                "TITLE": "Quitar Revisión",
+                "TEXT": "Eliminar permanentemente esta revisión? Esto no se puede deshacer."
+            }
+        },
+        "COURSE": {
+            "LABEL": "curso"
+        },
+        "SEMESTER": {
+            "LABEL": "semestre"
+        },
+        "DIFFICULTY": {
+            "1": "Muy Fácil",
+            "2": "Fácil",
+            "3": "Medio",
+            "4": "Duro",
+            "5": "Muy Duro",
+            "LABEL": "dificultad"
+        },
+        "RATING": {
+            "1": "Fuertemente Le Disgustaba!",
+            "2": "Le disgustaba",
+            "3": "Neutral",
+            "4": "Le gustaba",
+            "5": "Me encantó!",
+            "LABEL": "curso de calificación"
+        },
+        "WORKLOAD": {
+            "LABEL": "volumen de trabajo (horas por semana)",
+            "PLEASE_ENTER": "Por favor, introduzca una carga de trabajo",
+            "INVALID": "Por favor, escriba un válido de la carga de trabajo"
+        },
+        "HOUR_PER_WEEK": "horas/semana",
+        "HOURS_PER_WEEK": "horas/semana",
+        "COMMENTS": {
+            "LABEL": "comentarios",
+            "PLEASE_ENTER": "Por favor, escriba algunos comentarios",
+            "TOO_LONG": "Este comentario es demasiado largo"
+        },
+        "EDIT": "Editar",
+        "REMOVE": "Quitar",
+        "IMPORTED": "Importado"
+    },
+    "MESSAGES": {
+        "REMOVED": "Retira.",
+        "UPDATED": "Actualizado.",
+        "PUBLISHED": "Publicado."
+    },
+    "WIDGETS": {
+        "REVIEWS": "Comentarios",
+        "AVERAGE_DIFFICULTY": "Avg. Dificultad (1-5 Más Difícil)",
+        "AVERAGE_WORKLOAD": "Avg. Trabajo. (Horas/Semana)"
+    }
+}

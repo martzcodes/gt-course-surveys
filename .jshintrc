@@ -1,0 +1,53 @@
+{
+  "node": true,
+  "esnext": true,
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "indent": 4,
+  "latedef": true,
+  "newcap": false,
+  "noarg": true,
+  "quotmark": "single",
+  "regexp": true,
+  "undef": true,
+  "latedef": false,
+  "laxbreak": true,
+  "unused": true,
+  "strict": true,
+  "trailing": true,
+  "smarttabs": true,
+  "white": true,
+  "validthis": true,
+  "browser": true,
+  "-W034": true,
+  "globals": {
+    "angular": false,
+    "angularDragula": false,
+    "moment":false,
+    "CountUp":false,
+    "jQuery":false,
+    "$": false,
+    "_": false,
+    "Firebase": false,
+
+    // ANGULAR MOCKS
+    "inject": false,
+
+    // JASMINE
+    "describe": false,
+    "it": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "expect": false,
+
+    // PROTRACTOR
+    "element": false,
+    "by": false,
+    "browser": false
+  }
+}

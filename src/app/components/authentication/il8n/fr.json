@@ -1,0 +1,90 @@
+{
+    "MENU": {
+        "PROFILE": "Profil"
+    },
+    "LOGIN": {
+        "TITLE": "Connexion",
+        "EMAIL": {
+            "LABEL": "e-mail",
+            "PLEASE_ENTER": "Veuillez entrer votre adresse e-mail",
+            "PLEASE_VALID": "Veuillez entrer une adresse email valide",
+            "PLEASE_GATECH": "Veuillez saisir un gatech.edu adresse email"
+        },
+        "PASSWORD": {
+            "LABEL": "mot de passe",
+            "PLEASE_ENTER": "Veuillez entrer votre mot de passe."
+        },
+        "REMEMBER": "Se Souvenir De Moi",
+        "FORGOT": "Mot de passe oublié?",
+        "BUTTON": "Journal En",
+        "BUTTONING": "L'Exploitation Forestière Dans",
+        "SIGNUP_LINK": "N'avez pas de compte? Créer un maintenant",
+        "SOCIAL": {
+            "OR": "ou de connexion avec"
+        },
+        "MESSAGES": {
+            "LOGGED_IN": "Connecté."
+        }
+    },
+    "SIGNUP": {
+        "TITLE": "Inscrivez -",
+        "EMAIL": {
+            "LABEL": "e-mail",
+            "PLEASE_ENTER": "Veuillez entrer votre adresse e-mail",
+            "PLEASE_VALID": "Veuillez entrer une adresse email valide",
+            "PLEASE_GATECH": "Veuillez saisir un gatech.edu adresse email"
+        },
+        "BUTTON": "Inscrivez -",
+        "BUTTONING": "La Signature",
+        "HAVE_LOGIN": "Avez déjà un compte? Connectez-vous ici",
+        "MESSAGES": {
+            "CONFIRM_SENT": "Compte créé. Veuillez vérifier votre e-mail pour les instructions de connexion.",
+            "LOGIN_NOW": "Connexion"
+        }
+    },
+    "FORGOT": {
+        "TITLE": "Vous avez oublié votre mot de passe?",
+        "ENTER_EMAIL": "Veuillez entrer votre e-mail ci-dessous:",
+        "EMAIL": {
+            "LABEL": "e-mail",
+            "PLEASE_ENTER": "Veuillez entrer votre adresse e-mail",
+            "PLEASE_VALID": "Veuillez entrer une adresse email valide",
+            "PLEASE_GATECH": "Veuillez saisir un gatech.edu adresse email"
+        },
+        "RESET": "Réinitialiser",
+        "RESETTING": "La réinitialisation",
+        "LOGIN": "Se souvenait-il? Les identifiants de connexion ici",
+        "MESSAGES": {
+            "RESET_SENT": "Votre nouveau mot de passe a été envoyé par la poste.",
+            "LOGIN_NOW": "Connexion"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profil",
+        "EMAIL": {
+            "LABEL": "e-mail"
+        },
+        "NAME": {
+            "LABEL": "nom",
+            "PLEASE_ENTER": "Veuillez entrer votre nom"
+        },
+        "SPECIALIZATION": {
+            "LABEL": "spécialisation"
+        },
+        "PASSWORD": {
+            "TITLE": "Mot de passe",
+            "CURRENT": "mot de passe actuel",
+            "NEW": "nouveau mot de passe",
+            "CONFIRM": "confirmer le mot de passe",
+            "PLEASE_ENTER": "Veuillez entrer un mot de passe",
+            "MIN_LENGTH": "Votre mot de passe doit être supérieur à 8 caractères de long",
+            "SAME_PASSWORD": "Vous devez entrer le même mot de passe"
+        },
+        "REMAIN_ANONYMOUS": {
+            "LABEL": "Rester anonyme pour les autres?"
+        },
+        "UPDATE": "Mise à jour",
+        "UPDATING": "Mise à jour",
+        "UPDATED": "Mis à jour."
+    }
+}

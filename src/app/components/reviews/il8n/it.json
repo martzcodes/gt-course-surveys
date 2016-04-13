@@ -1,0 +1,70 @@
+{
+    "MENU": {
+        "REVIEWS": {
+            "ALL": "Tutte Le Recensioni",
+            "MY": "Le Mie Recensioni",
+            "COURSE": "Corso Di Giudizi"
+        }
+    },
+    "NONE": {
+        "REVIEWS": "Recensioni di sicurezza."
+    },
+    "REVIEW": {
+        "DIALOG": {
+            "EDIT": {
+                "TITLE": "Recensione"
+            },
+            "REMOVE": {
+                "TITLE": "Rimuovere Recensione",
+                "TEXT": "Rimuovere definitivamente questa recensione? Questo non può essere annullata."
+            }
+        },
+        "COURSE": {
+            "LABEL": "corso"
+        },
+        "SEMESTER": {
+            "LABEL": "semestre"
+        },
+        "DIFFICULTY": {
+            "1": "Molto Facile",
+            "2": "Facile",
+            "3": "Medio",
+            "4": "Difficile",
+            "5": "Molto Difficile",
+            "LABEL": "difficoltà"
+        },
+        "RATING": {
+            "1": "Fortemente Antipatico!",
+            "2": "Piaceva",
+            "3": "Neutro",
+            "4": "Piaciuto",
+            "5": "Amato!",
+            "LABEL": "corso di valutazione"
+        },
+        "WORKLOAD": {
+            "LABEL": "carico di lavoro (ore settimanali)",
+            "PLEASE_ENTER": "Si prega di inserire un carico di lavoro",
+            "INVALID": "Inserisci il carico di lavoro"
+        },
+        "HOUR_PER_WEEK": "ore/settimana",
+        "HOURS_PER_WEEK": "ore/settimana",
+        "COMMENTS": {
+            "LABEL": "commenti",
+            "PLEASE_ENTER": "Si prega di inserire alcuni commenti",
+            "TOO_LONG": "Questo commento è troppo lungo"
+        },
+        "EDIT": "Modifica",
+        "REMOVE": "Rimuovere",
+        "IMPORTED": "Importato"
+    },
+    "MESSAGES": {
+        "REMOVED": "Rimossa.",
+        "UPDATED": "Aggiornato.",
+        "PUBLISHED": "Pubblicato."
+    },
+    "WIDGETS": {
+        "REVIEWS": "Recensioni",
+        "AVERAGE_DIFFICULTY": "Avg. Difficoltà (1-5 Più Difficile)",
+        "AVERAGE_WORKLOAD": "Avg. Lavoro. (Ore/Settimana)"
+    }
+}

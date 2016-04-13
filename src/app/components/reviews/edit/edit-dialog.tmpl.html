@@ -1,0 +1,87 @@
+<md-dialog aria-label="{{ 'REVIEW.DIALOG.EDIT.TITLE' | translate }}" flex-gt-sm="50" flex="90">
+
+    <!-- TITLE -->
+    <md-toolbar md-theme="{{ triSkin.elements.content }}">
+        <div class="md-toolbar-tools">
+            <h2><span translate>REVIEW.DIALOG.EDIT.TITLE</span></h2>
+        </div>
+    </md-toolbar>
+
+    <!-- DIVIDER -->
+    <md-divider></md-divider>
+
+    <!-- FORM -->
+    <md-dialog-content class="md-dialog-content">
+        <form name="reviewForm" novalidate layout="column">
+
+            <!-- COURSE -->
+            <md-input-container class="md-block">
+                <label translate>REVIEW.COURSE.LABEL</label>
+                <md-select name="course" ng-model="vm.reviewSnapshot.course" ng-disabled="vm.reviewSnapshot.course" required>
+                    <md-option ng-value="c.$id" ng-repeat="c in vm.courses">
+                        {{ c.$id | course:'title' }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <!-- SEMESTER & DIFFICULTY-->
+            <div layout="row">
+                <md-input-container flex>
+                    <label translate>REVIEW.SEMESTER.LABEL</label>
+                    <md-select name="semester" ng-model="vm.reviewSnapshot.semester" required>
+                        <md-option ng-value="s.$id" ng-repeat="s in vm.semesters | orderBy:$id:true" ng-if="s.$id !== '0000-0'">
+                            {{ s.$id | semester:'name' }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex>
+                    <label translate>REVIEW.DIFFICULTY.LABEL</label>
+                    <md-select name="difficulty" ng-model="vm.reviewSnapshot.difficulty" required>
+                        <md-option ng-value="d.value" ng-repeat="d in vm.difficulties">
+                            {{ d.label }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <!-- WORKLOAD & RATING -->
+            <div layout="row">
+                <md-input-container flex>
+                    <label translate>REVIEW.WORKLOAD.LABEL</label>
+                    <input name="workload" type="number" ng-model="vm.reviewSnapshot.workload" ng-min="1" required />
+                    <div ng-messages="reviewForm.workload.$error">
+                        <div ng-message when="required"><span translate>REVIEW.WORKLOAD.PLEASE_ENTER</span></div>
+                        <div ng-message when="min"><span translate>REVIEW.WORKLOAD.INVALID</span></div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label translate>REVIEW.RATING.LABEL</label>
+                    <md-select name="rating" ng-model="vm.reviewSnapshot.rating" required>
+                        <md-option ng-value="r.value" ng-repeat="r in vm.ratings">
+                            {{ r.label }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <!-- COMMENTS -->
+            <md-input-container class="md-block margin-top-0">
+                <label translate>REVIEW.COMMENTS.LABEL</label>
+                <textarea name="comments" md-maxlength="2000" rows="5" ng-model="vm.reviewSnapshot.comments" required class="margin-top-0"></textarea>
+                <div ng-messages="reviewForm.comments.$error">
+                    <div ng-message="required"><span translate>REVIEW.COMMENTS.PLEASE_ENTER</span></div>
+                    <div ng-message="md-maxlength"><span translate>REVIEW.COMMENTS.TOO_LONG</span></div>
+                </div>
+            </md-input-container>
+
+        </form>
+    </md-dialog-content>
+
+    <!-- BUTTONS -->
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
+        <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="reviewForm.$invalid" translate="GENERAL.OK" aria-label="{{ 'GENERAL.OK' | translate }}"></md-button>
+    </md-dialog-actions>
+
+</md-dialog>

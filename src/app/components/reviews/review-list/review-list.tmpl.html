@@ -1,0 +1,67 @@
+<p ng-if="vm.model.length === 0" class="margin-0" translate>NONE.REVIEWS</p>
+
+<md-card ng-repeat="review in vm.model | orderBy:[ '-created', '-difficulty' ]" class="animated md-whiteframe-z2">
+
+    <md-card-header>
+        <md-card-avatar class="margin-right-10">
+            <img ng-src="{{ review.author | user:'profileImageUrl' }}" alt="{{ review.author | user:'name' }}" class="make-round" />
+        </md-card-avatar>
+        <md-card-header-text>
+            <span class="md-title">
+                <!-- AUTHOR -->
+                {{ review.author | user:'name' }}
+
+                <!-- INSTANT -->
+                <span hide-xs show-gt-xs>
+                    &bull;
+                    <span ng-if=" vm.showReviewInstant(review)">{{ review.created | amDateFormat:'M/D/YY, h:mm a' }}</span>
+                    <span ng-if="!vm.showReviewInstant(review)" translate>REVIEW.IMPORTED</span>
+                </span>
+
+                <!-- STARS -->
+                <div layout="row" layout-align="end start" flex class="display-inline-block pull-right" style="position:relative;top:-2px;">
+                    <md-icon ng-if="review.rating > 0" class="star" md-font-icon="zmdi zmdi-star"></md-icon>
+                    <md-icon ng-if="review.rating > 1" class="star" md-font-icon="zmdi zmdi-star"></md-icon>
+                    <md-icon ng-if="review.rating > 2" class="star" md-font-icon="zmdi zmdi-star"></md-icon>
+                    <md-icon ng-if="review.rating > 3" class="star" md-font-icon="zmdi zmdi-star"></md-icon>
+                    <md-icon ng-if="review.rating > 4" class="star" md-font-icon="zmdi zmdi-star"></md-icon>
+                    <md-icon ng-if="review.rating < 1 || review.rating === undefined" class="star" md-font-icon="zmdi zmdi-star-outline"></md-icon>
+                    <md-icon ng-if="review.rating < 2 || review.rating === undefined" class="star" md-font-icon="zmdi zmdi-star-outline"></md-icon>
+                    <md-icon ng-if="review.rating < 3 || review.rating === undefined" class="star" md-font-icon="zmdi zmdi-star-outline"></md-icon>
+                    <md-icon ng-if="review.rating < 4 || review.rating === undefined" class="star" md-font-icon="zmdi zmdi-star-outline"></md-icon>
+                    <md-icon ng-if="review.rating < 5 || review.rating === undefined" class="star" md-font-icon="zmdi zmdi-star-outline"></md-icon>
+                </div>
+            </span>
+            <span class="md-subhead">
+                <!-- SEMESTER -->
+                <span ng-if="review.semester !== '0000-0'">
+                {{ review.semester | semester:'name' }}
+                &bull;
+                </span>
+
+                <!-- DIFFICULTY -->
+                {{ review.difficulty | review:'difficulty' }}
+                &bull;
+
+                <!-- WORKLOAD -->
+                {{ review.workload | review:'workload' }}
+            </span>
+        </md-card-header-text>
+    </md-card-header>
+
+    <md-card-title ng-if="!vm.hideCourseTitle">
+        <md-card-title-text>
+            <span class="md-headline">{{ review.course | course:'title' }}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+        <div style="white-space:pre-wrap;">{{ review.comments }}</div>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center" ng-if="review.author === vm.authData.uid">
+        <md-button ng-click="vm.edit($event, review)" translate="REVIEW.EDIT" aria-label="{{ 'REVIEW.EDIT' | translate }}"></md-button>
+        <md-button ng-click="vm.remove($event, review)" translate="REVIEW.REMOVE" aria-label="{{ 'REVIEW.REMOVE' | translate }}"></md-button>
+    </md-card-actions>
+
+</md-card>

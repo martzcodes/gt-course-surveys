@@ -1,0 +1,48 @@
+
+.reviews-container {
+  .layout-margin {
+    margin: 0px;
+  }
+
+  // until layout is fixed in material we need to add this
+  // https://github.com/angular/material/issues/5014
+  .layout-margin > .widget {
+    margin: 8px;
+  }
+}
+
+table.md-data-table {
+  th.col-q, td.col-q { width: 25%; }
+  th.col-1, td.col-1 { width: 10%; }
+  th.col-2, td.col-2 { width: 20%; }
+  th.col-3, td.col-3 { width: 30%; }
+  th.col-4, td.col-4 { width: 40%; }
+  th.col-5, td.col-5 { width: 50%; }
+  th.col-6, td.col-6 { width: 60%; }
+  th.col-7, td.col-7 { width: 70%; }
+  th.col-8, td.col-8 { width: 80%; }
+  th.col-9, td.col-9 { width: 90%; }
+  th, td {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    padding: 0px 2px !important;
+  }
+  th {
+    font-size: 14px !important;
+  }
+  th>div {
+    display: none !important;
+  }
+  thead>tr,
+  tbody>tr {
+    height: 32px !important;
+  }
+  th[ng-click]:hover,
+  tr[ng-click]:hover {
+    cursor: pointer;
+  }
+  background: transparent;
+}

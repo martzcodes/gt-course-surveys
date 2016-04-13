@@ -1,0 +1,70 @@
+{
+    "MENU": {
+        "REVIEWS": {
+            "ALL": "Tüm Yorumları",
+            "MY": "Yorumları",
+            "COURSE": "Ders Değerlendirmeleri"
+        }
+    },
+    "NONE": {
+        "REVIEWS": "Kullanıcı yorumları."
+    },
+    "REVIEW": {
+        "DIALOG": {
+            "EDIT": {
+                "TITLE": "İnceleme"
+            },
+            "REMOVE": {
+                "TITLE": "Yorumunu Kaldır",
+                "TEXT": "Kalıcı olarak bu yorumunu Kaldır. Bu işlem geri alınamaz."
+            }
+        },
+        "COURSE": {
+            "LABEL": "ders"
+        },
+        "SEMESTER": {
+            "LABEL": "yarıyıl"
+        },
+        "DIFFICULTY": {
+            "1": "Çok Kolay",
+            "2": "Kolay",
+            "3": "Orta",
+            "4": "Sabit",
+            "5": "Çok Zor",
+            "LABEL": "zorluk"
+        },
+        "RATING": {
+            "1": "Güçlü Sevmiyordu!",
+            "2": "Sevilmeyen",
+            "3": "Nötr",
+            "4": "Sevdim",
+            "5": "Sevdi!",
+            "LABEL": "ders notu"
+        },
+        "WORKLOAD": {
+            "LABEL": "haftalık İş Yükü (saat)",
+            "PLEASE_ENTER": "Lütfen bir iş yükü girin",
+            "INVALID": "Lütfen geçerli bir iş yükü girin"
+        },
+        "HOUR_PER_WEEK": "saat/hafta",
+        "HOURS_PER_WEEK": "saat/hafta",
+        "COMMENTS": {
+            "LABEL": "yorumlar",
+            "PLEASE_ENTER": "Lütfen biraz yorum yazın",
+            "TOO_LONG": "Bu yorum çok uzun"
+        },
+        "EDIT": "Edit",
+        "REMOVE": "Kaldır",
+        "IMPORTED": "İthal"
+    },
+    "MESSAGES": {
+        "REMOVED": "Kaldırıldı.",
+        "UPDATED": "Güncellendi.",
+        "PUBLISHED": "Yayınladı."
+    },
+    "WIDGETS": {
+        "REVIEWS": "Yorumları",
+        "AVERAGE_DIFFICULTY": "Ort. Zor (1-5)Zorluk",
+        "AVERAGE_WORKLOAD": "Ort. İş. (Saat/Hafta)"
+    }
+}

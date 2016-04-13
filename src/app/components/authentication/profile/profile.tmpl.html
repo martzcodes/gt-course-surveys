@@ -1,0 +1,108 @@
+<div class="full-image-background mb-bg-31 padding-20 padding-top-100 overlay-gradient-30" layout="row" layout-align="start center">
+    <div class="margin-right-20">
+        <img ng-src="{{ vm.user.profileImageUrl }}" alt="{{ vm.user.name }}" class="make-round" width="100" />
+    </div>
+    <div class="text-light">
+        <h3 class="font-weight-600 margin-bottom-0 text-light">{{ vm.user.name }}</h3>
+        <p class="font-weight-300 margin-top-0">{{ vm.user.specialization | specialization }}</p>
+     </div>
+</div>
+
+<div layout="row" class="profile" layout-wrap>
+    <div flex="100" flex-gt-md="100">
+        <md-tabs md-dynamic-height md-border-bottom md-swipe-content>
+
+            <!-- PROFILE -->
+            <md-tab label="{{ 'PROFILE.TITLE' | translate }}">
+                <md-content class="md-padding">
+                    <form name="profileForm">
+
+                        <!-- EMAIL -->
+                        <md-input-container class="md-block" ng-if="vm.user.email">
+                            <!-- <md-icon md-font-icon="zmdi zmdi-email"></md-icon> -->
+                            <label translate>PROFILE.EMAIL.LABEL</label>
+                            <input name="email" type="email" ng-model="vm.user.email" disabled />
+                        </md-input-container>
+
+                        <!-- NAME -->
+                        <md-input-container class="md-block">
+                            <!-- <md-icon md-font-icon="zmdi zmdi-account"></md-icon> -->
+                            <label translate>PROFILE.NAME.LABEL</label>
+                            <input name="name" type="text" ng-model="vm.user.name" required />
+                            <div ng-messages="profileForm.name.$error">
+                                <div ng-message when="required"><span translate>PROFILE.NAME.PLEASE_ENTER</span></div>
+                            </div>
+                        </md-input-container>
+
+                        <!-- SPECIALIZATION -->
+                        <md-input-container class="md-block">
+                            <!-- <md-icon md-font-icon="zmdi zmdi-flash"></md-icon> -->
+                            <label translate>PROFILE.SPECIALIZATION.LABEL</label>
+                            <md-select ng-model="vm.user.specialization" flex-gt-sm="50" flex>
+                                <md-option ng-value="s" ng-repeat="s in ::vm.specializations">
+                                    {{ s | specialization }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <!-- REMAIN ANONYMOUS -->
+                        <div class="padding-top-10">
+                            <md-switch class="md-secondary" ng-model="vm.user.anonymous">
+                                <span translate>PROFILE.REMAIN_ANONYMOUS.LABEL</span>
+                            </md-switch>
+                        </div>
+
+                        <!-- UPDATE -->
+                        <md-button class="md-raised md-primary margin-left-0 margin-top-20"
+                            type="submit"
+                            ng-disabled="profileForm.$invalid || vm.working"
+                            ng-click="vm.update('user')"
+                            translate="{{ vm.working ? 'PROFILE.UPDATING' : 'PROFILE.UPDATE' }}"
+                            aria-label="{{ 'PROFILE.UPDATE' | translate }}">
+                        </md-button>
+
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!-- PASSWORD -->
+            <md-tab label="{{ 'PROFILE.PASSWORD.TITLE' | translate }}" ng-if="vm.user.authProvider === 'password'">
+                <md-content class="md-padding">
+                    <form name="passwordForm">
+
+                        <!-- CURRENT -->
+                        <md-input-container class="md-block">
+                            <label translate>PROFILE.PASSWORD.CURRENT</label>
+                            <input name="old" type="password" ng-model="vm.password.old" required />
+                        </md-input-container>
+
+                        <!-- NEW -->
+                        <md-input-container class="md-block">
+                            <label translate>PROFILE.PASSWORD.NEW</label>
+                            <input name="new" type="password" ng-model="vm.password.new" tri-same-password="passwordForm.confirm" ng-minlength="8" required />
+                            <div ng-messages="passwordForm.new.$error" ng-include="'app/components/authentication/profile/password.messages.html'"></div>
+                        </md-input-container>
+
+                        <!-- CONFIRM NEW -->
+                        <md-input-container class="md-block">
+                            <label translate>PROFILE.PASSWORD.CONFIRM</label>
+                            <input name="confirm" type="password" ng-model="vm.password.confirm" tri-same-password="passwordForm.new" ng-minlength="8" required />
+                            <div ng-messages="passwordForm.confirm.$error" ng-include="'app/components/authentication/profile/password.messages.html'"></div>
+                        </md-input-container>
+
+                        <!-- UPDATE -->
+                        <md-button class="md-raised md-primary margin-left-0"
+                            type="submit"
+                            ng-disabled="passwordForm.$invalid || vm.working"
+                            ng-click="vm.update('password')"
+                            translate="{{ vm.working ? 'PROFILE.UPDATING' : 'PROFILE.UPDATE' }}"
+                            aria-label="{{ 'PROFILE.UPDATE' | translate }}">
+                        </md-button>
+
+                    </form>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </div>
+</div>

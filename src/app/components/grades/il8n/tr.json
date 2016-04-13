@@ -1,0 +1,11 @@
+{
+    "MENU": {
+        "GRADES": {
+            "ALL": "Notlar"
+        }
+    },
+    "DISPLAY": {
+        "PERCENTAGES": "Yüzdeler",
+        "COUNTS": "Sayar"
+    }
+}

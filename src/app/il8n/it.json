@@ -1,0 +1,65 @@
+{
+    "404": {
+        "TITLE": "404",
+        "HOME": "Tornare a casa",
+        "MESSAGE": "Pagina non trovata",
+        "DESCRIPTION": "Spiacente, la pagina che stai cercando non può essere trovato qui. Tornare alla pagina iniziale e cominciare da lì."
+    },
+    "500": {
+        "TITLE": "500",
+        "MESSAGE": "Qualcosa è andato storto.",
+        "DESCRIPTION": "Ci dispiace, qualcosa è andato storto.",
+        "HOME": "Tornare a casa"
+    },
+    "GENERAL": {
+        "CANCEL": "Annulla",
+        "OK": "Ok"
+    },
+    "ADMIN": {
+        "TOOLBAR": {
+            "SETTINGS": "Impostazioni",
+            "PROFILE": "Profilo",
+            "LOGOUT": "Logout",
+            "TOGGLE_NAVIGATION": "Alterna La Barra Di Navigazione Laterale",
+            "TOGGLE_NOTIFICATIONS": "Alternare Le Notifiche Della Barra Laterale",
+            "TOGGLE_FULLSCREEN": "Passare A Schermo Intero",
+            "CHANGE_LANGUAGE": "Cambia Lingua",
+            "TOGGLE_MENU": "Toggle Menu",
+            "LOGIN": "Login",
+            "RECENT_REVIEWS": "Recensioni Recenti (Ultime 2 Settimane)"
+        }
+    },
+    "LANGUAGES": {
+        "ENGLISH": "Inglese",
+        "FRENCH": "Francese",
+        "GERMAN": "Tedesco",
+        "ITALIAN": "Italiano",
+        "SPANISH": "Spagnolo",
+        "TURKISH": "Bagno turco"
+    },
+    "MESSAGES": {
+        "LANGUAGE_CHANGED": "La lingua è stata cambiata."
+    },
+    "TABLES": {
+        "NEXT": "Pagina Successiva",
+        "PREV": "Pagina Precedente",
+        "OF": "di",
+        "ROWS": "Righe per pagina:"
+    },
+    "USER": {
+        "ANONYMOUS": "Anonimo"
+    },
+    "TABLE": {
+        "HEADER": {
+            "DEPARTMENT": "Dipartimento",
+            "NUMBER": "Numero",
+            "NAME": "Nome",
+            "NUM_REVIEWS": "# Recensioni",
+            "AVG_DIFFICULTY": "Avg. Diff.",
+            "AVG_WORKLOAD": "Avg. Lavoro."
+        }
+    },
+    "COURSE": {
+        "FOUNDATIONAL": "Fondamentale"
+    }
+}
