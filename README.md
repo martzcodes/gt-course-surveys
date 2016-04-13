@@ -13,11 +13,16 @@ Server:   Node
 Database: Firebase
 ```
 
-## Where is the code?
+## Where is the missing code?
 
-This repo no longer reflects the current codebase. The latest version uses the [triangular template](http://triangular.oxygenna.com/), which is not open-source.
+If you examine the `.gitignore`, you will notice the following directories are omitted from the repo:
 
-This repo is still used for tracking issues, however.
+```
+src/assets
+src/app/triangular
+```
+
+This is intentional. These directories contain code from the [triangular template](http://triangular.oxygenna.com/), which is not open-source.
 
 ## Contributing
 
