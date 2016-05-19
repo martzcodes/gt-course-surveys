@@ -1,36 +1,29 @@
 'use strict';
 
 /**
- * IMPORTS
+ * DEPENDENCIES
  */
 
-var _    = require('lodash');
-var fs   = require('fs');
-var rsvp = require('rsvp');
+var _        = require('lodash');
+var fs       = require('fs');
+var path     = require('path');
+var rsvp     = require('rsvp');
+var firebase = require('firebase');
 
 /**
  * FIREBASE WRAPPERS
  */
 
-var firebase        = require('firebase');
-var firebaseRef     = new firebase('https://gt-surveyor.firebaseio.com/');
-var firebaseSecret  = 'k1exBnlMQBp4y9bxWe1vTBgCLioEDmq48JscivvH';
+firebase.initializeApp({
+  serviceAccount: path.join(__dirname, 'key.json'),
+  databaseURL: 'https://gt-surveyor.firebaseio.com'
+});
 
-function authenticate() {
-    return new rsvp.Promise(function (resolve, reject) {
-        firebaseRef.authWithCustomToken(firebaseSecret, function (error, result) {
-            if (error) {
-                return reject(error);
-            } else {
-                return resolve(result);
-            }
-        });
-    });
-}
+var db = firebase.database();
 
 function read(what) {
     return new rsvp.Promise(function (resolve, reject) {
-        firebaseRef.child(what).once('value', function (snapshot) {
+        db.ref(what).once('value', function (snapshot) {
             return resolve(snapshot.val());
         }, reject);
     });
@@ -38,7 +31,7 @@ function read(what) {
 
 function set(what, toWhat) {
     return new rsvp.Promise(function (resolve, reject) {
-        firebaseRef.child(what).set(toWhat, function (error) {
+        db.ref(what).set(toWhat, function (error) {
             if (error) {
                 return reject(error);
             } else {
@@ -52,28 +45,27 @@ function set(what, toWhat) {
  * MAIN
  */
 
-authenticate()
-.then(function () {
-    return read('courses');
-})
+read('courses')
 .then(function (courses) {
-    return readGradesFromFile(_.mapValues(courses, function () { return {}; }));
+    function toEmptyObject() { return {}; }
+    return readGradesFromFile(_.mapValues(courses, toEmptyObject));
 })
 .then(function (grades) {
     return set('grades', grades);
 })
 .then(function () {
     console.log('Grades updated.');
-    process.exit();
 })
 .catch(function (error) {
     console.error('Error:', error.message);
+})
+.finally(function () {
     process.exit();
 });
 
 function readGradesFromFile(grades) {
     return new rsvp.Promise(function (resolve, reject) {
-        var fileName = __dirname + '/data.txt';
+        var fileName = path.join(__dirname, 'data.txt');
         fs.readFile(fileName, 'utf8', function (error, data) {
             if (error) {
                 return reject(error);

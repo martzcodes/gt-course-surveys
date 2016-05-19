@@ -110,7 +110,7 @@
                     course.averageWorkload = _.ceil(totals.workload / counts.workload, 1);
                 }
 
-                // append section number if available
+                // append section number to course number (if available)
                 if (!_.isEmpty(course.section)) {
                     course.number += '-' + course.section;
                 }

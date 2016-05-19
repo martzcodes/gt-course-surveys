@@ -120,6 +120,7 @@
 
             review.author = authData.uid;
             review.updated = review.created = moment.utc().format();
+            review.comments = review.comments.trim();
             return self.cache.reviews.$add(review);
         }
     }

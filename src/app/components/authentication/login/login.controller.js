@@ -69,7 +69,7 @@
 
             promise
             .then(function (authData) {
-                return userService.create(authData);
+                return userService.initialize(authData);
             })
             .then(function () {
                 return $state.go('triangular.admin-default.profile');

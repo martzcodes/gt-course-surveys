@@ -6,7 +6,7 @@
         .controller('CourseReviewsController', CourseReviewsController);
 
     /* @ngInject */
-    function CourseReviewsController($stateParams, $scope, reviews, courseService, databaseService) {
+    function CourseReviewsController($state, $stateParams, $scope, reviews, courseService, databaseService) {
         var vm = this;
 
         vm.reviews = reviews;
@@ -41,6 +41,11 @@
             courseService.getCourse($stateParams.id, vm.skipCache)
             .then(function (course) {
                 vm.course = course;
+
+                // reload to apply changes to UI
+                if (vm.skipCache) {
+                    $state.reload();
+                }
             });
         }
     }

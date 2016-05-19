@@ -35,6 +35,8 @@
 
         vm.showReviewInstant = showReviewInstant;
 
+        vm.searchFiltersExpanded = false;
+
         vm.edit = edit;
         vm.remove = remove;
 

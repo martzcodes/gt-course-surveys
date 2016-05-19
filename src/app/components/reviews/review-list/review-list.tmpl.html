@@ -4,7 +4,7 @@
 
     <md-card-header>
         <md-card-avatar class="margin-right-10">
-            <img ng-src="{{ review.author | user:'profileImageUrl' }}" alt="{{ review.author | user:'name' }}" class="make-round" />
+            <img ng-src="{{ review.author | user:'profileImageUrl' }}" alt="{{ review.author | user:'name' }}" class="make-round" style="width:40px;height:40px;" />
         </md-card-avatar>
         <md-card-header-text>
             <span class="md-title">
@@ -55,8 +55,8 @@
         </md-card-title-text>
     </md-card-title>
 
-    <md-card-content>
-        <div style="white-space:pre-wrap;">{{ review.comments }}</div>
+    <md-card-content class="padding-top-0 margin-top-0">
+        <div style="white-space:pre-wrap;">{{ review.comments.trim() }}</div>
     </md-card-content>
 
     <md-card-actions layout="row" layout-align="end center" ng-if="review.author === vm.authData.uid">
