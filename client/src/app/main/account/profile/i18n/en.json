@@ -1,0 +1,15 @@
+{
+    "PROFILE": {
+        "NAV": "Profile",
+        "ABOUT": "About",
+        "EMAIL": "Email",
+        "NAME": "Name",
+        "SPECIALIZATION": "Specialization",
+        "ANONYMOUS": "Remain anonymous to others?",
+        "UPDATE_PASSWORD": "Update Password",
+        "PASSWORD_CURRENT": "Password (Current)",
+        "PASSWORD_NEW": "Password (New)",
+        "PASSWORD_NEW_CONFIRM": "Password (Confirm New)",
+        "PASSWORD_NO_MATCH": "Passwords do not match."
+    }
+}

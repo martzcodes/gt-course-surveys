@@ -1,0 +1,156 @@
+#login {
+  height: 100%;
+  overflow: hidden;
+  #login-intro {
+    padding: 128px;
+    .logo {
+      width: 162px;
+      height: 128px;
+      line-height: 128px;
+      font-size: 86px;
+      font-weight: 500;
+      margin-bottom: 32px;
+      color: #FFFFFF;
+      border-radius: 2px;
+      text-align: center;
+    }
+    .title {
+      font-size: 42px;
+      font-weight: 300;
+    }
+    .description {
+      padding-top: 8px;
+      font-size: 14px;
+      max-width: 600px;
+    }
+  }
+  #login-form-wrapper {
+    width: 416px;
+    min-width: 416px;
+    max-width: 416px;
+    height: 100%;
+    background: #FFFFFF;
+    #login-form {
+      padding: 128px 48px 48px 48px;
+      .logo {
+        width: 128px;
+        height: 128px;
+        line-height: 128px;
+        font-size: 86px;
+        font-weight: 500;
+        margin: 32px auto;
+        color: #FFFFFF;
+        border-radius: 2px;
+      }
+      .title {
+        font-size: 21px;
+      }
+      .description {
+        padding-top: 8px;
+      }
+      form {
+        width: 100%;
+        text-align: left;
+        padding-top: 32px;
+        md-checkbox {
+          margin: 0;
+        }
+        .remember-forgot-password {
+          font-size: 13px;
+          margin-top: 8px;
+          .remember-me {
+            margin-bottom: 16px
+          }
+          .forgot-password {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 16px
+          }
+        }
+        .submit-button {
+          width: 100%;
+          margin: 16px auto;
+          display: block;
+        }
+      }
+      .separator {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 24px auto 16px auto;
+        position: relative;
+        overflow: hidden;
+        width: 100px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54);
+        .text {
+          display: inline-block;
+          vertical-align: baseline;
+          position: relative;
+          padding: 0 8px;
+          z-index: 9999;
+          &:before,
+          &:after {
+            content: '';
+            display: block;
+            width: 30px;
+            position: absolute;
+            top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
+          }
+          &:before {
+            right: 100%;
+          }
+          &:after {
+            left: 100%;
+          }
+        }
+      }
+      .md-button {
+        &.google,
+        &.facebook,
+        &.twitter,
+        &.github {
+          md-icon {
+            color: #FFFFFF;
+          }
+        }
+        &.google {
+          background-color: #D73D32;
+        }
+        &.facebook {
+          background-color: rgb(63, 92, 154);
+        }
+        &.twitter {
+          background-color: rgb(91, 192, 222);
+        }
+        &.github {
+          background-color: rgb(204, 204, 204);
+        }
+      }
+      .register {
+        margin: 32px auto 24px auto;
+        width: 250px;
+        font-weight: 500;
+        .text {
+          margin-right: 8px;
+        }
+        .link {}
+      }
+    }
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+  #login {
+    #login-form-wrapper {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      #login-form {
+        text-align: center;
+        padding: 24px;
+      }
+    }
+  }
+}

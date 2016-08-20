@@ -1,0 +1,76 @@
+<div id="login" layout="row" layout-align="start" gt-season-bg>
+  <div id="login-intro" flex hide show-gt-sm>
+    <div class="logo md-accent-bg">
+      <span>GT</span>
+    </div>
+    <div class="title">Course Surveys</div>
+    <div class="description" translate="LOGIN.INTRO"></div>
+  </div>
+
+  <div id="login-form-wrapper" class="flex-scrollable md-whiteframe-8dp" ms-scroll>
+    <div id="login-form">
+      <div class="logo md-accent-bg" hide-gt-sm>
+        <span>GT</span>
+      </div>
+
+      <div class="title" translate="LOGIN.TITLE"></div>
+      <div class="description" translate="LOGIN.DESCRIPTION"></div>
+
+      <form name="f" novalidate>
+        <md-input-container class="md-block" md-no-float>
+          <input type="email" name="email" ng-model="vm.user.email" required
+              aria-label="Email"
+              translate
+              translate-attr-aria-label="LOGIN.EMAIL"
+              translate-attr-placeholder="LOGIN.EMAIL">
+          <div ng-messages="f.email.$error" role="alert" multiple>
+            <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+          </div>
+        </md-input-container><div class="cf"></div>
+
+        <md-input-container class="md-block" md-no-float>
+          <input type="password" name="password" ng-model="vm.user.password" required
+              aria-label="Password"
+              translate
+              translate-attr-aria-label="LOGIN.PASSWORD"
+              translate-attr-placeholder="LOGIN.PASSWORD">
+          <div ng-messages="f.password.$error" role="alert">
+            <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+          </div>
+        </md-input-container><div class="cf"></div>
+
+        <div class="remember-forgot-password" layout="row" layout-sm="column" layout-align="center center">
+          <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color" translate="LOGIN.FORGOT_PASSWORD"></a>
+        </div>
+
+        <md-button
+            type="submit"
+            class="md-raised md-accent submit-button"
+            ng-click="vm.loginWithEmail(vm.user)"
+            ng-disabled="f.$invalid || f.$pristine || vm.working"
+            aria-label="Log In"
+            translate="LOGIN.LOG_IN"
+            translate-attr-aria-label="LOGIN.LOG_IN">
+        </md-button>
+      </form>
+
+      <div class="separator">
+        <span class="text" translate="LOGIN.OR"></span>
+      </div>
+
+      <div layout="row" layout-align="center space-between">
+        <md-button class="md-icon-button" aria-label="Log in with {{provider.name}}"
+            ng-repeat="provider in vm.authProviders"
+            ng-class="provider.name"
+            ng-click="vm.loginWithSocial(provider)">
+          <md-icon md-font-icon="{{provider.icon}}" class="s20"></md-icon>
+        </md-button>
+      </div>
+
+      <div class="register" layout="row" layout-sm="column" layout-align="center center">
+        <span class="text" translate="LOGIN.DONT_HAVE_ACCOUNT"></span>
+        <a class="link" ui-sref="app.pages_auth_register" translate="LOGIN.REGISTER"></a>
+      </div>
+    </div>
+  </div>
+</div>

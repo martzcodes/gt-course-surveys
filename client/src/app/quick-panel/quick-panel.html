@@ -1,0 +1,16 @@
+<md-content ms-scroll>
+  <md-list class="md-dense" flex>
+    <md-subheader class="md-no-sticky pt-8 pb-16 pl-16" translate="QUICKPANEL.TITLE"></md-subheader>
+    <div ng-repeat="review in vm.reviews | orderBy:['-created'] track by review.id">
+      <md-divider></md-divider>
+      <md-list-item class="md-3-line ph-0" ng-click="vm.goTo(review)" md-no-ink>
+        <img ng-src="{{review.authorImageUrl}}" alt="{{review.authorName}}" class="md-avatar">
+        <div class="md-list-item-text mt-16" layout="column">
+          <p>{{review.courseTitle}}</p>
+          <h4>{{review.text.substring(0, 100)}}</h4>
+          <p am-time-ago="review.created"></p>
+        </div>
+      </md-list-item>
+    </div>
+  </md-list>
+</md-content>

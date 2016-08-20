@@ -1,0 +1,135 @@
+// Black text
+.black-fg,
+.black-text {
+  color: rgba(0, 0, 0, 0.87) !important;
+  &.secondary-text,
+  .secondary-text,
+  &.icon,
+  .icon {
+    color: rgba(0, 0, 0, 0.54) !important;
+  }
+  &.hint-text,
+  .hint-text,
+  &.disabled-text,
+  .disabled-text {
+    color: rgba(0, 0, 0, 0.26) !important;
+  }
+  &.divider,
+  .divider,
+  &.faint-text,
+  .faint-text {
+    color: rgba(0, 0, 0, 0.12) !important;
+  }
+}
+
+// White text
+.white-fg,
+.white-text {
+  color: rgb(255, 255, 255) !important;
+  &.secondary-text,
+  .secondary-text,
+  &.icon,
+  .icon {
+    color: rgba(255, 255, 255, 0.70) !important;
+  }
+  &.hint-text,
+  .hint-text,
+  &.disabled-text,
+  .disabled-text {
+    color: rgba(255, 255, 255, 0.30) !important;
+  }
+  &.divider,
+  .divider,
+  &.faint-text,
+  .faint-text {
+    color: rgba(255, 255, 255, 0.12) !important;
+  }
+  // Angular material element color override
+  md-icon {
+    color: #FFFFFF;
+  }
+  md-progress-linear {
+    ._md-container {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    ._md-bar {
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// Material colors with all available hue values
+@each $colorName,
+$colorMap in $materialColorsMap {
+  @each $hue,
+  $hexValue in map-get($colorMap, 'hues') {
+    .#{$colorName}-#{$hue}-bg {
+      background-color: $hexValue !important;
+    }
+    .md-#{$colorName}-#{$hue}-bg {
+      background-color: $hexValue !important;
+      color: map-get($contrastsMap, map-get(map-get($colorMap, 'contrasts'), $hue));
+    }
+    .#{$colorName}-#{$hue}-fg {
+      color: $hexValue !important;
+    }
+    .#{$colorName}-#{$hue}-border {
+      border-color: $hexValue !important;
+    }
+    .#{$colorName}-#{$hue}-border-top {
+      border-top-color: $hexValue !important;
+    }
+    .#{$colorName}-#{$hue}-border-right {
+      border-right-color: $hexValue !important;
+    }
+    .#{$colorName}-#{$hue}-border-bottom {
+      border-bottom-color: $hexValue !important;
+    }
+    .#{$colorName}-#{$hue}-border-left {
+      border-left-color: $hexValue !important;
+    }
+    @if ($hue=='500') {
+      .md-#{$colorName}-bg {
+        background-color: $hexValue !important;
+        color: map-get($contrastsMap, map-get(map-get($colorMap, 'contrasts'), $hue));
+      }
+      .#{$colorName}-bg {
+        background-color: $hexValue !important;
+      }
+      .#{$colorName}-fg {
+        color: $hexValue !important;
+      }
+      .#{$colorName}-border {
+        border-color: $hexValue !important;
+      }
+      .#{$colorName}-border-top {
+        border-top-color: $hexValue !important;
+      }
+      .#{$colorName}-border-right {
+        border-right-color: $hexValue !important;
+      }
+      .#{$colorName}-border-bottom {
+        border-bottom-color: $hexValue !important;
+      }
+      .#{$colorName}-border-left {
+        border-left-color: $hexValue !important;
+      }
+    }
+  }
+}
+
+// Function for getting material color and their hue values in scss
+@function material-color($color, $hue: '500') {
+  @if (map-has-key($materialColorsMap, $color)) {
+    $availableHues: map-get(map-get($materialColorsMap, $color), 'hues');
+    @if (map-has-key($availableHues, $hue)) {
+      @return map-get($availableHues, $hue);
+    }
+    @else {
+      @error "'#{$hue}' is not a valid hue value for '#{$color}'!";
+    }
+  }
+  @else {
+    @error "'#{$color}' is not a valid Material Design color!";
+  }
+}

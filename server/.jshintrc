@@ -1,0 +1,26 @@
+{
+  "camelcase": false,
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 2,
+  "quotmark": "single",
+  "maxdepth": 3,
+  "maxlen": 120,
+  "eqnull": true,
+  "funcscope": true,
+  "node": true,
+  "-W030": true,
+  "-W071": true,
+  "newcap": true,
+  "globals": {
+    "describe": true,
+    "require": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "it": true,
+    "assert": true
+  }
+}

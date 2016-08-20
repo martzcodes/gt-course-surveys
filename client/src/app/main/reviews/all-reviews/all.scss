@@ -1,0 +1,14 @@
+.gt-grades,
+.gt-reviews {
+  th {
+    padding-top: 18px !important;
+    padding-bottom: 6px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  td {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+}

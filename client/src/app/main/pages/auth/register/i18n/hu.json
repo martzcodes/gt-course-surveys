@@ -1,0 +1,15 @@
+{
+    "REGISTER": {
+        "INTRO": "A prémium szolgáltatás, amely egyszerűsíti a irányító CrossFit versenyek.",
+        "TITLE": "Regisztráció",
+        "DESCRIPTION": "Csatlakozzon ahhoz a CrossFit sportolók.",
+        "NAME": "név",
+        "EMAIL": "E-mailben",
+        "READ_ACCEPT": "Én elolvastam és elfogadom a",
+        "TERMS": "általános szerződési feltételek",
+        "CREATE": "Fiók létrehozása",
+        "ALREADY_HAVE": "Már van egy számla?",
+        "LOGIN": "bejelentkezés",
+        "CREATED": "Létrehozott fiókot. Tekintse meg a bejelentkezési utasításokért."
+    }
+}

@@ -1,0 +1,89 @@
+#toolbar {
+  height: $toolbarHeight;
+  min-height: $toolbarHeight;
+  max-height: $toolbarHeight;
+  z-index: 55 !important;
+  #navigation-toggle {
+    width: $toolbarHeight;
+    min-width: $toolbarHeight;
+    height: $toolbarHeight;
+    margin: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+  }
+  #user-menu {
+    height: $toolbarHeight;
+    padding: 0;
+    md-menu-item .md-button {
+      font-size: 15px;
+      md-icon {
+        margin: auto 16px auto 0;
+      }
+    }
+    .user-button {
+      border-radius: 0;
+      margin: 0;
+      padding: 0 16px;
+      height: $toolbarHeight;
+      text-transform: none;
+      .username {
+        margin: 0 4px 0 8px;
+      }
+    }
+  }
+  #language-menu {
+    height: $toolbarHeight;
+    .language-button {
+      min-width: $toolbarHeight;
+      height: $toolbarHeight;
+      margin: 0;
+      padding: 0 16px;
+      border-radius: 0;
+      .iso {
+        text-transform: uppercase;
+      }
+      .flag {
+        margin-right: 8px;
+      }
+    }
+  }
+  #quick-panel-toggle {
+    width: $toolbarHeight;
+    height: $toolbarHeight;
+    margin: 0;
+    border-radius: 0;
+  }
+  .toolbar-separator {
+    height: $toolbarHeight;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.12);
+  }
+}
+
+#language-menu-content {
+  md-menu-item {
+    .flag {
+      margin-right: 16px;
+    }
+  }
+}
+
+#language-message {
+  min-height: 88px;
+  max-width: 600px;
+  .md-toast-content {
+    height: 90px;
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-xs) {
+  #toolbar {
+    #user-menu {
+      .user-button {
+        min-width: 64px;
+        padding: 0 2px;
+      }
+    }
+  }
+}

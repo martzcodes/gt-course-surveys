@@ -1,0 +1,53 @@
+<div id="register" layout="row" layout-align="start" gt-season-bg>
+  <div id="register-intro" flex hide show-gt-sm>
+    <div class="logo md-accent-bg">
+      <span>GT</span>
+    </div>
+    <div class="title">Course Surveys</div>
+    <div class="description" translate="REGISTER.INTRO"></div>
+  </div>
+
+  <div id="register-form-wrapper" class="flex-scrollable md-whiteframe-8dp" layout="column" flex ms-scroll>
+    <div id="register-form">
+      <div class="logo md-accent-bg" hide-gt-sm>
+        <span>GT</span>
+      </div>
+
+      <div class="title" translate="REGISTER.TITLE"></div>
+      <div class="description" translate="REGISTER.DESCRIPTION"></div>
+
+      <form name="vm.f" novalidate>
+        <md-input-container class="md-block" md-no-float>
+          <label translate="REGISTER.NAME"></label>
+          <input name="name" ng-model="vm.user.name" required>
+          <div ng-messages="vm.f.name.$error">
+            <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+          </div>
+        </md-input-container><div class="cf"></div>
+
+        <md-input-container class="md-block" md-no-float>
+          <label translate="REGISTER.EMAIL"></label>
+          <input type="email" name="email" ng-model="vm.user.email" required>
+          <div ng-messages="vm.f.email.$error" role="alert" multiple>
+            <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+          </div>
+        </md-input-container><div class="cf"></div>
+
+        <md-button
+            type="submit"
+            class="md-raised md-accent submit-button"
+            ng-click="vm.register(vm.user)"
+            ng-disabled="vm.f.$invalid || vm.f.$pristine || vm.working"
+            aria-label="Create My Account"
+            translate="REGISTER.CREATE"
+            translate-attr-aria-label="REGISTER.CREATE">
+        </md-button>
+      </form>
+
+      <div class="login" layout="row" layout-sm="column" layout-align="center center">
+        <span class="text" translate="REGISTER.ALREADY_HAVE"></span>
+        <a class="link" ui-sref="app.pages_auth_login({ e: vm.user.email })" translate="REGISTER.LOGIN"></a>
+      </div>
+    </div>
+  </div>
+</div>

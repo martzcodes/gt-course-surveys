@@ -1,0 +1,270 @@
+/*----------------------------------------------------------------*/
+
+
+/*  ms-navigation
+/*----------------------------------------------------------------*/
+
+.ms-navigation {
+  display: block;
+  position: relative;
+  color: rgba(255, 255, 255, 0.70);
+  user-select: none;
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+  }
+  ul {
+    display: block;
+    overflow: hidden;
+    li {
+      position: relative;
+      &.collapsed {
+        ul {
+          display: none;
+        }
+      }
+    }
+  }
+  .animate-height {
+    transition: height 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  }
+  .ms-navigation-node {
+    .ms-navigation-item {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.70);
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      // Non-link & Link Common
+      > .ms-navigation-button {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 48px;
+        line-height: 48px;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-right: 16px;
+        color: rgba(255, 255, 255, 0.70);
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        .icon {
+          color: rgba(255, 255, 255, 0.7);
+          margin: 0 16px 0 0;
+        }
+        // Non-link
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          opacity: 1;
+          transition: opacity 0.25s ease-in-out 0.1s;
+        }
+        // Link
+        a {
+          white-space: nowrap;
+          overflow: hidden;
+          opacity: 1;
+          transition: opacity 0.25s ease-in-out 0.1s;
+        }
+        // Arrow
+        .arrow {
+          margin: 0;
+          opacity: 1;
+          transition: transform 0.3s ease-in-out, opacity 0.25s ease-in-out 0.1s;
+        }
+        // Badge
+        .badge {
+          position: absolute;
+          top: 50%;
+          right: 16px;
+          min-width: 20px;
+          height: 20px;
+          line-height: 20px;
+          padding: 0 7px;
+          font-size: 11px;
+          font-weight: bold;
+          border-radius: 20px;
+          transform: translateY(-50%);
+          transition: opacity 0.2s ease-in-out 0.1s;
+        }
+        &.active {
+          color: #FFFFFF;
+          .icon {
+            color: #FFFFFF;
+          }
+          .badge {
+            background: #FFFFFF !important;
+            color: rgba(0, 0, 0, 0.87) !important;
+          }
+        }
+      }
+    }
+    // Arrow on expanded node
+    &:not(.collapsed) {
+      > .ms-navigation-item {
+        > .ms-navigation-button {
+          .arrow {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+    // Group
+    &.group {
+      > .ms-navigation-item {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 8px;
+        cursor: auto;
+        background: none !important;
+        text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        > .ms-navigation-button {
+          height: 32px;
+          line-height: 32px;
+          color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+    // Background color on expanded node
+    &:not(.group).has-children {
+      &:not(.collapsed) {
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+      &.collapsing {
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+      .has-children {
+        &:not(.collapsed) {
+          background: none;
+        }
+      }
+    }
+  }
+  // Level 1
+  li {
+    .ms-navigation-button {
+      padding-left: 24px;
+    }
+    // Level 2
+    li {
+      .ms-navigation-button {
+        padding-left: 56px;
+      }
+      // Level 3
+      li {
+        .ms-navigation-button {
+          padding-left: 72px;
+        }
+        // Level 4
+        li {
+          .ms-navigation-button {
+            padding-left: 88px;
+          }
+          // Level 5
+          li {
+            .ms-navigation-button {
+              padding-left: 104px;
+            }
+          }
+        }
+      }
+    }
+  }
+  // Level 1 (group-title)
+  li.group {
+    .ms-navigation-button {
+      padding-left: 24px;
+    }
+    // Level 2
+    li {
+      .ms-navigation-button {
+        padding-left: 24px;
+      }
+      // Level 3
+      li {
+        .ms-navigation-button {
+          padding-left: 56px;
+        }
+        // Level 4
+        li {
+          .ms-navigation-button {
+            padding-left: 72px;
+          }
+          // Level 5
+          li {
+            .ms-navigation-button {
+              padding-left: 88px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Folded navigation
+@media only screen and (min-width: $layout-breakpoint-sm) {
+  body {
+    &.ms-navigation-folded {
+      &:not(.ms-navigation-folded-open) {
+        .ms-navigation {
+          .animate-height {
+            transition: none;
+          }
+          .ms-navigation-node {
+            .ms-navigation-item {
+              .ms-navigation-button {
+                .icon {
+                  margin: 0;
+                }
+                .title,
+                .arrow,
+                .badge {
+                  opacity: 0;
+                  visibility: hidden;
+                }
+              }
+            }
+            &.group {
+              > .ms-navigation-item {
+                .ms-navigation-button {
+                  &:before {
+                    content: '';
+                    display: block;
+                    position: relative;
+                    width: 16px;
+                    border-top: 1px solid rgba(255, 255, 255, 0.12);
+                  }
+                }
+              }
+            }
+          }
+        }
+        #ms-navigation-fold-expander {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 999;
+        }
+      }
+      #ms-navigation-fold-collapser {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 59;
+      }
+    }
+  }
+}

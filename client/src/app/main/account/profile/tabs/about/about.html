@@ -1,0 +1,40 @@
+<form name="f" novalidate flex-gt-sm="50">
+  <md-input-container class="md-block" md-no-float>
+    <label translate="PROFILE.EMAIL"></label>
+    <input type="email" name="email" ng-model="vm.temp.email" readonly disabled>
+    <div class="md-errors-spacer"></div>
+  </md-input-container><div class="cf"></div>
+
+  <md-input-container class="md-block" md-no-float>
+    <label translate="PROFILE.NAME"></label>
+    <input type="text" name="name" ng-model="vm.temp.name" required>
+    <div ng-messages="f.name.$error" role="alert">
+      <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+    </div>
+  </md-input-container><div class="cf"></div>
+
+  <md-input-container class="md-block" md-no-float>
+    <label translate="PROFILE.SPECIALIZATION"></label>
+    <md-select name="specialization" ng-model="vm.temp.specialization">
+      <md-option ng-value="::v" ng-repeat="v in [0,1,2,3]">
+        {{::v | gtSpecialization}}
+      </md-option>
+    </md-select>
+    <div class="md-errors-spacer"></div>
+  </md-input-container><div class="cf"></div>
+
+  <md-switch ng-model="vm.temp.anonymous" aria-label="Remain anonymous?" class="md-primary pl-8 mt-0">
+    <span translate="PROFILE.ANONYMOUS"></span>
+  </md-switch>
+
+  <md-button
+      type="submit"
+      class="md-raised md-primary ml-0 mt-20"
+      ng-click="vm.updateAbout()"
+      ng-disabled="f.$invalid || f.$pristine || vm.working"
+      aria-label="Update"
+      translate="CORE.UPDATE"
+      translate-attr-aria-label="CORE.UPDATE">
+  </md-button>
+
+</form>

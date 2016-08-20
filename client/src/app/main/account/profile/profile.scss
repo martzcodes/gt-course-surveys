@@ -1,0 +1,106 @@
+#profile {
+  .header {
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("/assets/images/backgrounds/header-bg.png");
+
+    .profile-image {
+      margin-right: 24px;
+    }
+    .profile-image-edit-icon {
+      position: absolute;
+      left: 61px;
+      top: 236px;
+      &:hover { cursor: pointer; }
+    }
+
+    .cover-image-edit-icon-wrapper {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      text-align: center;
+      padding-top: 6px;
+    }
+    .cover-image-edit-icon {
+      &:hover { cursor: pointer; }
+    }
+
+    .name {
+      font-size: 34px;
+    }
+    .actions {
+      .md-button {
+        text-transform: none;
+        padding: 0 16px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 0 0 8px;
+      }
+    }
+  }
+  .content {
+    md-content {
+      background-color: transparent;
+    }
+  }
+  // Profile boxes
+  .profile-box {
+    margin-bottom: 16px;
+    header {
+      padding: 16px;
+      .title {
+        font-size: 17px;
+      }
+      .more {
+        cursor: pointer;
+      }
+    }
+    .content {
+      padding: 16px;
+      background-color: #FFF;
+    }
+    footer {
+      padding: 8px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+    &.info-box {
+      .info-line {
+        margin-bottom: 24px;
+        .title {
+          font-size: 15px;
+          font-weight: 500;
+          padding-bottom: 4px;
+        }
+        .info {}
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+  #profile {
+    .header {
+      .profile-image {
+        margin: 0 0 16px 0;
+      }
+      .name {
+        margin-bottom: 32px;
+      }
+      .profile-image-edit-icon, .cover-image-edit-icon-wrapper {
+        display: none;
+      }
+    }
+  }
+}

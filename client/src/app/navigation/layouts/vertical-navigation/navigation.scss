@@ -1,0 +1,87 @@
+#vertical-navigation {
+  width: $navigationWidth;
+  min-width: $navigationWidth;
+  max-width: $navigationWidth;
+  overflow-x: hidden;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2), width 0.1s linear, min-width 0.1s linear, max-width 0.1s linear;
+  box-shadow: $whiteframe-shadow-6dp;
+  .navigation-header {
+    height: 64px;
+    min-height: 64px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0 16px 0 24px;
+    .logo {
+      .logo-image {
+        display: block;
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: #FFFFFF;
+        border-radius: 2px;
+      }
+      .logo-text {
+        color: #FFFFFF;
+        margin-left: 8px;
+        font-size: 16px;
+      }
+    }
+    .fold-toggle {
+      transition: transform 0.3s ease-in-out 0.1s;
+      transform: rotate(0deg);
+      margin: 0;
+      padding: 8px;
+      width: 34px !important;
+      height: 34px !important;
+      cursor: pointer;
+    }
+  }
+  &:not(._md-locked-open) {
+    box-shadow: $whiteframe-shadow-8dp;
+  }
+}
+
+// Folded navigation
+@media only screen and (min-width: $layout-breakpoint-sm) {
+  .ms-navigation-folded {
+    #content-container {
+      margin-left: $navigationFoldedWidth;
+    }
+    #vertical-navigation {
+      position: absolute;
+      .navigation-header {
+        .fold-toggle {
+          transform: rotate(180deg);
+          opacity: 0;
+        }
+      }
+    }
+    &.ms-navigation-folded-open {
+      #vertical-navigation {
+        .navigation-header {
+          .fold-toggle {
+            transition: transform 0.3s ease-in-out 0.1s, opacity 0.3s ease-in-out 0.2s;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    &:not(.ms-navigation-folded-open) {
+      #vertical-navigation {
+        position: absolute;
+        width: $navigationFoldedWidth;
+        min-width: $navigationFoldedWidth;
+        max-width: $navigationFoldedWidth;
+        .navigation-header {
+          padding: 0 16px;
+          .logo-text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

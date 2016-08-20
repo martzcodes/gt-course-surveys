@@ -1,0 +1,108 @@
+/*----------------------------------------------------------------*/
+
+
+/*  ms-search-bar
+/*----------------------------------------------------------------*/
+
+.ms-search-bar {
+  height: $toolbarHeight;
+  font-size: 13px;
+  .ms-search-bar-expander,
+  .ms-search-bar-collapser {
+    cursor: pointer;
+    padding: 0 20px;
+    margin: 0;
+    width: 64px !important;
+    height: $toolbarHeight !important;
+    line-height: $toolbarHeight !important;
+  }
+  .ms-search-bar-loader {
+    width: 64px !important;
+    height: $toolbarHeight !important;
+    line-height: $toolbarHeight !important;
+  }
+  .ms-search-bar-collapser {
+    display: none;
+  }
+  #ms-search-bar-input {
+    display: none;
+    min-height: $toolbarHeight;
+    background-color: transparent;
+    font-size: 16px;
+  }
+  .ms-search-bar-results {
+    position: absolute;
+    top: $toolbarHeight;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: #FFFFFF;
+    max-height: 300px;
+    box-shadow: $whiteframe-shadow-3dp;
+    .no-results {
+      font-size: 18px;
+      padding: 16px;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    .result {
+      position: relative;
+      height: 56px;
+      min-height: 56px;
+      max-height: 56px;
+      padding: 16px;
+      cursor: pointer;
+      overflow-x: inherit;
+      &.selected {
+        background: rgba(0, 0, 0, 0.07);
+      }
+      .icon-container {
+        min-width: 32px;
+        margin-right: 8px;
+        .square {
+          width: 6px;
+          height: 6px;
+        }
+      }
+      .title {
+        font-size: 16px;
+        overflow-x: inherit;
+        white-space: nowrap;
+      }
+      .description {
+        padding-top: 6px;
+        font-size: 14px;
+      }
+    }
+  }
+  &.expanded {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #FFFFFF;
+    z-index: 10;
+    #ms-search-bar-input {
+      display: block;
+    }
+    .ms-search-bar-collapser {
+      display: block;
+    }
+  }
+}
+
+body {
+  &.ms-search-bar-expanded {
+    #toolbar {
+      z-index: 999 !important;
+    }
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+  .ms-search-bar-label {
+    padding: 0 8px 0 12px;
+  }
+}

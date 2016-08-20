@@ -1,0 +1,14 @@
+.ms-card {
+  .template-5 {
+    .media {
+      width: 80px;
+      min-width: 80px;
+      max-width: 80px;
+    }
+    // ie10 fix
+    .info,
+    .media {
+      -ms-flex: 0 1 auto;
+    }
+  }
+}

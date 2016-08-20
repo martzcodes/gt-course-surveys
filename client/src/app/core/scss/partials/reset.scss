@@ -1,0 +1,60 @@
+* {
+  text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -webkit-text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+  // Remove focus outline
+  &:focus {
+    outline: none;
+  }
+}
+
+// Reset non angular-material input's default browser/os styles
+*:not(md-input-container) {
+  > input[type="text"],
+  > input[type="tel"],
+  > input[type="email"],
+  > input[type="search"],
+  > input[type="password"],
+  > input[type="button"],
+  > button,
+  > input[type="submit"],
+  > input[type="image"],
+  > textarea {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+*:not(md-input-container) {
+  > input[type="button"],
+  > button,
+  > input[type="submit"] {
+    background: none;
+  }
+}
+
+button {
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}

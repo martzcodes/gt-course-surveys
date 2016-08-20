@@ -1,0 +1,8 @@
+{
+    "SETPASSWORD": {
+        "TITLE": "Ange lösenord",
+        "NEW_PASSWORD": "Nytt lösenord",
+        "INVALID_OR_EXPIRED": "Denna länk är ogiltig eller utgången.",
+        "REQUEST_NEW_LINK": "Begär ny länk"
+    }
+}

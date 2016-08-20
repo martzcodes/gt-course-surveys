@@ -1,0 +1,21 @@
+<div class="template-3 p-16 teal-bg white-fg" layout="row" layout-align="space-between">
+  <div layout="column" layout-align="space-between">
+    <div class="info">
+      <div class="title h1" ng-if="card.title">
+        {{card.title}}
+      </div>
+
+      <div class="subtitle h3 secondary-text" ng-if="card.subtitle">
+        {{card.subtitle}}
+      </div>
+    </div>
+
+    <div class="cta">
+      <md-button class="m-0">{{card.cta}}</md-button>
+    </div>
+  </div>
+
+  <div class="media pl-16">
+    <img class="image" ng-src="{{card.media.image.src}}" alt="{{card.media.image.alt}}" ng-show="card.media.image">
+  </div>
+</div>

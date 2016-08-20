@@ -1,0 +1,53 @@
+<md-card class="white-bg md-whiteframe-4dp mh-0" data-rid="{{vm.review.id}}">
+
+  <md-card-header>
+    <md-card-avatar hide-xs>
+      <img ng-src="{{vm.review.authorImageUrl}}" alt="{{vm.review.authorName}}" class="md-user-avatar">
+    </md-card-avatar>
+    <md-card-header-text>
+
+      <!-- TITLE -->
+      <span class="md-title" layout="row">
+        <span>{{vm.review.authorName}} &bull; {{vm.createdTimeOf(vm.review)}}</span>
+        <span flex></span>
+        <span class="rating-container" hide-xs>
+          <md-icon ng-if="vm.review.rating > 0" md-font-icon="icon-star" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating > 1" md-font-icon="icon-star" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating > 2" md-font-icon="icon-star" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating > 3" md-font-icon="icon-star" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating > 4" md-font-icon="icon-star" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating < 1 || vm.review.rating === undefined" md-font-icon="icon-star-outline" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating < 2 || vm.review.rating === undefined" md-font-icon="icon-star-outline" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating < 3 || vm.review.rating === undefined" md-font-icon="icon-star-outline" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating < 4 || vm.review.rating === undefined" md-font-icon="icon-star-outline" class="s18 m-0"></md-icon>
+          <md-icon ng-if="vm.review.rating < 5 || vm.review.rating === undefined" md-font-icon="icon-star-outline" class="s18 m-0"></md-icon>
+        </span>
+      </span>
+      <!-- / TITLE -->
+
+      <!-- SUBTITLE -->
+      <span class="md-subhead">
+        {{vm.review.semesterName}} &bull; {{vm.review.difficulty | gtDifficulty | translate}} &bull; {{vm.review.workload}} {{vm.review.workload | gtWorkload | translate}}
+      </span>
+      <!-- / SUBTITLE -->
+
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-title class="pt-0" ng-if="vm.showCourseTitle">
+    <md-card-title-text>
+      <span class="md-headline">{{vm.review.courseTitle}}</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <md-card-content class="pt-0" ng-class="{'pb-0':vm.showButtons()}">
+    <div class="pre-wrap">{{vm.review.text.trim()}}</div>
+  </md-card-content>
+
+  <md-card-actions layout="row" layout-align="end center" ng-if="vm.showButtons()">
+    <md-button ng-click="vm.edit($event, vm.review)" ng-disabled="vm.readOnly" translate="CORE.EDIT" aria-label="Edit"></md-button>
+    <md-button ng-click="vm.remove($event, vm.review)" ng-disabled="vm.readOnly" translate="CORE.REMOVE" aria-label="Remove"></md-button>
+  </md-card-actions>
+
+</md-card>
+

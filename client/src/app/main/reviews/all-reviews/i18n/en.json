@@ -1,0 +1,12 @@
+{
+    "ALL_REVIEWS": {
+        "NAV": "All Reviews",
+        "DEPARTMENT": "Department",
+        "NUMBER": "Number",
+        "NAME": "Name",
+        "REVIEWS": "Reviews",
+        "AVG_WORKLOAD": "Avg. Work.",
+        "AVG_DIFFICULTY": "Avg. Diff.",
+        "AVG_RATING": "Avg. Rating"
+    }
+}

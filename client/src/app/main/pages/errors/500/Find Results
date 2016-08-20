@@ -1,0 +1,10 @@
+Searching 343 files for "pages_home" (case sensitive)
+
+/Users/bajin/Desktop/bitbucket/gt-course-surveys/client/src/app/main/pages/errors/500/error-500.html:
+    4      <div class="message" translate="ERROR500.MESSAGE"></div>
+    5      <div class="sub-message" translate="ERROR500.SUBMESSAGE"></div>
+    6:     <a class="back-link md-accent-color" ui-sref="app.pages_home" translate="ERROR500.GO_BACK"></a>
+    7    </div>
+    8  </div>
+
+1 match in 1 file

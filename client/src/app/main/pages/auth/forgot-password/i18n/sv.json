@@ -1,0 +1,9 @@
+{
+    "FORGOTPASSWORD": {
+        "TITLE": "Återställ lösenord",
+        "EMAIL": "E-post",
+        "SEND_RESET_LINK": "Skicka Reset länk",
+        "BACK_TO_LOGIN": "Tillbaka till logga in",
+        "EMAIL_SENT": "Ett mail med länken Återställ lösenord har skickats."
+    }
+}

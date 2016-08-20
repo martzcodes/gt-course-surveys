@@ -1,0 +1,8 @@
+{
+    "ERROR500": {
+        "CODE": "500",
+        "MESSAGE": "Nos akkor tört az interneten!",
+        "SUBMESSAGE": "csak viccelek. Úgy néz ki, van egy belső probléma. Kérjük, próbálja újra néhány perc alatt.",
+        "GO_BACK": "Go Back Home"
+    }
+}

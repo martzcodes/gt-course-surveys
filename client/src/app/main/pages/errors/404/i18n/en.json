@@ -1,0 +1,9 @@
+{
+    "ERROR404": {
+        "CODE": "404",
+        "MESSAGE": "Sorry but we could not find the page you are looking for.",
+        "SUBMESSAGE": "The page address may contain a typo or the page may have been moved.",
+        "SEARCH": "Search",
+        "GO_BACK": "Go Back Home"
+    }
+}

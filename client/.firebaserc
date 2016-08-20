@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "gt-course-surveys-dev",
+    "dev": "gt-course-surveys-dev",
+    "prd": "firebase-gt-surveyor"
+  }
+}

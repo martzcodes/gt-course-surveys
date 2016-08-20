@@ -1,0 +1,9 @@
+{
+    "FORGOTPASSWORD": {
+        "TITLE": "-Jelszó alaphelyzetbe állítása",
+        "EMAIL": "E-mailben",
+        "SEND_RESET_LINK": "Visszaállító linket küld",
+        "BACK_TO_LOGIN": "Hát-hoz logika",
+        "EMAIL_SENT": "Küldtek egy e-mailt, amely tartalmazza a jelszó orrgazdaság láncszem."
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "ERROR500": {
+        "CODE": "500",
+        "MESSAGE": "Tja, bröt du internet!",
+        "SUBMESSAGE": "Skämtar bara. Ser ut som vi har en intern fråga. Behaga försök igen på några minuter.",
+        "GO_BACK": "Gå tillbaka hem"
+    }
+}

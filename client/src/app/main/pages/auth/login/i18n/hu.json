@@ -1,0 +1,13 @@
+{
+    "LOGIN": {
+        "INTRO": "A prémium szolgáltatás, amely egyszerűsíti a irányító CrossFit versenyek.",
+        "TITLE": "Bejelentkezés",
+        "DESCRIPTION": "Legyen naprakész a verseny eredményei.",
+        "EMAIL": "E-mailben",
+        "PASSWORD": "Jelszó",
+        "FORGOT_PASSWORD": "Elfelejtett jelszó?",
+        "LOG_IN": "bejelentkezés",
+        "DONT_HAVE_ACCOUNT": "Nincs fiókod?",
+        "REGISTER": "Regisztráció"
+    }
+}

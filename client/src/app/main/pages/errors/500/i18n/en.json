@@ -1,0 +1,8 @@
+{
+    "ERROR500": {
+        "CODE": "500",
+        "MESSAGE": "Well, you broke the internet!",
+        "SUBMESSAGE": "Just kidding. Looks like we have an internal issue. Please try again in a few minutes.",
+        "GO_BACK": "Go Back Home"
+    }
+}

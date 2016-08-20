@@ -1,0 +1,67 @@
+<div layout="row" flex layout-wrap class="mb-8">
+
+  <!-- REVIEW COUNT -->
+  <ms-widget class="h-100" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="ph-16 md-indigo-500-bg white-fg" layout="row" flex>
+      <div layout="row" layout-align="space-between center" flex>
+        <div>
+          <md-icon md-font-icon="icon-message-text-outline" class="s54 hint-text"></md-icon>
+        </div>
+        <div class="pr-8" layout="column" layout-align="center end">
+          <div class="md-display-1" gt-count-up-to="vm.aggregation.count" decimals="0">0</div>
+          <div class="font-weight-300 secondary-text w-160 text-truncate text-right" translate="CORE.AGGREGATE.REVIEWS"></div>
+        </div>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+  <!-- / REVIEW COUNT -->
+
+  <!-- AVERAGE WORKLOAD -->
+  <ms-widget class="h-100" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="ph-16 md-teal-500-bg white-fg" layout="row" flex>
+      <div layout="row" layout-align="space-between center" flex>
+        <div>
+          <md-icon md-font-icon="icon-worker" class="s54 hint-text"></md-icon>
+        </div>
+        <div class="pr-8" layout="column" layout-align="center end">
+          <div class="md-display-1" gt-count-up-to="vm.aggregation.average.workload" decimals="1">0.0</div>
+          <div class="font-weight-300 secondary-text w-160 text-truncate text-right" translate="CORE.AGGREGATE.AVG_WORKLOAD"></div>
+        </div>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+  <!-- AVERAGE WORKLOAD -->
+
+  <!-- AVERAGE DIFFICULTY -->
+  <ms-widget class="h-100" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="ph-16 md-deep-orange-500-bg white-fg" layout="row" flex>
+      <div layout="row" layout-align="space-between center" flex>
+        <div>
+          <md-icon md-font-icon="icon-pulse" class="s54 hint-text"></md-icon>
+        </div>
+        <div class="pr-8" layout="column" layout-align="center end">
+          <div class="md-display-1" gt-count-up-to="vm.aggregation.average.difficulty" decimals="1">0.0</div>
+          <div class="font-weight-300 secondary-text w-160 text-truncate text-right" translate="CORE.AGGREGATE.AVG_DIFFICULTY"></div>
+        </div>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+  <!-- AVERAGE DIFFICULTY -->
+
+  <!-- AVERAGE RATING -->
+  <ms-widget class="h-100" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+    <ms-widget-front class="ph-16 md-amber-600-bg white-fg" layout="row" flex>
+      <div layout="row" layout-align="space-between center" flex>
+        <div>
+          <md-icon md-font-icon="icon-thumbs-up-down" class="s54 hint-text"></md-icon>
+        </div>
+        <div class="pr-8" layout="column" layout-align="center end">
+          <div class="md-display-1" gt-count-up-to="vm.aggregation.average.rating" decimals="1">0.0</div>
+          <div class="font-weight-300 secondary-text w-160 text-truncate text-right" translate="CORE.AGGREGATE.AVG_RATING"></div>
+        </div>
+      </div>
+    </ms-widget-front>
+  </ms-widget>
+  <!-- AVERAGE RATING -->
+
+</div>

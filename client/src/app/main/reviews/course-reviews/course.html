@@ -1,0 +1,26 @@
+<div class="page-layout simple fullwidth doc-page element-doc-page">
+
+  <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div layout="column" layout-align="center start">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent" translate="REVIEWS.NAV"></span>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent" translate="COURSE_REVIEWS.NAV"></span>
+      </div>
+      <div class="title text-truncate">{{vm.course.title}}</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <gt-aggregation-card-list aggregation="vm.aggregation"></gt-aggregation-card-list>
+    <gt-review-card-list reviews="vm.reviews" show-course-title="false" read-only="vm.working" on-ready="vm.scroll()"></gt-review-card-list>
+  </div>
+
+  <md-button class="md-fab md-primary md-fab-top-right" aria-label="Publish Review" ng-click="vm.publish($event)" md-no-ink>
+    <md-icon md-font-icon="icon-pencil"></md-icon>
+  </md-button>
+
+</div>
+

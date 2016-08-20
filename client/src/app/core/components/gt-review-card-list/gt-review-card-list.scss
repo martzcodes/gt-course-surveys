@@ -1,0 +1,14 @@
+gt-review-card-list {
+  gt-review-card {
+    &:first-child {
+      md-card {
+        margin-top: 0;
+      }
+    }
+    &:last-child {
+      md-card {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

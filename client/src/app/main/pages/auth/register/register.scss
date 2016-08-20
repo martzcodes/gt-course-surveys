@@ -1,0 +1,98 @@
+#register {
+  height: 100%;
+  overflow: hidden;
+  #register-intro {
+    padding: 128px;
+    .logo {
+      width: 162px;
+      height: 128px;
+      line-height: 128px;
+      font-size: 86px;
+      font-weight: 500;
+      margin-bottom: 32px;
+      color: #FFFFFF;
+      border-radius: 2px;
+      text-align: center;
+    }
+    .title {
+      font-size: 42px;
+      font-weight: 300;
+    }
+    .description {
+      padding-top: 8px;
+      font-size: 14px;
+      max-width: 600px;
+    }
+  }
+  #register-form-wrapper {
+    width: 416px;
+    min-width: 416px;
+    max-width: 416px;
+    height: 100%;
+    background: #FFFFFF;
+    #register-form {
+      padding: 128px 48px 48px 48px;
+      .logo {
+        width: 128px;
+        height: 128px;
+        line-height: 128px;
+        font-size: 86px;
+        font-weight: 500;
+        margin: 32px auto;
+        color: #FFFFFF;
+        border-radius: 2px;
+      }
+      .title {
+        font-size: 21px;
+      }
+      .description {
+        padding-top: 8px;
+      }
+      form {
+        width: 100%;
+        text-align: left;
+        padding-top: 32px;
+        md-checkbox {
+          margin: 0;
+        }
+        .terms {
+          font-size: 13px;
+          margin: 16px 0 32px 0;
+          a {
+            margin-left: 4px;
+          }
+        }
+        .md-button[type=submit] {
+          width: 100%;
+          margin: 16px auto;
+          display: block;
+        }
+      }
+      .login {
+        margin: 32px auto 24px auto;
+        width: 250px;
+        font-weight: 500;
+        .text {
+          margin-right: 8px;
+        }
+        .link {}
+      }
+    }
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-sm) {
+  #register {
+    #register-form-wrapper {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      padding: 16px;
+      #register-form {
+        padding: 24px;
+        text-align: center;
+      }
+    }
+  }
+}

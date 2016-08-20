@@ -1,0 +1,9 @@
+{
+    "FORGOTPASSWORD": {
+        "TITLE": "Reset Password",
+        "EMAIL": "Email",
+        "SEND_RESET_LINK": "Send Reset Link",
+        "BACK_TO_LOGIN": "Back to login",
+        "EMAIL_SENT": "An email containing the password reset link has been sent."
+    }
+}

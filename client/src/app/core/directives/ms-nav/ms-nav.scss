@@ -1,0 +1,196 @@
+ms-nav {
+  display: block;
+  position: relative;
+  color: rgba(255, 255, 255, 0.70);
+  user-select: none;
+  z-index: 70;
+  ms-nav-item {
+    display: block;
+    position: relative;
+    line-height: 48px;
+    &.ms-nav-title {
+      line-height: 32px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 8px;
+      padding: 0 24px;
+      width: 100%;
+      color: rgba(255, 255, 255, 0.30);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ms-nav-button {
+      display: flex;
+      align-self: flex-start;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      padding: 0 48px 0 24px;
+      color: rgba(255, 255, 255, 0.70);
+      text-decoration: none;
+      &:not(.active):hover {
+        background: rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+      }
+      .ms-nav-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: opacity 0.2s ease-in-out 0.1s;
+      }
+      .arrow {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        margin: 0;
+        transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out 0.1s;
+      }
+      .ms-nav-badge {
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        min-width: 20px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 7px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 20px;
+        transform: translateY(-50%);
+        transition: opacity 0.2s ease-in-out 0.1s;
+      }
+      &.active {
+        color: #FFFFFF !important;
+        .ms-nav-badge {
+          background: #FFFFFF !important;
+          color: rgba(0, 0, 0, 0.87) !important;
+        }
+        i {
+          color: #FFFFFF;
+        }
+      }
+    }
+    i {
+      color: rgba(255, 255, 255, 0.70);
+      margin: 0 16px 0 0;
+    }
+  }
+  .ms-nav-toggle {
+    ms-nav-toggle-items {
+      display: none;
+      overflow: hidden;
+      &.expanded {}
+      &.expand-animation {
+        transition: height 0.35s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      }
+      &.collapse-animation {
+        transition: height 0.35s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+      }
+      ms-nav-item {
+        /* Level 1 */
+        .ms-nav-button {
+          padding-left: 58px;
+        }
+        /* Level 2 */
+        ms-nav-toggle-items ms-nav-item {
+          .ms-nav-button {
+            padding-left: 68px;
+          }
+          /* Level 3 */
+          ms-nav-toggle-items ms-nav-item {
+            .ms-nav-button {
+              padding-left: 78px;
+            }
+            /* Level 4 */
+            ms-nav-toggle-items ms-nav-item {
+              .ms-nav-button {
+                padding-left: 88px;
+              }
+              /* Level 5 */
+              ms-nav-toggle-items ms-nav-item {
+                .ms-nav-button {
+                  padding-left: 98px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.active {
+      > .ms-nav-button {
+        color: rgba(255, 255, 255, 1);
+        a,
+        md-icon {
+          color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+    &[collapsed="false"] {
+      & > .ms-nav-button {
+        & > .arrow {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+  & > .ms-nav-toggle {
+    &[collapsed="false"] {
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+  }
+}
+
+// Folded navigation
+@media only screen and (min-width: $layout-breakpoint-md) {
+  .ms-nav-folded {
+    #ms-nav-fold-close-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: transparent;
+      z-index: 998;
+    }
+    #ms-nav-fold-open-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+    }
+    &:not(.ms-nav-folded-open) {
+      ms-nav {
+        ms-nav-item {
+          &.ms-nav-title {
+            height: 32px;
+            &:before {
+              content: '';
+              display: block;
+              position: relative;
+              top: 12px;
+              width: 16px;
+              border-top: 1px solid rgba(255, 255, 255, 0.12);
+            }
+            span {
+              display: none;
+            }
+          }
+          .ms-nav-button {
+            height: 48px;
+            > .ms-nav-label,
+            > .ms-nav-badge,
+            > .arrow {
+              opacity: 0;
+              visibility: hidden;
+            }
+          }
+        }
+      }
+    }
+  }
+}

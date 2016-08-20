@@ -1,0 +1,28 @@
+.ps-container {
+  &:hover {
+    .ps-in-scrolling {
+      pointer-events: auto;
+    }
+  }
+  .ps-in-scrolling {
+    pointer-events: auto;
+  }
+  > .ps-scrollbar-x-rail {
+    background: none !important;
+    margin: 4px 0;
+    height: 4px;
+    z-index: 49;
+    > .ps-scrollbar-x {
+      height: 4px;
+    }
+  }
+  > .ps-scrollbar-y-rail {
+    background: none !important;
+    margin: 4px 0;
+    width: 4px;
+    z-index: 49;
+    > .ps-scrollbar-y {
+      width: 4px;
+    }
+  }
+}

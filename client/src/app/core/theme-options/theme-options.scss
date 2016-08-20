@@ -1,0 +1,86 @@
+.ms-theme-options {
+  .ms-theme-options-button {
+    position: absolute;
+    top: 160px;
+    right: 0;
+    z-index: 50;
+    box-shadow: $whiteframe-shadow-4dp;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0;
+    margin: 0;
+    pointer-events: auto;
+    opacity: 0.75;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  md-sidenav {
+    width: 384px;
+    min-width: 384px;
+    max-width: 384px;
+    .ms-theme-options-list {
+      background: #FFFFFF;
+      z-index: 12;
+      pointer-events: auto;
+      .theme-option {
+        padding: 16px;
+        &.layout-options {
+          md-radio-button {
+            width: 160px;
+            max-width: 160px;
+            margin: 8px 8px 16px 8px;
+            &:hover,
+            &.md-checked {
+              ._md-label {
+                img {
+                  opacity: 1;
+                  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+                }
+              }
+            }
+            ._md-container {
+              display: none;
+            }
+            ._md-label {
+              margin-left: 0;
+              img {
+                opacity: 0.8;
+                margin-bottom: 8px;
+              }
+            }
+          }
+        }
+        &.color-palettes {
+          md-menu-item {
+            max-width: 192px;
+          }
+          .theme-button {
+            border-bottom: 16px solid;
+            text-align: left;
+            width: 101px;
+            height: 88px;
+            box-shadow: none;
+            opacity: 0.8;
+            &:hover,
+            &.active {
+              opacity: 1;
+              box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+            }
+          }
+        }
+        md-radio-button {
+          margin: 8px;
+        }
+        .option-title {
+          font-size: 14px;
+          font-weight: 500;
+          padding: 0 8px 12px 8px;
+        }
+      }
+    }
+  }
+}

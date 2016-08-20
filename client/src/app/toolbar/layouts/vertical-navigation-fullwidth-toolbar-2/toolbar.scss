@@ -1,0 +1,62 @@
+#layout-vertical-navigation-fullwidth-toolbar-2 {
+  #toolbar {
+    .logo {
+      width: $navigationWidth;
+      padding: 0 16px;
+      .logo-image {
+        display: block;
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 2px;
+      }
+      .logo-text {
+        color: rgba(0, 0, 0, 0.87);
+        margin-left: 8px;
+        font-size: 16px;
+      }
+    }
+    .navigation-fold-toggle {
+      width: $toolbarHeight;
+      min-width: $toolbarHeight;
+      height: $toolbarHeight;
+      margin: 0;
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 0;
+      md-icon {
+        transition: transform 0.3s ease-in-out 0.1s;
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
+
+// RESPONSIVE
+@media only screen and (min-width: $layout-breakpoint-sm) {
+  .ms-navigation-folded {
+    #layout-vertical-navigation-fullwidth-toolbar-2 {
+      #toolbar {
+        .navigation-fold-toggle {
+          md-icon {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $layout-breakpoint-sm) {
+  #layout-vertical-navigation-fullwidth-toolbar-2 {
+    #toolbar {
+      .logo {
+        width: auto
+      }
+    }
+  }
+}

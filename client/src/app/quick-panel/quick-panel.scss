@@ -1,0 +1,36 @@
+$quickPanelWidth: 400px;
+#quick-panel {
+  width: $quickPanelWidth;
+  min-width: $quickPanelWidth;
+  max-width: $quickPanelWidth;
+  z-index: 99;
+
+  md-content {
+    height: 100%;
+  }
+
+  h3,
+  h4,
+  p {
+    max-width: 316px;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  h4 {
+    margin: 2px 0;
+  }
+
+  p {
+    font-weight: 400;
+  }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-xs) {
+  #quick-panel {
+    display: none;
+  }
+}

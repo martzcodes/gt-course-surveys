@@ -1,0 +1,226 @@
+@mixin transition() {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+}
+
+@mixin easingOutQuadTimingTransition($duration) {
+  @include transition();
+  transition-property: none;
+  transition-duration: $duration;
+  transition-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
+.animate-slide-up {
+  @include easingOutQuadTimingTransition(400ms);
+  opacity: 1;
+  // Enter & Leave
+  &.ng-enter {
+    transform: translateY(100%);
+    opacity: 0;
+    &.ng-enter-active {
+      transition-property: all;
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    transform: translateY(0);
+    opacity: 1;
+    &.ng-leave-active {
+      transition-property: all;
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  // Hide
+  &.ng-hide {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition-property: all;
+  }
+}
+
+.animate-slide-down {
+  @include easingOutQuadTimingTransition(400ms);
+  opacity: 1;
+  // Enter & Leave
+  &.ng-enter {
+    transform: translateY(-100%);
+    opacity: 0;
+    &.ng-enter-active {
+      transition-property: all;
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    transform: translateY(0);
+    opacity: 1;
+    &.ng-leave-active {
+      transition-property: all;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  // Hide
+  &.ng-hide {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition-property: all;
+  }
+}
+
+.animate-slide-left {
+  @include easingOutQuadTimingTransition(400ms);
+  opacity: 1;
+  // Enter & Leave
+  &.ng-enter {
+    transform: translateX(100%);
+    opacity: 0;
+    &.ng-enter-active {
+      transition-property: all;
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    transform: translateX(0);
+    opacity: 1;
+    &.ng-leave-active {
+      transition-property: all;
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+  // Hide
+  &.ng-hide {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition-property: all;
+  }
+}
+
+.animate-slide-right {
+  @include easingOutQuadTimingTransition(400ms);
+  opacity: 1;
+  // Enter & Leave
+  &.ng-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+    &.ng-enter-active {
+      transition-property: all;
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    transform: translateX(0);
+    opacity: 1;
+    &.ng-leave-active {
+      transition-property: all;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  // Hide
+  &.ng-hide {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition-property: all;
+  }
+}
+
+.animate-fade-in-out {
+  @include easingOutQuadTimingTransition(400ms);
+  opacity: 1;
+  // Enter & Leave
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      transition-property: all;
+      opacity: 1;
+    }
+  }
+  &.ng-leave {
+    opacity: 1;
+    &.ng-leave-active {
+      transition-property: all;
+      opacity: 0;
+    }
+  }
+  // Hide
+  &.ng-hide {
+    opacity: 0;
+  }
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition-property: all;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-500px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 1.75s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

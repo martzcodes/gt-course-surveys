@@ -1,0 +1,111 @@
+/*----------------------------------------------------------------*/
+
+
+/*  ms-widget
+/*----------------------------------------------------------------*/
+
+// Global ms-widget styles
+.ms-widget {
+  .ms-widget-front {
+    box-shadow: $whiteframe-shadow-1dp;
+  }
+  .ms-widget-back {
+    box-shadow: $whiteframe-shadow-1dp;
+  }
+  &.sidenav-widget {
+    .ms-widget-front,
+    .ms-widget-back {
+      box-shadow: none;
+    }
+  }
+  // Flip to front button
+  .flip-to-front {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  // ie fix
+  .c3 {
+    height: 100%;
+  }
+  // chart fill
+  @for $i from 1 through 10 {
+    .chart-fill-#{$i * 8} {
+      margin: 0 #{(-$i * 8) + 'px'} #{(-$i * 8) + 'px'} #{(-$i * 8) + 'px'};
+    }
+  }
+}
+
+// ms-widget
+$widgetPadding: 12px;
+.ms-widget {
+  position: relative;
+  font-size: $font-size-base;
+  perspective: 3000px;
+  padding: $widgetPadding;
+  .ms-widget-front {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+    visibility: visible;
+    width: 100%;
+    opacity: 1;
+    z-index: 10;
+    border-radius: 2px;
+    transition: transform 0.5s ease-out 0s, visibility 0s ease-in 0.2s, opacity 0s ease-in 0.2s;
+    // transform: rotateY(0deg);
+    backface-visibility: hidden;
+  }
+  .ms-widget-back {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10;
+    top: $widgetPadding;
+    right: $widgetPadding;
+    bottom: $widgetPadding;
+    left: $widgetPadding;
+    border-radius: 2px;
+    transition: transform 0.5s ease-out 0s, visibility 0s ease-in 0.2s, opacity 0s ease-in 0.2s;
+    // transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+  .md-button {
+    margin: 0;
+    &.md-icon-button {
+      margin: 0;
+    }
+  }
+  &.flipped {
+    .ms-widget-front {
+      visibility: hidden;
+      opacity: 0;
+      // transform: rotateY(180deg);
+    }
+    .ms-widget-back {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+      // transform: rotateY(360deg);
+    }
+  }
+  &.sidenav-widget {
+    padding: 0;
+  }
+  &.ar-2-1 {
+    .widget {
+      padding: 0;
+      @include maintain-aspect-ratio(2, 1, 8px, widget);
+    }
+  }
+  &.ar-1-1 {
+    .widget {
+      padding: 0;
+      @include maintain-aspect-ratio(1, 1, 8px, widget);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "REGISTER": {
+        "INTRO": "Den premiumtjänst som förenklar verkställande CrossFit tävlingar.",
+        "TITLE": "Registrera dig",
+        "DESCRIPTION": "Gå med i en gemenskap av CrossFit idrottare.",
+        "NAME": "Namn",
+        "EMAIL": "E-post",
+        "READ_ACCEPT": "Jag har läst och accepterar de",
+        "TERMS": "allmänna affärsvillkor",
+        "CREATE": "Skapa mitt konto",
+        "ALREADY_HAVE": "Redan har ett konto?",
+        "LOGIN": "Logga in",
+        "CREATED": "Kontot skapas. Vänligen kontrollera din e-postadress för inloggning instruktioner."
+    }
+}

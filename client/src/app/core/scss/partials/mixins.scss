@@ -1,0 +1,16 @@
+@mixin maintain-aspect-ratio($widthRatio, $heightRatio, $padding, $contentClass) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($heightRatio / $widthRatio) * 100%;
+  }
+  > .#{$contentClass} {
+    position: absolute;
+    top: $padding;
+    left: $padding;
+    right: $padding;
+    bottom: $padding;
+  }
+}

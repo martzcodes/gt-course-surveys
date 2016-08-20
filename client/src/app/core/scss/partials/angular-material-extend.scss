@@ -1,0 +1,303 @@
+/* --- FIXES --- */
+
+// IE layout-fill fix
+[layout] {
+  > * {
+    min-height: auto;
+    min-height: initial;
+  }
+}
+
+// IE card img auto height Fix
+md-card > img,
+md-card >:not(md-card-content) img {
+  height: inherit;
+  height: initial;
+}
+
+// Date picker box-sizing Fix
+.md-datepicker-calendar-pane {
+  * {
+    box-sizing: initial;
+  }
+}
+
+
+/* --- MODIFICATIONS --- */
+
+// Autocomplete
+md-autocomplete-wrap {
+  > input[type="search"] {
+    background: #FFFFFF;
+    padding: 0 15px !important;
+  }
+}
+
+// Backdrop
+md-backdrop {
+  &.md-opaque {
+    background-color: rgba(33, 33, 33, 0.48) !important;
+  }
+}
+
+// Card
+md-card {
+  md-card-header {
+    md-card-avatar {
+      md-icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+// Checkbox
+md-checkbox {
+  &.no-label {
+    margin: 0;
+  }
+}
+
+// Chip
+md-chip {
+  ._md-chip-remove {
+    md-icon {
+      margin-left: 2px;
+      svg {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin: 4px;
+      }
+    }
+  }
+}
+
+// Datepicker
+md-datepicker {
+  .md-datepicker-button {
+    vertical-align: middle;
+  }
+  .md-datepicker-input-container {
+    margin-left: 0;
+  }
+}
+
+.md-inline-form {
+  md-datepicker {
+    margin-top: 14px;
+  }
+}
+
+// Dialog
+md-dialog {
+  md-dialog-content {
+    padding: 24px 24px 0 24px !important;
+  }
+  md-dialog-actions {
+    min-height: 64px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    .md-button {
+      margin: 0 8px;
+    }
+  }
+}
+
+// Input
+md-input-container {
+  &.no-errors-spacer {
+    .md-errors-spacer {
+      display: none;
+    }
+  }
+  .input-hint {
+    position: absolute;
+    right: auto;
+    bottom: 7px;
+    left: 2px;
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    color: rgba(0, 0, 0, 0.54);
+  }
+  &.md-icon-left {
+    .input-hint {
+      left: 38px;
+    }
+  }
+}
+
+// Lists
+md-list-item {
+  .md-list-item-text {
+    p {
+      font-size: 13px !important;
+    }
+  }
+}
+
+// Menu
+md-menu,
+.md-menu {
+  padding: 0;
+}
+
+// Menubar
+md-menu-content {
+  &._md-menu-bar-menu {
+    &.md-dense {
+      padding: 8px 0;
+      .md-button,
+      md-menu-item {
+        height: 40px;
+        line-height: 40px;
+        &.md-indent {
+          > md-icon {
+            top: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+._md-open-menu-container {
+  md-menu-content {
+    md-menu-item {
+      &.selected {
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+// IE fix
+md-menu-content {
+  md-menu-item {
+    .md-button {
+      text-align: left;
+    }
+  }
+}
+
+// Select
+md-select {
+  &.simplified {
+    margin: 0 8px;
+    ._md-select-value {
+      border: none !important;
+      box-sizing: border-box;
+      padding: 0;
+      & *:first-child {
+        transform: none;
+        height: auto;
+      }
+      ._md-select-icon {
+        transform: none;
+        font-size: 16px;
+        &:after {
+          top: 1px;
+        }
+      }
+    }
+  }
+  &[multiple] {
+    md-select-value {
+      & > *:first-child {
+        display: flex;
+        & > *:first-child {
+          flex: 0;
+        }
+        .md-container {
+          padding-right: 6px;
+          &:first-of-type {
+            padding-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Select element contents
+md-select-menu {
+  md-select-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 48px;
+    padding-left: 10.667px;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    input[type="search"] {
+      border: none;
+      outline: none;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+// Sidenav
+md-sidenav {
+  -webkit-overflow-scrolling: touch;
+}
+
+// Toolbar
+md-toolbar {
+  // Colored toolbar element compatibility
+  &.colored-toolbar {
+    color: rgba(255, 255, 255, 0.87);
+    md-menu-bar {
+      md-menu {
+        &._md-open {
+          > button {
+            background: rgba(0, 0, 0, 0.12);
+          }
+        }
+      }
+    }
+    md-menu {
+      &._md-open {
+        > button {
+          background: rgba(0, 0, 0, 0.12);
+        }
+      }
+    }
+    input {
+      color: rgba(255, 255, 255, 0.87) !important;
+    }
+  }
+}
+
+// Progress
+md-progress-circular[disabled] {
+  visibility: hidden;
+}
+
+// Hints
+.hint {
+  position: absolute;
+  left: 5px;
+  right: auto;
+  bottom: 7px;
+}
+.hint,
+.hint-normal {
+  font-size: 11px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  color: grey;
+}
+@media screen and (max-width: $layout-breakpoint-xs) {
+  .hint,
+  .hint-normal {
+    display: none;
+    height: 0px;
+  }
+}

@@ -1,0 +1,34 @@
+<div flex layout="row" layout-align="start center">
+  <label for="ms-search-bar-input">
+        <md-button class="ms-search-bar-expander md-icon-button" aria-label="Expand Search Bar"
+                   ng-click="MsSearchBar.expand()"
+                   ng-if="!MsSearchBar.resultsLoading || MsSearchBar.collapsed">
+            <md-icon md-font-icon="icon-magnify" class="icon s24"></md-icon>
+        </md-button>
+        <div class="ms-search-bar-loader" layout="row" layout-align="center center"
+             ng-if="MsSearchBar.resultsLoading && !MsSearchBar.collapsed">
+            <md-progress-circular class="md-accent" md-diameter="32" md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </label>
+  <input id="ms-search-bar-input" type="text" placeholder="Search" flex ng-model="MsSearchBar.query" ng-model-options="MsSearchBar.queryOptions" ng-blur="MsSearchBar.collapse()" ng-keydown="MsSearchBar.handleKeydown($event)">
+  <md-button class="ms-search-bar-collapser md-icon-button" ng-click="MsSearchBar.collapse()" aria-label="Collapse Search Bar">
+    <md-icon md-font-icon="icon-close" class="icon s24"></md-icon>
+  </md-button>
+
+  <div class="ms-search-bar-results" ng-if="MsSearchBar.results" ms-scroll>
+    <div class="no-results" ng-if="MsSearchBar.results.length === 0">No Results!</div>
+
+    <div class="result" ng-repeat="result in MsSearchBar.results" ng-click="MsSearchBar.handleResultClick(result)" ng-mouseenter="MsSearchBar.handleMouseenter($index)" ng-mousedown="MsSearchBar.absorbEvent($event)" ng-class="{'selected': $index == MsSearchBar.selectedResultIndex}" md-ink-ripple>
+      <div layout="row" layout-align="start center">
+        <div class="icon-container" layout="row" layout-align="center center">
+          <i ng-if="result.icon" class="icon {{result.icon}}"></i>
+          <div ng-if="!result.icon" class="square md-accent-bg"></div>
+        </div>
+        <div>
+          <div class="title">{{result.title}}</div>
+          <div class="description" ng-if="result.description">{{result.description}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

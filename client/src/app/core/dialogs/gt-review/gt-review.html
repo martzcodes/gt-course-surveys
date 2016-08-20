@@ -1,0 +1,93 @@
+<md-dialog aria-label="Edit Review" flex-gt-sm="60" flex="90">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-title" translate="CORE.DIALOG.EDIT_REVIEW" ng-if="vm.editing"></h2>
+      <h2 class="md-title" translate="CORE.DIALOG.PUBLISH_REVIEW" ng-if="!vm.editing"></h2>
+    </div>
+  </md-toolbar>
+
+  <md-divider></md-divider>
+
+  <md-dialog-content class="md-dialog-content">
+    <form name="vm.f" novalidate layout="column">
+
+      <!-- COURSE -->
+      <md-input-container class="md-block">
+        <label translate="CORE.DIALOG.COURSE"></label>
+        <md-select name="course" ng-model="vm.review.course" ng-disabled="true" required>
+          <md-option ng-value="::c.id" ng-repeat="c in ::vm.courses track by c.id">
+            {{::c.title}}
+          </md-option>
+        </md-select>
+        <div class="md-errors-spacer"></div>
+        <div class="hint" translate="CORE.DIALOG.COURSE_HINT"></div>
+      </md-input-container><div class="cf"></div>
+      <!-- / COURSE -->
+
+      <!-- SEMESTER & DIFFICULTY -->
+      <div layout="row">
+        <md-input-container flex>
+          <label translate="CORE.DIALOG.SEMESTER"></label>
+          <md-select name="semester" ng-model="vm.review.semester" required>
+            <md-option ng-value="::s.id" ng-repeat="s in ::vm.semesters | orderBy:id:true track by s.id" ng-if="s.id !== '0000-0'">
+              {{::s.name}}
+            </md-option>
+          </md-select>
+          <div class="md-errors-spacer"></div>
+          <div class="hint" translate="CORE.DIALOG.SEMESTER_HINT"></div>
+        </md-input-container><div class="cf"></div>
+        <md-input-container flex>
+          <label translate="CORE.DIALOG.DIFFICULTY"></label>
+          <md-select name="difficulty" ng-model="vm.review.difficulty" required>
+            <md-option ng-value="::d" ng-repeat="d in ::vm.difficulties track by $index">
+              {{::d | gtDifficulty | translate}}
+            </md-option>
+          </md-select>
+          <div class="md-errors-spacer"></div>
+          <div class="hint" translate="CORE.DIALOG.DIFFICULTY_HINT"></div>
+        </md-input-container><div class="cf"></div>
+      </div>
+      <!-- SEMESTER & DIFFICULTY -->
+
+      <!-- WORKLOAD & RATING -->
+      <div layout="row">
+        <md-input-container flex>
+          <label translate="CORE.DIALOG.WORKLOAD"></label>
+          <input name="workload" type="number" ng-model="vm.review.workload" ng-min="1" required md-select-on-focus>
+          <div class="hint" translate="CORE.DIALOG.WORKLOAD_HINT"></div>
+        </md-input-container><div class="cf"></div>
+        <md-input-container flex>
+          <label translate="CORE.DIALOG.RATING"></label>
+          <md-select name="rating" ng-model="vm.review.rating" required>
+            <md-option ng-value="::r" ng-repeat="r in ::vm.ratings track by $index">
+              {{::r | gtRating | translate}}
+            </md-option>
+          </md-select>
+          <div class="md-errors-spacer"></div>
+          <div class="hint" translate="CORE.DIALOG.RATING_HINT"></div>
+        </md-input-container><div class="cf"></div>
+      </div>
+      <!-- / WORKLOAD & RATING -->
+
+      <!-- TEXT -->
+      <md-input-container class="md-block">
+        <label translate="CORE.DIALOG.TEXT"></label>
+        <textarea name="text" md-maxlength="2000" rows="5" ng-model="vm.review.text" required></textarea>
+        <div ng-messages="vm.f.text.$error">
+          <div ng-message="required"><span translate="CORE.ERRORS.REQUIRED"></span></div>
+          <div ng-message="md-maxlength"><span translate="CORE.ERRORS.MAXLENGTH"></span></div>
+        </div>
+      </md-input-container><div class="cf"></div>
+      <!-- / TEXT -->
+
+    </form>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="vm.cancel()" translate="CORE.CANCEL" aria-label="Cancel"></md-button>
+    <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="vm.f.$invalid || vm.f.$pristine" translate="CORE.OK" aria-label="OK"></md-button>
+  </md-dialog-actions>
+
+</md-dialog>

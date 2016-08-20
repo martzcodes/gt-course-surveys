@@ -1,0 +1,83 @@
+<div layout="row" layout-align="start center">
+  <div layout="row" layout-align="start center" flex>
+    <md-button id="navigation-toggle" class="md-icon-button" ng-click="vm.toggleSidenav('navigation')" hide-gt-sm aria-label="Toggle navigation" translate translate-attr-aria-label="TOOLBAR.TOGGLE_NAVIGATION">
+      <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+    </md-button>
+
+    <ms-search-bar on-search="vm.search(query)" on-result-click="vm.searchResultClick(item)" debounce="300"></ms-search-bar>
+
+    <div class="toolbar-separator"></div>
+  </div>
+
+  <div layout="row" layout-align="start center">
+    <md-progress-circular id="toolbar-progress" ng-if="$root.loadingProgress" class="md-accent" md-mode="indeterminate" md-diameter="64"></md-progress-circular>
+
+    <div class="toolbar-separator"></div>
+
+    <md-button class="md-raised md-accent mv-0 ml-0 mr-14" ui-sref="app.pages_auth_login" ng-if="!vm.user" translate="TOOLBAR.LOGIN" aria-label="Login"></md-button>
+
+    <md-menu-bar id="user-menu" ng-if="vm.user">
+      <md-menu md-position-mode="left bottom">
+        <md-button class="user-button" ng-click="$mdOpenMenu()" aria-label="User Settings" translate translate-attr-aria-label="TOOLBAR.USER_SETTINGS">
+          <img md-menu-align-target class="avatar m-0 display-inline-block" ng-src="{{vm.user.profileImageUrl}}">
+          <span class="username" hide show-gt-sm>{{vm.user.name}}</span>
+          <md-icon md-font-icon="icon-chevron-down" class="icon s16" hide show-gt-sm></md-icon>
+        </md-button>
+
+        <md-menu-content width="3" id="user-menu-content">
+          <md-menu-item class="md-indent" ui-sref="app.account_profile">
+            <md-button aria-label="My Profile">
+              <md-icon md-font-icon="icon-account" class="icon"></md-icon>
+              <span translate="TOOLBAR.MY_PROFILE"></span>
+            </md-button>
+          </md-menu-item>
+
+          <md-menu-item class="md-indent" ui-sref="app.account_reviews">
+            <md-button aria-label="My Reviews">
+              <md-icon md-font-icon="icon-view-list" class="icon"></md-icon>
+              <span translate="TOOLBAR.MY_REVIEWS"></span>
+            </md-button>
+          </md-menu-item>
+
+          <md-menu-divider></md-menu-divider>
+
+          <md-menu-item class="md-indent">
+            <md-button ng-click="vm.signOut()" aria-label="Logout">
+              <md-icon md-font-icon="icon-logout" class="icon"></md-icon>
+              <span translate="TOOLBAR.LOGOUT"></span>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+
+      </md-menu>
+    </md-menu-bar>
+
+    <div class="toolbar-separator"></div>
+
+    <md-menu id="language-menu" md-offset="0 72" md-position-mode="target-right target">
+      <md-button class="language-button" ng-click="$mdOpenMenu()" aria-label="Language" md-menu-origin md-menu-align-target>
+        <div layout="row" layout-align="center center">
+          <img class="flag" ng-src="assets/images/flags/{{vm.selectedLanguage.flag}}.png">
+          <span class="iso">{{vm.selectedLanguage.code}}</span>
+        </div>
+      </md-button>
+
+      <md-menu-content width="3" id="language-menu-content">
+        <md-menu-item ng-repeat="(iso, lang) in vm.languages">
+          <md-button ng-click="vm.changeLanguage(lang)" aria-label="{{lang.title}}" translate translate-attr-aria-label="{{lang.title}}">
+            <span layout="row" layout-align="start center">
+              <img class="flag" ng-src="assets/images/flags/{{lang.flag}}.png">
+              <span translate="{{lang.translation}}">{{lang.title}}</span>
+            </span>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <div class="toolbar-separator"></div>
+
+    <md-button id="quick-panel-toggle" hide-xs class="md-icon-button" ng-click="vm.toggleSidenav('quick-panel')" aria-label="Toggle quick panel" translate translate-attr-aria-label="TOOLBAR.TOGGLE_QUICK_PANEL">
+      <md-icon md-font-icon="icon-bell" class="icon"></md-icon>
+    </md-button>
+  </div>
+</div>

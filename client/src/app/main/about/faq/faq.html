@@ -1,0 +1,147 @@
+<div class="page-layout simple fullwidth doc-page element-doc-page">
+
+  <!-- HEADER -->
+  <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div layout="column" layout-align="center start">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent" translate="ABOUT.NAV"></span>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent" translate="FAQ.NAV"></span>
+      </div>
+      <div class="title" translate="FAQ.NAV"></div>
+    </div>
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div layout="column">
+      <md-card class="white-bg md-whiteframe-4dp mh-0 mt-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">What is this app?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>This app was created for GT OMSCS students to get a feel for course difficulty and workload.</p>
+          <p>It is not endorsed or sponsered by the official OMSCS program or staff.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">Who maintains the app?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>Mehmet Bajin <a href="https://linkedin.com/in/mehmetbajin" target="_blank">(LinkedIn)</a>.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">Does this sync with the old Google doc?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>No. There was a one-time import of that data on November 5, 2015.</p>
+          <p>While the Google doc is still accessible, its use is discouraged as it lacks validation and other useful features.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">I am concerned about privacy. How is my information kept secure?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>The app records only your name, email, profile image URL, and OMSCS specialization (if set).</p>
+          <p><a href="https://firebase.google.com/docs/database/security/" target="_blank">Firebase's security infrastructure</a> guarantees that this information is accessible only to individuals who are registered and authenticated.</p>
+          <p>See for yourself <a href="https://gt-surveyor.firebaseio.com/users.json" target="_blank">here</a>.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">How do I publish reviews?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>After signing in, use the floating action button for composing a review that appears on the reviews page for the given course.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">How do I remain anonymous?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>Go to your Profile and enable the <strong>Remain anonymous to others?</strong> switch. This causes your profile image and name to be masked.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">How do I enter grades?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>Grades for the OMSCS sections are imported from Georgia Tech's <a href="http://www.irp.gatech.edu/reports/grade_distributionsmry.php" target="_blank">self service reports website</a>, so you don't have to do anything.</p>
+          <p>Please note that there can be delays in the import process due to various reasons.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">How can I access the data?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>Use the following endpoints:</p>
+          <ul class="mb-0">
+            <li><a href="https://gt-surveyor.firebaseio.com/courses.json" target="_blank">https://gt-surveyor.firebaseio.com/courses.json</a></li>
+            <li><a href="https://gt-surveyor.firebaseio.com/semesters.json" target="_blank">https://gt-surveyor.firebaseio.com/semesters.json</a></li>
+            <li><a href="https://gt-surveyor.firebaseio.com/reviews.json" target="_blank">https://gt-surveyor.firebaseio.com/reviews.json</a></li>
+            <li><a href="https://gt-surveyor.firebaseio.com/aggregations.json" target="_blank">https://gt-surveyor.firebaseio.com/aggregations.json</a></li>
+            <li><a href="https://gt-surveyor.firebaseio.com/grades.json" target="_blank">https://gt-surveyor.firebaseio.com/grades.json</a></li>
+          </ul>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">Need to report an issue or an enhancement request?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p>Please submit on <a href="https://github.com/mehmetbajin/gt-course-surveys/issues" target="_blank">GitHub.</a></p>
+          <p>Requests are prioritized based on the amount of activity/support from the OMSCS community.</p>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="white-bg md-whiteframe-4dp mh-0 mb-0">
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">Have a question not answered here?</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content class="pt-0">
+          <p><a href="mailto:bajin.mehmet@gmail.com&subject=gt-course-surveys">Please ask!</a></p>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <!-- / CONTENT -->
+
+</div>

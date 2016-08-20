@@ -1,0 +1,29 @@
+#error-500 {
+  .content {
+    width: 90%;
+    max-width: 600px;
+    margin-top: 128px;
+    .error-code {
+      font-size: 112px;
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .message {
+      font-size: 24px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    .sub-message {
+      font-size: 17px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.54);
+      margin: 16px auto 48px auto;
+    }
+    .back-link, .report-link {
+      font-size: 15px;
+      text-align: center;
+    }
+  }
+}

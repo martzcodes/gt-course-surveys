@@ -1,0 +1,22 @@
+{
+    "TOOLBAR": {
+        "TOGGLE_NAVIGATION": "Toggle Navigation",
+        "TOGGLE_NAVIGATION_FOLD": "Toggle Navigation Fold",
+        "TOGGLE_NAVIGATION_MODE": "Toggle Navigation Mode",
+        "SEARCH": "Search",
+        "USER_SETTINGS": "User Settings",
+        "ENGLISH": "English",
+        "HINDI": "Hindi",
+        "SPANISH": "Spanish",
+        "GERMAN": "German",
+        "FRENCH": "French",
+        "TURKISH": "Turkish",
+        "LANGUAGE_UPDATED": "Language updated.",
+        "MY_PROFILE": "My Profile",
+        "MY_REVIEWS": "My Reviews",
+        "LOGOUT": "Logout",
+        "LOGIN": "Login",
+        "REVIEWS": "Reviews",
+        "GRADES": "Grades"
+    }
+}
