@@ -72,16 +72,16 @@ function parse(line) {
   }
 
   return _.set({}, [course, semester], {
-    a:     _.toNumber(counts[0]),
-    b:     _.toNumber(counts[1]),
-    c:     _.toNumber(counts[2]),
-    d:     _.toNumber(counts[3]),
-    f:     _.toNumber(counts[4]),
-    s:     _.toNumber(counts[5]),  // ???
-    u:     _.toNumber(counts[6]),  // ???
-    i:     _.toNumber(counts[7]),  // ???
-    w:     _.toNumber(counts[8]),
-    v:     _.toNumber(counts[9]),  // ???
-    total: _.toNumber(counts[10])
+    a: _.toNumber(counts[0]),
+    b: _.toNumber(counts[1]),
+    c: _.toNumber(counts[2]),
+    d: _.toNumber(counts[3]),
+    f: _.toNumber(counts[4]),
+    s: _.toNumber(counts[5]),  // ???
+    u: _.toNumber(counts[6]),  // ???
+    i: _.toNumber(counts[7]),  // ???
+    w: _.toNumber(counts[8]),
+    v: _.toNumber(counts[9]),  // ???
+    t: _.toNumber(counts[10])
   });
 }
