@@ -7,7 +7,8 @@ module.exports.paths = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  coverage: 'coverage'
+  coverage: 'coverage',
+  deploy: 'deploy'
 };
 
 module.exports.wiredep = {
