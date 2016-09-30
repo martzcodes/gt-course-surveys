@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider
-    .state('app.pages_errors_error-404', {
+    $stateProvider.state('app.pages_errors_error-404', {
       url: '/404',
       views: {
         'main@': {

@@ -7,16 +7,6 @@
 
   /** @ngInject */
   function config($mdThemingProvider, fusePalettes, fuseThemes, fuseThemingProvider) {
-    var $cookies;
-    angular.injector(['ngCookies']).invoke(['$cookies', function (_$cookies_) {
-      $cookies = _$cookies_;
-    }]);
-
-    var customTheme = $cookies.getObject('ct');
-    if (customTheme) {
-      fuseThemes['custom'] = customTheme;
-    }
-
     $mdThemingProvider.alwaysWatchTheme(true);
 
     angular.forEach(fusePalettes, function (palette) {

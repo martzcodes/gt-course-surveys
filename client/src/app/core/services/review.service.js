@@ -10,6 +10,7 @@
     var cache = {};
 
     var service = {
+      clear: clear,
       getByCourse: getByCourse,
       getByUser: getByUser,
       getRecent: getRecent,
@@ -24,6 +25,13 @@
     //////////
 
     /**
+     * Clears the cache.
+     */
+    function clear() {
+      cache = {};
+    }
+
+    /**
      * Puts a review into the cache.
      *
      * @param {!Review}
@@ -31,6 +39,7 @@
      * @private
      */
     function putInCache(review) {
+      /* istanbul ignore next */
       _.forEach(_.keys(cache), function (key) {
         var reviews = _.get(cache, [key, review[key]], []);
 
@@ -57,6 +66,7 @@
      * @private
      */
     function removeFromCache(review) {
+      /* istanbul ignore next */
       _.forEach(_.keys(cache), function (key) {
         var reviews = _.get(cache, [key, review[key]], []);
 
@@ -148,7 +158,7 @@
         .database()
         .ref('reviews')
         .orderByChild('created')
-        .startAt(recentBeginning().format())
+        .startAt(oneWeekEarlier().format())
         .once('value')
         .then(function (snapshot) {
           return addUserData(msUtils.manyRecordsFromSnapshot(snapshot));
@@ -171,15 +181,16 @@
      * @return {boolean}
      */
     function isRecent(review) {
-      return moment.utc(review.created).isSameOrAfter(recentBeginning());
+      return moment.utc(review.created).isSameOrAfter(oneWeekEarlier());
     }
 
     /**
      * Gets the moment in time after which reviews are considered recent.
      *
      * @return {!Moment}
+     * @private
      */
-    function recentBeginning() {
+    function oneWeekEarlier() {
       return moment().subtract(7, 'days').startOf('day').utc();
     }
 
@@ -207,7 +218,8 @@
 
         angular.forEach(reviews, function (review) {
           var user = index[review.author];
-          if (!user || (user.anonymous && user.id !== _.get(currentUser, 'id'))) {
+          if (/* istanbul ignore next */ !user ||
+              (user.anonymous && user.id !== _.get(currentUser, 'id'))) {
             review.authorName = 'Anonymous';
             review.authorImageUrl = 'assets/images/avatars/anonymous.png';
           } else {
@@ -242,6 +254,8 @@
 
         angular.forEach(reviews, function (review) {
           var course = index[review.course];
+
+          /* istanbul ignore else  */
           if (course) {
             review.courseTitle = course.title;
           }
@@ -273,6 +287,8 @@
 
         angular.forEach(reviews, function (review) {
           var semester = index[review.semester];
+
+          /* istanbul ignore else  */
           if (semester) {
             review.semesterName = semester.name;
           }
@@ -312,10 +328,10 @@
           return Semester.get(review.semester);
         })
         .then(function (semester) {
-          var updated = _.clone(review);
-
-          updated = _.assign(updated, updates);
-          updated = _.assign(updated, { semesterName: semester.name });
+          var updated = _.chain(review)
+            .assign(updates)
+            .assign({ semesterName: semester.name })
+            .value();
 
           deferred.resolve(putInCache(updated));
         })

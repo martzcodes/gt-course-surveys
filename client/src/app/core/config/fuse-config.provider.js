@@ -13,24 +13,12 @@
       disableCustomScrollbarsOnMobile: true
     };
 
-    // Methods
-    this.config = config;
-
     //////////
-
-    /**
-     * Extends default configuration with the given one.
-     *
-     * @param {object} configuration
-     */
-    function config(configuration) {
-      fuseConfiguration = angular.extend({}, fuseConfiguration, configuration);
-    }
 
     /**
      * Provides the service.
      *
-     * @return {!Service}
+     * @return {!fuseConfig}
      */
     this.$get = function () {
       var service = {
@@ -57,7 +45,7 @@
        *
        * @param {string} key
        * @param {boolean} value
-       * @return {!Service}
+       * @return {!fuseConfig}
        */
       function setConfig(key, value) {
         fuseConfiguration[key] = value;

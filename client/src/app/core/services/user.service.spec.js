@@ -1,13 +1,12 @@
 'use strict';
 
-describe('User', function () {
+describe('service: User', function () {
   var User;
   var msUtils;
   var firebase;
   var moment;
   var _;
 
-  var $q;
   var $timeout;
 
   beforeEach(module('app', function ($translateProvider) {
@@ -21,22 +20,10 @@ describe('User', function () {
     moment = $injector.get('moment');
     _ = $injector.get('_');
 
-    $q = $injector.get('$q');
     $timeout = $injector.get('$timeout');
-
-    $timeout.flush();
   }));
 
-  describe('User.ref', function () {
-    it('returns a user reference', function () {
-      var id = 'id';
-      var ref = User.ref(id);
-
-      expect(ref.path()).toEqual('users/' + id);
-    });
-  });
-
-  describe('User.get', function () {
+  describe('get', function () {
     var userId;
     var userData;
     var userSnapshot;
@@ -48,11 +35,16 @@ describe('User', function () {
       userSnapshot = firebase.snapshot(_.fromPairs([[userId, userData]]));
       userRecord = msUtils.oneRecordFromSnapshot(userSnapshot);
 
-      User.clearCache();
-      firebase.resetData();
+      User.clear();
+
+      firebase.clear();
       firebase.database().ref('users').child(userId).set(userData);
 
       spyOn(firebase, 'database').and.callThrough();
+    });
+
+    afterEach(function () {
+      firebase.database.calls.reset();
     });
 
     it('returns null if an id is not provided', function (done) {
@@ -65,15 +57,10 @@ describe('User', function () {
       $timeout.flush();
     });
 
-    it('returns null on error', function (done) {
-      var originalRef = User.ref;
-      User.ref = function () {
-        return { once: function () { return $q.reject(); } };
-      };
-
-      User.get(userId).then(function (user) {
+    it('returns null on firebase error', function (done) {
+      User.get('ERROR').then(function (user) {
         expect(user).toBeNull();
-        User.ref = originalRef;
+        expect(firebase.database).toHaveBeenCalled();
         done();
       });
 
@@ -105,7 +92,7 @@ describe('User', function () {
     });
   });
 
-  describe('User.set', function () {
+  describe('set', function () {
     var now;
     var userId;
     var userData;
@@ -119,11 +106,14 @@ describe('User', function () {
       userSnapshot = firebase.snapshot(_.fromPairs([[userId, userData]]));
       userRecord = msUtils.oneRecordFromSnapshot(userSnapshot);
 
-      User.clearCache();
-      firebase.resetData();
+      firebase.clear();
 
       spyOn(firebase, 'database').and.callThrough();
       spyOn(moment, 'utc').and.returnValue({ format: _.constant(now) });
+    });
+
+    afterEach(function () {
+      firebase.database.calls.reset();
     });
 
     it('creates the user', function (done) {
@@ -154,7 +144,7 @@ describe('User', function () {
     });
   });
 
-  describe('User.update', function () {
+  describe('update', function () {
     var now;
     var userId;
     var userData;
@@ -168,17 +158,21 @@ describe('User', function () {
       now = moment.utc().format();
       userId = 'id';
       userData = { name: 'name', email: 'email' };
-      userUpdates = { name: 'new name', email: 'email', profileImageUrl: 'url' };
+      userUpdates = { name: 'new name', email: 'email', profileImageUrl: 'http://domain.com' };
       userSnapshot = firebase.snapshot(_.fromPairs([[userId, userData]]));
       userSnapshotUpdated = firebase.snapshot(_.fromPairs([[userId, userUpdates]]));
       userRecord = msUtils.oneRecordFromSnapshot(userSnapshot);
       userRecordUpdated = msUtils.oneRecordFromSnapshot(userSnapshotUpdated);
+      userRecordUpdated.profileImageUrl = 'https://domain.com';
 
-      User.clearCache();
-      firebase.resetData();
+      firebase.clear();
 
       spyOn(firebase, 'database').and.callThrough();
       spyOn(moment, 'utc').and.returnValue({ format: _.constant(now) });
+    });
+
+    afterEach(function () {
+      firebase.database.calls.reset();
     });
 
     it('updates the user', function (done) {

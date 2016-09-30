@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider
-    .state('app.pages_auth_login', {
+    $stateProvider.state('app.pages_auth_login', {
       url: '/pages/auth/login?e&p',
       views: {
         'main@': {

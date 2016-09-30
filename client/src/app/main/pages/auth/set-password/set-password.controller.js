@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.pages.auth.forgot-password')
+    .module('app.pages.auth.set-password')
     .controller('SetPasswordController', SetPasswordController);
 
   /** @ngInject */
@@ -16,7 +16,8 @@
       msUtils,
       Auth,
 
-      user) {
+      user,
+      email) {
     var vm = this;
 
     // Data
@@ -34,15 +35,9 @@
      * @type {object}
      */
     vm.user = {
-      password: ''
+      password: '',
+      email: email || null
     };
-
-    /**
-     * Whether the state/URL is invalid.
-     *
-     * @type {boolean}
-     */
-    vm.invalid = angular.isUndefined($stateParams.oobCode);
 
     // Methods
 
@@ -55,8 +50,8 @@
     function init() {
       if (user) {
         $state.go('app.account_profile');
-      } else if (vm.invalid) {
-        showRequestNewLinkMessage();
+      } else if (!vm.user.email) {
+        showRequestNewLinkToast();
       }
     }
 
@@ -65,7 +60,7 @@
      *
      * @private
      */
-    function showRequestNewLinkMessage() {
+    function showRequestNewLinkToast() {
       $q.all([
         $translate('SETPASSWORD.INVALID_OR_EXPIRED'),
         $translate('SETPASSWORD.REQUEST_NEW_LINK')
@@ -92,18 +87,16 @@
     function setPassword(user) {
       vm.working = true;
 
-      Auth.email.setPassword(user.password, $stateParams.oobCode)
-      .then(function (email) {
-        return Auth.email.signIn(email, user.password);
+      Auth.email.setPassword($stateParams.oobCode, user.password)
+      .then(function () {
+        return Auth.email.signIn(user.email, user.password);
       })
       .then(function () {
         $state.go('app.account_profile');
       })
       .catch(function () {
-        showRequestNewLinkMessage();
-
+        showRequestNewLinkToast();
         vm.working = false;
-        vm.invalid = true;
       });
     }
   }

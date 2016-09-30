@@ -159,7 +159,7 @@
   }
 
   function md5(s) {
-    return hex(md51(s));
+    return s && s.length ? hex(md51(s)) : Array(33).join('0');
   }
 
   function add32(a, b) {

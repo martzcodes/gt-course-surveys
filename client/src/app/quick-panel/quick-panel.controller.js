@@ -28,9 +28,15 @@
     init();
 
     function init() {
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, onReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, onReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, onReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, handleReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, handleReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, handleReviewChange));
+
+      $scope.$on('$destroy', function () {
+        angular.forEach(reviewChangeListeners, function (listener) {
+          listener();
+        });
+      });
     }
 
     /**
@@ -39,7 +45,7 @@
      * @param {*} $event
      * @param {!Review} review
      */
-    function onReviewChange($event, review) {
+    function handleReviewChange($event, review) {
       if (Review.isRecent(review)) {
         Review.getRecent().then(function (reviews) {
           vm.reviews = reviews;
@@ -48,7 +54,7 @@
     }
 
     /**
-     * Navigates to a give review.
+     * Navigates to a given review.
      *
      * @param {!Review} review
      */

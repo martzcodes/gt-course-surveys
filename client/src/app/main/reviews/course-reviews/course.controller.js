@@ -64,8 +64,8 @@
 
     // Methods
 
-    vm.publish = publish;
     vm.scroll = scroll;
+    vm.publish = publish;
 
     //////////
 
@@ -92,35 +92,58 @@
      *
      * @private
      */
+    /* istanbul ignore next */
     function scroll() {
-      var rid = $stateParams.rid;
-      if (rid && _.find(vm.reviews, ['id', rid])) {
-        var targetOffsetTop = 76;
-
+      var id = $stateParams.rid;
+      if (id && _.find(vm.reviews, ['id', id])) {
         $timeout(function () {
-          var content = angular.element('#content').scrollTop(0);
-          var reviewCard = angular.element('[data-rid="' + rid + '"]');
-          var interval = $interval(function () {
-            var contentScrollTop = Math.round(content.scrollTop());
-            var reviewCardOffsetTop = Math.round(reviewCard.offset().top);
-            if (reviewCardOffsetTop !== targetOffsetTop) {
-              if (reviewCardOffsetTop < targetOffsetTop) {
-                // Needs to increase to targetOffsetTop, meaning contentScrollTop needs to decrease
-                content.scrollTop(contentScrollTop - Math.min(40, targetOffsetTop - reviewCardOffsetTop));
-              } else {
-                // Needs to decrease to targetOffsetTop, meaning contentScrollTop needs to increase
-                content.scrollTop(contentScrollTop + Math.min(40, reviewCardOffsetTop - targetOffsetTop));
-              }
-            } else {
-              // Stop working
-              $interval.cancel(interval);
-
-              // Update url to exclude rid (prevents future scrolling in case user navigates away and back)
-              $state.transitionTo($state.current, { id: $stateParams.id, rid: null }, { notify: false });
-            }
-          }, 25);
+          scrollToReview(id);
         });
       }
+    }
+
+    /**
+     * Scrolls to a particular review.
+     *
+     * @param {string} id Review ID.
+     * @private
+     */
+    /* istanbul ignore next */
+    function scrollToReview(id) {
+      var targetOffsetTop = 76;
+
+      var content = angular.element('#content').scrollTop(0);
+      var reviewCard = angular.element('[data-rid="' + id + '"]');
+
+      var step = 40;
+      var scrollTopChanged = true;
+
+      var interval = $interval(function () {
+
+        var contentScrollTop = Math.round(content.scrollTop());
+        var reviewCardOffsetTop = Math.round(reviewCard.offset().top);
+
+        if (reviewCardOffsetTop === targetOffsetTop || !scrollTopChanged) {
+
+          $interval.cancel(interval);
+
+          $state.transitionTo($state.current, { id: $stateParams.id, rid: null }, { notify: false });
+
+        } else if (reviewCardOffsetTop < targetOffsetTop) {
+
+          // Needs to increase to targetOffsetTop, meaning contentScrollTop needs to decrease
+          content.scrollTop(contentScrollTop - Math.min(step, targetOffsetTop - reviewCardOffsetTop));
+
+        } else {
+
+          // Needs to decrease to targetOffsetTop, meaning contentScrollTop needs to increase
+          content.scrollTop(contentScrollTop + Math.min(step, reviewCardOffsetTop - targetOffsetTop));
+
+        }
+
+        scrollTopChanged = (Math.round(content.scrollTop()) !== contentScrollTop);
+
+      }, 25);
     }
 
     /**
@@ -147,6 +170,7 @@
         })
         .value();
 
+      /* istanbul ignore else */
       if (serverHash !== clientHash) {
         vm.working = true;
 

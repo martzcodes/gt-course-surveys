@@ -8,7 +8,7 @@
 
       <!-- TITLE -->
       <span class="md-title" layout="row">
-        <span>{{vm.review.authorName}} &bull; {{vm.createdTimeOf(vm.review)}}</span>
+        <span class="text-nowrap">{{vm.review.authorName}} &bull; <a class="black-text" ngclipboard data-clipboard-text="{{vm.linkOf(vm.review)}}" href="" ngclipboard-success="vm.onLinkCopied(e)" title="Copy link to clipboard">{{vm.createdTimeOf(vm.review)}}</a></span>
         <span flex></span>
         <span class="rating-container" hide-xs>
           <md-icon ng-if="vm.review.rating > 0" md-font-icon="icon-star" class="s18 m-0"></md-icon>

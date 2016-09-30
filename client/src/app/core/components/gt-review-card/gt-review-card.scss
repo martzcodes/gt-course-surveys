@@ -7,4 +7,10 @@ gt-review-card {
       margin-right: -2px;
     }
   }
+
+  a[data-clipboard-text] {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

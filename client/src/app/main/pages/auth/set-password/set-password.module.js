@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider
-    .state('app.pages_auth_set-password', {
+    $stateProvider.state('app.pages_auth_set-password', {
       url: '/pages/auth/set-password?oobCode',
       views: {
         'main@': {
@@ -21,6 +20,9 @@
           resolve: {
             user: function (Auth) {
               return Auth.waitForCurrentUser();
+            },
+            email: function (Auth, $stateParams) {
+              return Auth.email.verifyPasswordResetCode($stateParams.oobCode);
             }
           }
         }

@@ -38,9 +38,9 @@
     }
 
     /**
-     * Gets a aggregation.
+     * Gets an aggregation.
      *
-     * @param {string} id Same as a course ID.
+     * @param {string} id Course ID.
      * @return {!Promise(?Aggregation)}
      */
     function get(id) {
@@ -60,7 +60,7 @@
     }
 
     /**
-     * Gets the aggregation for a course with no reviews.
+     * Gets the aggregation for a course without reviews.
      *
      * @return {!Aggregation}
      */

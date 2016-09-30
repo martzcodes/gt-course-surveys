@@ -60,9 +60,9 @@
       vm.working = true;
 
       var updates = {
-        name: vm.temp.name || user.name,
-        specialization: vm.temp.specialization || user.specialization,
-        anonymous: !!vm.temp.anonymous
+        name: vm.temp.name || vm.user.name,
+        specialization: vm.temp.specialization || vm.user.specialization,
+        anonymous: angular.isDefined(vm.temp.anonymous) ? vm.temp.anonymous : vm.user.anonymous
       };
 
       User.update(vm.user, updates)

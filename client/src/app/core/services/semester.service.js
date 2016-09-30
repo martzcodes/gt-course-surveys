@@ -16,6 +16,7 @@
     };
 
     var service = {
+      clear: clear,
       all: all,
       get: get,
       isUnknown: isUnknown
@@ -24,6 +25,13 @@
     return service;
 
     //////////
+
+    /**
+     * Clears the cache.
+     */
+    function clear() {
+      cache = {};
+    }
 
     /**
      * Determines if the semester is the 'unknown' semester.
@@ -78,14 +86,14 @@
       var deferred = $q.defer();
 
       all().then(function (semesters) {
-        deferred.resolve(_.find(semesters, ['id', id]));
+        deferred.resolve(_.find(semesters, ['id', id]) || null);
       }).catch(deferred.reject);
 
       return deferred.promise;
     }
 
     /**
-     * Denormalizing semester data for convenience.
+     * Denormalizes semester data for convenience.
      *
      * @param {!Array<Semester>} semesters
      * @return {!Array<Semester>}

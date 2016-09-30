@@ -31,9 +31,13 @@
 
     //////////
 
+    /**
+     * Handles review edit request.
+     *
+     * @param {!jQuery.Event} $event
+     * @param {!Review} review
+     */
     function edit($event, review) {
-      var editing = !!review;
-
       $mdDialog.show({
         controller: 'ReviewDialogController as vm',
         templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
@@ -56,18 +60,20 @@
         if (index >= 0) {
           _.assign(vm.reviews[index], review);
 
-          msUtils.toast(translate('CORE.UPDATED'));
-        }
-
-        if (editing) {
           $rootScope.$broadcast(eventCode.REVIEW_UPDATED, review);
-        } else {
-          $rootScope.$broadcast(eventCode.REVIEW_CREATED, review);
+
+          msUtils.toast(translate('CORE.UPDATED'));
         }
       })
       .catch(msUtils.toast);
     }
 
+    /**
+     * Handles review remove request.
+     *
+     * @param {!jQuery.Event} $event
+     * @param {!Review} review
+     */
     function remove($event, review) {
       msUtils.confirm($event)
       .then(function () {

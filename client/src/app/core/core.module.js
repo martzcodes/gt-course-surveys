@@ -13,6 +13,7 @@
       'pascalprecht.translate',
       'ui.router',
       'angularMoment',
-      'nvd3'
+      'nvd3',
+      'ngclipboard'
     ]);
 })();

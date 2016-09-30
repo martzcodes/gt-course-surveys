@@ -310,8 +310,8 @@
       /**
        * Return navigation array
        *
-       * @param root
-       * @return Array
+       * @param {string} root
+       * @return {?Array<*>}
        */
       function getNavigation(root) {
         if (root) {

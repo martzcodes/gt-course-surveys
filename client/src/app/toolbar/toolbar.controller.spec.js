@@ -1,6 +1,6 @@
 'use strict';
 
-describe('ToolbarController', function () {
+describe('controller: ToolbarController', function () {
   var vm;
 
   var $rootScope;
@@ -39,9 +39,7 @@ describe('ToolbarController', function () {
     eventCode = $injector.get('eventCode');
 
     $mdSidenavToggle = jasmine.createSpy();
-    $mdSidenav = jasmine.createSpy().and.returnValue({
-      toggle: $mdSidenavToggle
-    });
+    $mdSidenav = jasmine.createSpy().and.returnValue({ toggle: $mdSidenavToggle });
 
     vm = $controller('ToolbarController', {
       $scope: $rootScope.$new(),

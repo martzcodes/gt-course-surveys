@@ -59,6 +59,7 @@
           themeName = 'default';
         }
 
+        /* istanbul ignore else */
         if (angular.isDefined(service.themes.list[themeName])) {
           service.themes.active.name = themeName;
           service.themes.active.theme = service.themes.list[themeName];

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('NavigationController', function () {
+describe('controller: NavigationController', function () {
   var vm;
 
   beforeEach(module('app'));

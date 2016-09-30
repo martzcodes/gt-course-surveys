@@ -13,6 +13,8 @@
         "CONFIRM": "Confirm",
         "UPDATE": "Update",
         "UPDATED": "Updated.",
+        "COPIED": "Copied link to clipboard.",
+        "NONE": "None.",
         "SAVE": "Save",
         "SAVED": "Saved.",
         "EDIT": "Edit",

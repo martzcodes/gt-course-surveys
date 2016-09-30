@@ -11,11 +11,11 @@
 
     return {
       restrict: 'A',
-      link: function (scope, element) {
-        element.css('background-image', 'url("/assets/images/backgrounds/' + currentMonth + '.jpg")');
-        element.css('background-size', 'cover');
-        element.css('background-position', '0% 0%');
-        element.css('background-repeat', 'no-repeat');
+      link: function ($scope, $element) {
+        $element.css('background-image', 'url("/assets/images/backgrounds/' + currentMonth + '.jpg")');
+        $element.css('background-size', 'cover');
+        $element.css('background-position', '0% 0%');
+        $element.css('background-repeat', 'no-repeat');
       }
     };
   }

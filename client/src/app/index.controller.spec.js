@@ -1,6 +1,6 @@
 'use strict';
 
-describe('IndexController', function () {
+describe('controller: IndexController', function () {
   var vm;
 
   beforeEach(module('app'));

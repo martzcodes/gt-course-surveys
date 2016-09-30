@@ -17,7 +17,7 @@
     });
 
   /** @ngInject */
-  function ReviewCardController($filter, Auth, _) {
+  function ReviewCardController($filter, $location, Auth, msUtils, _) {
     var vm = this;
     var translate = $filter('translate');
     var amDateFormat = $filter('amDateFormat');
@@ -34,7 +34,11 @@
     // Methods
 
     vm.createdTimeOf = createdTimeOf;
+    vm.linkOf = linkOf;
+    vm.onLinkCopied = onLinkCopied;
+
     vm.showButtons = showButtons;
+
     vm.edit = edit;
     vm.remove = remove;
 
@@ -52,6 +56,25 @@
       } else {
         return amDateFormat(review.created, 'M/D/YY, h:mm a');
       }
+    }
+
+    /**
+     * Gets the deep link for a review.
+     *
+     * @param {!Review} review
+     * @return {string}
+     */
+    function linkOf(review) {
+      return $location.absUrl() + '?rid=' + review.id;
+    }
+
+    /**
+     * Handles a successful link copy by showing a toast.
+     *
+     * @param {!jQuery.Event} $event
+     */
+    function onLinkCopied(/* $event */) {
+      msUtils.toast(translate('CORE.COPIED'));
     }
 
     /**

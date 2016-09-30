@@ -14,7 +14,7 @@
     });
 
   /** @ngInject */
-  function ProgressBarController() {
+  function ProgressBarController(_) {
     var vm = this;
 
     // Data
@@ -38,7 +38,7 @@
      *
      * @type {number}
      */
-    vm.percent = Math.round((vm.value * 100.0) / vm.max) + '%';
+    vm.percent = _.round((vm.value * 100.0) / vm.max, 1);
 
     // Methods
 

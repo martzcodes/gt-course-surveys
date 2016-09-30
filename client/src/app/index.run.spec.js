@@ -1,6 +1,6 @@
 'use strict';
 
-describe('IndexRunBlock', function () {
+describe('run: Index', function () {
   var $rootScope;
   var $state;
   var $mdDialog;

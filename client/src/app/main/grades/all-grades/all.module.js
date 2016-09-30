@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider
-    .state('app.grades_all', {
+    $stateProvider.state('app.grades_all', {
       url: '/grades',
       views: {
         'content@app': {

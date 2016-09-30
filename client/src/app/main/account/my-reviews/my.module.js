@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider
-    .state('app.account_reviews', {
+    $stateProvider.state('app.account_reviews', {
       url: '/account/reviews',
       views: {
         'content@app': {

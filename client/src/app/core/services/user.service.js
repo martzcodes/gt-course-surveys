@@ -18,8 +18,7 @@
     }
 
     var service = {
-      clearCache: clearCache,
-      ref: ref,
+      clear: clear,
       get: get,
       set: set,
       update: update
@@ -32,7 +31,7 @@
     /**
      * Clears the cache.
      */
-    function clearCache() {
+    function clear() {
       cache = {};
     }
 
@@ -63,7 +62,7 @@
 
       var deferred = $q.defer();
 
-      service.ref(id).once('value')
+      ref(id).once('value')
       .then(function (snapshot) {
         deferred.resolve(putInCache(id, msUtils.oneRecordFromSnapshot(snapshot)));
       })
@@ -84,10 +83,10 @@
     function set(id, user) {
       var deferred = $q.defer();
 
+      user = format(user);
       user.created = moment.utc().format();
-      user.anonymous = !!user.anonymous;
 
-      service.ref(id).set(user)
+      ref(id).set(user)
       .then(function () {
         user.id = id;
         deferred.resolve(putInCache(id, user));
@@ -107,15 +106,32 @@
     function update(user, updates) {
       var deferred = $q.defer();
 
+      updates = format(updates);
       updates.updated = moment.utc().format();
 
-      service.ref(user.id).update(updates)
+      ref(user.id).update(updates)
       .then(function () {
         deferred.resolve(putInCache(user.id, angular.merge(user, updates)));
       })
       .catch(deferred.reject);
 
       return deferred.promise;
+    }
+
+    /**
+     * Formats a user record.
+     *
+     * @param {!User} user
+     * @private
+     */
+    function format(user) {
+      user.anonymous = !!user.anonymous;
+
+      if (user.profileImageUrl && user.profileImageUrl.indexOf('http:') > -1) {
+        user.profileImageUrl = user.profileImageUrl.replace('http:', 'https:');
+      }
+
+      return user;
     }
   }
 })();

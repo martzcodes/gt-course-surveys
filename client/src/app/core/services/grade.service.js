@@ -10,6 +10,7 @@
     var cache = {};
 
     var service = {
+      clear: clear,
       all: all,
       get: get,
       none: none
@@ -18,6 +19,13 @@
     return service;
 
     //////////
+
+    /**
+     * Clears the cache.
+     */
+    function clear() {
+      cache = {};
+    }
 
     /**
      * Gets grades for all courses.
@@ -69,7 +77,7 @@
     }
 
     /**
-     * Denormalizes grades for convenience.
+     * Denormalizes grades data for convenience.
      *
      * @param {!Map<CourseId, Map<SemesterId, SemesterGrades>>} grades
      * @return {!Map<CourseId, Map<SemesterId, SemesterGrades>>}
@@ -78,17 +86,15 @@
     function denormalize(grades) {
       var total = 0;
       var totalWithoutWithdrawals = 0;
+      var counts = {};
 
       // For each course's grades...
       _.forEach(grades, function (courseGrades, courseId) {
 
         // For each semester's grades...
         _.forEach(courseGrades, function (semesterGrades, semesterId) {
-          total = semesterGrades.total;
+          total = semesterGrades.t;
           totalWithoutWithdrawals = total - semesterGrades.w;
-
-          semesterGrades = _.omit(semesterGrades, 'total');
-          semesterGrades.t = total;
 
           grades[courseId][semesterId] = {
             '#': semesterGrades,
@@ -102,7 +108,7 @@
         });
 
         // Combined across all semesters stored under 'all' for a given course...
-        var counts = _.reduce(grades[courseId], function (all, current) {
+        counts = _.reduce(grades[courseId], function (all, current) {
           return _.isEmpty(all) ? current['#'] : _.mapValues(all, function (value, key) {
             return value + current['#'][key];
           });
@@ -149,9 +155,9 @@
      */
     function none() {
       return {
-        '#': {a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0},
-        '%': {a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0},
-        '~': {a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0}
+        '#': { a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0 },
+        '%': { a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0 },
+        '~': { a: 0, b: 0, c: 0, d: 0, f: 0, i: 0, s: 0, u: 0, v: 0, w: 0, t: 0 }
       };
     }
   }

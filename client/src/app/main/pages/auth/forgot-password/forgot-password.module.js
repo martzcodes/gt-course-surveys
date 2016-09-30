@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider
-    .state('app.pages_auth_forgot-password', {
+    $stateProvider.state('app.pages_auth_forgot-password', {
       url: '/pages/auth/forgot-password?e',
       views: {
         'main@': {

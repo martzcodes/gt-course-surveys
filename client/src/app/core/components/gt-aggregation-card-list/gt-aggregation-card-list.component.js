@@ -13,7 +13,7 @@
     });
 
   /** @ngInject */
-  function AggregationCardListController($scope, Aggregation, eventCode, _) {
+  function AggregationCardListController($scope, Aggregation, eventCode) {
     var vm = this;
     var reviewChangeListeners = [];
 
@@ -39,9 +39,9 @@
      * @private
      */
     function init() {
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, onReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, onReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, onReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, handleReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, handleReviewChange));
+      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, handleReviewChange));
     }
 
     /**
@@ -50,7 +50,7 @@
      * @private
      */
     function destroy() {
-      _.forEach(reviewChangeListeners, function (listener) {
+      angular.forEach(reviewChangeListeners, function (listener) {
         listener();
       });
     }
@@ -61,7 +61,7 @@
      * @param {*} $event
      * @param {!Review} review
      */
-    function onReviewChange($event, review) {
+    function handleReviewChange($event, review) {
       Aggregation.get(review.course).then(function (aggregation) {
         vm.aggregation = aggregation;
       });

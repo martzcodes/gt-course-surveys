@@ -23,7 +23,7 @@
      *
      * @type {!Review}
      */
-    vm.review = review ? angular.copy(review) : {};
+    vm.review = angular.copy(review);
 
     /**
      * Courses.
@@ -66,10 +66,11 @@
     function hide() {
       vm.review.text = _.chain(vm.review.text)
         .trim()
-        .replace(/\./g, '. ')
-        .replace(/,/g, ', ')
-        .replace(/[ ]+/g, ' ')
-        .replace(/\ \./g, '.')
+        .replace(/\./g, '. ')     // periods must be followed by a space
+        .replace(/,/g, ', ')      // commas  must be followed by a space
+        .replace(/[ ]+/g, ' ')    // no more than one space in a sequence
+        .replace(/[ ]+,/g, ',')   // commas  w/preceding space(s)
+        .replace(/[ ]+\./g, '.')  // periods w/preceding space(s)
         .trim()
         .value();
 

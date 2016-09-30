@@ -1,6 +1,6 @@
 'use strict';
 
-describe('msUtils', function () {
+describe('service: msUtils', function () {
   var msUtils;
   var bowser;
   var firebase;
@@ -25,11 +25,9 @@ describe('msUtils', function () {
     $mdToast = $injector.get('$mdToast');
     $mdDialog = $injector.get('$mdDialog');
     $timeout = $injector.get('$timeout');
-
-    $timeout.flush();
   }));
 
-  describe('msUtils.isMobile', function () {
+  describe('isMobile', function () {
     it('does not detect non-phone/non-table as mobile', function () {
       bowser.mobile = false;
       bowser.tablet = false;
@@ -49,7 +47,7 @@ describe('msUtils', function () {
     });
   });
 
-  describe('msUtils.toast', function () {
+  describe('toast', function () {
     beforeEach(function () {
       spyOn($mdToast, 'hide').and.returnValue($q.resolve());
       spyOn($mdToast, 'showSimple').and.returnValue($q.resolve());
@@ -104,7 +102,7 @@ describe('msUtils', function () {
     });
   });
 
-  describe('msUtils.oneRecordFromSnapshot', function () {
+  describe('oneRecordFromSnapshot', function () {
     it('returns null if snapshot does not exist', function () {
       var snapshot = firebase.snapshot(null);
       var record = msUtils.oneRecordFromSnapshot(snapshot);
@@ -120,7 +118,7 @@ describe('msUtils', function () {
     });
   });
 
-  describe('msUtils.manyRecordsFromSnapshot', function () {
+  describe('manyRecordsFromSnapshot', function () {
     it('returns empty array if snapshot does not exist', function () {
       var snapshot = firebase.snapshot(null);
       var records = msUtils.manyRecordsFromSnapshot(snapshot);
@@ -142,7 +140,7 @@ describe('msUtils', function () {
     });
   });
 
-  describe('msUtils.confirm', function () {
+  describe('confirm', function () {
     var confirm;
 
     beforeEach(function () {
@@ -197,7 +195,7 @@ describe('msUtils', function () {
     });
   });
 
-  describe('msUtils.hashCode', function () {
+  describe('hashCode', function () {
     it('return 0 for non-strings', function () {
       var tests = [undefined, null, false, true, 1, -1, {}, []];
 

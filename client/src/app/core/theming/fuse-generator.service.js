@@ -128,6 +128,7 @@
         color = applyContrast(color, contrastLevel);
       }
 
+      /* istanbul ignore else */
       if (color.length === 3) {
         return 'rgb(' + color.join(',') + ')';
       } else if (color.length === 4) {

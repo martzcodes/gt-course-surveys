@@ -11,8 +11,7 @@
       $logProvider,
       $translateProvider,
       $translatePartialLoaderProvider,
-      msScrollConfigProvider,
-      fuseConfigProvider) {
+      msScrollConfigProvider) {
     $logProvider.debugEnabled(true);
 
     // angular-translate
@@ -31,13 +30,6 @@
     // ng-aria
     $ariaProvider.config({
       tabindex: false
-    });
-
-    // fuse theme
-    fuseConfigProvider.config({
-      'disableCustomScrollbars': false,
-      'disableCustomScrollbarsOnMobile': true,
-      'disableMdInkRippleOnMobile': true
     });
 
     // msScroll

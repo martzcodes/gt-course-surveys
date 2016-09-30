@@ -20,7 +20,7 @@
           <md-content ng-include="'app/main/account/profile/tabs/about/about.html'"></md-content>
         </md-tab-body>
       </md-tab>
-      <md-tab>
+      <md-tab ng-if="vm.user.authProvider === 'password'">
         <md-tab-label>
           <span translate="PROFILE.UPDATE_PASSWORD"></span>
         </md-tab-label>

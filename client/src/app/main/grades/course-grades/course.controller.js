@@ -65,7 +65,6 @@
      */
     function refresh() {
       vm.options = getChartOptions();
-
       vm.data = getChartData();
     }
 
@@ -138,7 +137,7 @@
     /**
      * Gets the chart data.
      *
-     * @return {object}
+     * @return {!ChartSeries}
      * @private
      */
     function getChartData() {

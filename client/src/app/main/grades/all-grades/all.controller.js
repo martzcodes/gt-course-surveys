@@ -145,12 +145,14 @@
 
     function init() {
       angular.forEach(vm.courses, function (course) {
-        var courseGrades = _.get(grades, [course.id, 'all'], Grade.none());
-        _.forEach(['#', '%', '~'], function (mode) {
-          _.merge(course, _.chain(courseGrades[mode]).map(function (value, key) {
-            return [mode + key, value];
-          }).fromPairs().value());
-        });
+        var courseGrades = _.get(grades, [course.id, 'all'], null);
+        if (courseGrades) {
+          _.forEach(['#', '%', '~'], function (mode) {
+            _.merge(course, _.chain(courseGrades[mode]).map(function (value, key) {
+              return [mode + key, value];
+            }).fromPairs().value());
+          });
+        }
       });
     }
 

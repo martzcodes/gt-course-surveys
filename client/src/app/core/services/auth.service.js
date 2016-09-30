@@ -6,7 +6,7 @@
     .factory('Auth', Auth);
 
   /** @ngInject */
-  function Auth($q, $timeout, $http, $filter, User, firebase, firebaseConfig, errorCode) {
+  function Auth($q, $filter, User, firebase, errorCode) {
     var gtGravatarUrl = $filter('gtGravatarUrl');
 
     var currentUser = null;
@@ -31,6 +31,7 @@
         register: emailRegister,
         setPassword: emailSetPassword,
         resetPassword: emailSendPasswordReset,
+        verifyPasswordResetCode: emailVerifyPasswordResetCode,
         signIn: emailSignIn,
         updatePassword: emailUpdatePassword
       },
@@ -209,10 +210,10 @@
         deferred.resolve();
       }
 
-      function reject(message) {
+      function reject(error) {
         signOut();
 
-        deferred.reject(message);
+        deferred.reject(error);
       }
 
       firebase
@@ -234,11 +235,11 @@
             return reject('Name and picture must be provided.');
           }
 
-          User.get(result.user.uid).then(function (user) {
+          User.get(result.user.uid).then(function (userData) {
             var task;
 
-            if (user) {
-              task = User.update(user, {
+            if (userData) {
+              task = User.update(userData, {
                 email: providerData.email,
                 name: providerData.displayName,
                 profileImageUrl: providerData.photoURL
@@ -323,48 +324,10 @@
       return User.set(id, {
         authProvider: authProviderName,
         email: email || null,
-        name: name || 'Unknown',
+        name: name,
         profileImageUrl: profileImageUrl || gtGravatarUrl(email),
         anonymous: false
       });
-    }
-
-    /**
-     * Sets a user's password.
-     *
-     * @param {string} newPassword
-     * @param {oobCode} oobCode
-     * @return {!Promise(string)} Resolves with user's email address.
-     */
-    function emailSetPassword(newPassword, oobCode) {
-      var deferred = $q.defer();
-
-      var url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/resetPassword?key=' + firebaseConfig.apiKey;
-      var headers = {
-        'access-control-allow-origin': 'https://' + firebaseConfig.authDomain,
-        'access-control-allow-credentials': true,
-        'Content-Type': 'application/json; charset=UTF-8'
-      };
-      var data = {
-        newPassword: newPassword,
-        oobCode: oobCode
-      };
-
-      $http({
-        method: 'POST',
-        url: url,
-        headers: headers,
-        data: data,
-        responseType: 'json'
-      })
-      .then(function (response) {
-        deferred.resolve(response.data.email);
-      })
-      .catch(function (response) {
-        deferred.reject(response.data);
-      });
-
-      return deferred.promise;
     }
 
     /**
@@ -375,6 +338,41 @@
      */
     function emailSendPasswordReset(email) {
       return $q.when(firebase.auth().sendPasswordResetEmail(email));
+    }
+
+    /**
+     * Verifies a password reset code.
+     *
+     * @param {string} code
+     * @return {!Promise(?string)} Resolves with user's email if code is valid, null otherwise.
+     */
+    function emailVerifyPasswordResetCode(code) {
+      if (!code || !angular.isString(code)) {
+        return $q.resolve(null);
+      }
+
+      var deferred = $q.defer();
+
+      firebase
+        .auth()
+        .verifyPasswordResetCode(code)
+        .then(deferred.resolve)
+        .catch(function () {
+          deferred.resolve(null);
+        });
+
+      return deferred.promise;
+    }
+
+    /**
+     * Sets a user's password.
+     *
+     * @param {string} code
+     * @param {string} password
+     * @return {!Promise()}
+     */
+    function emailSetPassword(code, password) {
+      return $q.when(firebase.auth().confirmPasswordReset(code, password));
     }
 
     /**

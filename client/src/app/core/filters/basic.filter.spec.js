@@ -1,6 +1,6 @@
 'use strict';
 
-describe('basic', function () {
+describe('filter: basic', function () {
   var _;
   var $filter;
 
@@ -31,7 +31,7 @@ describe('basic', function () {
     var urlBegin = 'https://www.gravatar.com/avatar/';
 
     beforeEach(function () {
-      var email = 'user@domain.com';
+      var email = 'user@email.com';
       hash = md5(email);
       url = gtGravatarUrl(email);
     });

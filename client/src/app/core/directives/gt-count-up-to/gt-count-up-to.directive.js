@@ -6,13 +6,12 @@
     .directive('gtCountUpTo', gtCountUpTo);
 
   /** @ngInject */
-  function gtCountUpTo($timeout, CountUp, _) {
+  function gtCountUpTo($timeout, CountUp) {
     var directive = {
       link: link,
       restrict: 'A',
       scope: {
-        'countUpTo': '=gtCountUpTo',
-        'options': '=gtOptions'
+        countUpTo: '=gtCountUpTo'
       }
     };
     return directive;
@@ -27,27 +26,19 @@
         suffix: ''
       };
 
-      if ($scope.options) {
-        _.forEach(_.keys(options), function (option) {
-          if (angular.isDefined($scope.options[option])) {
-            options[option] = $scope.options[option];
-          }
-        });
-      }
+      $attrs.from = angular.isDefined($attrs.from) ? parseInt($attrs.from) : 0;
+      $attrs.decimals = angular.isDefined($attrs.decimals) ? parseInt($attrs.decimals) : 2;
+      $attrs.duration = angular.isDefined($attrs.duration) ? parseFloat($attrs.duration) : 3;
 
-      $attrs.from = angular.isUndefined($attrs.from) ? 0 : parseInt($attrs.from);
-      $attrs.decimals = angular.isUndefined($attrs.decimals) ? 2 : parseFloat($attrs.decimals);
-      $attrs.duration = angular.isUndefined($attrs.duration) ? 4 : parseFloat($attrs.duration);
-
-      var watcher = $scope.$watch('countUpTo', function () {
+      var watch = $scope.$watch('countUpTo', function () {
         $timeout(function () {
           var animation = new CountUp($element[0], $attrs.from, $scope.countUpTo, $attrs.decimals, $attrs.duration, options);
           animation.start();
-        }, 500);
+        }, 100);
       });
 
       $scope.$on('$destroy', function () {
-        watcher();
+        watch();
       });
     }
   }

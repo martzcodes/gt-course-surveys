@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider
-    .state('app.about_faq', {
+    $stateProvider.state('app.about_faq', {
       url: '/about/faq',
       views: {
         'content@app': {

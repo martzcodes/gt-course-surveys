@@ -10,6 +10,7 @@
     var cache = {};
 
     var service = {
+      clear: clear,
       all: all,
       get: get
     };
@@ -17,6 +18,13 @@
     return service;
 
     //////////
+
+    /**
+     * Clears the cache.
+     */
+    function clear() {
+      cache = {};
+    }
 
     /**
      * Gets all courses.
@@ -50,7 +58,7 @@
      * Gets a course.
      *
      * @param {string} id
-     * @return {!Promise(!Course)}
+     * @return {!Promise(?Course)}
      */
     function get(id) {
       var cached = _.get(cache, id);
@@ -61,7 +69,7 @@
       var deferred = $q.defer();
 
       all().then(function (courses) {
-        deferred.resolve(_.find(courses, ['id', id]));
+        deferred.resolve(_.find(courses, ['id', id]) || null);
       }).catch(deferred.reject);
 
       return deferred.promise;

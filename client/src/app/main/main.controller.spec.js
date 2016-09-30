@@ -1,6 +1,6 @@
 'use strict';
 
-describe('MainController', function () {
+describe('controller: MainController', function () {
   var $rootScope;
   var $scope;
 
@@ -15,7 +15,7 @@ describe('MainController', function () {
     });
   }));
 
-  describe('view content animation end', function () {
+  describe('init', function () {
     beforeEach(function () {
       spyOn($rootScope, '$broadcast').and.callThrough();
     });
@@ -28,9 +28,8 @@ describe('MainController', function () {
 
     it('does not remove the splash screen if another scope emits $viewContentAnimationEnded', function () {
       $rootScope.$broadcast('$viewContentAnimationEnded');
-      $rootScope.$broadcast.calls.reset();
 
-      expect($rootScope.$broadcast).not.toHaveBeenCalled();
+      expect($rootScope.$broadcast.calls.mostRecent().args[0]).not.toEqual('msSplashScreen::remove');
     });
   });
 });

@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider
-    .state('app.pages_errors_error-500', {
+    $stateProvider.state('app.pages_errors_error-500', {
       url: '/500',
       views: {
         'main@': {
