@@ -60,7 +60,7 @@
       if (user) {
         $state.go('app.account_profile');
       } else if (vm.user.email && vm.user.password) {
-        vm.login(vm.user);
+        vm.loginWithEmail(vm.user);
       }
     }
 

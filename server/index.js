@@ -2,38 +2,32 @@
 
 require('dotenv').config();
 
-var _      = require('lodash');
-var db     = require('./database');
-var app    = require('./config');
-var moment = require('moment');
-
-/**
- * Moment the script started.
- *
- * @type {!Moment}
- */
-var started = moment.utc();
+var _   = require('lodash');
+var db  = require('./database');
+var app = require('./config');
 
 /**
  * Gets review aggregations for a course.
  *
  * @param {string} id Course ID.
  * @return {?Aggregation|Error}
+ * @private
  */
 app.get('/aggregation/:id', function (req, res) {
   db.get('aggregations/' + req.params.id)
-  .then(function (snapshot) {
-    res.status(200).json(snapshot.exists() ? _.assign(snapshot.val(), { id: snapshot.key }) : null);
-  })
-  .catch(function (error) {
-    res.status(500).json(error);
-  });
+    .then(function (snapshot) {
+      res.status(200).json(snapshot.exists() ? _.assign(snapshot.val(), {id: snapshot.key}) : null);
+    })
+    .catch(function (error) {
+      res.status(500).json(error);
+    });
 });
 
 /**
  * Reviews and their courses, difficulties, workloads, and ratings.
  *
- * @type {!Map<ReviewId, Review>}
+ * @type {object<ReviewId, Review>}
+ * @private
  */
 var reviews = {};
 
@@ -41,6 +35,7 @@ var reviews = {};
  * Handles a review change by recalculating aggregations for the review's course.
  *
  * @param {!Snapshot}
+ * @private
  */
 function onReviewChanged(snapshot) {
   reviews[snapshot.key] = snapshot.val();
@@ -53,6 +48,7 @@ function onReviewChanged(snapshot) {
  * Handles a review removal by recalculating aggregations for the review's course.
  *
  * @param {!Snapshot}
+ * @private
  */
 function onReviewRemoved(snapshot) {
   delete reviews[snapshot.key];
@@ -66,6 +62,7 @@ function onReviewRemoved(snapshot) {
  *
  * @param {string} course Course ID.
  * @return {object} Aggregations.
+ * @private
  */
 function calculate(course) {
   var courseReviews = _.filter(reviews, ['course', course]);
@@ -75,10 +72,6 @@ function calculate(course) {
     w: _.chain(courseReviews).map('workload').filter(_.isNumber).value(),
     r: _.chain(courseReviews).map('rating').filter(_.isNumber).value()
   };
-
-  function averageOf(values) {
-    return values.length > 0 ? _.ceil(_.sum(values) / values.length, 1) : 0;
-  }
 
   return {
     count: courseReviews.length,
@@ -99,39 +92,25 @@ function calculate(course) {
       })
       .value() || 0
   };
+
+  /**
+   * Calculates the average of a list of numbers.
+   *
+   * @param {!Array<number>} values
+   * @return {number}
+   * @private
+   */
+  function averageOf(values) {
+    return values.length > 0 ? _.ceil(_.sum(values) / values.length, 1) : 0;
+  }
 }
-
-/**
- * Handles process termination.
- *
- * @param {object} options
- * @param {!Error} error
- */
-function onExit(options, error) {
-  if (options.cleanup) { /* cleanup */ }
-  if (error)           { console.log(error.stack); }
-  if (options.exit)    { process.exit(); }
-}
-
-process.stdin.resume();
-
-process.on('exit', onExit.bind(null, { cleanup: true }));
-process.on('SIGINT', onExit.bind(null, { exit: true }));
-process.on('uncaughtException', onExit.bind(null, { exit: true }));
-
-var server = app.listen(process.env.PORT || process.env.DEFAULT_PORT, function () {
-  console.log('Listening on port %d...', server.address().port);
-
-  db.ref('reviews').on('child_added',   onReviewChanged);
-  db.ref('reviews').on('child_changed', onReviewChanged);
-  db.ref('reviews').on('child_removed', onReviewRemoved);
-});
 
 /**
  * Calculates the hash code for a string.
  *
  * @param {string} s
  * @return {number} 32-bit integer.
+ * @private
  */
 function hashCode(s) {
   var hash = 0, i, char, l;
@@ -148,3 +127,36 @@ function hashCode(s) {
 
   return hash;
 }
+
+/**
+ * Handles process termination.
+ *
+ * @param {object} options
+ * @param {!Error} error
+ * @private
+ */
+function onExit(options, error) {
+  if (options.cleanup) {
+    /* cleanup */
+  }
+  if (error) {
+    console.log(error.stack);
+  }
+  if (options.exit) {
+    process.exit();
+  }
+}
+
+process.stdin.resume();
+
+process.on('exit', onExit.bind(null, {cleanup: true}));
+process.on('SIGINT', onExit.bind(null, {exit: true}));
+process.on('uncaughtException', onExit.bind(null, {exit: true}));
+
+var server = app.listen(process.env.PORT || process.env.DEFAULT_PORT, function () {
+  console.log('Listening on port %d...', server.address().port);
+
+  db.ref('reviews').on('child_added',   onReviewChanged);
+  db.ref('reviews').on('child_changed', onReviewChanged);
+  db.ref('reviews').on('child_removed', onReviewRemoved);
+});

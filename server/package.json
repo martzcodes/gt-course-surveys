@@ -15,16 +15,26 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-exit": "0.0.2",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-jshint": "^2.0.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nodemon": "^2.1.0",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.0.1",
+    "lodash": "^4.15.0",
     "mocha": "^2.4.5",
     "mock-require": "^1.2.1",
     "nodemon": "^1.10.0"
   },
   "scripts": {
     "test": "mocha --recursive --harmony test/",
-    "start": "node --harmony index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": "0.11.x"
