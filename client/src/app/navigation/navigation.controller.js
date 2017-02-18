@@ -7,11 +7,12 @@
 
   /** @ngInject */
   function NavigationController() {
-    var vm = this;
+    const vm = this;
 
     // Data
 
     vm.folded = false;
+
     vm.msScrollOptions = {
       suppressScrollX: true
     };
@@ -22,9 +23,6 @@
 
     //////////
 
-    /**
-     * Toggles the navigation sidebar folded/unfolded.
-     */
     function toggleMsNavigationFolded() {
       vm.folded = !vm.folded;
     }

@@ -14,31 +14,14 @@
     });
 
   /** @ngInject */
-  function ProgressBarController(_) {
-    var vm = this;
+  function ProgressBarController(Util) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Value in the range.
-     *
-     * @type {number}
-     */
     vm.value = vm.value || 0;
-
-    /**
-     * Maximum of the range.
-     *
-     * @type {number}
-     */
     vm.max = vm.max || 100;
-
-    /**
-     * Percentage of value in range.
-     *
-     * @type {number}
-     */
-    vm.percent = _.round((vm.value * 100.0) / vm.max, 1);
+    vm.percent = Util.percent(vm.value, vm.max);
 
     // Methods
 

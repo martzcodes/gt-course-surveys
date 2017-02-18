@@ -2,57 +2,21 @@
   'use strict';
 
   angular
-    .module('app.grades.course')
+    .module('app.main.grades.course')
     .controller('GradesCourseController', GradesCourseController);
 
   /** @ngInject */
-  function GradesCourseController($filter, $mdMedia, Grade, Semester, course, grades, semesters, d3, _) {
-    var vm = this;
-    var translate = $filter('translate');
+  function GradesCourseController($mdMedia, Grade, Semester, course, grades, semesters) {
+    const vm = this;
 
     // Data
 
-    /**
-     * The course for which to display grades.
-     *
-     * @type {!Course}
-     */
     vm.course = course;
-
-    /**
-     * Course grades across semesters.
-     *
-     * @type {!Array<SemesterGrades>}
-     */
     vm.grades = _.omit(grades, 'all');
-
-    /**
-     * All semesters.
-     *
-     * @type {!Array<Semester>}
-     */
     vm.semesters = _.reject(semesters, Semester.isUnknown);
-
-    /**
-     * Display mode. One of ['#', '%', '~'].
-     *
-     * @type {string}
-     */
     vm.mode = '%';
-
-    /**
-     * Chart options.
-     *
-     * @type {object}
-     */
-    vm.options = getChartOptions();
-
-    /**
-     * Chart data.
-     *
-     * @type {object};
-     */
-    vm.data = getChartData();
+    vm.options = _getChartOptions();
+    vm.data = _getChartData();
 
     // Methods
 
@@ -60,31 +24,22 @@
 
     //////////
 
-    /**
-     * Refreshes chart state.
-     */
     function refresh() {
-      vm.options = getChartOptions();
-      vm.data = getChartData();
+      vm.options = _getChartOptions();
+      vm.data = _getChartData();
     }
 
-    /**
-     * Gets the chart options.
-     *
-     * @return {object}
-     * @private
-     */
-    function getChartOptions() {
-      var isLargeDisplay = $mdMedia('gt-md');
+    function _getChartOptions() {
+      const isLargeDisplay = $mdMedia('gt-md');
 
-      var options = {
+      const options = {
         chart: {
           type: 'multiBarChart',
           height: 600,
           margin: {
-            top: 24,
-            right: 0,
-            bottom: isLargeDisplay ? 36 : 24,
+            top: 48,
+            right: 12,
+            bottom: isLargeDisplay ? 36 : 12,
             left: 48
           },
           clipEdge: true,
@@ -92,8 +47,8 @@
           stacked: true,
           showControls: isLargeDisplay,
           controlLabels: {
-            grouped: translate('COURSE_GRADES.GROUPED'),
-            stacked: translate('COURSE_GRADES.STACKED')
+            grouped: 'Grouped',
+            stacked: 'Stacked'
           },
           showLegend: isLargeDisplay,
           legend: {
@@ -110,21 +65,24 @@
           },
           yAxis: {
             axisLabelDistance: -20,
-            tickFormat: function (d) {
+            tickFormat(d) {
               if (vm.mode === '#') {
                 return d3.format(',f')(d);
-              } else {
-                return d3.format(',f')(d) + '%';
               }
+              return `${d3.format(',f')(d)}%`;
             }
           }
         }
       };
 
       if (vm.mode === '#') {
-        var max = _.chain(vm.grades).map(function (semesterGrades) {
-          return _.get(semesterGrades, ['#', 't'], 0);
-        }).max().divide(100).ceil().multiply(100).value();
+        const max = _.chain(vm.grades)
+          .map((semesterGrades) => _.get(semesterGrades, ['#', 't'], 0))
+          .max()
+          .divide(100)
+          .ceil()
+          .multiply(100)
+          .value();
 
         options.chart.forceY = [0, max];
       } else {
@@ -134,29 +92,21 @@
       return options;
     }
 
-    /**
-     * Gets the chart data.
-     *
-     * @return {!ChartSeries}
-     * @private
-     */
-    function getChartData() {
-      var data = [];
+    function _getChartData() {
+      const data = [];
 
-      var keys = Grade.none()[vm.mode];
-      _.forEach(_.keys(keys).sort(), function (key) {
+      const keys = Grade.none()[vm.mode];
+      _.forEach(_.keys(keys).sort(), (key) => {
         if (key === 't') {
           return;
         }
 
         data.push({
           key: _.toUpper(key),
-          values: _.map(vm.semesters, function (semester) {
-            return {
-              x: semester.name,
-              y: _.get(vm.grades, [semester.id, vm.mode, key], 0)
-            };
-          })
+          values: _.map(vm.semesters, (semester) => ({
+            x: semester.name,
+            y: _.get(vm.grades, [semester._id, vm.mode, key], 0)
+          }))
         });
       });
 

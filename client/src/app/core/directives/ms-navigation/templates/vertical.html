@@ -9,14 +9,14 @@
 
     <div class="ms-navigation-button" ng-if="!node.uisref && node.title">
       <i class="icon s16 {{node.icon}}" ng-if="node.icon"></i>
-      <span class="title" translate="{{node.translate}}" flex>{{node.title}}</span>
+      <span class="title" flex>{{node.title}}</span>
       <span class="badge white-fg" ng-style="{'background': node.badge.color}" ng-if="node.badge">{{node.badge.content}}</span>
       <i class="icon-chevron-right s16 arrow" ng-if="vm.collapsable && vm.hasChildren"></i>
     </div>
 
     <a class="ms-navigation-button" ui-sref="{{node.uisref}}" ui-sref-active="active md-accent-bg" ng-if="node.uisref && node.title">
       <i class="icon s16 {{node.icon}}" ng-if="node.icon"></i>
-      <span class="title text-truncate" translate="{{node.translate}}" flex>
+      <span class="title text-truncate" flex>
         {{node.title}}
         <md-tooltip md-direction="right" class="ml-10" ng-if="node.tooltip">{{node.tooltip}}</md-tooltip>
       </span>

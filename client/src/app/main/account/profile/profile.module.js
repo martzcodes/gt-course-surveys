@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.account.profile', [])
+    .module('app.main.account.profile', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider.state('app.account_profile', {
+  function config($stateProvider, msNavigationServiceProvider) {
+    $stateProvider.state('app.main_account_profile', {
       url: '/account/profile',
       views: {
         'content@app': {
@@ -16,20 +16,15 @@
         }
       },
       resolve: {
-        user: function (Auth) {
-          return Auth.requireCurrentUserData();
-        }
+        user: (Auth) => Auth.requireUser()
       },
-      bodyClass: 'account-profile'
+      bodyClass: 'main-account-profile'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/account/profile');
-
-    msNavigationServiceProvider.saveItem('account.profile', {
+    msNavigationServiceProvider.saveItem('app_main_account.profile', {
       title: 'Profile',
-      translate: 'PROFILE.NAV',
       icon: 'icon-account',
-      state: 'app.account_profile',
+      state: 'app.main_account_profile',
       weight: 1.1
     });
   }

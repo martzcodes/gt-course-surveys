@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.reviews.all', [])
+    .module('app.main.reviews.all', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider.state('app.reviews_all', {
+  function config($stateProvider, msNavigationServiceProvider) {
+    $stateProvider.state('app.main_reviews_all', {
       url: '/reviews',
       views: {
         'content@app': {
@@ -16,23 +16,16 @@
         }
       },
       resolve: {
-        courses: function (Course) {
-          return Course.all();
-        },
-        aggregations: function (Aggregation) {
-          return Aggregation.all();
-        }
+        courses: (Course) => Course.all(),
+        aggregations: (Aggregation) => Aggregation.all()
       },
-      bodyClass: 'reviews-all'
+      bodyClass: 'main-reviews-all'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/reviews/all-reviews');
-
-    msNavigationServiceProvider.saveItem('reviews.all', {
+    msNavigationServiceProvider.saveItem('app_main_reviews.all', {
       title: 'All Reviews',
-      translate: 'ALL_REVIEWS.NAV',
       icon: 'icon-table-large',
-      state: 'app.reviews_all',
+      state: 'app.main_reviews_all',
       weight: 2.1
     });
   }

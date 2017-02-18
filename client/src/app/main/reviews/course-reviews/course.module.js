@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.reviews.course', [])
+    .module('app.main.reviews.course', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider.state('app.reviews_course', {
+  function config($stateProvider, msNavigationServiceProvider) {
+    $stateProvider.state('app.main_reviews_course', {
       url: '/reviews/:id?rid',
       views: {
         'content@app': {
@@ -16,24 +16,15 @@
         }
       },
       resolve: {
-        course: function ($stateParams, Course) {
-          return Course.get($stateParams.id);
-        },
-        reviews: function ($stateParams, Review) {
-          return Review.getByCourse($stateParams.id);
-        },
-        aggregation: function ($stateParams, Aggregation) {
-          return Aggregation.get($stateParams.id);
-        }
+        course: ($stateParams, Course) => Course.get($stateParams.id),
+        reviews: ($stateParams, Review) => Review.getByCourse($stateParams.id),
+        aggregation: ($stateParams, Aggregation) => Aggregation.get($stateParams.id)
       },
-      bodyClass: 'reviews-course'
+      bodyClass: 'main-reviews-course'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/reviews/course-reviews');
-
-    msNavigationServiceProvider.saveItem('reviews.course', {
+    msNavigationServiceProvider.saveItem('app_main_reviews.course', {
       title: 'Course Reviews',
-      translate: 'COURSE_REVIEWS.NAV',
       icon: 'icon-view-list',
       weight: 2.2
     });

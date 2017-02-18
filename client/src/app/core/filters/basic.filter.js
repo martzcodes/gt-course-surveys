@@ -11,74 +11,69 @@
 
   /** @ngInject */
   function gtGravatarUrlFilter($filter) {
-    var md5 = $filter('md5');
+    const md5 = $filter('md5');
 
     return function (email) {
-      return 'https://www.gravatar.com/avatar/' + md5(email) + '?s=200&d=mm';
+      return `https://www.gravatar.com/avatar/${md5(email)}?s=200&d=mm`;
     };
   }
 
   /** @ngInject */
   function gtSpecializationFilter() {
-    var values = [
+    const values = [
       'Computational Perception & Robotics',
       'Computing Systems',
       'Interactive Intelligence',
       'Machine Learning'
     ];
 
-    return function (specialization) {
-      return values[specialization] || '';
+    return function (value) {
+      return values[value] || '';
     };
   }
 
   /** @ngInject */
-  function gtDifficultyFilter(_) {
-    return function (difficulty) {
-      if (_.includes([1,2,3,4,5], difficulty)) {
-        return 'CORE.DIFFICULTY.' + toLetter(difficulty);
-      } else {
-        return '';
-      }
+  function gtDifficultyFilter() {
+    const values = [
+      '',
+      'Very Easy',
+      'Easy',
+      'Medium',
+      'Hard',
+      'Very Hard'
+    ];
+
+    return function (value) {
+      return values[value] || '';
     };
   }
 
   /** @ngInject */
-  function gtWorkloadFilter(_) {
+  function gtWorkloadFilter() {
     return function (workload) {
       if (workload === 1) {
-        return 'CORE.HOUR_PER_WEEK';
-      } else if (_.isNumber(workload) && workload >= 0) {
-        return 'CORE.HOURS_PER_WEEK';
-      } else {
-        return '';
+        return 'hour/week';
       }
+      if (workload > 1) {
+        return 'hours/week';
+      }
+      return '';
     };
   }
 
   /** @ngInject */
-  function gtRatingFilter(_) {
-    return function (rating) {
-      if (_.includes([1,2,3,4,5], rating)) {
-        return 'CORE.RATING.' + toLetter(rating);
-      } else {
-        return '';
-      }
-    };
-  }
+  function gtRatingFilter() {
+    const values = [
+      '',
+      'Strongly Disliked',
+      'Disliked',
+      'Neutral',
+      'Liked',
+      'Loved!'
+    ];
 
-  /**
-   * Maps numbers to letters:
-   *
-   * 1 -> A
-   * 2 -> B
-   * ...
-   *
-   * @param {number} number
-   * @return {string} Character.
-   * @private
-   */
-  function toLetter(number) {
-    return String.fromCharCode(64 + number);
+    return function (value) {
+      return values[value] || '';
+    };
   }
 })();

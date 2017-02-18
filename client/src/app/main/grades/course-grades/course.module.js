@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.grades.course', [])
+    .module('app.main.grades.course', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider.state('app.grades_course', {
+  function config($stateProvider, msNavigationServiceProvider) {
+    $stateProvider.state('app.main_grades_course', {
       url: '/grades/:id',
       views: {
         'content@app': {
@@ -16,24 +16,15 @@
         }
       },
       resolve: {
-        course: function ($stateParams, Course) {
-          return Course.get($stateParams.id);
-        },
-        grades: function ($stateParams, Grade) {
-          return Grade.get($stateParams.id);
-        },
-        semesters: function (Semester) {
-          return Semester.all();
-        }
+        course: ($stateParams, Course) => Course.get($stateParams.id),
+        grades: ($stateParams, Grade) => Grade.get($stateParams.id),
+        semesters: (Semester) => Semester.all()
       },
-      bodyClass: 'grades-course'
+      bodyClass: 'main-grades-course'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/grades/course-grades');
-
-    msNavigationServiceProvider.saveItem('grades.course', {
+    msNavigationServiceProvider.saveItem('app_main_grades.course', {
       title: 'Course Grades',
-      translate: 'COURSE_GRADES.NAV',
       icon: 'icon-view-list',
       weight: 3.2
     });

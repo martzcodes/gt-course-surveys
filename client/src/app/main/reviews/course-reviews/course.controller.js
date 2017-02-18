@@ -2,65 +2,39 @@
   'use strict';
 
   angular
-    .module('app.reviews.course')
+    .module('app.main.reviews.course')
     .controller('ReviewsCourseController', ReviewsCourseController);
 
   /** @ngInject */
   function ReviewsCourseController(
-      $rootScope,
-      $scope,
-      $filter,
-      $timeout,
-      $interval,
-      $q,
-      $state,
-      $stateParams,
-      $mdToast,
-      $mdDialog,
+    $rootScope,
+    $scope,
+    $timeout,
+    $interval,
+    $state,
+    $stateParams,
+    $mdToast,
+    $mdDialog,
 
-      msUtils,
-      Review,
-      Course,
-      Semester,
+    Util,
+    Aggregation,
+    Review,
+    Course,
+    Semester,
 
-      course,
-      reviews,
-      aggregation,
+    course,
+    reviews,
+    aggregation,
 
-      eventCode,
-      _) {
-    var vm = this;
-    var translate = $filter('translate');
+    eventCode) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Whether there is an asynchronous operation happening.
-     *
-     * @type {boolean}
-     */
     vm.working = false;
-
-    /**
-     * The course for which to display reviews.
-     *
-     * @type {!Course}
-     */
     vm.course = course;
-
-    /**
-     * Course reviews.
-     *
-     * @type {!Array<Review>}
-     */
     vm.reviews = reviews;
-
-    /**
-     * Aggregation of course reviews.
-     *
-     * @type {!Aggregation}
-     */
-    vm.aggregation = aggregation;
+    vm.aggregation = aggregation || Aggregation.none();
 
     // Methods
 
@@ -72,152 +46,106 @@
     init();
 
     function init() {
-      var initializing = true;
+      let initializing = true;
 
-      var aggregationWatch = $scope.$watch('vm.aggregation', function () {
+      const watch = $scope.$watch('vm.aggregation', () => {
         if (initializing) {
-          $timeout(function () { initializing = false; });
+          $timeout(() => { initializing = false; });
         } else {
-          checkForUpdatesByOthers();
+          _checkForUpdatesByOthers();
         }
       });
 
-      $scope.$on('$destroy', function () {
-        aggregationWatch();
+      $scope.$on('$destroy', () => {
+        watch();
       });
     }
 
-    /**
-     * Scrolls to a particular review if needed.
-     *
-     * @private
-     */
-    /* istanbul ignore next */
     function scroll() {
-      var id = $stateParams.rid;
-      if (id && _.find(vm.reviews, ['id', id])) {
-        $timeout(function () {
-          scrollToReview(id);
+      const id = $stateParams.rid;
+      if (id && _.find(vm.reviews, ['_id', id])) {
+        $timeout(() => {
+          _scrollTo(id);
         });
       }
     }
 
-    /**
-     * Scrolls to a particular review.
-     *
-     * @param {string} id Review ID.
-     * @private
-     */
-    /* istanbul ignore next */
-    function scrollToReview(id) {
-      var targetOffsetTop = 76;
+    function _scrollTo(id) {
+      const targetOffsetTop = 76;
 
-      var content = angular.element('#content').scrollTop(0);
-      var reviewCard = angular.element('[data-rid="' + id + '"]');
+      const content = angular.element('#content').scrollTop(0);
+      const reviewCard = angular.element(`[data-rid="${id}"]`);
 
-      var step = 40;
-      var scrollTopChanged = true;
+      const step = 40;
+      let scrollTopChanged = true;
 
-      var interval = $interval(function () {
-
-        var contentScrollTop = Math.round(content.scrollTop());
-        var reviewCardOffsetTop = Math.round(reviewCard.offset().top);
+      const interval = $interval(() => {
+        const contentScrollTop = Math.round(content.scrollTop());
+        const reviewCardOffsetTop = Math.round(reviewCard.offset().top);
 
         if (reviewCardOffsetTop === targetOffsetTop || !scrollTopChanged) {
-
           $interval.cancel(interval);
 
           $state.transitionTo($state.current, { id: $stateParams.id, rid: null }, { notify: false });
-
         } else if (reviewCardOffsetTop < targetOffsetTop) {
-
           // Needs to increase to targetOffsetTop, meaning contentScrollTop needs to decrease
           content.scrollTop(contentScrollTop - Math.min(step, targetOffsetTop - reviewCardOffsetTop));
-
         } else {
-
           // Needs to decrease to targetOffsetTop, meaning contentScrollTop needs to increase
           content.scrollTop(contentScrollTop + Math.min(step, reviewCardOffsetTop - targetOffsetTop));
-
         }
 
         scrollTopChanged = (Math.round(content.scrollTop()) !== contentScrollTop);
-
       }, 25);
     }
 
-    /**
-     * Checks if there are updates contributing to the aggregation that have not
-     * been observed by the client, and if so, refreshes state.
-     *
-     * @private
-     */
-    function checkForUpdatesByOthers() {
+    async function _checkForUpdatesByOthers() {
       if (vm.working) {
         return;
       }
 
-      var serverHash = vm.aggregation.hash;
+      const serverHash = vm.aggregation.hash;
+      const clientHash = Review.has(vm.reviews);
 
-      var clientHash = _.chain(reviews)
-        .map(function (review) {
-          return [review.id, review.difficulty, review.workload, review.rating];
-        })
-        .flatten()
-        .reduce(function (hash, x) {
-          /* jshint bitwise: false */
-          return hash ^ msUtils.hashCode(_.toString(x));
-        })
-        .value();
-
-      /* istanbul ignore else */
       if (serverHash !== clientHash) {
         vm.working = true;
-
-        Review.getByCourse(course.id, true)
-        .then(function (reviews) {
-          vm.reviews = reviews;
-        })
-        .catch(msUtils.toast)
-        .finally(function () {
-          vm.working = false;
-        });
+        try {
+          vm.reviews = await Review.getByCourse(course._id);
+        } catch (error) {
+          // silent failure
+        }
+        vm.working = false;
       }
     }
 
-    /**
-     * Brings up the dialog to publish a review.
-     *
-     * @param {!jQuery.Event} $event
-     */
-    function publish($event) {
-      $mdDialog.show({
-        controller: 'ReviewDialogController as vm',
-        templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
-        parent: angular.element('body'),
-        targetEvent: $event,
-        clickOutsideToClose: true,
-        locals: {
-          review: {
-            course: vm.course.id
+    async function publish($event) {
+      try {
+        const toPush = await $mdDialog.show({
+          controller: 'ReviewDialogController as vm',
+          templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
+          parent: angular.element('body'),
+          targetEvent: $event,
+          clickOutsideToClose: true,
+          locals: {
+            review: {
+              course: vm.course._id
+            }
+          },
+          resolve: {
+            courses: Course.all,
+            semesters: Semester.all
           }
-        },
-        resolve: {
-          courses: Course.all,
-          semesters: Semester.all
-        }
-      })
-      .then(function (review) {
-        return Review.push(review);
-      })
-      .then(function (review) {
-        vm.reviews.push(review);
+        });
 
-        $rootScope.$broadcast(eventCode.REVIEW_CREATED, review);
+        const pushed = await Review.push(toPush);
+        vm.reviews.push(pushed);
 
-        msUtils.toast(translate('COURSE_REVIEWS.PUBLISHED'));
-      })
-      .catch(msUtils.toast);
+        $rootScope.$broadcast(eventCode.REVIEW_CREATED, pushed);
+
+        Util.toast('Published.');
+      } catch (error) {
+        Util.toast(error);
+      }
     }
   }
 })();

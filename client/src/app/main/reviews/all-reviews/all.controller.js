@@ -2,69 +2,49 @@
   'use strict';
 
   angular
-    .module('app.reviews.all')
+    .module('app.main.reviews.all')
     .controller('ReviewsAllController', ReviewsAllController);
 
   /** @ngInject */
-  function ReviewsAllController($state, Aggregation, courses, aggregations, _) {
-    var vm = this;
+  function ReviewsAllController($state, Aggregation, courses, aggregations) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Courses.
-     *
-     * @type {!Array<Course>}
-     */
     vm.courses = courses;
 
-    /**
-     * Column headers.
-     *
-     * @type {!Array<object>}
-     */
     vm.headers = [{
       key: 'department',
-      translate: 'ALL_REVIEWS.DEPARTMENT',
+      title: 'Department',
       classes: 'w-100 text-truncate'
-    },{
+    }, {
       key: 'number',
-      translate: 'ALL_REVIEWS.NUMBER',
+      title: 'Number',
       classes: 'w-100 text-truncate'
-    },{
+    }, {
       key: 'name',
-      translate: 'ALL_REVIEWS.NAME',
+      title: 'Name',
       classes: ''
-    },{
+    }, {
       key: 'reviews',
-      translate: 'ALL_REVIEWS.REVIEWS',
+      title: 'Reviews',
       classes: 'w-100 text-truncate text-center'
-    },{
+    }, {
       key: 'workload',
-      translate: 'ALL_REVIEWS.AVG_WORKLOAD',
+      title: 'Avg. Work.',
       classes: 'w-100 text-truncate text-center'
-    },{
+    }, {
       key: 'difficulty',
-      translate: 'ALL_REVIEWS.AVG_DIFFICULTY',
+      title: 'Avg. Dif.',
       classes: 'w-100 text-truncate text-center'
-    },{
+    }, {
       key: 'rating',
-      translate: 'ALL_REVIEWS.AVG_RATING',
+      title: 'Avg. Rating',
       classes: 'w-100 text-truncate text-center'
     }];
 
-    /**
-     * Key used for sorting.
-     *
-     * @type {?string}
-     */
     vm.sortKey = null;
 
-    /**
-     * Whether to sort in reverse.
-     *
-     * @type {?boolean}
-     */
     vm.sortReverse = null;
 
     // Methods
@@ -78,52 +58,35 @@
     init();
 
     function init() {
-      var index = _.zipObject(_.map(aggregations, 'id'), aggregations);
+      const index = _.zipObject(_.map(aggregations, '_id'), aggregations);
 
-      angular.forEach(vm.courses, function (course) {
-        var aggregation = index[course.id] || Aggregation.none();
+      angular.forEach(vm.courses, (course) => {
+        const aggregation = index[course._id] || Aggregation.none();
 
         _.merge(course, {
-          reviews:    aggregation.count,
+          reviews: aggregation.count,
           difficulty: aggregation.average.difficulty,
-          workload:   aggregation.average.workload,
-          rating:     aggregation.average.rating
+          workload: aggregation.average.workload,
+          rating: aggregation.average.rating
         });
       });
     }
 
-    /**
-     * Sorts on a given column.
-     *
-     * @param {object} column
-     */
     function sortOn(column) {
       if (vm.sortReverse === null) {
         vm.sortReverse = true;
       } else if (vm.sortingOn(column)) {
         vm.sortReverse = !vm.sortReverse;
       }
-
       vm.sortKey = column.key;
     }
 
-    /**
-     * Determines if currently sorting on a given column.
-     *
-     * @param {object} column
-     * @return {boolean}
-     */
     function sortingOn(column) {
       return column && column.key === vm.sortKey;
     }
 
-    /**
-     * Navigates to the detailed view for a given course.
-     *
-     * @param {!Course} course
-     */
     function goTo(course) {
-      $state.go('app.reviews_course', { id: course.id });
+      $state.go('app.main_reviews_course', { id: course._id });
     }
   }
 })();

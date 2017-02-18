@@ -12,7 +12,7 @@
       scope: {},
       controller: 'MsThemeOptionsController as vm',
       templateUrl: 'app/core/theme-options/theme-options.html',
-      compile: function ($element) {
+      compile($element) {
         $element.addClass('ms-theme-options');
 
         return function postLink($scope) {

@@ -13,17 +13,12 @@
     });
 
   /** @ngInject */
-  function AggregationCardListController($scope, Aggregation, eventCode) {
-    var vm = this;
-    var reviewChangeListeners = [];
+  function AggregationCardListController($scope, $timeout, Aggregation, eventCode) {
+    const vm = this;
+    const listeners = [];
 
     // Data
 
-    /**
-     * Aggregation of course reviews.
-     *
-     * @type {!Aggregation}
-     */
     vm.aggregation = vm.aggregation || Aggregation.none();
 
     // Methods
@@ -33,38 +28,22 @@
 
     //////////
 
-    /**
-     * Registers event listeners.
-     *
-     * @private
-     */
     function init() {
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, handleReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, handleReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, handleReviewChange));
+      listeners.push($scope.$on(eventCode.REVIEW_CREATED, onReviewChanged));
+      listeners.push($scope.$on(eventCode.REVIEW_UPDATED, onReviewChanged));
+      listeners.push($scope.$on(eventCode.REVIEW_REMOVED, onReviewChanged));
     }
 
-    /**
-     * Releases event listeners.
-     *
-     * @private
-     */
     function destroy() {
-      angular.forEach(reviewChangeListeners, function (listener) {
+      angular.forEach(listeners, (listener) => {
         listener();
       });
     }
 
-    /**
-     * Handles a review change by refreshing the aggregation for the review's course.
-     *
-     * @param {*} $event
-     * @param {!Review} review
-     */
-    function handleReviewChange($event, review) {
-      Aggregation.get(review.course).then(function (aggregation) {
-        vm.aggregation = aggregation;
-      });
+    async function onReviewChanged($event, review) {
+      $timeout(async() => {
+        vm.aggregation = await Aggregation.get(review.course) || Aggregation.none();
+      }, 100);
     }
   }
 })();

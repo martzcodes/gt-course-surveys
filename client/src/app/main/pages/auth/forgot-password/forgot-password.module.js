@@ -2,31 +2,27 @@
   'use strict';
 
   angular
-    .module('app.pages.auth.forgot-password', [])
+    .module('app.main.pages.auth.forgot-password', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider) {
-    $stateProvider.state('app.pages_auth_forgot-password', {
-      url: '/pages/auth/forgot-password?e',
+  function config($stateProvider) {
+    $stateProvider.state('app.main_pages_auth_forgot-password', {
+      url: '/forgot-password?e',
       views: {
         'main@': {
           templateUrl: 'app/core/layouts/content-only.html',
           controller: 'MainController as vm'
         },
-        'content@app.pages_auth_forgot-password': {
+        'content@app.main_pages_auth_forgot-password': {
           templateUrl: 'app/main/pages/auth/forgot-password/forgot-password.html',
           controller: 'ForgotPasswordController as vm',
           resolve: {
-            user: function (Auth) {
-              return Auth.waitForCurrentUser();
-            }
+            user: (Auth) => Auth.waitForUser()
           }
         }
       },
-      bodyClass: 'pages-auth-forgot-password'
+      bodyClass: 'main-pages-auth-forgot-password'
     });
-
-    $translatePartialLoaderProvider.addPart('app/main/pages/auth/forgot-password');
   }
 })();

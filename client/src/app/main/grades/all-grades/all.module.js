@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.grades.all', [])
+    .module('app.main.grades.all', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $stateProvider.state('app.grades_all', {
+  function config($stateProvider, msNavigationServiceProvider) {
+    $stateProvider.state('app.main_grades_all', {
       url: '/grades',
       views: {
         'content@app': {
@@ -16,23 +16,16 @@
         }
       },
       resolve: {
-        courses: function (Course) {
-          return Course.all();
-        },
-        grades: function (Grade) {
-          return Grade.all();
-        }
+        courses: (Course) => Course.all(),
+        grades: (Grade) => Grade.all()
       },
-      bodyClass: 'grades-all'
+      bodyClass: 'main-grades-all'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/grades/all-grades');
-
-    msNavigationServiceProvider.saveItem('grades.all', {
+    msNavigationServiceProvider.saveItem('app_main_grades.all', {
       title: 'All Grades',
-      translate: 'ALL_GRADES.NAV',
       icon: 'icon-table-large',
-      state: 'app.grades_all',
+      state: 'app.main_grades_all',
       weight: 3.1
     });
   }

@@ -7,12 +7,13 @@
 
   /** @ngInject */
   function fuseThemingProvider() {
-    var $cookies;
+    let $cookies;
     angular.injector(['ngCookies']).invoke(['$cookies', function (_$cookies_) {
       $cookies = _$cookies_;
     }]);
 
-    var registeredPalettes, registeredThemes;
+    let registeredPalettes;
+    let registeredThemes;
 
     this.setRegisteredPalettes = setRegisteredPalettes;
     this.setRegisteredThemes = setRegisteredThemes;
@@ -28,16 +29,16 @@
     }
 
     this.$get = function () {
-      var service = {
-        getRegisteredPalettes: getRegisteredPalettes,
-        getRegisteredThemes: getRegisteredThemes,
-        setActiveTheme: setActiveTheme,
-        setThemesList: setThemesList,
+      const service = {
+        getRegisteredPalettes,
+        getRegisteredThemes,
+        setActiveTheme,
+        setThemesList,
         themes: {
           list: {},
           active: {
-            'name': '',
-            'theme': {}
+            name: '',
+            theme: {}
           }
         }
       };
@@ -59,7 +60,6 @@
           themeName = 'default';
         }
 
-        /* istanbul ignore else */
         if (angular.isDefined(service.themes.list[themeName])) {
           service.themes.active.name = themeName;
           service.themes.active.theme = service.themes.list[themeName];

@@ -2,11 +2,11 @@
   'use strict';
 
   angular
-    .module('app.about.donate', [])
+    .module('app.main.about.donate', [])
     .config(config);
 
   /** @ngInject */
-  function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
+  function config($stateProvider, msNavigationServiceProvider) {
     $stateProvider.state('app.about_donate', {
       url: '/about/donate',
       views: {
@@ -14,14 +14,11 @@
           templateUrl: 'app/main/about/donate/donate.html'
         }
       },
-      bodyClass: 'about-donate'
+      bodyClass: 'main-about-donate'
     });
 
-    $translatePartialLoaderProvider.addPart('app/main/about/donate');
-
-    msNavigationServiceProvider.saveItem('about.donate', {
-      title: 'DONATE',
-      translate: 'DONATE.NAV',
+    msNavigationServiceProvider.saveItem('app_main_about.donate', {
+      title: 'Donate',
       icon: 'icon-heart',
       state: 'app.about_donate',
       weight: 4.2

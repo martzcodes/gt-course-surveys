@@ -1,0 +1,24 @@
+<div class="page-layout simple fullwidth doc-page element-doc-page">
+
+  <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div layout="column" layout-align="center start">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">Account</span>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">My Reviews</span>
+      </div>
+      <div class="title">My Reviews</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <p ng-if="!vm.reviews.length" class="m-0">
+      You haven't published any reviews yet.
+      Get started by publishing a review from a course reviews page.
+    </p>
+    <gt-review-card-list reviews="vm.reviews" show-course-title="true"></gt-review-card-list>
+  </div>
+
+</div>

@@ -1,7 +1,7 @@
 <div layout="column">
 
   <gt-review-card
-      ng-repeat="review in vm.reviews | orderBy:['-created', '-difficulty'] track by review.id"
+      ng-repeat="review in vm.reviews | orderBy:['-created', '-difficulty'] track by review._id"
       review="review"
       show-course-title="vm.showCourseTitle"
       on-edit="vm.edit(event, review)"

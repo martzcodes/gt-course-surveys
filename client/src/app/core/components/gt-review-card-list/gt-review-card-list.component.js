@@ -16,9 +16,8 @@
     });
 
   /** @ngInject */
-  function ReviewCardListController($rootScope, $filter, $mdDialog, msUtils, Review, Course, Semester, eventCode, _) {
-    var vm = this;
-    var translate = $filter('translate');
+  function ReviewCardListController($rootScope, $mdDialog, Util, Review, Course, Semester, eventCode) {
+    const vm = this;
 
     // Data
 
@@ -31,62 +30,46 @@
 
     //////////
 
-    /**
-     * Handles review edit request.
-     *
-     * @param {!jQuery.Event} $event
-     * @param {!Review} review
-     */
-    function edit($event, review) {
-      $mdDialog.show({
-        controller: 'ReviewDialogController as vm',
-        templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
-        parent: angular.element('body'),
-        targetEvent: $event,
-        clickOutsideToClose: true,
-        locals: {
-          review: review
-        },
-        resolve: {
-          courses: Course.all,
-          semesters: Semester.all
-        }
-      })
-      .then(function (review) {
-        return Review.update(review);
-      })
-      .then(function (review) {
-        var index = _.findIndex(vm.reviews, ['id', review.id]);
+    async function edit($event, review) {
+      try {
+        const edited = await $mdDialog.show({
+          controller: 'ReviewDialogController as vm',
+          templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
+          parent: angular.element('body'),
+          targetEvent: $event,
+          clickOutsideToClose: true,
+          locals: {
+            review
+          },
+          resolve: {
+            courses: Course.all,
+            semesters: Semester.all
+          }
+        });
+
+        const updated = await Review.update(edited);
+
+        const index = _.findIndex(vm.reviews, ['_id', updated._id]);
         if (index >= 0) {
-          _.assign(vm.reviews[index], review);
-
-          $rootScope.$broadcast(eventCode.REVIEW_UPDATED, review);
-
-          msUtils.toast(translate('CORE.UPDATED'));
+          vm.reviews[index] = updated;
+          $rootScope.$broadcast(eventCode.REVIEW_UPDATED, updated);
+          Util.toast('Updated.');
         }
-      })
-      .catch(msUtils.toast);
+      } catch (error) {
+        Util.toast(error);
+      }
     }
 
-    /**
-     * Handles review remove request.
-     *
-     * @param {!jQuery.Event} $event
-     * @param {!Review} review
-     */
-    function remove($event, review) {
-      msUtils.confirm($event)
-      .then(function () {
-        return Review.remove(review);
-      })
-      .then(function () {
-        _.remove(vm.reviews, ['id', review.id]);
-
-        msUtils.toast(translate('CORE.REMOVED'));
-
+    async function remove($event, review) {
+      try {
+        await Util.confirm($event);
+        await Review.remove(review);
+        _.remove(vm.reviews, ['_id', review._id]);
         $rootScope.$broadcast(eventCode.REVIEW_REMOVED, review);
-      })
-      .catch(msUtils.toast);
+        Util.toast('Removed.');
+      } catch (error) {
+        Util.toast(error);
+      }
     }
   }
 })();

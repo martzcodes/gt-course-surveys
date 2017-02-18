@@ -2,19 +2,16 @@
   'use strict';
 
   angular
-    .module('app.reviews', [
-      'app.reviews.all',
-      'app.reviews.course'
+    .module('app.main.reviews', [
+      'app.main.reviews.all',
+      'app.main.reviews.course'
     ])
     .config(config);
 
   /** @ngInject */
-  function config($translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $translatePartialLoaderProvider.addPart('app/main/reviews');
-
-    msNavigationServiceProvider.saveItem('reviews', {
+  function config(msNavigationServiceProvider) {
+    msNavigationServiceProvider.saveItem('app_main_reviews', {
       title: 'Reviews',
-      translate: 'REVIEWS.NAV',
       group: true,
       weight: 2
     });

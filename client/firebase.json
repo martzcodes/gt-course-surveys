@@ -1,18 +1,12 @@
 {
-  "database": {
-    "rules": "rules.json"
-  },
+  "database": {},
   "hosting": {
     "public": "dist",
     "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
+    }]
   },
-  "storage": {
-
-  }
+  "storage": {}
 }

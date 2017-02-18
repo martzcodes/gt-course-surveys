@@ -9,9 +9,9 @@
   function msResponsiveTableDirective() {
     return {
       restrict: 'A',
-      link: function (scope, iElement) {
+      link(scope, iElement) {
         // Wrap the table
-        var wrapper = angular.element('<div class="ms-responsive-table-wrapper"></div>');
+        const wrapper = angular.element('<div class="ms-responsive-table-wrapper"></div>');
         iElement.after(wrapper);
         wrapper.append(iElement);
 

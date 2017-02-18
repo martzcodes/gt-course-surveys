@@ -9,10 +9,9 @@
       'ngMessages',
       'ngSanitize',
       'ngMaterial',
-
-      'pascalprecht.translate',
       'ui.router',
       'angularMoment',
+      'angular-cache',
       'nvd3',
       'ngclipboard'
     ]);

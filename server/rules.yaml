@@ -1,0 +1,164 @@
+
+functions:
+  - isLoggedIn():      auth.uid !== null
+  - isCurrentUser(id): auth.uid === id
+  - undeletable():     next.exists()
+
+schema:
+  type: object
+  additionalProperties: false
+  properties:
+
+    LOG:
+      type: object
+
+    ################
+
+    AGG:
+      type: object
+
+    ################
+
+    CRS:
+      type: object
+      $crsId:
+        type: object
+        additionalProperties: false
+        required: [department, foundational, icon, name, number]
+        properties:
+          department:   {type: string, enum: [CS, CSE]}
+          foundational: {type: boolean}
+          icon:         {type: string}
+          name:         {type: string}
+          number:       {type: number}
+          section:      {type: number}
+
+    ################
+
+    SEM:
+      type: object
+      $semId:
+        type: object
+        additionalProperties: false
+        required: [season, year]
+        properties:
+          season: {type: number, minimum: 0, maximum: 3}
+          year:   {type: number, minimum: 0}
+
+    ################
+
+    GRD:
+      type: object
+      $grdId:
+        type: object
+        additionalProperties: false
+        required: [a, b, c, d, f, i, s, u, v, w, total]
+        properties:
+          a: {type: number, minimum: 0}
+          b: {type: number, minimum: 0}
+          c: {type: number, minimum: 0}
+          d: {type: number, minimum: 0}
+          f: {type: number, minimum: 0}
+          i: {type: number, minimum: 0}
+          s: {type: number, minimum: 0}
+          u: {type: number, minimum: 0}
+          v: {type: number, minimum: 0}
+          w: {type: number, minimum: 0}
+          t: {type: number, minimum: 0}
+
+    ################
+
+    USR:
+      type: object
+      $usrId:
+        type: object
+        additionalProperties: false
+        required: [created, authProvider, name, profileImageUrl, anonymous]
+        constraint: undeletable()
+        properties:
+          created:         {type: string}
+          updated:         {type: string}
+          authProvider:    {type: string, enum: [password, google, facebook, twitter, github]}
+          email:           {type: string}
+          name:            {type: string}
+          profileImageUrl: {type: string}
+          anonymous:       {type: boolean}
+          specialization:  {type: number, minimum: 0, maximum: 3}
+
+    ################
+
+    RVW:
+      type: object
+      indexOn: [created, author, course]
+      $rvwId:
+        type: object
+        additionalProperties: false
+        required: [created, author, semester, course, difficulty, workload, rating, text]
+        properties:
+          created:    {type: string}
+          updated:    {type: string}
+          author:     {type: string}
+          semester:   {type: string}
+          course:     {type: string}
+          difficulty: {type: number, minimum: 1, maximum: 5}
+          workload:   {type: number, minimum: 1}
+          rating:     {type: number, minimum: 1, maximum: 5}
+          text:       {type: string}
+
+    ################
+
+    CMT:
+      type: object
+      indexOn: [author, review]
+      $cmtId:
+        type: object
+        additionalProperties: false
+        required: [created, author, review, text]
+        properties:
+          created: {type: string}
+          updated: {type: string}
+          author:  {type: string}
+          review:  {type: string}
+          text:    {type: string}
+
+access:
+  - location: /
+    read:     false
+    write:    false
+
+  # static data maintained by admin
+  - location: /CRS/
+    read:     true
+    write:    false
+  - location: /SEM/
+    read:     true
+    write:    false
+  - location: /GRD/
+    read:     true
+    write:    false
+
+  # event log
+  - location: /LOG/
+    read:     false
+    write:    true
+
+  # dynamic data maintained by server
+  - location: /AGG/
+    read:     true
+    write:    false
+
+  # rest
+  - location: /USR/
+    read:     isLoggedIn()
+  - location: /USR/$usrId
+    write:    isCurrentUser($usrId)
+
+  - location: /RVW/
+    read:     true
+  - location: /RVW/$rvwId
+    write:    (next.exists() && isCurrentUser(next.author)) || (!next.exists() && isCurrentUser(prev.author))
+
+  - location: /CMT/
+    read:     true
+  - location: /CMT/$cmtId
+    write:    (next.exists() && isCurrentUser(next.author)) || (!next.exists() && isCurrentUser(next.author))

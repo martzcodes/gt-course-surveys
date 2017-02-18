@@ -2,38 +2,17 @@
   'use strict';
 
   angular
-    .module('app.pages.auth.set-password')
+    .module('app.main.pages.auth.set-password')
     .controller('SetPasswordController', SetPasswordController);
 
   /** @ngInject */
-  function SetPasswordController(
-      $q,
-      $state,
-      $stateParams,
-      $translate,
-      $mdToast,
-
-      msUtils,
-      Auth,
-
-      user,
-      email) {
-    var vm = this;
+  function SetPasswordController($state, $stateParams, $mdToast, Util, Auth, user, email) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Whether there is an asynchronous operation happening.
-     *
-     * @type {boolean}
-     */
     vm.working = false;
 
-    /**
-     * User object for the view.
-     *
-     * @type {object}
-     */
     vm.user = {
       password: '',
       email: email || null
@@ -49,55 +28,36 @@
 
     function init() {
       if (user) {
-        $state.go('app.account_profile');
+        $state.go('app.main_account_profile');
       } else if (!vm.user.email) {
-        showRequestNewLinkToast();
+        _toastInvalid();
       }
     }
 
-    /**
-     * Shows a toast with a link to request new reset link.
-     *
-     * @private
-     */
-    function showRequestNewLinkToast() {
-      $q.all([
-        $translate('SETPASSWORD.INVALID_OR_EXPIRED'),
-        $translate('SETPASSWORD.REQUEST_NEW_LINK')
-      ])
-      .then(function (translations) {
-        return $mdToast.show(
-          $mdToast.simple()
-            .textContent(translations[0])
-            .action(translations[1])
-            .hideDelay(0)
-            .highlightAction(true)
-        );
-      })
-      .then(function () {
-        $state.go('app.pages_auth_forgot-password');
-      });
+    async function _toastInvalid() {
+      try {
+        const toast = $mdToast.simple()
+          .textContent('This link is invalid or expired.')
+          .action('Request New Link')
+          .hideDelay(0)
+          .highlightAction(true);
+        await $mdToast.show(toast);
+        $state.go('app.main_pages_auth_forgot-password');
+      } catch (error) {
+        // Silent death.
+      }
     }
 
-    /**
-     * Sets the user's password.
-     *
-     * @param {object} user
-     */
-    function setPassword(user) {
+    async function setPassword(user) {
       vm.working = true;
-
-      Auth.email.setPassword($stateParams.oobCode, user.password)
-      .then(function () {
-        return Auth.email.signIn(user.email, user.password);
-      })
-      .then(function () {
-        $state.go('app.account_profile');
-      })
-      .catch(function () {
-        showRequestNewLinkToast();
+      try {
+        await Auth.email.setPassword($stateParams.oobCode, user.password)
+        await Auth.email.signIn(user.email, user.password);
+        $state.go('app.main_account_profile');
+      } catch (error) {
+        _toastInvalid();
         vm.working = false;
-      });
+      }
     }
   }
 })();

@@ -9,11 +9,11 @@
   function config($mdThemingProvider, fusePalettes, fuseThemes, fuseThemingProvider) {
     $mdThemingProvider.alwaysWatchTheme(true);
 
-    angular.forEach(fusePalettes, function (palette) {
+    angular.forEach(fusePalettes, (palette) => {
       $mdThemingProvider.definePalette(palette.name, palette.options);
     });
 
-    angular.forEach(fuseThemes, function (theme, themeName) {
+    angular.forEach(fuseThemes, (theme, themeName) => {
       $mdThemingProvider.theme(themeName)
         .primaryPalette(theme.primary.name, theme.primary.hues)
         .accentPalette(theme.accent.name, theme.accent.hues)

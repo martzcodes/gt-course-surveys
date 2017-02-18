@@ -5,9 +5,9 @@
       <div class="breadcrumb" layout="row" layout-align="start center">
         <md-icon md-font-icon="icon-home" class="s16"></md-icon>
         <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-        <span class="parent" translate="GRADES.NAV"></span>
+        <span class="parent">Grades</span>
         <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
-        <span class="parent" translate="COURSE_GRADES.NAV"></span>
+        <span class="parent">Course Grades</span>
       </div>
       <div class="title full-width text-truncate">{{vm.course.title}}</div>
     </div>
@@ -16,9 +16,9 @@
   <div class="content">
     <nvd3 layout="row" layout-align="center center" options="vm.options" data="vm.data"></nvd3>
     <md-radio-group ng-model="vm.mode" ng-click="vm.refresh()" class="mt-0 ml-50" layout="row" layout-xs="column" layout-sm="column">
-      <md-radio-button value="%" aria-label="%"><span translate="ALL_GRADES.RADIO_%"></span></md-radio-button>
-      <md-radio-button value="~" aria-label="~"><span translate="ALL_GRADES.RADIO_~"></span></md-radio-button>
-      <md-radio-button value="#" aria-label="#"><span translate="ALL_GRADES.RADIO_#"></span></md-radio-button>
+      <md-radio-button value="%" aria-label="%">Percentages</md-radio-button>
+      <md-radio-button value="~" aria-label="~">Percentages (No Withdrawals)</md-radio-button>
+      <md-radio-button value="#" aria-label="#">Counts</md-radio-button>
     </md-radio-group>
   </div>
 

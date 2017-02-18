@@ -1,24 +1,22 @@
 'use strict';
 
-var gutil = require('gulp-util');
+import util from 'gulp-util';
 
-module.exports.paths = {
-  src: 'src',
-  dist: 'dist',
-  tmp: '.tmp',
-  e2e: 'e2e',
-  coverage: 'coverage',
-  deploy: 'deploy'
-};
-
-module.exports.wiredep = {
-  directory: 'bower_components'
-};
-
-module.exports.errorHandler = function (title) {
-  return function (error) {
-    gutil.log(gutil.colors.red('[' + title + ']'), error.toString());
-
+export default {
+  paths: {
+    gulp: 'gulp',
+    config: 'config',
+    coverage: 'coverage',
+    tmp: '.tmp',
+    src: 'src',
+    dist: 'dist'
+  },
+  babel: {
+    presets: ['latest'],
+    plugins: ['transform-async-functions']
+  },
+  error: (label) => function handle(error) {
+    util.log(util.colors.red(`[${label}]`), error.toString());
     this.emit('end');
-  };
+  }
 };

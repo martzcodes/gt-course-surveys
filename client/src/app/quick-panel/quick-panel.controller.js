@@ -7,16 +7,10 @@
 
   /** @ngInject */
   function QuickPanelController($scope, $state, $mdSidenav, Review, reviews, eventCode) {
-    var vm = this;
-    var reviewChangeListeners = [];
+    const vm = this;
 
     // Data
 
-    /**
-     * Recent reviews (in the last week).
-     *
-     * @type {!Array<Review>}
-     */
     vm.reviews = reviews;
 
     // Methods
@@ -28,40 +22,26 @@
     init();
 
     function init() {
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_CREATED, handleReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_UPDATED, handleReviewChange));
-      reviewChangeListeners.push($scope.$on(eventCode.REVIEW_REMOVED, handleReviewChange));
+      const listeners = [
+        $scope.$on(eventCode.REVIEW_CREATED, onReviewChanged),
+        $scope.$on(eventCode.REVIEW_UPDATED, onReviewChanged),
+        $scope.$on(eventCode.REVIEW_REMOVED, onReviewChanged)
+      ];
 
-      $scope.$on('$destroy', function () {
-        angular.forEach(reviewChangeListeners, function (listener) {
-          listener();
-        });
+      $scope.$on('$destroy', () => {
+        angular.forEach(listeners, (listener) => listener());
       });
     }
 
-    /**
-     * Handles a review change by refreshing the review list (if the review is a recent one).
-     *
-     * @param {*} $event
-     * @param {!Review} review
-     */
-    function handleReviewChange($event, review) {
+    async function onReviewChanged($event, review) {
       if (Review.isRecent(review)) {
-        Review.getRecent().then(function (reviews) {
-          vm.reviews = reviews;
-        });
+        vm.reviews = await Review.getRecent();
       }
     }
 
-    /**
-     * Navigates to a given review.
-     *
-     * @param {!Review} review
-     */
-    function goTo(review) {
-      $mdSidenav('quick-panel').toggle().then(function () {
-        $state.go('app.reviews_course', { id: review.course, rid: review.id });
-      });
+    async function goTo(review) {
+      await $mdSidenav('quick-panel').toggle();
+      $state.go('app.main_reviews_course', { id: review.course, rid: review._id });
     }
   }
 })();

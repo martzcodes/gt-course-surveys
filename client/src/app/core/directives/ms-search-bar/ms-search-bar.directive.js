@@ -8,7 +8,7 @@
 
   /** @ngInject */
   function MsSearchBarController($scope, $element, $timeout) {
-    var vm = this;
+    const vm = this;
 
     // Data
     vm.collapsed = true;
@@ -40,7 +40,7 @@
 
     function init() {
       // Watch the model changes to trigger the search
-      $scope.$watch('MsSearchBar.query', function (current, old) {
+      $scope.$watch('MsSearchBar.query', (current, old) => {
         if (angular.isUndefined(current)) {
           return;
         }
@@ -55,7 +55,7 @@
 
         // Evaluate the onSearch function to access the
         // function itself
-        var onSearchEvaluated = $scope.$parent.$eval(vm.onSearch, {
+        let onSearchEvaluated = $scope.$parent.$eval(vm.onSearch, {
             query: current
           }),
           isArray = angular.isArray(onSearchEvaluated),
@@ -67,24 +67,10 @@
         }
 
         if (isPromise) {
-          // Show the loader
           vm.resultsLoading = true;
-
-          onSearchEvaluated.then(
-              // Success
-              function (response) {
-                // Populate the results
-                vm.populateResults(response);
-              },
-              // Error
-              function () {
-                // Assign an empty array to show
-                // the no-results screen
-                vm.populateResults([]);
-              }
-            )
-            .finally(function () {
-              // Hide the loader
+          onSearchEvaluated
+            .then((response) => { vm.populateResults(response); }, () => { vm.populateResults([]); })
+            .finally(() => {
               vm.resultsLoading = false;
             });
         }
@@ -103,7 +89,7 @@
         return;
       }
 
-      var isArray = angular.isArray(results),
+      let isArray = angular.isArray(results),
         isNull = results === null;
 
       // Only accept arrays and null values
@@ -171,7 +157,7 @@
      * @param event
      */
     function handleKeydown(event) {
-      var keyCode = event.keyCode,
+      let keyCode = event.keyCode,
         keys = [27, 38, 40];
 
       // Prevent the default action if
@@ -263,7 +249,7 @@
       $timeout.cancel(vm.mouseEventIgnoreTimeout);
 
       // Set the timeout
-      vm.mouseEventIgnoreTimeout = $timeout(function () {
+      vm.mouseEventIgnoreTimeout = $timeout(() => {
         vm.ignoreMouseEvents = false;
       }, 250);
     }
@@ -276,7 +262,7 @@
     function handleResultClick(item) {
       if (vm.onResultClick) {
         vm.onResultClick({
-          item: item
+          item
         });
       }
 
@@ -290,11 +276,11 @@
      * area
      */
     function ensureSelectedResultIsVisible() {
-      var resultsEl = $element.find('.ms-search-bar-results'),
+      let resultsEl = $element.find('.ms-search-bar-results'),
         selectedItemEl = angular.element(resultsEl.find('.result')[vm.selectedResultIndex]);
 
       if (resultsEl && selectedItemEl) {
-        var top = selectedItemEl.position()
+        let top = selectedItemEl.position()
           .top - 8,
           bottom = selectedItemEl.position()
           .top + selectedItemEl.outerHeight() + 8;
@@ -328,14 +314,14 @@
         onCollapse: '&?'
       },
       templateUrl: 'app/core/directives/ms-search-bar/ms-search-bar.html',
-      compile: function (tElement) {
+      compile(tElement) {
         // Add class
         tElement.addClass('ms-search-bar');
 
         return function postLink(scope, iElement) {
           // Data
-          var inputEl,
-              bodyEl = angular.element('body');
+          let inputEl,
+            bodyEl = angular.element('body');
 
           // Methods
           scope.collapse = collapse;

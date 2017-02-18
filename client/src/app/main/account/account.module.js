@@ -2,19 +2,16 @@
   'use strict';
 
   angular
-    .module('app.account', [
-      'app.account.profile',
-      'app.account.reviews'
+    .module('app.main.account', [
+      'app.main.account.profile',
+      'app.main.account.reviews'
     ])
     .config(config);
 
   /** @ngInject */
-  function config($translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $translatePartialLoaderProvider.addPart('app/main/account');
-
-    msNavigationServiceProvider.saveItem('account', {
+  function config(msNavigationServiceProvider) {
+    msNavigationServiceProvider.saveItem('app_main_account', {
       title: 'Account',
-      translate: 'ACCOUNT.NAV',
       group: true,
       weight: 1
     });

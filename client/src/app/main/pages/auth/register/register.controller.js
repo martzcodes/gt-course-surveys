@@ -2,27 +2,17 @@
   'use strict';
 
   angular
-    .module('app.pages.auth.register')
+    .module('app.main.pages.auth.register')
     .controller('RegisterController', RegisterController);
 
   /** @ngInject */
-  function RegisterController($filter, $state, msUtils, Auth, user) {
-    var vm = this;
+  function RegisterController($state, Util, Auth, user) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Whether there is an asynchronous operation happening.
-     *
-     * @type {boolean}
-     */
     vm.working = false;
 
-    /**
-     * User object for the view.
-     *
-     * @type {object}
-     */
     vm.user = {
       name: '',
       email: ''
@@ -38,28 +28,19 @@
 
     function init() {
       if (user) {
-        $state.go('app.account_profile');
+        $state.go('app.main_account_profile');
       }
     }
 
-    /**
-     * Registers a user to WODLeader.
-     *
-     * @param {object} user
-     */
-    function register(user) {
+    async function register(user) {
       vm.working = true;
-
-      Auth.email.register(user.email, user.name)
-      .then(function () {
-        msUtils.toast($filter('translate')('REGISTER.CREATED'));
-      })
-      .catch(function (error) {
-        msUtils.toast(error);
-      })
-      .finally(function () {
-        vm.working = false;
-      });
+      try {
+        await Auth.email.register(user.email, user.name);
+        Util.toast('Account created. Please check your email for login instructions.');
+      } catch (error) {
+        Util.toast(error);
+      }
+      vm.working = false;
     }
   }
 })();

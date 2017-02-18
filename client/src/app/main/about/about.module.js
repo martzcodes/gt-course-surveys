@@ -2,19 +2,16 @@
   'use strict';
 
   angular
-    .module('app.about', [
-      'app.about.faq',
-      'app.about.donate'
+    .module('app.main.about', [
+      'app.main.about.faq',
+      'app.main.about.donate'
     ])
     .config(config);
 
   /** @ngInject */
-  function config($translatePartialLoaderProvider, msNavigationServiceProvider) {
-    $translatePartialLoaderProvider.addPart('app/main/about');
-
-    msNavigationServiceProvider.saveItem('about', {
+  function config(msNavigationServiceProvider) {
+    msNavigationServiceProvider.saveItem('app_main_about', {
       title: 'About',
-      translate: 'ABOUT.NAV',
       group: true,
       weight: 4
     });

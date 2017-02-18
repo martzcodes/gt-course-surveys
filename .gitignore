@@ -1,31 +1,11 @@
 
-# MISC
 .DS_Store
 *.log
-
-# PACKAGE MANAGEMENT
+*.json
 node_modules/
 bower_components/
-
-# LANGUAGES
-hi.json
-es.json
-de.json
-fr.json
-tr.json
-
-# FIREBASE RULES
-rules.json
-
-# CLIENT
 .sass-cache/
 .idea/
 .tmp/
 dist/
 coverage/
-
-# SERVER
-temp.js
-#firebase-key.json
-#firebase-key-dev.json
-firebase-key-prd.json

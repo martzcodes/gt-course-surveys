@@ -1,9 +1,0 @@
-{
-    "ERROR404": {
-        "CODE": "404",
-        "MESSAGE": "Sajnálom, de nem találja az Ön által keresett oldal.",
-        "SUBMESSAGE": "Az oldal címe tartalmazhat egy elírás, vagy az oldal költözött.",
-        "SEARCH": "Szálláshelyek keresése",
-        "GO_BACK": "Go Back Home"
-    }
-}

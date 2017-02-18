@@ -1,8 +1,0 @@
-{
-    "SETPASSWORD": {
-        "TITLE": "Set Password",
-        "NEW_PASSWORD": "New Password",
-        "INVALID_OR_EXPIRED": "This link is invalid or expired.",
-        "REQUEST_NEW_LINK": "Request New Link"
-    }
-}

@@ -9,9 +9,9 @@
   function msSplashScreenDirective($animate) {
     return {
       restrict: 'E',
-      link: function (scope, iElement) {
-        var splashScreenRemoveEvent = scope.$on('msSplashScreen::remove', function () {
-          $animate.leave(iElement).then(function () {
+      link(scope, iElement) {
+        var splashScreenRemoveEvent = scope.$on('msSplashScreen::remove', () => {
+          $animate.leave(iElement).then(() => {
             // De-register scope event
             splashScreenRemoveEvent();
 

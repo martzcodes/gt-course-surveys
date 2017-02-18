@@ -10,7 +10,7 @@
 
   /** @ngInject */
   function MsWidgetController($scope, $element) {
-    var vm = this;
+    const vm = this;
 
     // Data
     vm.flipped = false;
@@ -54,12 +54,12 @@
       },
       controller: 'MsWidgetController',
       transclude: true,
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-widget');
 
         return function postLink(scope, iElement, iAttrs, MsWidgetCtrl, transcludeFn) {
           // Custom transclusion
-          transcludeFn(function (clone) {
+          transcludeFn((clone) => {
             iElement.empty();
             iElement.append(clone);
           });
@@ -76,12 +76,12 @@
       restrict: 'E',
       require: '^msWidget',
       transclude: true,
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-widget-front');
 
         return function postLink(scope, iElement, iAttrs, MsWidgetCtrl, transcludeFn) {
           // Custom transclusion
-          transcludeFn(function (clone) {
+          transcludeFn((clone) => {
             iElement.empty();
             iElement.append(clone);
           });
@@ -99,12 +99,12 @@
       restrict: 'E',
       require: '^msWidget',
       transclude: true,
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-widget-back');
 
         return function postLink(scope, iElement, iAttrs, MsWidgetCtrl, transcludeFn) {
           // Custom transclusion
-          transcludeFn(function (clone) {
+          transcludeFn((clone) => {
             iElement.empty();
             iElement.append(clone);
           });

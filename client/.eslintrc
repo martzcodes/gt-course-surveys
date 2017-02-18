@@ -1,20 +1,22 @@
 {
-  "extends": "eslint:recommended",
-  "plugins": [
-    "angular"
-  ],
-  "rules": {
-    "angular/controller-as": 0,
-    "angular/controller-as-vm": 0
-  },
   "env": {
-    "browser": true,
-    "jasmine": true
+    "es6": true,
+    "node": true,
+    "jasmine": true,
   },
-  "globals": {
-    "angular": true,
-    "module": true,
-    "inject": true,
-    "PerfectScrollbar": true
-  }
+  "rules": {
+    "strict": 0,
+    "max-len": ["error", 80],
+    "func-names": ["error", "as-needed"],
+    "arrow-parens": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "never"
+    }],
+    "import/no-extraneous-dependencies": 0,
+    "newline-per-chained-call": 0,
+    "comma-dangle": ["error", "never"]
+  },
+  "extends": "airbnb"
 }

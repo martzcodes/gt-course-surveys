@@ -12,14 +12,14 @@
     $urlRouterProvider.when('/', '/reviews');
     $urlRouterProvider.otherwise('/404');
 
-    var $cookies;
+    let $cookies;
     angular.injector(['ngCookies']).invoke(['$cookies', function (_$cookies_) {
       $cookies = _$cookies_;
     }]);
 
-    var layoutStyle = $cookies.get('ls') || 'verticalNavigation';
+    const layoutStyle = $cookies.get('ls') || 'verticalNavigation';
 
-    var layouts = {
+    const layouts = {
       verticalNavigation: {
         main: 'app/core/layouts/vertical-navigation.html',
         toolbar: 'app/toolbar/layouts/vertical-navigation/toolbar.html',
@@ -58,9 +58,7 @@
           templateUrl: layouts[layoutStyle].toolbar,
           controller: 'ToolbarController as vm',
           resolve: {
-            user: function (Auth) {
-              return Auth.waitForCurrentUserData();
-            }
+            user: (Auth) => Auth.waitForUser()
           }
         },
         'navigation@app': {
@@ -71,9 +69,7 @@
           templateUrl: 'app/quick-panel/quick-panel.html',
           controller: 'QuickPanelController as vm',
           resolve: {
-            reviews: function (Review) {
-              return Review.getRecent();
-            }
+            reviews: (Review) => Review.getRecent()
           }
         }
       }

@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": false
+  },
+  "plugins": [
+    "angular"
+  ],
+  "rules": {
+    "angular/controller-as": 0,
+    "angular/controller-as-vm": 0,
+    "comma-dangle": ["error", "never"]
+  },
+  "globals": {
+    "_": true,
+    "angular": true,
+    "atob": true,
+    "d3": true,
+    "firebase": true,
+    "moment": true,
+    "Blob": true,
+    "CountUp": true,
+    "PerfectScrollbar": true
+  },
+  "extends": "eslint:recommended"
+}

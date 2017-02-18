@@ -16,7 +16,7 @@
     init();
 
     function init() {
-      $scope.$on('$viewContentAnimationEnded', function (event) {
+      $scope.$on('$viewContentAnimationEnded', (event) => {
         if (event.targetScope.$id === $scope.$id) {
           $rootScope.$broadcast('msSplashScreen::remove');
         }

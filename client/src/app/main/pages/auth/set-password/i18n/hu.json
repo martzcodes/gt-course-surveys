@@ -1,8 +1,0 @@
-{
-    "SETPASSWORD": {
-        "TITLE": "Jelszó beállítása",
-        "NEW_PASSWORD": "Új jelszó",
-        "INVALID_OR_EXPIRED": "Ez a link érvénytelen vagy lejárt.",
-        "REQUEST_NEW_LINK": "Kérjen új Link"
-    }
-}

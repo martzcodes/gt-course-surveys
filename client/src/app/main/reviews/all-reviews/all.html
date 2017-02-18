@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th ng-repeat="header in ::vm.headers track by header.key" ng-class="header.classes" ng-click="vm.sortOn(header)">
-              <span translate="{{header.translate}}"></span>
+              <span>{{::header.title}}</span>
               <md-icon ng-show="vm.sortingOn(header) && vm.sortReverse === true" class="s16 mb-4" md-font-icon="icon-chevron-down"></md-icon>
               <md-icon ng-show="vm.sortingOn(header) && vm.sortReverse !== true" class="s16 mb-4" md-font-icon="icon-chevron-up"></md-icon>
             </th>
@@ -15,7 +15,7 @@
         <tfoot><tr><td></td></tr></tfoot>
 
         <tbody>
-          <tr ng-repeat="course in vm.courses | orderBy:vm.sortKey:vm.sortReverse track by course.id"
+          <tr ng-repeat="course in vm.courses | orderBy:vm.sortKey:vm.sortReverse track by course._id"
               ng-click="vm.goTo(course)">
             <td>
               {{::course.department}}
@@ -41,11 +41,11 @@
             </td>
 
             <td class="text-center">
-              <gt-progress-bar ng-if="::course.difficulty > 0" value="course.difficulty" max="5"></gt-progress-bar>
+              <gt-progress-bar value="course.difficulty" max="5"></gt-progress-bar>
             </td>
 
             <td class="text-center">
-              <gt-progress-bar ng-if="::course.rating > 0" value="course.rating" max="5"></gt-progress-bar>
+              <gt-progress-bar value="course.rating" max="5"></gt-progress-bar>
             </td>
           </tr>
         </tbody>

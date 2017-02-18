@@ -1,35 +1,27 @@
 'use strict';
 
-var path = require('path');
-var conf = require('./gulp/conf');
+import _ from 'lodash';
+import wiredep from 'wiredep';
 
-var _ = require('lodash');
-var wiredep = require('wiredep');
+import conf from './gulp/conf';
 
-var pathSrcHtml = [path.join(conf.paths.src, '/**/*.html')];
+const HTML = [
+  `${conf.paths.src}/**/*.html`
+];
 
-function listFiles() {
-  var wiredepOptions = _.extend({}, conf.wiredep, {
-    dependencies: true,
-    devDependencies: true
-  });
-
-  var patterns = wiredep(wiredepOptions)
-    .js
+function getFiles() {
+  const files = wiredep({ dependencies: true, devDependencies: true }).js
+    .concat(HTML)
     .concat([
-      path.join(conf.paths.src, '/app/**/*.module.js'),
-      path.join(conf.paths.src, '/app/**/*.js'),
-      path.join(conf.paths.src, '/**/*.spec.js'),
-      path.join(conf.paths.src, '/**/*.mock.js')
+      `${conf.paths.src}/app/**/*.module.js`,
+      `${conf.paths.src}/app/**/*.js`,
+      `${conf.paths.src}/**/*.spec.js`
+      // `${conf.paths.src}/**/*.mock.js`,
     ])
-    .concat(pathSrcHtml);
-
-  var files = patterns.map(function (pattern) {
-    return { pattern: pattern };
-  });
+    .map((pattern) => ({ pattern }));
 
   files.push({
-    pattern: path.join(conf.paths.src, '/assets/**/*'),
+    pattern: `${conf.paths.src}/assets/**/*`,
     included: false,
     served: true,
     watched: false
@@ -38,43 +30,25 @@ function listFiles() {
   return files;
 }
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
-    files: listFiles(),
-
+    files: getFiles(),
     singleRun: true,
-
     autoWatch: false,
-
     ngHtml2JsPreprocessor: {
-      stripPrefix: conf.paths.src + '/',
+      stripPrefix: `${conf.paths.src}/`,
       moduleName: 'generatorGulpAngular'
     },
-
     logLevel: 'WARN',
-
     frameworks: ['jasmine', 'angular-filesort'],
-
     angularFilesort: {
-      whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
+      whitelist: [`${conf.paths.src}/**/!(*.html|*.spec|*.mock).js`]
     },
-
     browsers: [
-      'Chrome',
+      'Chrome'
       // 'Firefox',
-      // 'PhantomJS'
+      // 'PhantomJS',
     ],
-
-    customLaunchers: {
-      'chrome-travis-ci': {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      },
-      'firefox-travis-ci': {
-        base: 'Firefox'
-      }
-    },
-
     plugins: [
       'karma-chrome-launcher',
       'karma-firefox-launcher',
@@ -84,20 +58,15 @@ module.exports = function (config) {
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
     ],
-
     coverageReporter: {
       type: 'html',
-      dir: 'coverage/'
+      dir: 'coverage/',
+      includeAllSources: true
     },
-
+    preprocessors: _.fromPairs(HTML.map((path) => [path, 'ng-html2js'])),
     reporters: ['progress'],
-
     proxies: {
-      '/assets/': path.join('/base/', conf.paths.src, '/assets/')
-    },
-
-    preprocessors: _.chain(pathSrcHtml).map(function (path) {
-      return [path, ['ng-html2js']];
-    }).fromPairs().value()
+      '/assets/': `/base/${conf.paths.src}/assets/`
+    }
   });
 };

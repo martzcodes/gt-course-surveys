@@ -6,57 +6,47 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock(
-      $rootScope,
-      $timeout,
-      $log,
-      $state,
-      $stateParams,
-      $mdDialog,
-      $mdToast,
-      msNavigationService,
-      firebase,
-      firebaseConfig,
-      errorCode) {
-    var stateChangeStartEvent = $rootScope.$on('$stateChangeStart', function () {
+  function runBlock($rootScope, $timeout, $state, $stateParams, $mdDialog, $mdToast, msNavigationService, Logger, firebaseConfig, errorCode) {
+    const stateChangeStart = $rootScope.$on('$stateChangeStart', () => {
       $rootScope.loadingProgress = true;
 
       $mdDialog.cancel();
       $mdToast.hide();
     });
 
-    var stateChangeSuccessEvent = $rootScope.$on('$stateChangeSuccess', function () {
-      $timeout(function () {
+    const stateChangeSuccess = $rootScope.$on('$stateChangeSuccess', () => {
+      $timeout(() => {
         $rootScope.loadingProgress = false;
       });
     });
 
-    var stateChangeErrorEvent = $rootScope.$on('$stateChangeError', function (event, to_, toParams, from_, fromParams, error) {
+    const stateChangeError = $rootScope.$on('$stateChangeError', (event, toState, toStateParams, fromState, fromStateParams, error) => {
       switch (error) {
-        case errorCode.USER_REQUIRED:
-          $state.go('app.pages_auth_login');
+        case errorCode.HTTP_401:
+          $state.go('app.main_pages_auth_login');
           break;
 
         case errorCode.HTTP_404:
-          $state.go('app.pages_errors_error-404');
+          $state.go('app.main_pages_errors_404');
           break;
 
         case errorCode.HTTP_500:
-          $state.go('app.pages_errors_error-500');
+          $state.go('app.main_pages_errors_500');
           break;
 
         default:
-          $log.error(error);
+          $state.go('app.main_pages_errors_500');
+          Logger.log(Logger.Type.Error, error);
           break;
       }
     });
 
     $rootScope.state = $state;
 
-    $rootScope.$on('$destroy', function () {
-      stateChangeStartEvent();
-      stateChangeSuccessEvent();
-      stateChangeErrorEvent();
+    $rootScope.$on('$destroy', () => {
+      stateChangeStart();
+      stateChangeSuccess();
+      stateChangeError();
     });
 
     firebase.initializeApp(firebaseConfig);

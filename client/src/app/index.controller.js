@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function IndexController(fuseTheming) {
-    var vm = this;
+    const vm = this;
 
     // Data
 

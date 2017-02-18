@@ -1,4 +1,4 @@
-<md-card class="white-bg md-whiteframe-4dp mh-0" data-rid="{{vm.review.id}}">
+<md-card class="white-bg md-whiteframe-4dp mh-0" data-rid="{{vm.review._id}}">
 
   <md-card-header>
     <md-card-avatar hide-xs>
@@ -8,7 +8,7 @@
 
       <!-- TITLE -->
       <span class="md-title" layout="row">
-        <span class="text-nowrap">{{vm.review.authorName}} &bull; <a class="black-text" ngclipboard data-clipboard-text="{{vm.linkOf(vm.review)}}" href="" ngclipboard-success="vm.onLinkCopied(e)" title="Copy link to clipboard">{{vm.createdTimeOf(vm.review)}}</a></span>
+        <span class="text-nowrap">{{vm.review.authorName}} &bull; <a class="black-text" ngclipboard data-clipboard-text="{{vm.deepLinkOf(vm.review)}}" href="" ngclipboard-success="vm.onDeepLinkCopied(e)" title="Copy link to clipboard">{{vm.createdTimeOf(vm.review)}}</a></span>
         <span flex></span>
         <span class="rating-container" hide-xs>
           <md-icon ng-if="vm.review.rating > 0" md-font-icon="icon-star" class="s18 m-0"></md-icon>
@@ -27,7 +27,7 @@
 
       <!-- SUBTITLE -->
       <span class="md-subhead">
-        {{vm.review.semesterName}} &bull; {{vm.review.difficulty | gtDifficulty | translate}} &bull; {{vm.review.workload}} {{vm.review.workload | gtWorkload | translate}}
+        {{vm.review.semesterName}} &bull; {{vm.review.difficulty | gtDifficulty}} &bull; {{vm.review.workload}} {{vm.review.workload | gtWorkload}}
       </span>
       <!-- / SUBTITLE -->
 
@@ -45,8 +45,8 @@
   </md-card-content>
 
   <md-card-actions layout="row" layout-align="end center" ng-if="vm.showButtons()">
-    <md-button ng-click="vm.edit($event, vm.review)" ng-disabled="vm.readOnly" translate="CORE.EDIT" aria-label="Edit"></md-button>
-    <md-button ng-click="vm.remove($event, vm.review)" ng-disabled="vm.readOnly" translate="CORE.REMOVE" aria-label="Remove"></md-button>
+    <md-button ng-click="vm.edit($event, vm.review)" ng-disabled="vm.readOnly" aria-label="Edit">EDIT</md-button>
+    <md-button ng-click="vm.remove($event, vm.review)" ng-disabled="vm.readOnly" aria-label="Remove">REMOVE</md-button>
   </md-card-actions>
 
 </md-card>

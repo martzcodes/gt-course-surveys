@@ -8,7 +8,7 @@
                 ng-class="header.classes"
                 ng-click="vm.sortOn(header)"
                 ng-hide="header.mode && header.mode !== vm.mode">
-              <span translate="{{header.translate}}">{{header.text}}</span>
+              <span>{{header.title || header.text}}</span>
               <md-icon ng-show="vm.sortingOn(header) && vm.sortReverse === true" class="s16 mb-4" md-font-icon="icon-chevron-down"></md-icon>
               <md-icon ng-show="vm.sortingOn(header) && vm.sortReverse !== true" class="s16 mb-4" md-font-icon="icon-chevron-up"></md-icon>
             </th>
@@ -18,7 +18,7 @@
         <tfoot><tr><td></td></tr></tfoot>
 
         <tbody>
-          <tr ng-repeat="course in vm.courses | orderBy:vm.sortKey:vm.sortReverse track by course.id"
+          <tr ng-repeat="course in vm.courses | orderBy:vm.sortKey:vm.sortReverse track by course._id"
               ng-click="vm.goTo(course)">
             <td>
               {{::course.department}}
@@ -36,48 +36,48 @@
             </td>
 
             <td class="text-center" ng-show="vm.mode === '#'">
-              <gt-progress-bar ng-if="::course['#a'] > 0" value="course['#a']" max="course['#t']"></gt-progress-bar>
+              <gt-progress-bar value="course['#a']" max="course['#t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '#'">
-              <gt-progress-bar ng-if="::course['#b'] > 0" value="course['#b']" max="course['#t']"></gt-progress-bar>
+              <gt-progress-bar value="course['#b']" max="course['#t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '#'">
-              <gt-progress-bar ng-if="::course['#c'] > 0" value="course['#c']" max="course['#t']"></gt-progress-bar>
+              <gt-progress-bar value="course['#c']" max="course['#t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '#'">
-              <gt-progress-bar ng-if="::course['#d'] > 0" value="course['#d']" max="course['#t']"></gt-progress-bar>
+              <gt-progress-bar value="course['#d']" max="course['#t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '#'">
-              <gt-progress-bar ng-if="::course['#w'] > 0" value="course['#w']" max="course['#t']"></gt-progress-bar>
+              <gt-progress-bar value="course['#w']" max="course['#t']"></gt-progress-bar>
             </td>
 
             <td class="text-center" ng-show="vm.mode === '%'">
-              <gt-progress-bar ng-if="::course['%a'] > 0" value="course['%a']" max="course['%t']"></gt-progress-bar>
+              <gt-progress-bar value="course['%a']" max="course['%t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '%'">
-              <gt-progress-bar ng-if="::course['%b'] > 0" value="course['%b']" max="course['%t']"></gt-progress-bar>
+              <gt-progress-bar value="course['%b']" max="course['%t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '%'">
-              <gt-progress-bar ng-if="::course['%c'] > 0" value="course['%c']" max="course['%t']"></gt-progress-bar>
+              <gt-progress-bar value="course['%c']" max="course['%t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '%'">
-              <gt-progress-bar ng-if="::course['%d'] > 0" value="course['%d']" max="course['%t']"></gt-progress-bar>
+              <gt-progress-bar value="course['%d']" max="course['%t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '%'">
-              <gt-progress-bar ng-if="::course['%w'] > 0" value="course['%w']" max="course['%t']"></gt-progress-bar>
+              <gt-progress-bar value="course['%w']" max="course['%t']"></gt-progress-bar>
             </td>
 
             <td class="text-center" ng-show="vm.mode === '~'">
-              <gt-progress-bar ng-if="::course['~a'] > 0" value="course['~a']" max="course['~t']"></gt-progress-bar>
+              <gt-progress-bar value="course['~a']" max="course['~t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '~'">
-              <gt-progress-bar ng-if="::course['~b'] > 0" value="course['~b']" max="course['~t']"></gt-progress-bar>
+              <gt-progress-bar value="course['~b']" max="course['~t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '~'">
-              <gt-progress-bar ng-if="::course['~c'] > 0" value="course['~c']" max="course['~t']"></gt-progress-bar>
+              <gt-progress-bar value="course['~c']" max="course['~t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '~'">
-              <gt-progress-bar ng-if="::course['~d'] > 0" value="course['~d']" max="course['~t']"></gt-progress-bar>
+              <gt-progress-bar value="course['~d']" max="course['~t']"></gt-progress-bar>
             </td>
             <td class="text-center" ng-show="vm.mode === '~'">
               <!-- NOTHING WHEN EXCLUDING WITHDRAWALS -->
@@ -88,9 +88,9 @@
     </div>
 
     <md-radio-group ng-model="vm.mode" class="mt-20 ml-10" layout="row" layout-xs="column" layout-sm="column">
-      <md-radio-button value="%" aria-label="%"><span translate="ALL_GRADES.RADIO_%"></span></md-radio-button>
-      <md-radio-button value="~" aria-label="~"><span translate="ALL_GRADES.RADIO_~"></span></md-radio-button>
-      <md-radio-button value="#" aria-label="#"><span translate="ALL_GRADES.RADIO_#"></span></md-radio-button>
+      <md-radio-button value="%" aria-label="%">Percentages</md-radio-button>
+      <md-radio-button value="~" aria-label="~">Percentages (No Withdrawals)</md-radio-button>
+      <md-radio-button value="#" aria-label="#">Counts</md-radio-button>
     </md-radio-group>
   </div>
 </div>

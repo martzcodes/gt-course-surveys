@@ -1,17 +1,17 @@
-<md-content ms-scroll>
-  <md-list class="md-dense" flex>
-    <md-subheader class="md-no-sticky pt-8 pb-16 pl-16" translate="QUICKPANEL.TITLE"></md-subheader>
+<md-content class="white-bg" ms-scroll>
+  <md-list class="md-dense pv-0" flex>
+    <md-subheader class="md-no-sticky">Recent Reviews (Last 7 Days)</md-subheader>
 
     <div ng-if="!vm.reviews.length">
       <md-divider></md-divider>
       <md-list-item>
         <div class="md-list-item-text">
-          <p translate="CORE.NONE"></p>
+          <p>There are no recent reviews.</p>
         </div>
       </md-list-item>
     </div>
 
-    <div ng-repeat="review in vm.reviews | orderBy:['-created'] track by review.id">
+    <div ng-repeat="review in vm.reviews | orderBy:['-created'] track by review._id">
       <md-divider></md-divider>
       <md-list-item class="md-3-line ph-0" ng-click="vm.goTo(review)" md-no-ink>
         <img ng-src="{{review.authorImageUrl}}" alt="{{review.authorName}}" class="md-avatar">

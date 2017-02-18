@@ -2,42 +2,17 @@
   'use strict';
 
   angular
-    .module('app.account.profile')
+    .module('app.main.account.profile')
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController(
-      $rootScope,
-      $filter,
-      msUtils,
-      User,
-      Auth,
-      eventCode,
-      user) {
-    var vm = this;
-    var translate = $filter('translate');
+  function ProfileController($rootScope, Util, User, Auth, eventCode, user) {
+    const vm = this;
 
     // Data
 
-    /**
-     * Whether there is an asynchronous operation happening.
-     *
-     * @type {boolean}
-     */
     vm.working = false;
-
-    /**
-     * Current user.
-     *
-     * @type {!User}
-     */
     vm.user = user;
-
-    /**
-     * Copy of the current user for DOM binding.
-     *
-     * @type {!User}
-     */
     vm.temp = angular.copy(user);
 
     // Methods
@@ -53,50 +28,45 @@
       $rootScope.$broadcast(eventCode.USER_UPDATED, vm.user);
     }
 
-    /**
-     * Updates the user's about section.
-     */
-    function updateAbout() {
+    async function updateAbout() {
       vm.working = true;
 
-      var updates = {
+      const updates = {
         name: vm.temp.name || vm.user.name,
         specialization: vm.temp.specialization || vm.user.specialization,
         anonymous: angular.isDefined(vm.temp.anonymous) ? vm.temp.anonymous : vm.user.anonymous
       };
 
-      User.update(vm.user, updates)
-      .then(function (user) {
-        vm.user = user;
+      try {
+        vm.user = await User.update(vm.user, updates);
 
-        $rootScope.$broadcast(eventCode.USER_UPDATED, user);
+        $rootScope.$broadcast(eventCode.USER_UPDATED, vm.user);
 
-        msUtils.toast(translate('CORE.UPDATED'));
-      })
-      .catch(msUtils.toast)
-      .finally(function () {
-        vm.working = false;
-      });
+        Util.toast('Updated.');
+      } catch (error) {
+        Util.toast(error);
+      }
+
+      vm.working = false;
     }
 
-    /**
-     * Updates the user's password.
-     */
-    function updatePassword() {
+    async function updatePassword() {
       if (vm.temp.passwordNew !== vm.temp.passwordConfirm) {
-        return msUtils.toast(translate('PROFILE.PASSWORD_NO_MATCH'));
+        Util.toast('Passwords do not match.');
+        return;
       }
 
       vm.working = true;
 
-      Auth.email.updatePassword(vm.user.email, vm.temp.passwordCurrent, vm.temp.passwordNew)
-      .then(function () {
-        msUtils.toast(translate('CORE.UPDATED'));
-      })
-      .catch(msUtils.toast)
-      .finally(function () {
-        vm.working = false;
-      });
+      try {
+        await Auth.email.updatePassword(vm.user.email, vm.temp.passwordCurrent, vm.temp.passwordNew)
+
+        Util.toast('Updated.');
+      } catch (error) {
+        Util.toast(error);
+      }
+
+      vm.working = false;
     }
   }
 })();

@@ -14,9 +14,9 @@
   /** @ngInject */
   function msNavigationServiceProvider() {
     // Navigation array
-    var navigation = [];
+    let navigation = [];
 
-    var service = this;
+    const service = this;
 
     // Methods
     service.saveItem = saveItem;
@@ -36,16 +36,16 @@
         return;
       }
 
-      var parts = path.split('.');
+      const parts = path.split('.');
 
       // Generate the object id from the parts
-      var id = parts[parts.length - 1];
+      const id = parts[parts.length - 1];
 
       // Get the parent item from the parts
-      var parent = _findOrCreateParent(parts);
+      const parent = _findOrCreateParent(parts);
 
       // Decide if we are going to update or create
-      var updateItem = false;
+      let updateItem = false;
 
       for (var i = 0; i < parent.length; i++) {
         if (parent[i]._id === id) {
@@ -97,11 +97,11 @@
       }
 
       // Locate the item by using given path
-      var item = navigation,
+      let item = navigation,
         parts = path.split('.');
 
       for (var p = 0; p < parts.length; p++) {
-        var id = parts[p];
+        const id = parts[p];
 
         for (var i = 0; i < item.length; i++) {
           if (item[i]._id === id) {
@@ -138,7 +138,7 @@
 
       // Sort the children
       for (var i = 0; i < parent.length; i++) {
-        var children = parent[i].children;
+        const children = parent[i].children;
 
         if (children.length > 1) {
           children.sort(_byWeight);
@@ -163,7 +163,7 @@
      */
     function _findOrCreateParent(parts) {
       // Store the main navigation
-      var parent = navigation;
+      let parent = navigation;
 
       // If it's going to be a root item
       // return the navigation itself
@@ -176,15 +176,13 @@
       parts.pop();
 
       // Find and return the parent
-      for (var i = 0; i < parts.length; i++) {
-        var _id = parts[i],
-          createParent = true;
-
-        for (var p = 0; p < parent.length; p++) {
+      for (let i = 0; i < parts.length; i++) {
+        let _id = parts[i];
+        let createParent = true;
+        for (let p = 0; p < parent.length; p++) {
           if (parent[p]._id === _id) {
             parent = parent[p].children;
             createParent = false;
-
             break;
           }
         }
@@ -193,8 +191,8 @@
         // it into the current parent and assign it as a
         // new parent
         if (createParent) {
-          var item = {
-            _id: _id,
+          const item = {
+            _id,
             _path: parts.join('.'),
             title: _id,
             weight: 1,
@@ -230,13 +228,13 @@
      * @private
      */
     function _getUiSref(item) {
-      var uisref = '';
+      let uisref = '';
 
       if (angular.isDefined(item.state)) {
         uisref = item.state;
 
         if (angular.isDefined(item.stateParams) && angular.isObject(item.stateParams)) {
-          uisref = uisref + '(' + angular.toJson(item.stateParams) + ')';
+          uisref = `${uisref}(${angular.toJson(item.stateParams)})`;
         }
       }
 
@@ -248,26 +246,26 @@
     /* ----------------- */
 
     this.$get = function () {
-      var activeItem = null,
+      let activeItem = null,
         navigationScope = null,
         folded = null,
         foldedOpen = null;
 
-      var service = {
-        saveItem: saveItem,
-        deleteItem: deleteItem,
+      const service = {
+        saveItem,
+        deleteItem,
         sort: sortByWeight,
-        clearNavigation: clearNavigation,
-        setActiveItem: setActiveItem,
-        getActiveItem: getActiveItem,
-        getNavigation: getNavigation,
-        getFlatNavigation: getFlatNavigation,
-        setNavigationScope: setNavigationScope,
-        setFolded: setFolded,
-        getFolded: getFolded,
-        setFoldedOpen: setFoldedOpen,
-        getFoldedOpen: getFoldedOpen,
-        toggleFolded: toggleFolded
+        clearNavigation,
+        setActiveItem,
+        getActiveItem,
+        getNavigation,
+        getFlatNavigation,
+        setNavigationScope,
+        setFolded,
+        getFolded,
+        setFoldedOpen,
+        getFoldedOpen,
+        toggleFolded
       };
 
       return service;
@@ -295,8 +293,8 @@
        */
       function setActiveItem(node, scope) {
         activeItem = {
-          node: node,
-          scope: scope
+          node,
+          scope
         };
       }
 
@@ -335,7 +333,7 @@
        */
       function getFlatNavigation(root) {
         // Get the correct navigation array
-        var navigation = getNavigation(root);
+        const navigation = getNavigation(root);
 
         // Flatten the navigation object
         return _flattenNavigation(navigation);
@@ -400,12 +398,12 @@
        * @private
        */
       function _flattenNavigation(navigation) {
-        var flatNav = [];
+        let flatNav = [];
 
         for (var x = 0; x < navigation.length; x++) {
           // Copy and clear the children of the
           // navigation that we want to push
-          var navToPush = angular.copy(navigation[x]);
+          const navToPush = angular.copy(navigation[x]);
           navToPush.children = [];
 
           // Push the item
@@ -425,7 +423,7 @@
 
   /** @ngInject */
   function MsNavigationController($scope, msNavigationService) {
-    var vm = this;
+    const vm = this;
 
     // Data
     if ($scope.root) {
@@ -454,11 +452,11 @@
       controller: 'MsNavigationController as vm',
       templateUrl: 'app/core/directives/ms-navigation/templates/vertical.html',
       transclude: true,
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-navigation');
 
         return function postLink(scope, iElement) {
-          var bodyEl = angular.element('body'),
+          let bodyEl = angular.element('body'),
             foldExpanderEl = angular.element('<div id="ms-navigation-fold-expander"></div>'),
             foldCollapserEl = angular.element('<div id="ms-navigation-fold-collapser"></div>'),
             sidenav = $mdSidenav('navigation');
@@ -497,7 +495,7 @@
               // event listener is not registered yet. $timeout
               // will ensure that it will be called after it is
               // registered.
-              $timeout(function () {
+              $timeout(() => {
                 $rootScope.$broadcast('msNavigation::collapse');
               });
 
@@ -510,14 +508,12 @@
           }
 
           // Sidenav locked open status watcher
-          scope.$watch(function () {
-            return sidenav.isLockedOpen();
-          }, function (current, old) {
+          scope.$watch(() => sidenav.isLockedOpen(), (current, old) => {
             if (angular.isUndefined(current) || angular.equals(current, old)) {
               return;
             }
 
-            var folded = msNavigationService.getFolded();
+            const folded = msNavigationService.getFolded();
 
             if (folded) {
               if (current) {
@@ -525,7 +521,7 @@
                 $rootScope.$broadcast('msNavigation::collapse');
               } else {
                 // Expand the active one and its parents
-                var activeItem = msNavigationService.getActiveItem();
+                const activeItem = msNavigationService.getActiveItem();
                 if (activeItem) {
                   activeItem.scope.$emit('msNavigation::stateMatched');
                 }
@@ -534,7 +530,7 @@
           });
 
           // Folded status watcher
-          scope.$watch('folded', function (current, old) {
+          scope.$watch('folded', (current, old) => {
             if (angular.isUndefined(current) || angular.equals(current, old)) {
               return;
             }
@@ -562,7 +558,7 @@
               setFoldExpander();
             } else {
               // Expand the active one and its parents
-              var activeItem = msNavigationService.getActiveItem();
+              const activeItem = msNavigationService.getActiveItem();
               if (activeItem) {
                 activeItem.scope.$emit('msNavigation::stateMatched');
               }
@@ -584,7 +580,7 @@
 
             // Let everything settle for a moment
             // before registering the event listener
-            $timeout(function () {
+            $timeout(() => {
               foldExpanderEl.on('mouseenter touchstart', onFoldExpanderHover);
             });
           }
@@ -617,7 +613,7 @@
             msNavigationService.setFoldedOpen(true);
 
             // Expand the active one and its parents
-            var activeItem = msNavigationService.getActiveItem();
+            const activeItem = msNavigationService.getActiveItem();
             if (activeItem) {
               activeItem.scope.$emit('msNavigation::stateMatched');
             }
@@ -660,7 +656,7 @@
            * Public access for toggling folded status externally
            */
           scope.toggleFolded = function () {
-            var folded = msNavigationService.getFolded();
+            const folded = msNavigationService.getFolded();
 
             setFolded(!folded);
           };
@@ -668,13 +664,13 @@
           /**
            * On $stateChangeStart
            */
-          scope.$on('$stateChangeStart', function () {
+          scope.$on('$stateChangeStart', () => {
             // Close the sidenav
             sidenav.close();
           });
 
           // Cleanup
-          scope.$on('$destroy', function () {
+          scope.$on('$destroy', () => {
             foldCollapserEl.off('mouseenter touchstart');
             foldExpanderEl.off('mouseenter touchstart');
           });
@@ -685,7 +681,7 @@
 
   /** @ngInject */
   function MsNavigationNodeController($scope, $element, $rootScope, $animate, $state, msNavigationService) {
-    var vm = this;
+    const vm = this;
 
     // Data
     vm.element = $element;
@@ -748,17 +744,17 @@
         msNavigationService.setActiveItem(vm.node, $scope);
       }
 
-      $scope.$on('msNavigation::stateMatched', function () {
+      $scope.$on('msNavigation::stateMatched', () => {
         // Expand if the current scope is collapsable and is collapsed
         if (vm.collapsable && vm.collapsed) {
-          $scope.$evalAsync(function () {
+          $scope.$evalAsync(() => {
             vm.collapsed = false;
           });
         }
       });
 
       // Listen for collapse event
-      $scope.$on('msNavigation::collapse', function (event, path) {
+      $scope.$on('msNavigation::collapse', (event, path) => {
         if (vm.collapsed || !vm.collapsable) {
           return;
         }
@@ -771,10 +767,10 @@
         // the items that are inside that path. This will
         // prevent parent items from collapsing
         else {
-          var givenPathParts = path.split('.'),
+          let givenPathParts = path.split('.'),
             activePathParts = [];
 
-          var activeItem = msNavigationService.getActiveItem();
+          const activeItem = msNavigationService.getActiveItem();
           if (activeItem) {
             activePathParts = activeItem.node._path.split('.');
           }
@@ -794,7 +790,7 @@
       });
 
       // Listen for $stateChangeSuccess event
-      $scope.$on('$stateChangeSuccess', function () {
+      $scope.$on('$stateChangeSuccess', () => {
         if (vm.node.state === $state.current.name) {
           // If state params are defined, make sure they are
           // equal, otherwise do not set the active item
@@ -840,12 +836,12 @@
      */
     function collapse() {
       // Grab the element that we are going to collapse
-      var collapseEl = vm.element.children('ul');
+      const collapseEl = vm.element.children('ul');
 
       // Grab the height
-      var height = collapseEl[0].offsetHeight;
+      const height = collapseEl[0].offsetHeight;
 
-      $scope.$evalAsync(function () {
+      $scope.$evalAsync(() => {
         // Set collapsed status
         vm.collapsed = true;
 
@@ -853,28 +849,18 @@
         vm.element.addClass('collapsing');
 
         // Animate the height
-        $animate.animate(collapseEl, {
-              'display': 'block',
-              'height': height + 'px'
-            },{
-              'height': '0px'
-            },
-            vm.animateHeightClass
-          )
-          .then(
-            function () {
-              // Clear the inline styles after animation done
-              collapseEl.css({
-                'display': '',
-                'height': ''
-              });
-
-              // Clear collapsing class from the node
-              vm.element.removeClass('collapsing');
-            }
-          );
-
-        // Broadcast the collapse event so child items can also be collapsed
+        $animate.animate(
+          collapseEl,
+          { display: 'block', height: `${height}px` },
+          { height: '0px' },
+          vm.animateHeightClass
+        ).then(() => {
+          collapseEl.css({
+            display: '',
+            height: ''
+          });
+          vm.element.removeClass('collapsing');
+        });
         $scope.$broadcast('msNavigation::collapse');
       });
     }
@@ -884,29 +870,29 @@
      */
     function expand() {
       // Grab the element that we are going to expand
-      var expandEl = vm.element.children('ul');
+      const expandEl = vm.element.children('ul');
 
       // Move the element out of the dom flow and
       // make it block so we can get its height
       expandEl.css({
-        'position': 'absolute',
-        'visibility': 'hidden',
-        'display': 'block',
-        'height': 'auto'
+        position: 'absolute',
+        visibility: 'hidden',
+        display: 'block',
+        height: 'auto'
       });
 
       // Grab the height
-      var height = expandEl[0].offsetHeight;
+      const height = expandEl[0].offsetHeight;
 
       // Reset the style modifications
       expandEl.css({
-        'position': '',
-        'visibility': '',
-        'display': '',
-        'height': ''
+        position: '',
+        visibility: '',
+        display: '',
+        height: ''
       });
 
-      $scope.$evalAsync(function () {
+      $scope.$evalAsync(() => {
         // Set collapsed status
         vm.collapsed = false;
 
@@ -914,25 +900,17 @@
         vm.element.addClass('expanding');
 
         // Animate the height
-        $animate.animate(expandEl, {
-              'display': 'block',
-              'height': '0px'
-            },{
-              'height': height + 'px'
-            },
-            vm.animateHeightClass
-          )
-          .then(
-            function () {
-              // Clear the inline styles after animation done
-              expandEl.css({
-                'height': ''
-              });
-
-              // Clear expanding class from the node
-              vm.element.removeClass('expanding');
-            }
-          );
+        $animate.animate(
+          expandEl,
+          { display: 'block', height: '0px' },
+          { height: `${height}px` },
+          vm.animateHeightClass
+        ).then(() => {
+          expandEl.css({
+            height: ''
+          });
+          vm.element.removeClass('expanding');
+        });
 
         // If item expanded, broadcast the collapse event from rootScope so that the other expanded items
         // can be collapsed. This is necessary for keeping only one parent expanded at any time
@@ -971,7 +949,7 @@
         node: '=msNavigationNode'
       },
       controller: 'MsNavigationNodeController as vm',
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-navigation-node');
 
         return function postLink(scope, iElement, iAttrs, MsNavigationNodeCtrl) {
@@ -992,7 +970,7 @@
     return {
       restrict: 'A',
       require: '^msNavigationNode',
-      compile: function (tElement) {
+      compile(tElement) {
         tElement.addClass('ms-navigation-item');
 
         return function postLink(scope, iElement, iAttrs, MsNavigationNodeCtrl) {
@@ -1002,7 +980,7 @@
           }
 
           // Cleanup
-          scope.$on('$destroy', function () {
+          scope.$on('$destroy', () => {
             iElement.off('click');
           });
         };

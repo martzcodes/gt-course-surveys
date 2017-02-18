@@ -1,9 +1,0 @@
-{
-    "ERROR404": {
-        "CODE": "404",
-        "MESSAGE": "Ledsen men vi kunde inte hitta sidan du söker efter.",
-        "SUBMESSAGE": "Sidans adress kan innehålla ett stavfel eller sidan kan ha flyttats.",
-        "SEARCH": "Sök",
-        "GO_BACK": "Gå tillbaka hem"
-    }
-}

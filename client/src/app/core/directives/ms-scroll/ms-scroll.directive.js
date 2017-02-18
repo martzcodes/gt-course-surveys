@@ -9,7 +9,7 @@
   /** @ngInject */
   function msScrollConfigProvider() {
     // Default configuration
-    var defaultConfiguration = {
+    let defaultConfiguration = {
       wheelSpeed: 1,
       wheelPropagation: false,
       swipePropagation: true,
@@ -42,8 +42,8 @@
      * Service
      */
     this.$get = function () {
-      var service = {
-        getConfig: getConfig
+      const service = {
+        getConfig
       };
 
       return service;
@@ -60,27 +60,18 @@
   }
 
   /** @ngInject */
-  function msScrollDirective($timeout, msScrollConfig, msUtils, fuseConfig) {
+  function msScrollDirective($timeout, msScrollConfig, Util, fuseConfig) {
     return {
       restrict: 'AE',
-      compile: function (tElement) {
-        // Do not replace scrollbars if
-        // 'disableCustomScrollbars' config enabled
+      compile(tElement) {
         if (fuseConfig.getConfig('disableCustomScrollbars')) {
           return;
         }
 
-        // Do not replace scrollbars on mobile devices
-        // if 'disableCustomScrollbarsOnMobile' config enabled
-        if (fuseConfig.getConfig('disableCustomScrollbarsOnMobile') && msUtils.isMobile()) {
-          return;
-        }
-
-        // Add class
         tElement.addClass('ms-scroll');
 
         return function postLink(scope, iElement, iAttrs) {
-          var options = {};
+          let options = {};
 
           // If options supplied, evaluate the given
           // value. This is because we don't want to
@@ -97,7 +88,7 @@
           options = angular.extend({}, msScrollConfig.getConfig(), options);
 
           // Initialize the scrollbar
-          $timeout(function () {
+          $timeout(() => {
             PerfectScrollbar.initialize(iElement[0], options);
           }, 0);
 
@@ -106,9 +97,7 @@
 
           // Watch scrollHeight and update
           // the scrollbar if it changes
-          scope.$watch(function () {
-            return iElement.prop('scrollHeight');
-          }, function (current, old) {
+          scope.$watch(() => iElement.prop('scrollHeight'), (current, old) => {
             if (angular.isUndefined(current) || angular.equals(current, old)) {
               return;
             }
@@ -118,9 +107,7 @@
 
           // Watch scrollWidth and update
           // the scrollbar if it changes
-          scope.$watch(function () {
-            return iElement.prop('scrollWidth');
-          }, function (current, old) {
+          scope.$watch(() => iElement.prop('scrollWidth'), (current, old) => {
             if (angular.isUndefined(current) || angular.equals(current, old)) {
               return;
             }
@@ -136,7 +123,7 @@
           }
 
           // Cleanup on destroy
-          scope.$on('$destroy', function () {
+          scope.$on('$destroy', () => {
             iElement.off('mouseenter');
             PerfectScrollbar.destroy(iElement[0]);
           });
