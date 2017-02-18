@@ -5,7 +5,7 @@ import stats from 'stats-lite';
 import db from '../database';
 import Aggregation from '../../data/models/aggregation';
 import Cache from '../cache';
-import FirebaseEnum from '../../enums/firebase';
+import FirebaseEnum from '../../enum/firebase';
 import Logger from '../../logger';
 import Review from '../../data/models/review';
 import ReviewService from './review';

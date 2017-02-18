@@ -9,7 +9,7 @@ export default Export({
     LOG_LEVEL_WINSTON: 'silly',
     LOG_LEVEL_MORGAN: 'dev',
     WHITELIST_DOMAINS: [
-      'http://localhost:8000'
+      'http://localhost:3000'
     ]
   },
   staging: {

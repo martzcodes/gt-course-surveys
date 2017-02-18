@@ -6,12 +6,13 @@
     .factory('Util', Util);
 
   /** @ngInject */
-  function Util($window, $mdDialog, $mdToast) {
+  function Util($window, $cookies, $mdDialog, $mdToast) {
     const service = {
       toast,
       one,
       many,
       confirm,
+      outdated,
       hashCode,
       percent
     };
@@ -56,6 +57,21 @@
         .targetEvent($event);
 
       return $mdDialog.show(dialog);
+    }
+
+    function outdated(serverVersion) {
+      const toast = $mdToast.simple()
+        .textContent('There is a new version of GT Course Surveys available.')
+        .action('Refresh Now')
+        .highlightAction(true)
+        .hideDelay(false);
+
+      return $mdToast.show(toast).then((response) => {
+        if (response === 'ok') {
+          $cookies.put('vs', serverVersion);
+          $window.location.reload(true);
+        }
+      });
     }
 
     function hashCode(s) {

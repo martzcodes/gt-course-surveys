@@ -2,7 +2,7 @@
 
 import firebase from 'firebase-admin';
 import firebaseConfig from '../../config/firebase';
-import FirebaseEnum from '../enums/firebase';
+import FirebaseEnum from '../enum/firebase';
 
 firebase.initializeApp({
   credential: firebaseConfig.CREDENTIAL,

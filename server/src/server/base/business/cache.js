@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import assert from 'assert';
 import db from './database';
-import FirebaseEnum from '../enums/firebase';
+import FirebaseEnum from '../enum/firebase';
 import Util from './util';
 
 const { Event } = FirebaseEnum;

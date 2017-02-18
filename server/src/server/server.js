@@ -12,8 +12,8 @@ const boot = _.mapValues(requireDir('./base/boot'), 'default');
 
 app.phase(boot.extensions());
 app.phase(boot.config(app));
-app.phase(boot.routes(app));
 app.phase(boot.cors(app));
+app.phase(boot.routes(app));
 app.phase(boot.caches());
 app.phase(boot.services());
 app.phase(boot.exit());

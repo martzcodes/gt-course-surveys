@@ -5,7 +5,7 @@ import appConfig from '../../config/app';
 import Logger from '../logger';
 
 function origin(url, cb) {
-  cb(null, appConfig.DOMAINS.includes(url));
+  cb(null, appConfig.WHITELIST_DOMAINS.includes(url));
 }
 
 export default (app) => () => {

@@ -10,7 +10,7 @@
       storageBucket: 'gt-course-surveys-dev.appspot.com',
       messagingSenderId: '1029912675292'
     })
-    .constant('apiUrl', 'https://gt-course-surveys-dev.herokuapp.com')
+    .constant('apiUrl', 'http://localhost:8000')
     .constant('errorCode', {
       HTTP_401: 401,
       HTTP_404: 404,
