@@ -5,7 +5,7 @@ import util from 'gulp-util';
 export default {
   paths: {
     gulp: 'gulp',
-    config: 'config',
+    config: '.config',
     coverage: 'coverage',
     tmp: '.tmp',
     src: 'src',

@@ -3,22 +3,19 @@
 
   angular
     .module('app')
-
     .constant('firebaseConfig', {
-      apiKey: 'AIzaSyDJ4eSJ0d6qWSwz4J2SUWftOnP_qSg0Eco',
-      authDomain: 'gt-surveyor.firebaseapp.com',
-      databaseURL: 'https://gt-surveyor.firebaseio.com',
-      storageBucket: 'firebase-gt-surveyor.appspot.com',
-      messagingSenderId: '138094612706'
+      apiKey: 'AIzaSyBEi34tJ32tvY_OZgTuwZmmSbwuCdqnqvM',
+      authDomain: 'gt-course-surveys-dev.firebaseapp.com',
+      databaseURL: 'https://gt-course-surveys-dev.firebaseio.com',
+      storageBucket: 'gt-course-surveys-dev.appspot.com',
+      messagingSenderId: '1029912675292'
     })
-    .constant('apiUrl', 'https://gt-course-surveys-prd.herokuapp.com')
-
+    .constant('apiUrl', 'https://gt-course-surveys-dev.herokuapp.com')
     .constant('errorCode', {
       HTTP_401: 401,
       HTTP_404: 404,
       HTTP_500: 500
     })
-
     .constant('eventCode', {
       LANG_UPDATED: 1,
       USER_UPDATED: 2,

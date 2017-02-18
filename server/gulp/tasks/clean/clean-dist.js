@@ -5,5 +5,5 @@ import gulp from 'gulp';
 import conf from '../../conf';
 
 gulp.task('clean:dist', () => {
-  return del([conf.paths.dist, `${conf.paths.dist}/**/*`]);
+  return del([conf.paths.dist]);
 });

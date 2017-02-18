@@ -12,7 +12,7 @@ const JS = [
   `${conf.paths.src}/**/!(*.spec).js`
 ];
 
-function run(done, oneTime) {
+function go(done, oneTime) {
   const preprocessors = {};
   HTML.forEach((path) => { preprocessors[path] = ['ng-html2js']; });
   if (oneTime) {
@@ -37,9 +37,9 @@ function run(done, oneTime) {
 }
 
 gulp.task('test', ['scripts'], (done) => {
-  run(done, true);
+  go(done, true);
 });
 
 gulp.task('test:watch', ['watch'], (done) => {
-  run(done, false);
+  go(done, false);
 });

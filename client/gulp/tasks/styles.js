@@ -17,7 +17,6 @@ function build() {
     `${conf.paths.src}/app/core/scss/**/*.scss`,
     `${conf.paths.src}/app/core/**/*.scss`,
     `${conf.paths.src}/app/**/*.scss`,
-    `!${conf.paths.src}/app/main/components/material-docs/demo-partials/**/*.scss`, // eslint-disable-line max-len
     `!${conf.paths.src}/app/core/scss/partials/**/*.scss`,
     `!${conf.paths.src}/app/index.scss`
   ], { read: false });
