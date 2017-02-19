@@ -118,7 +118,7 @@
     }
 
     async function _addSemData(reviews) {
-      const semesters = await Semester.all();
+      const semesters = await Semester.all(true);
       const index = _.zipObject(_.map(semesters, '_id'), semesters);
 
       return _.map(reviews, (review) => {

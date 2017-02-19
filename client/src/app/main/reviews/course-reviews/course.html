@@ -18,8 +18,20 @@
     <gt-review-card-list reviews="vm.reviews" show-course-title="false" read-only="vm.working" on-ready="vm.scroll()"></gt-review-card-list>
   </div>
 
-  <md-button class="md-fab md-primary md-fab-top-right" aria-label="Publish Review" ng-click="vm.publish($event)" md-no-ink>
+  <md-button class="md-fab md-primary md-fab-top-right mr-80"
+             aria-label="FILTER REVIEWS"
+             ng-click="vm.filter($event)"
+             md-no-ink>
+    <md-icon md-font-icon="icon-filter-variant"></md-icon>
+    <md-tooltip>Filter</md-tooltip>
+  </md-button>
+
+  <md-button class="md-fab md-primary md-fab-top-right"
+             aria-label="PUBLISH REVIEW"
+             ng-click="vm.publish($event)"
+             md-no-ink>
     <md-icon md-font-icon="icon-pencil"></md-icon>
+    <md-tooltip>Publish</md-tooltip>
   </md-button>
 
 </div>

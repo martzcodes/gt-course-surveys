@@ -6,14 +6,14 @@
     .controller('GradesCourseController', GradesCourseController);
 
   /** @ngInject */
-  function GradesCourseController($mdMedia, Grade, Semester, course, grades, semesters) {
+  function GradesCourseController($mdMedia, Grade, course, grades, semesters) {
     const vm = this;
 
     // Data
 
     vm.course = course;
     vm.grades = _.omit(grades, 'all');
-    vm.semesters = _.reject(semesters, Semester.isUnknown);
+    vm.semesters = semesters;
     vm.mode = '%';
     vm.options = _getChartOptions();
     vm.data = _getChartData();

@@ -1,4 +1,4 @@
-<md-dialog aria-label="REVIEW" flex-gt-sm="60" flex="90">
+<md-dialog class="gt-review-dialog" aria-label="REVIEW" flex-gt-sm="60" flex="90">
 
   <md-toolbar>
     <div class="md-toolbar-tools">
@@ -30,7 +30,7 @@
         <md-input-container flex>
           <label>Semester</label>
           <md-select name="semester" ng-model="vm.review.semester" required>
-            <md-option ng-value="::s._id" ng-repeat="s in ::vm.semesters | orderBy:id:true track by s._id" ng-if="s._id !== '0000-0'">
+            <md-option ng-value="::s._id" ng-repeat="s in ::vm.semesters | orderBy:id:true track by s._id">
               {{::s.name}}
             </md-option>
           </md-select>

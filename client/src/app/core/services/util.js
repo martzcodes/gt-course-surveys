@@ -14,7 +14,8 @@
       confirm,
       outdated,
       hashCode,
-      percent
+      percent,
+      average
     };
 
     return service;
@@ -62,7 +63,7 @@
     function outdated(serverVersion) {
       const toast = $mdToast.simple()
         .textContent('There is a new version of GT Course Surveys available.')
-        .action('Refresh Now')
+        .action('Refresh')
         .highlightAction(true)
         .hideDelay(false);
 
@@ -92,6 +93,19 @@
     function percent(numerator, denominator = 0) {
       if (denominator > 0) {
         return Math.abs(_.round((numerator / denominator) * 100, 1));
+      }
+      return 0;
+    }
+
+    function average(collection, key) {
+      const items = key ? _.map(collection, key) : collection;
+      if (items && items.length) {
+        const numbers = _.filter(items, _.isNumber);
+        if (numbers.length) {
+          const total = _.sum(numbers);
+          const count = numbers.length;
+          return _.round(total / count, 1);
+        }
       }
       return 0;
     }

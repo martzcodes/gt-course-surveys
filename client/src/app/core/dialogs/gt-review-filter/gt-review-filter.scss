@@ -1,0 +1,11 @@
+.gt-review-filter-dialog {
+  fieldset {
+    border: 1px solid #CCCCCC;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

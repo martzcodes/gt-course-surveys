@@ -18,21 +18,18 @@
 
     const service = {
       all,
-      get,
-      isUnknown
+      get
     };
 
     return service;
 
     //////////
 
-    function isUnknown(semester) {
-      return semester._id === '0000-0';
-    }
+    async function all(unknown = false) {
+      const filter = (s) => unknown || !s.isUnknown;
 
-    async function all() {
       if (cache.info().size > 0) {
-        return cache.values();
+        return _.filter(cache.values(), filter);
       }
 
       const snapshot = await firebase.database().ref(ini).once('value');
@@ -40,7 +37,7 @@
 
       _.forEach(semesters, (s) => cache.put(s._id, s));
 
-      return semesters;
+      return _.filter(semesters, filter);
     }
 
     async function get(id) {
@@ -52,17 +49,22 @@
 
     function _denormalize(semesters) {
       return _.map(semesters, (semester) => _.assign({}, semester, {
-        name: _formatName(semester)
+        name: _formatName(semester),
+        isUnknown: _formatIsUnknown(semester)
       }));
     }
 
     function _formatName(semester) {
-      if (isUnknown(semester)) {
+      if (_formatIsUnknown(semester)) {
         return 'Unknown';
       }
       const season = seasons[semester.season];
       const year = semester.year;
       return `${season} ${year}`;
+    }
+
+    function _formatIsUnknown(semester) {
+      return semester._id === '0000-0';
     }
   }
 })();

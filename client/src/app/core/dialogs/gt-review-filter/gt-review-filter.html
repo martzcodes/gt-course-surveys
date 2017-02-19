@@ -1,0 +1,99 @@
+<md-dialog class="gt-review-filter-dialog" aria-label="REVIEW FILTER" flex-gt-sm="60" flex="90">
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">Filter Reviews</h2>
+    </div>
+  </md-toolbar>
+
+  <md-divider></md-divider>
+
+  <md-dialog-content class="md-dialog-content">
+    <form name="vm.f" novalidate layout="column">
+
+      <!-- SEMESTERS -->
+      <fieldset class="mb-8">
+        <legend>Semesters</legend>
+        <div layout="row" layout-wrap flex>
+          <div flex="100"
+               flex-gt-sm="50"
+               flex-gt-md="33"
+               ng-repeat="s in vm.options.semesters track by s._id">
+            <md-checkbox class="m-0"
+                         ng-checked="vm.exists(vm.filters.semesters, s._id)"
+                         ng-click="vm.toggle(vm.filters.semesters, s._id)"
+                         ng-disabled="!vm.exists(vm.reviews.semesters, s._id)">
+              {{::s.name}}
+            </md-checkbox>
+          </div>
+        </div>
+      </fieldset>
+      <!-- / SEMESTERS -->
+
+      <div layout="column" layout-gt-md="row">
+
+        <!-- DIFFICULTIES -->
+        <div flex="100" flex-gt-md="50" class="mb-8">
+          <fieldset>
+            <legend>Difficulties</legend>
+            <div layout="row" layout-wrap flex>
+              <div flex="100" ng-repeat="d in vm.options.difficulties track by $index">
+                <md-checkbox class="m-0"
+                             ng-checked="vm.exists(vm.filters.difficulties, d)"
+                             ng-click="vm.toggle(vm.filters.difficulties, d)"
+                             ng-disabled="!vm.exists(vm.reviews.difficulties, d)">
+                  {{::d | gtDifficulty}}
+                </md-checkbox>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <!-- / DIFFICULTIES -->
+
+        <!-- RATINGS -->
+        <div flex="100" flex-gt-md="50" class="mb-8">
+          <fieldset>
+            <legend>Ratings</legend>
+            <div layout="row" layout-wrap flex>
+              <div flex="100" ng-repeat="r in vm.options.ratings track by $index">
+                <md-checkbox class="m-0"
+                             ng-checked="vm.exists(vm.filters.ratings, r)"
+                             ng-click="vm.toggle(vm.filters.ratings, r)"
+                             ng-disabled="!vm.exists(vm.reviews.ratings, r)">
+                  {{::r | gtRating}}
+                </md-checkbox>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <!-- / RATINGS -->
+
+      </div>
+
+      <!-- MINIMUM WORKLOAD -->
+      <fieldset>
+        <legend>Minimum Workload</legend>
+        <md-input-container class="md-block m-0" md-no-float>
+          <input type="number"
+                 name="workload"
+                 ng-model="vm.filters.workload"
+                 ng-min="0"
+                 ng-max="vm.reviews.workload"
+                 placeholder="Hours/Week"
+                 md-select-on-focus>
+          <div class="hint">Reviews with weekly workload of at least this many hours (max {{vm.reviews.workload}}).</div>
+        </md-input-container>
+      </fieldset>
+      <!-- / MINIMUM WORKLOAD -->
+
+    </form>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="vm.clear()" class="md-accent" aria-label="CLEAR">CLEAR</md-button>
+    <md-button ng-click="vm.cancel()" aria-label="CANCEL">CANCEL</md-button>
+    <md-button ng-click="vm.hide()" class="md-primary" ng-disabled="vm.f.$invalid" aria-label="OK">OK</md-button>
+  </md-dialog-actions>
+
+</md-dialog>

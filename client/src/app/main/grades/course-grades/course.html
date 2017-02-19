@@ -15,7 +15,12 @@
 
   <div class="content">
     <nvd3 layout="row" layout-align="center center" options="vm.options" data="vm.data"></nvd3>
-    <md-radio-group ng-model="vm.mode" ng-click="vm.refresh()" class="mt-0 ml-50" layout="row" layout-xs="column" layout-sm="column">
+    <md-radio-group class="mt-0 ml-50"
+                    layout="row"
+                    layout-xs="column"
+                    layout-sm="column"
+                    ng-model="vm.mode"
+                    ng-click="vm.refresh()">
       <md-radio-button value="%" aria-label="%">Percentages</md-radio-button>
       <md-radio-button value="~" aria-label="~">Percentages (No Withdrawals)</md-radio-button>
       <md-radio-button value="#" aria-label="#">Counts</md-radio-button>

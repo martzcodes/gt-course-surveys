@@ -34,32 +34,16 @@
     vm.working = false;
     vm.course = course;
     vm.reviews = reviews;
+    vm.filters = null;
     vm.aggregation = aggregation || Aggregation.none();
 
     // Methods
 
     vm.scroll = scroll;
     vm.publish = publish;
+    vm.filter = filter;
 
     //////////
-
-    init();
-
-    function init() {
-      let initializing = true;
-
-      const watch = $scope.$watch('vm.aggregation', () => {
-        if (initializing) {
-          $timeout(() => { initializing = false; });
-        } else {
-          _checkForUpdatesByOthers();
-        }
-      });
-
-      $scope.$on('$destroy', () => {
-        watch();
-      });
-    }
 
     function scroll() {
       const id = $stateParams.rid;
@@ -99,53 +83,82 @@
       }, 25);
     }
 
-    async function _checkForUpdatesByOthers() {
-      if (vm.working) {
-        return;
-      }
-
-      const serverHash = vm.aggregation.hash;
-      const clientHash = Review.has(vm.reviews);
-
-      if (serverHash !== clientHash) {
-        vm.working = true;
-        try {
-          vm.reviews = await Review.getByCourse(course._id);
-        } catch (error) {
-          // silent failure
-        }
-        vm.working = false;
-      }
-    }
-
     async function publish($event) {
-      try {
-        const toPush = await $mdDialog.show({
-          controller: 'ReviewDialogController as vm',
-          templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
-          parent: angular.element('body'),
-          targetEvent: $event,
-          clickOutsideToClose: true,
-          locals: {
-            review: {
-              course: vm.course._id
-            }
-          },
-          resolve: {
-            courses: Course.all,
-            semesters: Semester.all
+      const dialog = {
+        controller: 'ReviewDialogController as vm',
+        templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
+        parent: angular.element('body'),
+        targetEvent: $event,
+        clickOutsideToClose: true,
+        locals: {
+          review: {
+            course: vm.course._id
           }
-        });
+        },
+        resolve: {
+          courses: Course.all,
+          semesters: Semester.all
+        }
+      };
 
+      try {
+        $rootScope.loadingProgress = true;
+
+        const toPush = await $mdDialog.show(dialog);
         const pushed = await Review.push(toPush);
         vm.reviews.push(pushed);
 
         $rootScope.$broadcast(eventCode.REVIEW_CREATED, pushed);
+        $rootScope.loadingProgress = false;
 
         Util.toast('Published.');
       } catch (error) {
         Util.toast(error);
       }
+    }
+
+    function filter($event) {
+      const dialog = {
+        controller: 'ReviewFilterDialogController as vm',
+        templateUrl: 'app/core/dialogs/gt-review-filter/gt-review-filter.html',
+        parent: angular.element('body'),
+        targetEvent: $event,
+        clickOutsideToClose: true,
+        locals: {
+          filters: vm.filters,
+          reviews
+        },
+        resolve: {
+          semesters: Semester.all
+        }
+      };
+
+      $mdDialog.show(dialog).then((filters) => {
+        vm.filters = filters;
+
+        if (vm.filters) {
+          vm.reviews = _.filter(reviews, (r) =>
+            _.includes(vm.filters.semesters, r.semester) &&
+            _.includes(vm.filters.difficulties, r.difficulty) &&
+            _.includes(vm.filters.ratings, r.rating) &&
+            vm.filters.workload <= r.workload);
+
+          Util.toast('Filters applied.');
+        } else {
+          vm.reviews = reviews;
+
+          Util.toast('Filters cleared.');
+        }
+
+        vm.aggregation = {
+          count: vm.reviews.length,
+          average: {
+            difficulty: Util.average(vm.reviews, 'difficulty'),
+            workload: Util.average(vm.reviews, 'workload'),
+            rating: Util.average(vm.reviews, 'rating')
+          }
+        };
+      });
     }
   }
 })();
