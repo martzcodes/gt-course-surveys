@@ -19,7 +19,7 @@
 
     async function post(type, data) {
       try {
-        const url = `${apiUrl}/api/${version}`;
+        const url = `${apiUrl.server}/api/${version}`;
         const response = await $http.post(url, { type, data });
         return _.get(response.data, 'data.result', null);
       } catch (error) {

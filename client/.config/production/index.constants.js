@@ -10,7 +10,10 @@
       storageBucket: 'firebase-gt-surveyor.appspot.com',
       messagingSenderId: '138094612706'
     })
-    .constant('apiUrl', 'https://gt-course-surveys-prd.herokuapp.com')
+    .constant('apiUrl', {
+      server: 'https://gt-course-surveys-prd.herokuapp.com',
+      bot: 'https://youngblksocrates.pythonanywhere.com/api/v1'
+    })
     .constant('errorCode', {
       HTTP_401: 401,
       HTTP_404: 404,

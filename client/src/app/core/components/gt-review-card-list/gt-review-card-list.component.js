@@ -31,24 +31,24 @@
     //////////
 
     async function edit($event, review) {
+      const dialog = {
+        controller: 'ReviewDialogController as vm',
+        templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
+        parent: angular.element('body'),
+        targetEvent: $event,
+        clickOutsideToClose: true,
+        locals: {
+          review
+        },
+        resolve: {
+          courses: Course.all,
+          semesters: Semester.all
+        }
+      };
+
       try {
-        const edited = await $mdDialog.show({
-          controller: 'ReviewDialogController as vm',
-          templateUrl: 'app/core/dialogs/gt-review/gt-review.html',
-          parent: angular.element('body'),
-          targetEvent: $event,
-          clickOutsideToClose: true,
-          locals: {
-            review
-          },
-          resolve: {
-            courses: Course.all,
-            semesters: Semester.all
-          }
-        });
-
+        const edited = await $mdDialog.show(dialog);
         const updated = await Review.update(edited);
-
         const index = _.findIndex(vm.reviews, ['_id', updated._id]);
         if (index >= 0) {
           vm.reviews[index] = updated;

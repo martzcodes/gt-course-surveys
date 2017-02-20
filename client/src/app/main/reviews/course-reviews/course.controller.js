@@ -102,14 +102,11 @@
       };
 
       try {
-        $rootScope.loadingProgress = true;
-
         const toPush = await $mdDialog.show(dialog);
         const pushed = await Review.push(toPush);
         vm.reviews.push(pushed);
 
         $rootScope.$broadcast(eventCode.REVIEW_CREATED, pushed);
-        $rootScope.loadingProgress = false;
 
         Util.toast('Published.');
       } catch (error) {
