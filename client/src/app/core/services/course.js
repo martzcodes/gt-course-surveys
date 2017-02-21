@@ -6,7 +6,7 @@
     .factory('Course', Course);
 
   /** @ngInject */
-  function Course(CacheFactory, Util) {
+  function Course(CacheFactory, Util, errorCode) {
     const ini = 'CRS';
     const cache = CacheFactory(ini);
 
@@ -36,7 +36,13 @@
       if (cache.get(id)) {
         return cache.get(id);
       }
-      return _.find(await all(), ['_id', id]) || null;
+
+      const course = _.find(await all(), ['_id', id]);
+      if (course) {
+        return course;
+      }
+
+      throw errorCode.HTTP_404;
     }
 
     function _denormalize(courses) {

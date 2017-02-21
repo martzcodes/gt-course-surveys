@@ -49,13 +49,13 @@
       return records;
     }
 
-    function confirm($event, title, text) {
+    function confirm(options = {}) {
       const dialog = $mdDialog.confirm()
-        .title(title || 'Confirm')
-        .textContent(text || 'Are you sure? This cannot be undone.')
+        .title(options.title || 'Confirm')
+        .textContent(options.text || 'Are you sure? This cannot be undone.')
         .ok('OK')
         .cancel('Cancel')
-        .targetEvent($event);
+        .targetEvent(options.targetEvent);
 
       return $mdDialog.show(dialog);
     }

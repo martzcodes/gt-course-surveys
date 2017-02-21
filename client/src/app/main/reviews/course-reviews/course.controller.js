@@ -31,7 +31,6 @@
 
     // Data
 
-    vm.working = false;
     vm.course = course;
     vm.reviews = reviews;
     vm.filters = null;

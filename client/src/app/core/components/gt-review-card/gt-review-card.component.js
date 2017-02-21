@@ -10,7 +10,6 @@
       bindings: {
         review: '<',
         showCourseTitle: '<',
-        readOnly: '<',
         onEdit: '&',
         onRemove: '&'
       }

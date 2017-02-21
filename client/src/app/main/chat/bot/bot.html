@@ -49,18 +49,19 @@
           <div class="chat-messages">
 
             <div layout="row"
+                 layout-align="start end"
                  class="md-padding message-row"
                  ng-repeat="message in vm.thread"
                  ng-class="message.by">
 
               <img ng-if="message.by === 'bot'"
                    ng-src="assets/images/avatars/bot.png"
-                   class="avatar"
+                   class="avatar mr-16"
                    alt="BOT">
 
               <img ng-if="message.by === 'user'"
                    ng-src="{{vm.user.profileImageUrl}}"
-                   class="avatar"
+                   class="avatar ml-16"
                    alt="{{vm.user.name}}">
 
               <div class="bubble">

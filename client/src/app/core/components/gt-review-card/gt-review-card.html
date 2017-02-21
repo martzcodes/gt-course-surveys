@@ -45,8 +45,8 @@
   </md-card-content>
 
   <md-card-actions layout="row" layout-align="end center" ng-if="vm.showButtons()">
-    <md-button ng-click="vm.edit($event, vm.review)" ng-disabled="vm.readOnly" aria-label="Edit">EDIT</md-button>
-    <md-button ng-click="vm.remove($event, vm.review)" ng-disabled="vm.readOnly" aria-label="Remove">REMOVE</md-button>
+    <md-button ng-click="vm.edit($event, vm.review)" aria-label="EDIT">EDIT</md-button>
+    <md-button ng-click="vm.remove($event, vm.review)" aria-label="REMOVE">REMOVE</md-button>
   </md-card-actions>
 
 </md-card>

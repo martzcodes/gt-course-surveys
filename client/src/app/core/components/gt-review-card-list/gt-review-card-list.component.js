@@ -10,7 +10,6 @@
       bindings: {
         reviews: '=',
         showCourseTitle: '<',
-        readOnly: '<',
         onReady: '&'
       }
     });
@@ -62,7 +61,7 @@
 
     async function remove($event, review) {
       try {
-        await Util.confirm($event);
+        await Util.confirm({ targetEvent: $event, title: 'Remove' });
         await Review.remove(review);
         _.remove(vm.reviews, ['_id', review._id]);
         $rootScope.$broadcast(eventCode.REVIEW_REMOVED, review);

@@ -16,6 +16,6 @@
           Util.outdated(serverVersion);
         }
       }
-    });
+    }).catch(_.noop);
   }
 })();
