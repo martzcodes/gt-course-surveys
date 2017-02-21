@@ -36,7 +36,7 @@
         'I\'m a bot that can answer questions about courses.',
         'Start by asking me a question.',
         'For example, "What\'s the hardest?" or "What\'s the easiest?"'
-      ].join('<br>');
+      ].join('<br><br>');
 
       const dialog = $mdDialog.alert()
         .title('About')
