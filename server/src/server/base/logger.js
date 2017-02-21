@@ -6,7 +6,7 @@ import appConfig from '../config/app';
 
 winston.emitErrs = true;
 
-const LOGGER = new winston.Logger({
+const Logger = new winston.Logger({
   transports: [
     new winston.transports.Console({
       level: appConfig.LOG_LEVEL_WINSTON,
@@ -20,4 +20,4 @@ const LOGGER = new winston.Logger({
   exitOnError: false
 });
 
-export default LOGGER;
+export default Logger;

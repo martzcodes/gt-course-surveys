@@ -4,21 +4,20 @@ import db from '../database';
 import Semester from '../../data/models/semester';
 import Util from '../util';
 
-async function get() {
-  return Util.many({
-    model: Semester,
-    snapshot: await db.get('SEM')
-  });
+class Service {
+  static async get() {
+    return Util.many({
+      model: Semester,
+      snapshot: await db.get('SEM')
+    });
+  }
+
+  static async getById(id) {
+    return Util.one({
+      model: Semester,
+      snapshot: await db.get(`SEM/${id}`)
+    });
+  }
 }
 
-async function getById(id) {
-  return Util.one({
-    model: Semester,
-    snapshot: await db.get(`SEM/${id}`)
-  });
-}
-
-export default {
-  get,
-  getById
-};
+export default Service;

@@ -48,14 +48,14 @@ function _onReviewChanged(review) {
   _update(review.course);
 }
 
-async function init() {
-  await Promise.all(_.chain(cache.crs.all()).keys().map(_update).value());
+class Service {
+  static async init() {
+    await Promise.all(_.chain(cache.crs.all()).keys().map(_update).value());
 
-  db.ref('RVW').on(Event.ChildCreated, Util.on(_onReviewChanged, Review));
-  db.ref('RVW').on(Event.ChildUpdated, Util.on(_onReviewChanged, Review));
-  db.ref('RVW').on(Event.ChildRemoved, Util.on(_onReviewChanged, Review));
+    db.ref('RVW').on(Event.ChildCreated, Util.on(_onReviewChanged, Review));
+    db.ref('RVW').on(Event.ChildUpdated, Util.on(_onReviewChanged, Review));
+    db.ref('RVW').on(Event.ChildRemoved, Util.on(_onReviewChanged, Review));
+  }
 }
 
-export default {
-  init
-};
+export default Service;

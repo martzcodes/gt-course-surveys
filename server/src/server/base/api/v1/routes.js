@@ -3,8 +3,8 @@
 import { Router } from 'express';
 import Controller from './controller';
 
-const router = new Router();
+const Routes = new Router();
 
-router.route('/').post(Controller.receive);
+Routes.route('/').post(Controller.receive);
 
-export default router;
+export default Routes;

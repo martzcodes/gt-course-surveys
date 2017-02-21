@@ -1,5 +1,7 @@
 'use strict';
 
-export default {
+class Service {
 
-};
+}
+
+export default Service;

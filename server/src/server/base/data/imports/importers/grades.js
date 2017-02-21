@@ -37,15 +37,15 @@ function _parse(line) {
   });
 }
 
-async function run() {
-  const file = path.join(__dirname, '..', 'data', 'grades.txt');
-  const data = await fs.readFileAsync(file, 'utf8');
+class Importer {
+  static async run() {
+    const file = path.join(__dirname, '..', 'data', 'grades.txt');
+    const data = await fs.readFileAsync(file, 'utf8');
 
-  const grades = {};
-  data.split('\n').forEach((line) => _.merge(grades, _parse(line)));
-  await db.set('GRD', grades);
+    const grades = {};
+    data.split('\n').forEach((line) => _.merge(grades, _parse(line)));
+    await db.set('GRD', grades);
+  }
 }
 
-export default {
-  run
-};
+export default Importer;
