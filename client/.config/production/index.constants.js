@@ -12,7 +12,7 @@
     })
     .constant('apiUrl', {
       server: 'https://gt-course-surveys-prd.herokuapp.com',
-      bot: 'https://youngblksocrates.pythonanywhere.com/api/v1'
+      bot: 'https://youngblksocrates.pythonanywhere.com'
     })
     .constant('errorCode', {
       HTTP_401: 401,

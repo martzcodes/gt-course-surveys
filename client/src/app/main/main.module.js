@@ -5,6 +5,7 @@
     .module('app.main', [
       'app.main.pages',
       'app.main.account',
+      'app.main.chat',
       'app.main.reviews',
       'app.main.grades',
       'app.main.about'

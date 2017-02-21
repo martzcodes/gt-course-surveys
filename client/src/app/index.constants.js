@@ -12,7 +12,7 @@
     })
     .constant('apiUrl', {
       server: 'http://localhost:8000',
-      bot: 'https://youngblksocrates.pythonanywhere.com/api/v1'
+      bot: 'https://youngblksocrates.pythonanywhere.com'
     })
     .constant('errorCode', {
       HTTP_401: 401,

@@ -1,0 +1,115 @@
+<div id="gt-chat" class="page-layout carded fullwidth">
+
+  <div class="top-bg md-accent-bg"></div>
+
+  <div class="center">
+
+    <div class="content-card" layout="row" flex>
+
+      <div class="chat" layout="column" flex>
+
+        <md-toolbar class="chat-toolbar">
+
+          <div class="md-toolbar-tools">
+
+            <div class="chat-contact" layout="row" layout-align="start center">
+
+              <div class="avatar-wrapper">
+                <img src="assets/images/avatars/bot.png" class="avatar" alt="BOT">
+              </div>
+
+              <div class="chat-contact-name">Bot</div>
+
+            </div>
+
+            <md-menu md-position-mode="target-right target">
+              <md-button class="md-icon-button" ng-click="$mdOpenMenu()" aria-label="MORE">
+                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+              </md-button>
+              <md-menu-content width="3">
+                <md-menu-item>
+                  <md-button ng-click="vm.about($event)" aria-label="ABOUT">
+                    About
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="vm.clear($event)" aria-label="CLEAR MESSAGES">
+                    Clear Messages
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+
+          </div>
+
+        </md-toolbar>
+
+        <md-content id="gt-chat-content" flex ms-scroll>
+
+          <div class="chat-messages">
+
+            <div layout="row"
+                 class="md-padding message-row"
+                 ng-repeat="message in vm.thread"
+                 ng-class="message.by">
+
+              <img ng-if="message.by === 'bot'"
+                   ng-src="assets/images/avatars/bot.png"
+                   class="avatar"
+                   alt="BOT">
+
+              <img ng-if="message.by === 'user'"
+                   ng-src="{{vm.user.profileImageUrl}}"
+                   class="avatar"
+                   alt="{{vm.user.name}}">
+
+              <div class="bubble">
+                <div class="message">{{message.text}}</div>
+                <div class="time secondary-text" am-time-ago="message.time"></div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </md-content>
+
+        <div class="chat-footer flex-noshrink"
+             layout="row"
+             layout-align="center center">
+
+          <form flex
+                class="reply-form"
+                layout="row"
+                layout-align="start center"
+                ng-submit="vm.reply()">
+
+            <md-input-container flex md-no-float>
+              <textarea placeholder="Press enter to ask a question..."
+                        ng-keyup="vm.conversate($event)"
+                        md-no-autogrow
+                        ng-model="vm.query"
+                        ng-class="{'grow': vm.grow}"
+                        ng-disabled="vm.working">
+              </textarea>
+            </md-input-container>
+
+            <md-button class="md-fab"
+                       type="submit"
+                       aria-label="SEND"
+                       ng-click="vm.conversate($event, true)"
+                       ng-disabled="vm.working">
+              <md-icon md-font-icon="icon-send"></md-icon>
+            </md-button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

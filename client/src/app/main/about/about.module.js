@@ -13,7 +13,7 @@
     msNavigationServiceProvider.saveItem('app_main_about', {
       title: 'About',
       group: true,
-      weight: 4
+      weight: 5
     });
   }
 })();

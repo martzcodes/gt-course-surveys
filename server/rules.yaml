@@ -84,6 +84,7 @@ schema:
           profileImageUrl: {type: string}
           anonymous:       {type: boolean}
           specialization:  {type: number, minimum: 0, maximum: 3}
+          token:           {type: string}
 
     ################
 
