@@ -37,7 +37,7 @@ class Util {
       if (time && init.isBefore(moment.utc(time))) {
         try {
           const entity = Util.one({ model, snapshot });
-          cb(entity, model, snapshot);
+          cb(entity, snapshot, model);
         } catch (error) {
           Logger.error('base.business.util:', error);
         }

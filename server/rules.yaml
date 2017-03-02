@@ -85,6 +85,7 @@ schema:
           anonymous:       {type: boolean}
           specialization:  {type: number, minimum: 0, maximum: 3}
           token:           {type: string}
+          conversations:   {type: object}
 
     ################
 
@@ -108,19 +109,28 @@ schema:
 
     ################
 
-    CMT:
+    CNV:
       type: object
-      indexOn: [author, review]
-      $cmtId:
+      $cnvId:
         type: object
         additionalProperties: false
-        required: [created, author, review, text]
+        required: [created, users]
         properties:
           created: {type: string}
-          updated: {type: string}
-          author:  {type: string}
-          review:  {type: string}
-          text:    {type: string}
+          users:   {type: object}
+
+    ################
+
+    MSG:
+      type: object
+      indexOn: [conversation]
+      $msgId:
+        type: object
+        additionalProperties: false
+        required: [created, conversation]
+        properties:
+          created:      {type: string}
+          conversation: {type: string}
 
 access:
   - location: /
@@ -131,9 +141,11 @@ access:
   - location: /CRS/
     read:     true
     write:    false
+
   - location: /SEM/
     read:     true
     write:    false
+
   - location: /GRD/
     read:     true
     write:    false
@@ -148,7 +160,7 @@ access:
     read:     true
     write:    false
 
-  # rest
+  # remaining
   - location: /USR/
     read:     isLoggedIn()
   - location: /USR/$usrId
@@ -159,7 +171,10 @@ access:
   - location: /RVW/$rvwId
     write:    (next.exists() && isCurrentUser(next.author)) || (!next.exists() && isCurrentUser(prev.author))
 
-  - location: /CMT/
-    read:     true
-  - location: /CMT/$cmtId
-    write:    (next.exists() && isCurrentUser(next.author)) || (!next.exists() && isCurrentUser(next.author))
+  - location: /CNV/$cnvId
+    read:     isLoggedIn() && root.USR[auth.uid].conversations[$cnvId]
+    write:    isLoggedIn() && root.CNV[$cnvId].users[auth.uid]
+
+  - location: /MSG/$msgId
+    read:     isLoggedIn() && root.USR[auth.uid].conversations[root.MSG[$msgId].conversation]
+    write:    isLoggedIn() && root.USR[auth.uid].conversations[next.conversation]

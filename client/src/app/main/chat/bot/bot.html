@@ -51,7 +51,7 @@
             <div layout="row"
                  layout-align="start end"
                  class="md-padding message-row"
-                 ng-repeat="message in vm.thread"
+                 ng-repeat="message in vm.conversation"
                  ng-class="message.by">
 
               <img ng-if="message.by === 'bot'"

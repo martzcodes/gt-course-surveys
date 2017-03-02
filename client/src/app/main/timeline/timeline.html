@@ -1,0 +1,18 @@
+<div class="page-layout simple fullwidth">
+
+  <div class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div class="full-width" layout="column" layout-align="center start">
+      <div class="breadcrumb" layout="row" layout-align="start center">
+        <md-icon md-font-icon="icon-home" class="s16"></md-icon>
+        <md-icon md-font-icon="icon-chevron-right" class="s16 separator"></md-icon>
+        <span class="parent">Timeline</span>
+      </div>
+      <div class="title full-width text-truncate">100 Most Recent</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <gt-review-card-list reviews="vm.reviews" show-course-title="true"></gt-review-card-list>
+  </div>
+
+</div>

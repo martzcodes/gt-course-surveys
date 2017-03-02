@@ -8,6 +8,7 @@
       'app.main.chat',
       'app.main.reviews',
       'app.main.grades',
-      'app.main.about'
+      'app.main.about',
+      'app.main.timeline'
     ]);
 })();

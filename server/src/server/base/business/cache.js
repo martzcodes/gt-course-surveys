@@ -27,15 +27,15 @@ class Cache {
     db.ref(model.INI).on(Event.ChildRemoved, Util.on(Cache._onRemoved, model));
   }
 
-  static _onCreated(entity, model) {
+  static _onCreated(entity, snapshot, model) {
     Cache._map[model.INI].put(entity._id, entity);
   }
 
-  static _onUpdated(entity, model) {
+  static _onUpdated(entity, snapshot, model) {
     Cache._map[model.INI].put(entity._id, entity);
   }
 
-  static _onRemoved(entity, model) {
+  static _onRemoved(entity, snapshot, model) {
     Cache._map[model.INI].del(entity._id);
   }
 

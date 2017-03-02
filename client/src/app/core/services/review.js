@@ -14,6 +14,7 @@
     };
 
     const service = {
+      all,
       getByCourse,
       getByUser,
       getByCurrentUser,
@@ -28,6 +29,15 @@
     return service;
 
     //////////
+
+    async function all(limit = 100) {
+      const snapshot = await firebase.database().ref(ini)
+        .orderByChild('created')
+        .limitToLast(limit)
+        .once('value');
+
+      return _denormalize(Util.many(snapshot));
+    }
 
     function _lastWeek() {
       return moment().subtract(7, 'days').startOf('day').utc();
