@@ -35,11 +35,14 @@
       const html = [
         'I\'m a bot that can answer questions about courses.',
         'Start by asking me a question.',
-        'Some examples:', '"What\'s the hardest?"',
-        '"How is the math in 6601?"',
-        '"Which languages should I know for ML?"',
-        '"Is there a lot of homework in KBAI?"',
-        'or "How is the professor in CCA?"'
+        [
+          'Some examples:',
+          '"What\'s the hardest?"',
+          '"How is the math in 6601?"',
+          '"Which languages should I know for ML?"',
+          '"Is there a lot of homework in KBAI?"',
+          '"How is the professor in CCA?"'
+        ].join('<br>')
       ].join('<br><br>');
 
       const dialog = $mdDialog.alert()
