@@ -35,9 +35,9 @@
       const html = [
         'I\'m a bot that can answer questions about courses.',
         'Start by asking me a question.',
-        'Some examples:,' 
-        '"What\'s the hardest?" or "How is the math in AI?"',
-        'or "Which languages should I know for BD4H?"'
+        'Some examples:', '"What\'s the hardest?"',
+        '"How is the math in AI?"',
+        'or "Which languages should I know for ML?"'
       ].join('<br><br>');
 
       const dialog = $mdDialog.alert()
