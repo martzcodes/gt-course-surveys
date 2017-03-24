@@ -18,10 +18,11 @@
 
     //////////
 
-    async function log(type, data) {
+    async function log(type, data = null) {
       const user = await Auth.waitForUser(true);
       const by = _.get(user, '_id', null);
-      const meta = { type, by };
+      const when = moment.utc().format();
+      const meta = { type, by, when };
       try {
         firebase.database().ref('LOG').push({ meta, data });
       } catch (error) {

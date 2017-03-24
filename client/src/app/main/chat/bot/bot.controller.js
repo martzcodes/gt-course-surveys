@@ -59,6 +59,11 @@
     }
 
     async function conversate($event, fromClick) {
+      if (!$event) {
+        return;
+      }
+      $event.preventDefault();
+
       if ($event && $event.keyCode === 13 && $event.shiftKey) {
         vm.grow = true;
         return;
@@ -103,10 +108,8 @@
 
     function _scroll() {
       $timeout(() => {
-        const chatContent = angular.element($document.find('#gt-chat-content'));
-        chatContent.animate({
-          scrollTop: chatContent[0].scrollHeight
-        }, 400);
+        const content = angular.element($document.find('#gt-chat-content'));
+        content.animate({ scrollTop: content[0].scrollHeight }, 400);
       });
     }
 
