@@ -22,9 +22,9 @@ Logger.info('base.data.imports.imports: Running...');
 main()
   .then(() => {
     Logger.info('base.data.imports.imports: Done!');
-    process.exit();
+    process.exit(0);
   })
   .catch((error) => {
     Logger.error('base.data.imports.imports:', error);
-    process.exit();
+    process.exit(1);
   });
