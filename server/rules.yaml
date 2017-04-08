@@ -19,6 +19,11 @@ schema:
 
     ################
 
+    SPC:
+      type: object
+
+    ################
+
     CRS:
       type: object
       $crsId:
@@ -107,31 +112,6 @@ schema:
           rating:     {type: number, minimum: 1, maximum: 5}
           text:       {type: string}
 
-    ################
-
-    CNV:
-      type: object
-      $cnvId:
-        type: object
-        additionalProperties: false
-        required: [created, users]
-        properties:
-          created: {type: string}
-          users:   {type: object}
-
-    ################
-
-    MSG:
-      type: object
-      indexOn: [conversation]
-      $msgId:
-        type: object
-        additionalProperties: false
-        required: [created, conversation]
-        properties:
-          created:      {type: string}
-          conversation: {type: string}
-
 access:
   - location: /
     read:     false
@@ -139,6 +119,10 @@ access:
 
   # static data maintained by admin
   - location: /CRS/
+    read:     true
+    write:    false
+
+  - location: /SPC/
     read:     true
     write:    false
 
@@ -170,11 +154,3 @@ access:
     read:     true
   - location: /RVW/$rvwId
     write:    (next.exists() && isCurrentUser(next.author)) || (!next.exists() && isCurrentUser(prev.author))
-
-  - location: /CNV/$cnvId
-    read:     isLoggedIn() && root.USR[auth.uid].conversations[$cnvId]
-    write:    isLoggedIn() && root.CNV[$cnvId].users[auth.uid]
-
-  - location: /MSG/$msgId
-    read:     isLoggedIn() && root.USR[auth.uid].conversations[root.MSG[$msgId].conversation]
-    write:    isLoggedIn() && root.USR[auth.uid].conversations[next.conversation]
