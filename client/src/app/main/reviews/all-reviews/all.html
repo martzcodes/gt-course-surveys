@@ -27,8 +27,14 @@
 
             <td class="text-truncate">
               <span>{{::course.name}}</span>
-              <md-icon ng-if="::course.foundational" md-font-icon="icon-flag" class="s16 mb-4">
+              <md-icon md-font-icon="icon-flag-variant" class="s16 mb-4" ng-if="::course.foundational">
                 <md-tooltip md-direction="right">Foundational</md-tooltip>
+              </md-icon>
+              <md-icon md-font-icon="icon-food-apple" class="s16 mb-4" ng-if="::course.core">
+                <md-tooltip md-direction="right">Core</md-tooltip>
+              </md-icon>
+              <md-icon md-font-icon="icon-android-studio" class="s16 mb-4" ng-if="::course.elective">
+                <md-tooltip md-direction="right">Elective</md-tooltip>
               </md-icon>
             </td>
 

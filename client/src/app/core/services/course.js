@@ -6,7 +6,7 @@
     .factory('Course', Course);
 
   /** @ngInject */
-  function Course(CacheFactory, Util, errorCode) {
+  function Course(CacheFactory, Util, Auth, Specialization, errorCode) {
     const ini = 'CRS';
     const cache = CacheFactory(ini);
 
@@ -25,7 +25,7 @@
       }
 
       const snapshot = await firebase.database().ref(ini).once('value');
-      const courses = _denormalize(Util.many(snapshot));
+      const courses = await _denormalize(Util.many(snapshot));
 
       _.forEach(courses, (c) => cache.put(c._id, c));
 
@@ -45,10 +45,14 @@
       throw errorCode.HTTP_404;
     }
 
-    function _denormalize(courses) {
+    async function _denormalize(courses) {
+      const user = await Auth.waitForUser();
+      const spec = user ? await Specialization.get(user.specialization) : null;
       return _.map(courses, (course) => _.assign({}, course, {
         title: _formatTitle(course),
-        icon: _formatIcon(course)
+        icon: _formatIcon(course),
+        core: _formatCore(course, spec),
+        elective: _formatElective(course, spec)
       }));
     }
 
@@ -61,6 +65,14 @@
 
     function _formatIcon(course) {
       return `icon-${course.icon}`;
+    }
+
+    function _formatCore(course, specialization) {
+      return _.has(specialization.core, course._id);
+    }
+
+    function _formatElective(course, specialization) {
+      return _.has(specialization.elective, course._id);
     }
   }
 })();
