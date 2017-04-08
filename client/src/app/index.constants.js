@@ -11,7 +11,7 @@
       messagingSenderId: '1029912675292'
     })
     .constant('apiUrl', {
-      server: 'http://localhost:8000',
+      server: 'https://gt-course-surveys-dev.herokuapp.com',
       bot: 'https://youngblksocrates.pythonanywhere.com'
     })
     .constant('errorCode', {
