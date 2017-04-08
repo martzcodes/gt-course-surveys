@@ -38,7 +38,6 @@
         return null;
       }
 
-
       if (cache.get(id)) {
         return cache.get(id);
       }
