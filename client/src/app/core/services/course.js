@@ -11,6 +11,7 @@
     const cache = CacheFactory(ini);
 
     const service = {
+      clear,
       all,
       get
     };
@@ -18,6 +19,10 @@
     return service;
 
     //////////
+
+    function clear() {
+      return cache.removeAll();
+    }
 
     async function all() {
       if (cache.info().size > 0) {
