@@ -51,13 +51,18 @@
     }
 
     async function _denormalize(courses) {
-      const user = await Auth.waitForUser();
-      const spec = user ? await Specialization.get(user.specialization) : null;
+      // const user = await Auth.waitForUser();
+
+      // let spec = null;
+      // if (user) {
+      //   spec = await Specialization.get(user.specialization);
+      // }
+
       return _.map(courses, (course) => _.assign({}, course, {
         title: _formatTitle(course),
         icon: _formatIcon(course),
-        core: _formatCore(course, spec),
-        elective: _formatElective(course, spec)
+        // core: _formatCore(course, spec),
+        // elective: _formatElective(course, spec)
       }));
     }
 
