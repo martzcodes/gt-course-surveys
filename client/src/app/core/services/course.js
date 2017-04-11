@@ -6,12 +6,10 @@
     .factory('Course', Course);
 
   /** @ngInject */
-  function Course(CacheFactory, Util, Auth, Specialization, errorCode) {
+  function Course(Util, Auth, Specialization, errorCode) {
     const ini = 'CRS';
-    const cache = CacheFactory(ini);
 
     const service = {
-      clear,
       all,
       get
     };
@@ -20,31 +18,20 @@
 
     //////////
 
-    function clear() {
-      return cache.removeAll();
-    }
-
     async function all() {
-      if (cache.info().size > 0) {
-        return cache.values();
-      }
-
       const snapshot = await firebase.database().ref(ini).once('value');
-      const courses = await _denormalize(Util.many(snapshot));
 
-      _.forEach(courses, (c) => cache.put(c._id, c));
-
-      return courses;
+      return _denormalize(Util.many(snapshot));
     }
 
     async function get(id) {
-      if (cache.get(id)) {
-        return cache.get(id);
-      }
+      const snapshot = await firebase.database().ref(ini)
+        .child(id)
+        .once('value');
 
-      const course = _.find(await all(), ['_id', id]);
+      const course = Util.one(snapshot);
       if (course) {
-        return course;
+        return (await _denormalize([course]))[0];
       }
 
       throw errorCode.HTTP_404;

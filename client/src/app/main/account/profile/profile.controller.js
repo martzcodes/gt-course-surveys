@@ -6,7 +6,7 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController($rootScope, Util, User, Auth, Course, eventCode, user) {
+  function ProfileController($rootScope, Util, User, Auth, eventCode, user) {
     const vm = this;
 
     // Data
@@ -36,10 +36,6 @@
         specialization: vm.temp.specialization || vm.user.specialization,
         anonymous: angular.isDefined(vm.temp.anonymous) ? vm.temp.anonymous : vm.user.anonymous
       };
-
-      if (updates.specialization !== vm.user.specialization) {
-        Course.clear();
-      }
 
       try {
         vm.user = await User.update(vm.user, updates);
