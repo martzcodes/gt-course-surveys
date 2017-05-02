@@ -41,9 +41,14 @@
     }
 
     async function get(id) {
+      if (!id) {
+        return null;
+      }
+
       if (cache.get(id)) {
         return cache.get(id);
       }
+
       return _.find(await all(), ['_id', id]) || null;
     }
 

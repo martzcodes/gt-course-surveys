@@ -32,10 +32,15 @@
     }
 
     async function get(id) {
+      if (!id) {
+        return null;
+      }
+
       const cached = _.get(cache.get('all'), id);
       if (cached) {
         return cached;
       }
+
       return _.get(await all(), id, null);
     }
 

@@ -26,6 +26,10 @@
     }
 
     async function get(id) {
+      if (!id) {
+        return null;
+      }
+
       const snapshot = await firebase.database().ref(ini)
         .child(id)
         .once('value');

@@ -17,7 +17,7 @@
 
     vm.headers = [{
       key: 'department',
-      title: 'Department',
+      title: 'Dept.',
       classes: 'w-100 text-truncate'
     }, {
       key: 'number',
