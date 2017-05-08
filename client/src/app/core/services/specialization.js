@@ -8,6 +8,7 @@
   /** @ngInject */
   function Specialization(CacheFactory, Util) {
     const ini = 'SPC';
+    const cache = CacheFactory(ini);
 
     const service = {
       all,
@@ -20,8 +21,9 @@
 
     async function all() {
       const snapshot = await firebase.database().ref(ini).once('value');
+      const list = Util.many(snapshot);
 
-      return Util.many(snapshot);
+      return cache.put('all', list);
     }
 
     async function get(id) {
@@ -29,11 +31,9 @@
         return null;
       }
 
-      const snapshot = await firebase.database().ref(ini)
-        .child(id)
-        .once('value');
+      const list = cache.get('all') || (await all());
 
-      return Util.one(snapshot);
+      return _.find(list, ['_id', id]) || null;
     }
   }
 })();
