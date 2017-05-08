@@ -6,8 +6,9 @@
     .factory('Course', Course);
 
   /** @ngInject */
-  function Course(Util, Auth, Specialization, errorCode) {
+  function Course(CacheFactory, Util, Auth, Specialization, gtConfig) {
     const ini = 'CRS';
+    const cache = CacheFactory(ini);
 
     const service = {
       all,
@@ -19,9 +20,14 @@
     //////////
 
     async function all() {
-      const snapshot = await firebase.database().ref(ini).once('value');
+      if (cache.get('all')) {
+        return cache.get('all');
+      }
 
-      return _denormalize(Util.many(snapshot));
+      const snapshot = await firebase.database().ref(ini).once('value');
+      const list = await _denormalize(Util.many(snapshot));
+
+      return cache.put('all', list);
     }
 
     async function get(id) {
@@ -29,16 +35,13 @@
         return null;
       }
 
-      const snapshot = await firebase.database().ref(ini)
-        .child(id)
-        .once('value');
-
-      const course = Util.one(snapshot);
-      if (course) {
-        return (await _denormalize([course]))[0];
+      const list = cache.get('all') || (await all());
+      const course = _.find(list, ['_id', id]);
+      if (!course) {
+        throw gtConfig.code.error.HTTP_404;
       }
 
-      throw errorCode.HTTP_404;
+      return (await _denormalize([course]))[0];
     }
 
     async function _denormalize(courses) {

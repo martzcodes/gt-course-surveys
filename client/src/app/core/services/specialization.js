@@ -6,7 +6,7 @@
     .factory('Specialization', Specialization);
 
   /** @ngInject */
-  function Specialization(Util) {
+  function Specialization(CacheFactory, Util) {
     const ini = 'SPC';
 
     const service = {

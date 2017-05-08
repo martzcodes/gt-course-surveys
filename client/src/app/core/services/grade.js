@@ -26,9 +26,9 @@
       }
 
       const snapshot = await firebase.database().ref(ini).once('value');
-      const grades = _denormalize(snapshot.val());
+      const map = _denormalize(snapshot.val());
 
-      return cache.put('all', grades);
+      return cache.put('all', map);
     }
 
     async function get(id) {
@@ -41,7 +41,9 @@
         return cached;
       }
 
-      return _.get(await all(), id, null);
+      cache.remove('all');
+      const map = await all();
+      return _.get(map, id, null);
     }
 
     function _denormalize(grades) {
@@ -49,9 +51,13 @@
       let totalWithoutWithdrawals = 0;
       let counts = {};
 
+      //
       // For each course's grades...
+      //
       _.forEach(grades, (courseGrades, courseId) => {
+        //
         // For each semester's grades...
+        //
         _.forEach(courseGrades, (semesterGrades, semesterId) => {
           total = semesterGrades.t;
           totalWithoutWithdrawals = total - semesterGrades.w;
@@ -63,12 +69,18 @@
           };
         });
 
-        // Combined across all semesters stored under 'all' for a given course...
-        counts = _.reduce(grades[courseId], (all, current) => _.isEmpty(all) ? current['#'] : _.mapValues(all, (value, key) => value + current['#'][key]), {});
+        //
+        // Combine across all semesters, and store under 'all' for a given course...
+        //
+        counts = _.reduce(grades[courseId], (all, current) =>
+          _.isEmpty(all) ?
+            current['#'] :
+            _.mapValues(all, (value, key) => value + current['#'][key]), {});
 
         total = _.reduce(counts, (sum, count, key) => sum + (key === 't' ? 0 : count));
 
-        totalWithoutWithdrawals = _.reduce(counts, (sum, count, key) => sum + (key === 't' || key === 'w' ? 0 : count));
+        totalWithoutWithdrawals = _.reduce(counts, (sum, count, key) =>
+          sum + ((key === 't' || key === 'w') ? 0 : count));
 
         grades[courseId].all = {
           '#': counts,
