@@ -18,8 +18,9 @@
     <gt-review-card-list reviews="vm.reviews" show-course-title="false" on-ready="vm.scroll()"></gt-review-card-list>
   </div>
 
-  <md-button class="md-fab md-primary md-fab-top-right mr-80"
+  <md-button class="md-fab md-primary md-fab-top-right"
              aria-label="FILTER REVIEWS"
+             ng-class="{'mr-80':vm.signedIn}"
              ng-click="vm.filter($event)"
              md-no-ink>
     <md-icon md-font-icon="icon-filter-variant"></md-icon>
@@ -29,6 +30,7 @@
   <md-button class="md-fab md-primary md-fab-top-right"
              aria-label="PUBLISH REVIEW"
              ng-click="vm.publish($event)"
+             ng-if="vm.signedIn"
              md-no-ink>
     <md-icon md-font-icon="icon-pencil"></md-icon>
     <md-tooltip>Publish</md-tooltip>

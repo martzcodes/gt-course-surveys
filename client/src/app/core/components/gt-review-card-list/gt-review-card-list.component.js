@@ -47,28 +47,44 @@
 
       try {
         const edited = await $mdDialog.show(dialog);
+
+        $rootScope.loadingProgress = true;
+
         const updated = await Review.update(edited);
+
         const index = _.findIndex(vm.reviews, ['_id', updated._id]);
         if (index >= 0) {
           vm.reviews[index] = updated;
+
           $rootScope.$broadcast(gtConfig.code.event.REVIEW_UPDATED, updated);
+
           Util.toast('Updated.');
         }
       } catch (error) {
         Util.toast(error);
       }
+
+      $rootScope.loadingProgress = false;
     }
 
     async function remove($event, review) {
       try {
         await Util.confirm({ targetEvent: $event, title: 'Remove' });
+
+        $rootScope.loadingProgress = true;
+
         await Review.remove(review);
+
         _.remove(vm.reviews, ['_id', review._id]);
+
         $rootScope.$broadcast(gtConfig.code.event.REVIEW_REMOVED, review);
+
         Util.toast('Removed.');
       } catch (error) {
         Util.toast(error);
       }
+
+      $rootScope.loadingProgress = false;
     }
   }
 })();

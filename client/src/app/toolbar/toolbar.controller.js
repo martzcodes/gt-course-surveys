@@ -6,7 +6,18 @@
     .controller('ToolbarController', ToolbarController);
 
   /** @ngInject */
-  function ToolbarController($rootScope, $scope, $state, $timeout, $mdSidenav, $mdToast, msNavigationService, Util, Auth, gtConfig, user) {
+  function ToolbarController(
+    $rootScope,
+    $scope,
+    $state,
+    $timeout,
+    $mdSidenav,
+    $mdToast,
+    msNavigationService,
+    Util,
+    Auth,
+    gtConfig,
+    user) {
     const vm = this;
 
     // Data
@@ -46,9 +57,9 @@
     }
 
     async function signOut() {
+      vm.user = null;
       await Auth.signOut();
       await $state.go('app.main_pages_auth_login');
-      vm.user = null;
     }
 
     function toggleMsNavigationFolded() {

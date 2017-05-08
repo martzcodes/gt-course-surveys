@@ -22,6 +22,7 @@
     Course,
     Semester,
 
+    user,
     course,
     reviews,
     aggregation,
@@ -31,6 +32,7 @@
 
     // Data
 
+    vm.signedIn = !!user;
     vm.course = course;
     vm.reviews = reviews;
     vm.filters = null;
@@ -43,6 +45,14 @@
     vm.filter = filter;
 
     //////////
+
+    init();
+
+    function init() {
+      firebase.auth().onAuthStateChanged((auth) => {
+        $timeout(() => { vm.signedIn = !!auth; });
+      });
+    }
 
     function scroll() {
       const id = $stateParams.rid;
@@ -102,6 +112,9 @@
 
       try {
         const toPush = await $mdDialog.show(dialog);
+
+        $rootScope.loadingProgress = true;
+
         const pushed = await Review.push(toPush);
         vm.reviews.push(pushed);
 
@@ -111,6 +124,8 @@
       } catch (error) {
         Util.toast(error);
       }
+
+      $rootScope.loadingProgress = false;
     }
 
     function filter($event) {

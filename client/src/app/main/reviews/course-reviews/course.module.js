@@ -16,6 +16,7 @@
         }
       },
       resolve: {
+        user: (Auth) => Auth.waitForUser(true),
         course: ($stateParams, Course) => Course.get($stateParams.id),
         reviews: ($stateParams, Review) => Review.getByCourse($stateParams.id),
         aggregation: ($stateParams, Aggregation) => Aggregation.get($stateParams.id)

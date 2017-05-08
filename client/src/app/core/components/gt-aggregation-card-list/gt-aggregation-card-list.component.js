@@ -41,8 +41,11 @@
     }
 
     async function onReviewChanged($event, review) {
+      Aggregation.bust();
+
       $timeout(async() => {
-        vm.aggregation = await Aggregation.get(review.course) || Aggregation.none();
+        vm.aggregation = await Aggregation.get(review.course);
+        vm.aggregation = vm.aggregation || Aggregation.none();
       }, 100);
     }
   }

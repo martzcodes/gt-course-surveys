@@ -11,6 +11,7 @@
     const cache = CacheFactory(ini);
 
     const service = {
+      bust,
       all,
       get,
       none
@@ -19,6 +20,10 @@
     return service;
 
     //////////
+
+    function bust() {
+      return cache.remove('all');
+    }
 
     async function all() {
       if (cache.get('all')) {
