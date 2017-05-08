@@ -15,7 +15,7 @@
     });
 
   /** @ngInject */
-  function ReviewCardListController($rootScope, $mdDialog, Util, Review, Course, Semester, eventCode) {
+  function ReviewCardListController($rootScope, $mdDialog, Util, Review, Course, Semester, gtConfig) {
     const vm = this;
 
     // Data
@@ -51,7 +51,7 @@
         const index = _.findIndex(vm.reviews, ['_id', updated._id]);
         if (index >= 0) {
           vm.reviews[index] = updated;
-          $rootScope.$broadcast(eventCode.REVIEW_UPDATED, updated);
+          $rootScope.$broadcast(gtConfig.code.event.REVIEW_UPDATED, updated);
           Util.toast('Updated.');
         }
       } catch (error) {
@@ -64,7 +64,7 @@
         await Util.confirm({ targetEvent: $event, title: 'Remove' });
         await Review.remove(review);
         _.remove(vm.reviews, ['_id', review._id]);
-        $rootScope.$broadcast(eventCode.REVIEW_REMOVED, review);
+        $rootScope.$broadcast(gtConfig.code.event.REVIEW_REMOVED, review);
         Util.toast('Removed.');
       } catch (error) {
         Util.toast(error);

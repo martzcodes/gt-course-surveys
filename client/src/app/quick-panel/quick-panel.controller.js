@@ -6,7 +6,7 @@
     .controller('QuickPanelController', QuickPanelController);
 
   /** @ngInject */
-  function QuickPanelController($scope, $state, $mdSidenav, Review, reviews, eventCode) {
+  function QuickPanelController($scope, $state, $mdSidenav, Review, reviews, gtConfig) {
     const vm = this;
 
     // Data
@@ -23,9 +23,9 @@
 
     function init() {
       const listeners = [
-        $scope.$on(eventCode.REVIEW_CREATED, onReviewChanged),
-        $scope.$on(eventCode.REVIEW_UPDATED, onReviewChanged),
-        $scope.$on(eventCode.REVIEW_REMOVED, onReviewChanged)
+        $scope.$on(gtConfig.code.event.REVIEW_CREATED, onReviewChanged),
+        $scope.$on(gtConfig.code.event.REVIEW_UPDATED, onReviewChanged),
+        $scope.$on(gtConfig.code.event.REVIEW_REMOVED, onReviewChanged)
       ];
 
       $scope.$on('$destroy', () => {

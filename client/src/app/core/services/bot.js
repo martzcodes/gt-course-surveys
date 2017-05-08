@@ -6,7 +6,7 @@
     .factory('Bot', Bot);
 
   /** @ngInject */
-  function Bot($http, Auth, User, apiUrl) {
+  function Bot($http, Auth, User, gtConfig) {
     const version = 'v1';
 
     const service = {
@@ -20,7 +20,7 @@
     async function conversate(query) {
       const user = await Auth.requireUser();
 
-      const url = `${apiUrl.bot}/api/${version}`;
+      const url = `${gtConfig.url.bot}/api/${version}`;
 
       const request = {
         type: 'CONVERSATE',

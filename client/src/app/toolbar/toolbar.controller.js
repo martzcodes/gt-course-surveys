@@ -6,7 +6,7 @@
     .controller('ToolbarController', ToolbarController);
 
   /** @ngInject */
-  function ToolbarController($rootScope, $scope, $state, $timeout, $mdSidenav, $mdToast, msNavigationService, Util, Auth, eventCode, user) {
+  function ToolbarController($rootScope, $scope, $state, $timeout, $mdSidenav, $mdToast, msNavigationService, Util, Auth, gtConfig, user) {
     const vm = this;
 
     // Data
@@ -28,7 +28,7 @@
     init();
 
     function init() {
-      const userUpdated = $scope.$on(eventCode.USER_UPDATED, ($event, user) => {
+      const userUpdated = $scope.$on(gtConfig.code.event.USER_UPDATED, ($event, user) => {
         vm.user = user;
       });
 

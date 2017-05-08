@@ -26,7 +26,7 @@
     reviews,
     aggregation,
 
-    eventCode) {
+    gtConfig) {
     const vm = this;
 
     // Data
@@ -105,7 +105,7 @@
         const pushed = await Review.push(toPush);
         vm.reviews.push(pushed);
 
-        $rootScope.$broadcast(eventCode.REVIEW_CREATED, pushed);
+        $rootScope.$broadcast(gtConfig.code.event.REVIEW_CREATED, pushed);
 
         Util.toast('Published.');
       } catch (error) {

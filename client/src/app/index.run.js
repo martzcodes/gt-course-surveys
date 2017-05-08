@@ -6,7 +6,7 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($rootScope, $timeout, $state, $stateParams, $mdDialog, $mdToast, msNavigationService, Logger, firebaseConfig, errorCode) {
+  function runBlock($rootScope, $timeout, $state, $stateParams, $mdDialog, $mdToast, msNavigationService, Logger, gtConfig) {
     const stateChangeStart = $rootScope.$on('$stateChangeStart', () => {
       $rootScope.loadingProgress = true;
 
@@ -22,15 +22,15 @@
 
     const stateChangeError = $rootScope.$on('$stateChangeError', (event, toState, toStateParams, fromState, fromStateParams, error) => {
       switch (error) {
-        case errorCode.HTTP_401:
+        case gtConfig.code.error.HTTP_401:
           $state.go('app.main_pages_auth_login');
           break;
 
-        case errorCode.HTTP_404:
+        case gtConfig.code.error.HTTP_404:
           $state.go('app.main_pages_errors_404');
           break;
 
-        case errorCode.HTTP_500:
+        case gtConfig.code.error.HTTP_500:
           $state.go('app.main_pages_errors_500');
           break;
 
@@ -49,6 +49,6 @@
       stateChangeError();
     });
 
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(gtConfig.firebase);
   }
 })();

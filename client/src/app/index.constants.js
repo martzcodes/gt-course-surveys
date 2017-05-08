@@ -19,7 +19,7 @@
       HTTP_404: 404,
       HTTP_500: 500
     })
-    .constant('eventCode', {
+    .constant('gtConfig', {
       LANG_UPDATED: 1,
       USER_UPDATED: 2,
       REVIEW_CREATED: 3,

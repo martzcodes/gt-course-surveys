@@ -13,7 +13,7 @@
     });
 
   /** @ngInject */
-  function AggregationCardListController($scope, $timeout, Aggregation, eventCode) {
+  function AggregationCardListController($scope, $timeout, Aggregation, gtConfig) {
     const vm = this;
     const listeners = [];
 
@@ -29,9 +29,9 @@
     //////////
 
     function init() {
-      listeners.push($scope.$on(eventCode.REVIEW_CREATED, onReviewChanged));
-      listeners.push($scope.$on(eventCode.REVIEW_UPDATED, onReviewChanged));
-      listeners.push($scope.$on(eventCode.REVIEW_REMOVED, onReviewChanged));
+      listeners.push($scope.$on(gtConfig.code.event.REVIEW_CREATED, onReviewChanged));
+      listeners.push($scope.$on(gtConfig.code.event.REVIEW_UPDATED, onReviewChanged));
+      listeners.push($scope.$on(gtConfig.code.event.REVIEW_REMOVED, onReviewChanged));
     }
 
     function destroy() {

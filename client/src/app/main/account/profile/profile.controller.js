@@ -6,7 +6,7 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController($rootScope, Util, User, Auth, eventCode, user) {
+  function ProfileController($rootScope, Util, User, Auth, gtConfig, user) {
     const vm = this;
 
     // Data
@@ -25,7 +25,7 @@
     init();
 
     function init() {
-      $rootScope.$broadcast(eventCode.USER_UPDATED, vm.user);
+      $rootScope.$broadcast(gtConfig.code.event.USER_UPDATED, vm.user);
     }
 
     async function updateAbout() {
@@ -40,7 +40,7 @@
       try {
         vm.user = await User.update(vm.user, updates);
 
-        $rootScope.$broadcast(eventCode.USER_UPDATED, vm.user);
+        $rootScope.$broadcast(gtConfig.code.event.USER_UPDATED, vm.user);
 
         Util.toast('Updated.');
       } catch (error) {

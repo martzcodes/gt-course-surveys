@@ -6,7 +6,7 @@
     .factory('Api', Api);
 
   /** @ngInject */
-  function Api($http, apiUrl) {
+  function Api($http, gtConfig) {
     const version = 'v1';
 
     const service = {
@@ -18,7 +18,7 @@
     //////////
 
     async function post(type, data) {
-      const url = `${apiUrl.server}/api/${version}`;
+      const url = `${gtConfig.url.server}/api/${version}`;
       const response = await $http.post(url, { type, data });
       return _.get(response.data, 'data.result', null);
     }

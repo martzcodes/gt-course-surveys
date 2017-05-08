@@ -6,7 +6,7 @@
     .factory('Auth', Auth);
 
   /** @ngInject */
-  function Auth($filter, User, errorCode) {
+  function Auth($filter, User, gtConfig) {
     const service = {
       waitForUser,
       requireUser,
@@ -48,7 +48,7 @@
           if (user) {
             resolve(user);
           } else {
-            reject(errorCode.HTTP_401);
+            reject(gtConfig.code.error.HTTP_401);
           }
         });
       });
