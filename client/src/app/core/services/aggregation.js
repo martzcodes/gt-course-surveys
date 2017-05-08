@@ -6,8 +6,9 @@
     .factory('Aggregation', Aggregation);
 
   /** @ngInject */
-  function Aggregation(Util) {
+  function Aggregation(CacheFactory, Util) {
     const ini = 'AGG';
+    const cache = CacheFactory(ini);
 
     const service = {
       all,
@@ -20,9 +21,14 @@
     //////////
 
     async function all() {
-      const snapshot = await firebase.database().ref(ini).once('value');
+      if (cache.get('all')) {
+        return cache.get('all');
+      }
 
-      return Util.many(snapshot);
+      const snapshot = await firebase.database().ref(ini).once('value');
+      const list = Util.many(snapshot);
+
+      return cache.put('all', list);
     }
 
     async function get(id) {
@@ -30,11 +36,9 @@
         return null;
       }
 
-      const snapshot = await firebase.database().ref(ini)
-        .child(id)
-        .once('value');
+      const list = await all();
 
-      return Util.one(snapshot);
+      return _.find(list, ['_id', id]) || null;
     }
 
     function none() {

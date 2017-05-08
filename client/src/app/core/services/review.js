@@ -6,14 +6,17 @@
     .factory('Review', Review);
 
   /** @ngInject */
-  function Review(Util, Auth, User, Course, Semester) {
+  function Review(CacheFactory, Util, Auth, User, Course, Semester) {
     const ini = 'RVW';
+    const cache = CacheFactory(ini);
+
     const anonymous = {
       authorName: 'Anonymous',
       authorImageUrl: 'assets/images/avatars/anonymous.png'
     };
 
     const service = {
+      bust,
       all,
       getByCourse,
       getByUser,
@@ -30,13 +33,25 @@
 
     //////////
 
-    async function all(limit = 100) {
-      const snapshot = await firebase.database().ref(ini)
-        .orderByChild('created')
-        .limitToLast(limit)
-        .once('value');
+    function bust() {
+      return cache.remove('all');
+    }
 
-      return _denormalize(Util.many(snapshot));
+    async function all(limit = 100) {
+      if (cache.get('all')) {
+        return cache.get('all');
+      }
+
+      const snapshot = await firebase.database().ref(ini).once('value');
+      const list = await _denormalize(Util.many(snapshot));
+
+      cache.put('all', list);
+
+      if (limit) {
+        return _.chain(list).sortBy('created').takeRight(limit).value();
+      }
+
+      return list;
     }
 
     function _lastWeek() {
@@ -48,12 +63,9 @@
     }
 
     async function _getByIndex(key, value) {
-      const snapshot = await firebase.database().ref(ini)
-        .orderByChild(key)
-        .equalTo(value)
-        .once('value');
+      const list = await all();
 
-      return _denormalize(Util.many(snapshot));
+      return _.chain(list).filter([key, value]).sortBy(key).value();
     }
 
     function getByCourse(courseId) {
@@ -73,12 +85,9 @@
     }
 
     async function getRecent() {
-      const snapshot = await firebase.database().ref(ini)
-        .orderByChild('created')
-        .startAt(_lastWeek().format())
-        .once('value');
+      const list = await all();
 
-      return _denormalize(Util.many(snapshot));
+      return _.chain(list).filter(isRecent).sortBy('created').value();
     }
 
     async function _denormalize(reviews) {
@@ -93,8 +102,8 @@
     }
 
     async function _addUsrData(reviews) {
-      const currentUser = await Auth.waitForUser(true);
-      if (!currentUser) {
+      const auth = await Auth.waitForUser(true);
+      if (!auth) {
         return _.map(reviews, (review) => _.assign({}, review, anonymous));
       }
 
@@ -153,11 +162,28 @@
 
       await firebase.database().ref(ini).child(review._id).update(updates);
 
-      return _denormalize(_.assign({}, review, updates));
+      const denormalized = await _denormalize(_.assign({}, review, updates));
+
+      const list = cache.get('all');
+      if (list) {
+        const index = _.findIndex(list, ['_id', review._id]);
+        if (index >= 0) {
+          list[index] = denormalized;
+          cache.put('all', list);
+        }
+      }
+
+      return denormalized;
     }
 
     async function remove(review) {
       await firebase.database().ref(ini).child(review._id).remove();
+
+      const list = cache.get('all');
+      if (list) {
+        _.remove(list, ['_id', review._id]);
+        cache.put('all', list);
+      }
 
       return review;
     }
@@ -177,7 +203,15 @@
           } else {
             const pushed = _.assign({}, toPush, { _id: ref.key });
             try {
-              resolve(await _denormalize(pushed));
+              const denormalized = await _denormalize(pushed);
+
+              const list = cache.get('all');
+              if (list) {
+                list.push(denormalized);
+                cache.put('all', list);
+              }
+
+              resolve(denormalized);
             } catch (error) {
               reject(error);
             }

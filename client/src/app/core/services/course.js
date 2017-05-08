@@ -35,13 +35,13 @@
         return null;
       }
 
-      const list = cache.get('all') || (await all());
+      const list = await all();
       const course = _.find(list, ['_id', id]);
       if (!course) {
         throw gtConfig.code.error.HTTP_404;
       }
 
-      return (await _denormalize([course]))[0];
+      return course;
     }
 
     async function _denormalize(courses) {

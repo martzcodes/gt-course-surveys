@@ -28,16 +28,14 @@
     async function all(unknown = false) {
       const filter = (s) => unknown || !s.isUnknown;
 
-      if (cache.info().size > 0) {
-        return _.filter(cache.values(), filter);
+      if (cache.get('all')) {
+        return _.filter(cache.get('all'), filter);
       }
 
       const snapshot = await firebase.database().ref(ini).once('value');
-      const semesters = _denormalize(Util.many(snapshot));
+      const list = _denormalize(Util.many(snapshot));
 
-      _.forEach(semesters, (s) => cache.put(s._id, s));
-
-      return _.filter(semesters, filter);
+      return _.filter(cache.put('all', list), filter);
     }
 
     async function get(id) {
@@ -45,11 +43,8 @@
         return null;
       }
 
-      if (cache.get(id)) {
-        return cache.get(id);
-      }
-
-      return _.find(await all(), ['_id', id]) || null;
+      const list = await all();
+      return _.find(list, ['_id', id]) || null;
     }
 
     function _denormalize(semesters) {

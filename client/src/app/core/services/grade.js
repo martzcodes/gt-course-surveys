@@ -36,13 +36,8 @@
         return null;
       }
 
-      const cached = _.get(cache.get('all'), id);
-      if (cached) {
-        return cached;
-      }
-
-      cache.remove('all');
       const map = await all();
+
       return _.get(map, id, null);
     }
 

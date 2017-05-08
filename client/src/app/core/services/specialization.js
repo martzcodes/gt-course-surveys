@@ -20,6 +20,10 @@
     //////////
 
     async function all() {
+      if (cache.get('all')) {
+        return cache.get('all');
+      }
+
       const snapshot = await firebase.database().ref(ini).once('value');
       const list = Util.many(snapshot);
 
@@ -31,7 +35,7 @@
         return null;
       }
 
-      const list = cache.get('all') || (await all());
+      const list = await all();
 
       return _.find(list, ['_id', id]) || null;
     }
