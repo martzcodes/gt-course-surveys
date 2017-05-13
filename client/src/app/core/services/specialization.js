@@ -37,7 +37,7 @@
 
       const list = await all();
 
-      return _.find(list, ['_id', id]) || null;
+      return _.find(list, ['_id', _.toString(id)]) || null;
     }
   }
 })();

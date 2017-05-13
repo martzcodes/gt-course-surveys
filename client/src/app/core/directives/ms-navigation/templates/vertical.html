@@ -1,6 +1,10 @@
-<ul>
-  <li ng-repeat="node in vm.navigation" ms-navigation-node="node" ng-class="{'collapsed': vm.collapsed, 'has-children': vm.hasChildren}" ng-include="'navigation-nested.html'"></li>
-</ul>
+<div>
+
+  <ul>
+    <li ng-repeat="node in vm.navigation" ms-navigation-node="node" ng-class="{'collapsed': vm.collapsed, 'has-children': vm.hasChildren}" ng-include="'navigation-nested.html'"></li>
+  </ul>
+
+</div>
 
 <!-- Nested navigation template -->
 <script type="text/ng-template" id="navigation-nested.html">

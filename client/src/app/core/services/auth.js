@@ -196,7 +196,7 @@
     async function emailUpdatePassword(email, passwordOld, passwordNew) {
       const credential = firebase.auth.EmailAuthProvider.credential(email, passwordOld);
       const user = await requireUser(true);
-      await user.reauthenticate(credential)
+      await user.reauthenticate(credential);
       await user.updatePassword(passwordNew);
     }
 

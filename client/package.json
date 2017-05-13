@@ -12,8 +12,9 @@
     "serve": "gulp config:local && gulp serve:local",
     "serve:staging": "gulp clean && gulp config:staging && gulp serve:staging",
     "serve:production": "gulp clean && gulp config:production && gulp serve:production",
-    "deploy:staging": "gulp clean && gulp config:staging && gulp build:staging && firebase use staging && firebase deploy --only hosting && firebase open hosting:site",
-    "deploy:production": "gulp clean && gulp config:production && gulp build:production && firebase use production && firebase deploy --only hosting && open https://omscentral.com"
+    "deploy:staging": "gulp clean && gulp config:staging && gulp build:staging && firebase use staging && firebase deploy --only hosting",
+    "deploy:production": "gulp clean && gulp config:production && gulp build:production && firebase use production && firebase deploy --only hosting",
+    "deploy": "npm run deploy:staging && npm run deploy:production"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

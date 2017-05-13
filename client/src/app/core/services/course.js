@@ -46,7 +46,7 @@
 
     async function _denormalize(courses) {
       const user = await Auth.waitForUser();
-      const spec = await Specialization.get(_.get(user, 'specialization'))
+      const spec = await Specialization.get(_.get(user, 'specialization'));
       return _.map(courses, (course) => _.assign({}, course, {
         title: _formatTitle(course),
         icon: _formatIcon(course),

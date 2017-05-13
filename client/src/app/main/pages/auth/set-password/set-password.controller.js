@@ -51,7 +51,7 @@
     async function setPassword(user) {
       vm.working = true;
       try {
-        await Auth.email.setPassword($stateParams.oobCode, user.password)
+        await Auth.email.setPassword($stateParams.oobCode, user.password);
         await Auth.email.signIn(user.email, user.password);
         $state.go('app.main_account_profile');
       } catch (error) {

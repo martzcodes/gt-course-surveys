@@ -28,13 +28,20 @@
       $rootScope.$broadcast(gtConfig.code.event.USER_UPDATED, vm.user);
     }
 
+    function _getTempValue(key) {
+      if (angular.isDefined(vm.temp[key])) {
+        return vm.temp[key];
+      }
+      return vm.user[key];
+    }
+
     async function updateAbout() {
       vm.working = true;
 
       const updates = {
-        name: vm.temp.name || vm.user.name,
-        specialization: vm.temp.specialization || vm.user.specialization,
-        anonymous: angular.isDefined(vm.temp.anonymous) ? vm.temp.anonymous : vm.user.anonymous
+        name: _getTempValue('name'),
+        specialization: _getTempValue('specialization'),
+        anonymous: _getTempValue('anonymous')
       };
 
       try {
@@ -59,7 +66,7 @@
       vm.working = true;
 
       try {
-        await Auth.email.updatePassword(vm.user.email, vm.temp.passwordCurrent, vm.temp.passwordNew)
+        await Auth.email.updatePassword(vm.user.email, vm.temp.passwordCurrent, vm.temp.passwordNew);
 
         Util.toast('Updated.');
       } catch (error) {
