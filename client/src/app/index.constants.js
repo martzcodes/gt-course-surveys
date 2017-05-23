@@ -11,7 +11,7 @@
         storageBucket: 'firebase-gt-surveyor.appspot.com',
         messagingSenderId: '138094612706'
       },
-      api: {
+      url: {
         server: 'https://gt-course-surveys-prd.herokuapp.com',
         bot: 'https://youngblksocrates.pythonanywhere.com'
       },
