@@ -11,7 +11,7 @@
         storageBucket: 'gt-course-surveys-dev.appspot.com',
         messagingSenderId: '1029912675292'
       },
-      api: {
+      url: {
         server: 'http://localhost:8000',
         bot: 'https://youngblksocrates.pythonanywhere.com'
       },
