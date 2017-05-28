@@ -1,0 +1,7 @@
+{
+  "database": {
+    "rules": "rules.json"
+  },
+  "hosting": {},
+  "storage": {}
+}
