@@ -6,6 +6,13 @@ import moment from 'moment';
 import Logger from '../logger';
 
 class Util {
+  static one(options) {
+    assert(options.model);
+    assert(options.snapshot);
+
+    return options.model.builder(options.snapshot);
+  }
+
   static many(options) {
     assert(options.model);
     assert(options.snapshot);
@@ -19,11 +26,8 @@ class Util {
     return entities;
   }
 
-  static one(options) {
-    assert(options.model);
-    assert(options.snapshot);
-
-    return options.model.builder(options.snapshot);
+  static zip(many) {
+    return _.zipObject(_.map(many, '_id'), many);
   }
 
   static on(cb, model) {

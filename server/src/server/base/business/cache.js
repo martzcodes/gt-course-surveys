@@ -18,7 +18,7 @@ class Cache {
 
     const cache = new Cache();
     const snapshot = await db.get(model.INI);
-    const entities = await Util.many({ model, snapshot });
+    const entities = Util.many({ model, snapshot });
     cache.set(_.zipObject(_.map(entities, '_id'), entities));
     Cache._map[model.INI] = cache;
 

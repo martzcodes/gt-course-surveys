@@ -4,34 +4,47 @@ import firebase from 'firebase-admin';
 import firebaseConfig from '../../config/firebase';
 import FirebaseEnum from '../enum/firebase';
 
-firebase.initializeApp({
-  credential: firebaseConfig.CREDENTIAL,
-  databaseURL: firebaseConfig.DATABASE_URL
-});
-
 class Database {
-  static get(location) {
-    return firebase.database().ref(location).once(FirebaseEnum.Event.Value);
+  constructor(app) {
+    this._app = app;
   }
 
-  static set(location, toWhat) {
-    return firebase.database().ref(location).set(toWhat);
+  get(location) {
+    return this._app.database().ref(location).once(FirebaseEnum.Event.Value);
   }
 
-  static update(location, withWhat) {
-    return firebase.database().ref(location).update(withWhat);
+  set(location, toWhat) {
+    return this._app.database().ref(location).set(toWhat);
   }
 
-  static remove(location) {
-    return firebase.database().ref(location).remove();
+  update(location, withWhat) {
+    return this._app.database().ref(location).update(withWhat);
   }
 
-  static ref(location) {
+  remove(location) {
+    return this._app.database().ref(location).remove();
+  }
+
+  ref(location) {
     if (location) {
-      return firebase.database().ref(location);
+      return this._app.database().ref(location);
     }
-    return firebase.database().ref();
+    return this._app.database().ref();
   }
 }
 
-export default Database;
+export const archive = new Database(
+  firebase.initializeApp({
+    credential: firebaseConfig.archive.CREDENTIAL,
+    databaseURL: firebaseConfig.archive.DATABASE_URL
+  }, 'archive')
+);
+
+const NormalDatabase = new Database(
+  firebase.initializeApp({
+    credential: firebaseConfig.normal.CREDENTIAL,
+    databaseURL: firebaseConfig.normal.DATABASE_URL
+  }, 'normal')
+);
+
+export default NormalDatabase;

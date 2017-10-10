@@ -12,6 +12,7 @@
         messagingSenderId: '138094612706'
       },
       url: {
+        archive: 'https://gt-course-surveys-prd-archive.firebaseio.com',
         server: 'https://gt-course-surveys-prd.herokuapp.com',
         bot: 'https://youngblksocrates.pythonanywhere.com'
       },

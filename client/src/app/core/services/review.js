@@ -6,7 +6,7 @@
     .factory('Review', Review);
 
   /** @ngInject */
-  function Review(CacheFactory, Util, Auth, User, Course, Semester) {
+  function Review(CacheFactory, Api, Archive, Util, Auth, User, Course, Semester) {
     const ini = 'RVW';
     const cache = CacheFactory(ini);
 
@@ -42,13 +42,28 @@
         return cache.get('all');
       }
 
-      const snapshot = await firebase.database().ref(ini).once('value');
-      const list = await _denormalize(Util.many(snapshot));
+      const [
+        snapshot,
+        archived
+      ] = await Promise.all([
+        firebase.database().ref(ini).once('value'),
+        Archive.get('RVW')
+      ]);
+
+      const [
+        snapshotList,
+        archivedList
+      ] = await Promise.all([
+        _denormalize(Util.many(snapshot)),
+        _denormalize(Util.manyJson(archived), true)
+      ]);
+
+      const list = _.sortBy(snapshotList.concat(archivedList), 'created');
 
       cache.put('all', list);
 
       if (limit) {
-        return _.chain(list).sortBy('created').takeRight(limit).value();
+        return _.takeRight(list, limit);
       }
 
       return list;
@@ -90,15 +105,20 @@
       return _.chain(list).filter(isRecent).sortBy('created').value();
     }
 
-    async function _denormalize(reviews) {
+    async function _denormalize(reviews, archived) {
       const isMany = _.isArray(reviews);
       const toDenormalize = isMany ? reviews : [reviews];
 
-      const withUsrData = await _addUsrData(toDenormalize);
+      const withArcData = _addArcData(toDenormalize, archived);
+      const withUsrData = await _addUsrData(withArcData);
       const withCrsData = await _addCrsData(withUsrData);
       const withSemData = await _addSemData(withCrsData);
 
       return isMany ? withSemData : withSemData[0];
+    }
+
+    function _addArcData(reviews, archived) {
+      return _.map(reviews, (review) => _.assign({}, review, { archived }));
     }
 
     async function _addUsrData(reviews) {
@@ -160,9 +180,13 @@
 
       updates.updated = moment.utc().format();
 
-      await firebase.database().ref(ini).child(review._id).update(updates);
+      if (review.archived) {
+        await Api.post('ARCHIVED-REVIEW-UPDATE', review);
+      } else {
+        await firebase.database().ref(ini).child(review._id).update(updates);
+      }
 
-      const denormalized = await _denormalize(_.assign({}, review, updates));
+      const denormalized = await _denormalize(_.assign({}, review, updates), review.archived);
 
       const list = cache.get('all');
       if (list) {
@@ -177,7 +201,11 @@
     }
 
     async function remove(review) {
-      await firebase.database().ref(ini).child(review._id).remove();
+      if (review.archived) {
+        await Api.post('ARCHIVED-REVIEW-REMOVE', review._id);
+      } else {
+        await firebase.database().ref(ini).child(review._id).remove();
+      }
 
       const list = cache.get('all');
       if (list) {

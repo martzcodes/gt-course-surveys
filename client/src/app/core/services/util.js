@@ -9,6 +9,8 @@
   function Util($window, $cookies, $mdDialog, $mdToast) {
     const service = {
       toast,
+      oneJson,
+      manyJson,
       one,
       many,
       confirm,
@@ -26,8 +28,31 @@
       const message = payload ? (payload.message || payload) : null;
       if (message && message.length) {
         await $mdToast.hide();
-        await $mdToast.showSimple(message);
+        await $mdToast.showSimple(
+          message.includes('PERMISSION')
+            ? 'Permission denied.'
+            : message
+        );
       }
+    }
+
+    function oneJson(value, key) {
+      return value ? angular.merge({ _id: key }, value) : null;
+    }
+
+    function manyJson(data) {
+      const records = [];
+
+      if (data) {
+        angular.forEach(data, (value, key) => {
+          const record = oneJson(value, key);
+          if (record) {
+            records.push(record);
+          }
+        });
+      }
+
+      return records;
     }
 
     function one(s) {
