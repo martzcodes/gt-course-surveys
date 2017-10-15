@@ -2,20 +2,20 @@
 
 import _ from 'lodash';
 import stats from 'stats-lite';
-import db, { archive } from '../database';
+import db from '../database';
 import Aggregation from '../../data/models/aggregation';
+import Cache from '../cache';
 import FirebaseEnum from '../../enum/firebase';
 import Logger from '../../logger';
-import Course from '../../data/models/course';
 import Review from '../../data/models/review';
 import ReviewService from './review';
 import Util from '../util';
 
-const { ChildCreated, ChildUpdated, ChildRemoved } = FirebaseEnum.Event;
+const { Event } = FirebaseEnum;
 
 const cache = {
-  rvw: {},
-  crs: {}
+  rvw: Cache.get('RVW'),
+  crs: Cache.get('CRS')
 };
 
 function _remove(courseId) {
@@ -23,7 +23,7 @@ function _remove(courseId) {
 }
 
 async function _update(courseId) {
-  const reviews = _.filter(cache.rvw, ['course', courseId]);
+  const reviews = _.filter(cache.rvw.all(), ['course', courseId]);
   const count = reviews.length;
   Logger.info(`base.business.services.aggregation: ${courseId} (${count})`);
   if (count > 0) {
@@ -45,44 +45,16 @@ async function _update(courseId) {
 }
 
 function _onReviewChanged(review) {
-  cache.rvw[review._id] = review;
-
-  _update(review.course);
-}
-
-function _onReviewRemoved(review) {
-  delete cache.rvw[review._id];
-
   _update(review.course);
 }
 
 class Service {
   static async init() {
-    const [
-      courses,
-      reviewsNew,
-      reviewsOld
-    ] = await Promise.all([
-      db.get('CRS'),
-      db.get('RVW'),
-      archive.get('RVW')
-    ]);
+    await Promise.all(_.chain(cache.crs.all()).keys().map(_update).value());
 
-    cache.crs = Util.zip(Util.many({ model: Course, snapshot: courses }));
-    cache.rvw = _.merge(
-      Util.zip(Util.many({ model: Review, snapshot: reviewsNew })),
-      Util.zip(Util.many({ model: Review, snapshot: reviewsOld }))
-    );
-
-    await Promise.all(_.keys(cache.crs).map(_update));
-
-    db.ref('RVW').on(ChildCreated, Util.on(_onReviewChanged, Review));
-    db.ref('RVW').on(ChildUpdated, Util.on(_onReviewChanged, Review));
-    db.ref('RVW').on(ChildRemoved, Util.on(_onReviewRemoved, Review));
-
-    archive.ref('RVW').on(ChildCreated, Util.on(_onReviewChanged, Review));
-    archive.ref('RVW').on(ChildUpdated, Util.on(_onReviewChanged, Review));
-    archive.ref('RVW').on(ChildRemoved, Util.on(_onReviewRemoved, Review));
+    db.ref('RVW').on(Event.ChildCreated, Util.on(_onReviewChanged, Review));
+    db.ref('RVW').on(Event.ChildUpdated, Util.on(_onReviewChanged, Review));
+    db.ref('RVW').on(Event.ChildRemoved, Util.on(_onReviewChanged, Review));
   }
 }
 
