@@ -54,7 +54,7 @@
         snapshotList,
         archivedList
       ] = await Promise.all([
-        _denormalize(Util.many(snapshot)),
+        _denormalize(Util.many(snapshot), false),
         _denormalize(Util.manyJson(archived), true)
       ]);
 
@@ -231,7 +231,7 @@
           } else {
             const pushed = _.assign({}, toPush, { _id: ref.key });
             try {
-              const denormalized = await _denormalize(pushed);
+              const denormalized = await _denormalize(pushed, false);
 
               const list = cache.get('all');
               if (list) {

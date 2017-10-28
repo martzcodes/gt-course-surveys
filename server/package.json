@@ -1,6 +1,6 @@
 {
   "name": "gt-course-surveys-server",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "private": true,
   "scripts": {
     "start": "npm run serve",
@@ -10,6 +10,8 @@
     "rules:production": "firebase use production && echo Compiling... && blaze rules.yaml &> /dev/null && firebase deploy --only database && gulp clean:rules",
     "imports:staging": "export NODE_ENV=staging && npm run build &> /dev/null && node dist/server/base/data/imports/imports.js && unset NODE_ENV",
     "imports:production": "export NODE_ENV=production && npm run build &> /dev/null && node dist/server/base/data/imports/imports.js && unset NODE_ENV",
+    "archive:staging": "export NODE_ENV=staging && npm run build &> /dev/null && node dist/server/bin/archive-reviews.js && unset NODE_ENV",
+    "archive:production": "export NODE_ENV=production && npm run build &> /dev/null && node dist/server/bin/archive-reviews.js && unset NODE_ENV",
     "clean": "gulp clean",
     "eslint": "gulp eslint",
     "build": "gulp build",
