@@ -8,7 +8,13 @@
   /** @ngInject */
   function Review(CacheFactory, Api, Archive, Util, Auth, User, Course, Semester) {
     const ini = 'RVW';
-    const cache = CacheFactory(ini);
+    const cacheKey = 'all-1.0.0';
+    const cacheNew = CacheFactory(ini);
+    const oneWeek = 7 * 24 * 60 * 60 * 1000;
+    const cacheOld = CacheFactory(`${ini}-old`, {
+      maxAge: oneWeek,
+      cacheFlushInterval: oneWeek
+    });
 
     const anonymous = {
       authorName: 'Anonymous',
@@ -34,39 +40,70 @@
     //////////
 
     function bust() {
-      return cache.remove('all');
+      cacheNew.remove(cacheKey);
+      cacheOld.remove(cacheKey);
     }
 
     async function all(limit = 100) {
-      if (cache.get('all')) {
-        return cache.get('all');
+      const newReviews = cacheNew.get(cacheKey);
+      const oldReviews = cacheOld.get(cacheKey);
+
+      // console.log('newReviews:', newReviews);
+      // console.log('oldReviews:', oldReviews);
+
+      if (newReviews && oldReviews) {
+        // console.log('CACHE HIT');
+        return _.chain(newReviews).concat(oldReviews).sortBy('created').value();
+      }
+
+      const promises = [];
+
+      if (newReviews) {
+        promises.push(Promise.resolve(newReviews));
+      } else {
+        // console.log('CACHE MISS: NEW');
+        promises.push(
+          firebase.database().ref(ini).once('value')
+            .then(snapshot => _denormalize(Util.many(snapshot), false))
+        );
+      }
+
+      if (oldReviews) {
+        promises.push(Promise.resolve(oldReviews));
+      } else {
+        // console.log('CACHE MISS: OLD');
+        promises.push(
+          Archive.get(ini)
+            .then(archived => _denormalize(Util.manyJson(archived), true))
+        );
       }
 
       const [
-        snapshot,
-        archived
-      ] = await Promise.all([
-        firebase.database().ref(ini).once('value'),
-        Archive.get('RVW')
-      ]);
+        newReviewsFetched,
+        oldReviewsFetched
+      ] = await Promise.all(promises);
 
-      const [
-        snapshotList,
-        archivedList
-      ] = await Promise.all([
-        _denormalize(Util.many(snapshot), false),
-        _denormalize(Util.manyJson(archived), true)
-      ]);
+      // console.log('NEW FETCHED:', newReviewsFetched.length);
+      // console.log('OLD FETCHED:', oldReviewsFetched.length);
 
-      const list = _.sortBy(snapshotList.concat(archivedList), 'created');
-
-      cache.put('all', list);
-
-      if (limit) {
-        return _.takeRight(list, limit);
+      if (!newReviews) {
+        // console.log('CACHING NEW');
+        cacheNew.put(cacheKey, newReviewsFetched);
       }
 
-      return list;
+      if (!oldReviews) {
+        // console.log('CACHING OLD');
+        cacheOld.put(cacheKey, oldReviewsFetched);
+      }
+
+      const allReviews = _.chain(newReviewsFetched)
+        .concat(oldReviewsFetched)
+        .sortBy('created')
+        .value();
+
+      return limit
+        ? _.takeRight(allReviews, limit)
+        : allReviews;
     }
 
     function _lastWeek() {
@@ -188,12 +225,13 @@
 
       const denormalized = await _denormalize(_.assign({}, review, updates), review.archived);
 
-      const list = cache.get('all');
+      const cache = review.archived ? cacheOld : cacheNew;
+      const list = cache.get(cacheKey);
       if (list) {
         const index = _.findIndex(list, ['_id', review._id]);
         if (index >= 0) {
           list[index] = denormalized;
-          cache.put('all', list);
+          cache.put(cacheKey, list);
         }
       }
 
@@ -207,10 +245,11 @@
         await firebase.database().ref(ini).child(review._id).remove();
       }
 
-      const list = cache.get('all');
+      const cache = review.archived ? cacheOld : cacheNew;
+      const list = cache.get(cacheKey);
       if (list) {
         _.remove(list, ['_id', review._id]);
-        cache.put('all', list);
+        cache.put(cacheKey, list);
       }
 
       return review;
@@ -233,10 +272,10 @@
             try {
               const denormalized = await _denormalize(pushed, false);
 
-              const list = cache.get('all');
+              const list = cacheNew.get(cacheKey);
               if (list) {
                 list.push(denormalized);
-                cache.put('all', list);
+                cacheNew.put(cacheKey, list);
               }
 
               resolve(denormalized);
@@ -248,6 +287,9 @@
       });
     }
 
+    //
+    // DEPRECATED
+    //
     function hash(reviews) {
       return _.chain(reviews)
         .map((r) => [r._id, r.difficulty, r.workload, r.rating])
