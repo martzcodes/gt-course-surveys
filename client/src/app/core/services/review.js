@@ -65,6 +65,7 @@
         promises.push(
           firebase.database().ref(ini).once('value')
             .then(snapshot => _denormalize(Util.many(snapshot), false))
+            .catch(() => [])
         );
       }
 
@@ -75,6 +76,7 @@
         promises.push(
           Archive.get(ini)
             .then(archived => _denormalize(Util.manyJson(archived), true))
+            .catch(() => [])
         );
       }
 
