@@ -10,6 +10,10 @@
     $locationProvider.html5Mode(true);
 
     // $urlRouterProvider.when('/', '/reviews');
+    $urlRouterProvider.when('/reviews', '/about/faq');
+    $urlRouterProvider.when('/reviews/{path:.*}', '/about/faq');
+    $urlRouterProvider.when('/grades', '/about/faq');
+    $urlRouterProvider.when('/grades/{path:.*}', '/about/faq');
     $urlRouterProvider.when('/', '/about/faq');
     $urlRouterProvider.otherwise('/404');
 
