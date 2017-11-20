@@ -49,6 +49,6 @@
       stateChangeError();
     });
 
-    firebase.initializeApp(gtConfig.firebase);
+    // firebase.initializeApp(gtConfig.firebase);
   }
 })();

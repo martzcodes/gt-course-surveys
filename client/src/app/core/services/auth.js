@@ -30,15 +30,16 @@
 
     function waitForUser(authOnly) {
       return new Promise((resolve) => {
-        firebase.auth().onAuthStateChanged(async(user) => {
-          if (!user) {
-            resolve(null);
-          } else if (authOnly) {
-            resolve(_.assign(user, { _id: user.uid }));
-          } else {
-            resolve(await User.get(user.uid));
-          }
-        });
+        // firebase.auth().onAuthStateChanged(async(user) => {
+        //   if (!user) {
+        //     resolve(null);
+        //   } else if (authOnly) {
+        //     resolve(_.assign(user, { _id: user.uid }));
+        //   } else {
+        //     resolve(await User.get(user.uid));
+        //   }
+        // });
+        resolve(null);
       });
     }
 

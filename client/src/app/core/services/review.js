@@ -139,9 +139,9 @@
     }
 
     async function getRecent() {
-      const list = await all();
+      // const list = await all();
 
-      return _.chain(list).filter(isRecent).sortBy('created').value();
+      // return _.chain(list).filter(isRecent).sortBy('created').value();
     }
 
     async function _denormalize(reviews, archived) {

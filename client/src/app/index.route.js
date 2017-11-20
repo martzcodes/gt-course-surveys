@@ -9,7 +9,8 @@
   function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.when('/', '/reviews');
+    // $urlRouterProvider.when('/', '/reviews');
+    $urlRouterProvider.when('/', '/about/faq');
     $urlRouterProvider.otherwise('/404');
 
     let $cookies;
